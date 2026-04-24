@@ -16,6 +16,10 @@
 - Obsidian: https://obsidian.md/
 - Google Keep: https://keep.google.com/
 
+### Digital note taking research:
+- https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d
+
+
 
 ### GitHub
 - conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
@@ -49,6 +53,23 @@ Needs:
 - forces to make clear choices,
 - promotes focused learning; most distractions come not from our environment, but from our own minds; when you trust the system and know that everything is taken care of you can focus on the task at hand,
 
+5. What do people expect from a note-taking app?
+Key takeways from https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, that I could use in my app:
+- **Organization and Categorization:**  Users should be able to organize their notes effectively through features such as folders, tags, or categories, allowing for easy navigation and retrieval of specific notes.
+- **Search Functionality:** A robust search feature enables users to quickly find specific notes by searching for keywords or phrases.
+- **Intuitive and Familiar Interface:** Users should be able to navigate and use the app effortlessly, without the need for extensive learning or guidance.
+
+From AI overview: 
+- 1. Instant "Capture" Functionality
+- A Blank Note or New Note Button: A prominent "plus" (+) button or a completely blank note to immediately start typing or writing.
+- Recent Notes: A list of recent or pinned notes, allowing users to pick up where they left off.
+- Minimalist Interface: A clean, distraction-free design that focuses on the content rather than the tool itself
+
+- 2. Immediate Organization and Search
+- Search Bar: A highly visible, robust search feature to find old notes instantly by keyword.
+- Folders or Tags: Clear access to existing structures (notebooks, folders, or tags) to categorize notes.
+- "All Notes" View: A default, chronological list of all created notes.
+
 
 **Problem Statements (Who, What, Quality)**
 How might we give students a clear, repeatable routine for turning course material into knowledge they actually understand?
@@ -72,7 +93,7 @@ The basic user story is: As a student, I want to take notes to .... The reasons 
 - The link between own words notes/question notes and reference notes is mentioned but the navigation around that relationship — how a student actually moves between linked notes — isn't captured in any story.
 
 **Market Research for Landing and Dashboard/Editor**<br>
-To find out what a note-taking app user expects to see, I studied the top 10 apps:
+I've done some market research to find out what a note-taking app user expects to see when they first open the app and when they want to start working:
 
 1. OneNote - mainstream app: https://onenote.cloud.microsoft/<br>
 Home Page:<br>
