@@ -10,14 +10,23 @@
 ### Learning Theory
 - Richard Feynman - the Feynman Technique
 
-### Design Thinking
+### Note-taking apps
+- OneNote: https://onenote.cloud.microsoft/
+- Notion: https://www.notion.com/notes
+- Obsidian: https://obsidian.md/
+- Google Keep: https://keep.google.com/
 
 
 ### GitHub
 - conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 
 
-## Design Thinking Questions:
+## Design
+### App Name:
+How I found the name for the app? My conversation with Claude AI: https://claude.ai/share/275c93ee-878d-457b-aa82-dfbbb6c5250a
+
+### Design Thinking:
+**Questions:**
 1. Who takes notes?
 - students
 - professors
@@ -41,10 +50,10 @@ Needs:
 - promotes focused learning; most distractions come not from our environment, but from our own minds; when you trust the system and know that everything is taken care of you can focus on the task at hand,
 
 
-### Problem Statements (Who, What, Quality)
-1. How might we give students a clear, repeatable routine for turning course material into knowledge they actually understand?
+**Problem Statements (Who, What, Quality)**
+How might we give students a clear, repeatable routine for turning course material into knowledge they actually understand?
 
-### Find the MVP user stories
+**Find the MVP user stories**
 What is the minimum the app needs to do to be useful?
 
 **Choosing the main target audience**
@@ -61,5 +70,28 @@ The basic user story is: As a student, I want to take notes to .... The reasons 
 - You don't have a story for the dashboard/home view once logged in — what does a student see first when they open the app?
 - The course entity appears implicitly in several stories ("related to a particular course") but you haven't written a story specifically about creating or managing courses. That's likely an entity in your ERD that needs its own CRUD stories.
 - The link between own words notes/question notes and reference notes is mentioned but the navigation around that relationship — how a student actually moves between linked notes — isn't captured in any story.
-## Design
-How I found the name for the app? My conversation with Claude AI: https://claude.ai/share/275c93ee-878d-457b-aa82-dfbbb6c5250a
+
+**Market Research for Landing and Dashboard/Editor**<br>
+To find out what a note-taking app user expects to see, I studied the top 10 apps:
+
+1. OneNote - mainstream app: https://onenote.cloud.microsoft/<br>
+Home Page:<br>
+<img src="research-assets/market-research/one_note_home.png" style="height: 400px"><br>
+Dashboard:<br>
+<img src="research-assets/market-research/one_note_dashboard.png" style="height: 400px"><br>
+
+2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes <br>
+Home Page:<br>
+<img src="research-assets/market-research/notion_home.png" style="height: 400px"><br>
+Dashboard:<br>
+<img src="research-assets/market-research/notion_dashboard.png" style="height: 400px"><br>
+
+3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/<br>
+Home Page: <br>
+<img src="research-assets/market-research/obsidian-home.png" style="height: 400px"><br>
+Dashboard: <br>
+<img src="research-assets/market-research/obsidian-dashboard.png" style="height: 400px"><br>
+
+4. Google Keep - minimal: https://keep.google.com/<br>
+Dashboard:<br>
+<img src="research-assets/market-research/google-keep-dashboard.png" style="height: 400px"><br>
