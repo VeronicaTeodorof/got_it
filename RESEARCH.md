@@ -1,9 +1,20 @@
 # got it?
 
 ## Origin and Personal Need
-The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools.<br>
-This led to reading <em>How to Take Smart Notes<em> by Sonke Ahrens (2017), which introduced the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
+The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools.
+
+
+This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
+
+
 Initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. On discovering it already existed, I thought about simplifying it, as I felt it too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
+
+
+A second observation that reinforced this direction came from my own experience as a student in an online, mostly self-guided course. We have a weekly drop-in session that is very poorly attended. When students do come, they have very few questions; even I find myself reflecting on what I want to ask or what I didn't understand just before the session. Surely one week of self-guided study must generate a lot of questions, but they are unacknowledged, unformed and unwritten.
+
+This too pointed to the need for a structured way to capture thoughts while learning — with clear decision points that make understanding, or the lack of it, explicit.
+
+
 
 
 ## Resources
