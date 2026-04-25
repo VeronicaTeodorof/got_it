@@ -1,19 +1,45 @@
 # got it?
 
-## Origin and Personal Need
+## 1. Origin and Personal Need
 The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools.
 
 
 This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
 
 
-Initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. On discovering it already existed, I thought about simplifying it, as I felt it too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
+Initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. On discovering it already existed, I thought about simplifying it, as I felt it was too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
 
 
 A second observation that reinforced this direction came from my own experience as a student in an online, mostly self-guided course. We have a weekly drop-in session that is very poorly attended. When students do come, they have very few questions; even I find myself reflecting on what I want to ask or what I didn't understand just before the session. Surely one week of self-guided study must generate a lot of questions, but they are unacknowledged, unformed and unwritten.
 
 This too pointed to the need for a structured way to capture thoughts while learning — with clear decision points that make understanding, or the lack of it, explicit.
 
+
+## 2. Core Concept and Hypothesis
+This would be the core of my app:
+
+```mermaid
+graph TD
+    A[Capture reference note] --> B{Got it?}
+    B -->|Yes| C[Own words note]
+    B -->|No| D[Question note]
+    D --> F{Question answered?}
+    F -->|Yes| C
+    F -->|No| G[Pending]
+```
+**Adopted**
+- The idea of distinguishing between different types of notes, adopted from the Zettelkasten system
+- Cornell Notes — the principle of imposing a structured workflow on the note-taking process
+
+**Adopted and verified by existing research**
+- The Feynman Technique — checking understanding by summarising in your own words: if you can explain something simply, you understand it; if you can't, you don't
+
+**Adapted**
+- Literature notes in Zettelkasten system become two types of notes in my app: reference notes and own words notes.
+
+**Extended - product hypothesis, not yet validated**
+- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.<br>
+While not verified by research, this extension is grounded in a personal observation: students in self-guided learning contexts often arrive at feedback sessions without formed questions, not necessarily because they have none, but possibly because they have no routine of evaluating their understanding of what is being learned. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
 
 
 
@@ -39,7 +65,8 @@ This too pointed to the need for a structured way to capture thoughts while lear
 
 
 ### GitHub
-- conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+- Conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+- Mermaid diagramming syntax: https://mermaid.js.org
 
 
 ## Design
