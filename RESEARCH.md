@@ -67,6 +67,7 @@ While not verified by research, this extension is grounded in a personal observa
 ### GitHub
 - Conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 - Mermaid diagramming syntax: https://mermaid.js.org
+- Project management documentation: https://docs.github.com/en/issues
 
 
 ## Design
