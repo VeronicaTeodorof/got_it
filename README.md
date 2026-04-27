@@ -33,23 +33,20 @@
 - **Courses**
 21. As a student I want to be able to create a course, so that I can organise my notes by subject.
 22. As a student I want to be able to rename a course, so that I can keep it accurate if the name changes.
-23. As a student I want to be asked to confirm before deleting a course, so that I don't accidentally lose all the notes within it.
-24. As a student I want to be able to delete a course when I no longer need it, so that my dashboard stays uncluttered.<br>
+23. As a student I want to be able to delete a course with confirmation step when I no longer need it, so that my dashboard stays uncluttered.<br>
 - **Units**
-25. As a student I want to be able to create a unit within a course, so that I can organise my notes by topic.
-26. As a student I want to be able to rename a unit, so that I can keep it aligned with my course structure.
-27. As a student I want to be asked to confirm before deleting a unit, so that I don't accidentally lose all the notes within it.
-28. As a student I want to be able to delete a unit when I no longer need it, so that I can keep my course structure tidy.<br>
+24. As a student I want to be able to create a unit within a course, so that I can organise my notes by topic.
+25. As a student I want to be able to rename a unit, so that I can keep it aligned with my course structure.
+26. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my course structure tidy.<br>
 - **Tags**
-29. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different courses.
-30. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
-31. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-32. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across subjects.<br>
+27. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different courses.
+28. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
+29. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
+30. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across subjects.<br>
 - **Authentication Theme**
-33. As a new user I want to be able to create a new account, to start using the app.
-34. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.
-35. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
-36. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
-37. As a user I want to be prompted to reconsider whether I want to delete my account when I press delete account button, so that I don't accidentally lose my account and notes.
-38. As a user I want to be able to delete my account when I consider I don't need it anymore, so that I can be in control of my information.
-39. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+31. As a new user I want to be able to create a new account, to start using the app.
+32. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.
+33. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
+34. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
+35. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
+36. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
