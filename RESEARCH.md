@@ -38,8 +38,73 @@ graph TD
 - Literature notes in Zettelkasten system become two types of notes in my app: reference notes and own words notes.
 
 **Extended - product hypothesis, not yet validated**
-- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.<br>
+- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.  
+
 While not verified by research, this extension is grounded in a personal observation: students in self-guided learning contexts often arrive at feedback sessions without formed questions, not necessarily because they have none, but possibly because they have no routine of evaluating their understanding of what is being learned. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
+
+
+## Scoping the Full Application
+The workflow above, combined with authentication, forms the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above — and then set out to understand what users actually expect from a note-taking app.
+
+
+**Market Research for Landing and Dashboard/Editor**  
+
+I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
+1. OneNote - mainstream app: https://onenote.cloud.microsoft/  
+
+Home Page:  
+
+<img src="research-assets/market-research/one_note_home.png" style="height: 400px">  
+
+Dashboard:  
+
+<img src="research-assets/market-research/one_note_dashboard.png" style="height: 400px">  
+
+
+2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes  
+
+Home Page:  
+
+<img src="research-assets/market-research/notion_home.png" style="height: 400px">  
+
+Dashboard:  
+
+<img src="research-assets/market-research/notion_dashboard.png" style="height: 400px">  
+
+
+3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/  
+
+Home Page:  
+
+<img src="research-assets/market-research/obsidian-home.png" style="height: 400px">  
+
+Dashboard:  
+
+<img src="research-assets/market-research/obsidian-dashboard.png" style="height: 400px">  
+
+
+4. Google Keep - minimal: https://keep.google.com/  
+
+Dashboard:  
+
+<img src="research-assets/market-research/google-keep-dashboard.png" style="height: 400px">  
+
+
+To complement the visual research, I also drew on an academic article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview to further inform my design decisions.
+
+
+**Key Takeaways**  
+
+Note-taking app users expect:
+- a minimalist UI,
+- a search feature,
+- organization by course, or subject, or topic,
+- a quick capture mechanism,
+- recent notes visibility.
+
+
+
+
 
 
 
@@ -76,10 +141,6 @@ How I found the name for the app? My conversation with Claude AI: https://claude
 
 ### Design Thinking:
 **Questions:**
-1. Who takes notes?
-- students
-- professors
-- nonfiction writers
 2. Why do they take notes?
 - to remember,
 - to organize their thoughts,
@@ -87,7 +148,6 @@ How I found the name for the app? My conversation with Claude AI: https://claude
 Needs: 
 - a system to keep track of the ever-increasing pool of information,
 - how to deal with complexity,
-
 
 3. Why do people use note-taking apps?
 4. Why would anyone use <em>got it?</em> app?
@@ -97,23 +157,6 @@ Needs:
 - introduces a routine, so that repeatable tasks become automatic,
 - forces to make clear choices,
 - promotes focused learning; most distractions come not from our environment, but from our own minds; when you trust the system and know that everything is taken care of you can focus on the task at hand,
-
-5. What do people expect from a note-taking app?
-Key takeways from https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, that I could use in my app:
-- **Organization and Categorization:**  Users should be able to organize their notes effectively through features such as folders, tags, or categories, allowing for easy navigation and retrieval of specific notes.
-- **Search Functionality:** A robust search feature enables users to quickly find specific notes by searching for keywords or phrases.
-- **Intuitive and Familiar Interface:** Users should be able to navigate and use the app effortlessly, without the need for extensive learning or guidance.
-
-From AI overview: 
-- 1. Instant "Capture" Functionality
-- A Blank Note or New Note Button: A prominent "plus" (+) button or a completely blank note to immediately start typing or writing.
-- Recent Notes: A list of recent or pinned notes, allowing users to pick up where they left off.
-- Minimalist Interface: A clean, distraction-free design that focuses on the content rather than the tool itself
-
-- 2. Immediate Organization and Search
-- Search Bar: A highly visible, robust search feature to find old notes instantly by keyword.
-- Folders or Tags: Clear access to existing structures (notebooks, folders, or tags) to categorize notes.
-- "All Notes" View: A default, chronological list of all created notes.
 
 
 **Problem Statements (Who, What, Quality)**
@@ -137,27 +180,4 @@ The basic user story is: As a student, I want to take notes to .... The reasons 
 - The course entity appears implicitly in several stories ("related to a particular course") but you haven't written a story specifically about creating or managing courses. That's likely an entity in your ERD that needs its own CRUD stories.
 - The link between own words notes/question notes and reference notes is mentioned but the navigation around that relationship — how a student actually moves between linked notes — isn't captured in any story.
 
-**Market Research for Landing and Dashboard/Editor**<br>
-I've done some market research to find out what a note-taking app user expects to see when they first open the app and when they want to start working:
 
-1. OneNote - mainstream app: https://onenote.cloud.microsoft/<br>
-Home Page:<br>
-<img src="research-assets/market-research/one_note_home.png" style="height: 400px"><br>
-Dashboard:<br>
-<img src="research-assets/market-research/one_note_dashboard.png" style="height: 400px"><br>
-
-2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes <br>
-Home Page:<br>
-<img src="research-assets/market-research/notion_home.png" style="height: 400px"><br>
-Dashboard:<br>
-<img src="research-assets/market-research/notion_dashboard.png" style="height: 400px"><br>
-
-3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/<br>
-Home Page: <br>
-<img src="research-assets/market-research/obsidian-home.png" style="height: 400px"><br>
-Dashboard: <br>
-<img src="research-assets/market-research/obsidian-dashboard.png" style="height: 400px"><br>
-
-4. Google Keep - minimal: https://keep.google.com/<br>
-Dashboard:<br>
-<img src="research-assets/market-research/google-keep-dashboard.png" style="height: 400px"><br>
