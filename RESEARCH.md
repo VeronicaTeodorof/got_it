@@ -43,7 +43,7 @@ graph TD
 While not verified by research, this extension is grounded in a personal observation: students in self-guided learning contexts often arrive at feedback sessions without formed questions, not necessarily because they have none, but possibly because they have no routine of evaluating their understanding of what is being learned. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
 
 
-## Scoping the Full Application
+## 3.Scoping the Full Application
 The workflow above, combined with authentication, forms the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above — and then set out to understand what users actually expect from a note-taking app.
 
 
@@ -90,7 +90,7 @@ Dashboard:
 <img src="research-assets/market-research/google-keep-dashboard.png" style="height: 400px">  
 
 
-To complement the visual research, I also drew on an academic article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview to further inform my design decisions.
+To complement the visual research, I also drew on an academic article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview, to further inform my design decisions.
 
 
 **Key Takeaways**  
@@ -102,8 +102,33 @@ Note-taking app users expect:
 - a quick capture mechanism,
 - recent notes visibility.
 
+With a clearer picture of user expectations, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README.
 
 
+## 4. Database Design
+I'm using the the "Database Design for Mere Mortals" methodology for designing my database, with the following steps: 
+1. **Defining Mission Statement**:  
+"The purpose of the "got i?" database is to maintain the data necessary to support users in transforming source material into personal knowledge." 
+
+
+   **Defining Mission Objectives**: 
+- Maintain complete user account information
+- Maintain complete course and unit information
+- Maintain complete note information
+- Maintain complete tag information
+
+2. **Identifying Subjects and Subjects Characteristics**
+
+**Subjects**: User, Course, Unit, Note, Tag, Note Tag.
+
+
+**Subject Characteristics**: 
+- User: First name, Last name, Email address, Password, Email verification status;
+- Course: Creator, Name, Creation date, Last modified date;
+- Unit: Course, Name, Creation date, Last modified date;
+- Note: Unit, Title, Content, Type, Parent note (applies to own-words and question notes only), Creation date, Last date modified;
+- Tag: Creator, Name;
+- Note Tag: Note, Tag;
 
 
 
@@ -133,6 +158,11 @@ Note-taking app users expect:
 - Conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 - Mermaid diagramming syntax: https://mermaid.js.org
 - Project management documentation: https://docs.github.com/en/issues
+
+### Database Design
+- Database Design for Mere Mortals by Michael Hernandez
+### ERDs
+- https://www.lucidchart.com/pages/er-diagrams
 
 
 ## Design
