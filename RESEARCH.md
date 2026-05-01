@@ -20,7 +20,7 @@ This would be the core of my app:
 
 ```mermaid
 graph TD
-    A[Capture reference note] --> B{Got it?}
+    A[Capture reference note] --> B{got it?}
     B -->|Yes| C[Own words note]
     B -->|No| D[Question note]
     D --> F{Question answered?}
@@ -102,7 +102,34 @@ Note-taking app users expect:
 - a quick capture mechanism,
 - recent notes visibility.
 
-With a clearer picture of user expectations, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README.
+
+**Anticipating User Behaviour**  
+
+This being a course project, prototype testing was not possible. The risks and opportunities that would typically surface through user testing were instead anticipated, emerging through design conversations with Claude AI:
+- The binary choice presented to the user after capturing a reference note was the biggest risk identified. Users may feel pressured into making a quick decision about their comprehension and this could lead to abandoning the app altogether. From a pedagogical point of view, the Feynman Technique also recognises that understanding is a process, not a moment. A third option, defer, was considered a good way of mitigating the identified risk while remaining consistent with the underlying pedagogy.
+- One opportunity identified was to reinforce evaluating information and being selective in capturing notes, by displaying a gentle prompt — 'Is it important?' — at the top of the reference note view, as a passive reminder.  
+- Another opportunity identified was to give the user the possibility to capture their own ideas and questions related to the study material but not necessarily stemming from a specific reference note, in a default 'My Thoughts' unit created automatically once a course is created.
+- A question was identified around whether a question note should be automatically marked as answered once linked to an own-words note, or whether that decision should belong to the user. Given that the app is built around conscious comprehension choices, automatic resolution was ruled out — the user should explicitly confirm that they feel the idea is understood.
+
+
+These considerations informed the following updated workflow diagram:  
+
+graph TD
+    A[Capture reference note] --> B{got it?}
+    B -->|Yes| C[Own words note]
+    B -->|No| D[Question note]
+    B -->|Not yet| E[Deferred]
+    D --> F{Question answered?}
+    F -->|Yes| G[Add or review own words note]
+    G --> C
+    G --> H{Mark as answered?}
+    H -->|Yes| I[Solved]
+    H -->|No| J[Pending]
+    J --> F
+    E --> B  
+
+
+With a clearer picture of user expectations from market research and anticipated behaviour risks and opportunities, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README and translated into the following features and content requirements.
 
 
 ## 4. Database Design
