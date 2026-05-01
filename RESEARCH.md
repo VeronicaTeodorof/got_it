@@ -114,6 +114,7 @@ This being a course project, prototype testing was not possible. The risks and o
 
 These considerations informed the following updated workflow diagram:  
 
+```mermaid
 graph TD
     A[Capture reference note] --> B{got it?}
     B -->|Yes| C[Own words note]
@@ -126,7 +127,8 @@ graph TD
     H -->|Yes| I[Solved]
     H -->|No| J[Pending]
     J --> F
-    E --> B  
+    E --> B 
+``` 
 
 
 With a clearer picture of user expectations from market research and anticipated behaviour risks and opportunities, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README and translated into the following features and content requirements.
