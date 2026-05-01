@@ -134,6 +134,63 @@ graph TD
 With a clearer picture of user expectations from market research and anticipated behaviour risks and opportunities, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README and translated into the following features and content requirements.
 
 
+**Features and Content Requirements**  
+
+1. Authentication
+- User registration — email, username, password
+- Email verification after registration
+- Sign in
+- Session persistence (stay logged in between sessions)
+- Password reset
+- Account deletion with confirmation step
+
+
+2. Comprehension Workflow
+- Capture a reference note
+- "Is it important?" passive prompt on reference note view
+- "got it?" prompt after saving a reference note — three options: Yes, No, Not yet
+- Own-words note with linked reference note and "explain in simple terms" prompt
+- Question note with linked reference note,  linked own-words note (optional), status (unanswered/pending/solved)
+- Defer option — reference note marked as deferred, returned to later
+- "Answer question?" prompt displayed on the view of a saved question note with no linked own-words note
+- "Review answer?" — question note with a linked own-words note but not yet marked as solved (pending)
+- After saving an own-words note linked to a question note, the student is prompted — 'Mark question as answered?' — moving the question to solved or leaving it as pending
+- Note editing and deletion with confirmation step
+- Quick capture from dashboard — press plus to capture an own-words or question note immediately, source and unit tagged afterwards
+
+
+3. Organisation
+- Create a source and assign a source type
+- Edit source name and source type
+- Delete a source with confirmation step (warning that all associated notes will be deleted)
+- Default "My Thoughts" unit created automatically when a source is created
+- Create a unit within a source
+- Rename a unit
+- Delete a unit with confirmation step
+- View all notes related to a source, organised hierarchically by unit — source expandable into units, units expandable into notes
+- View all sources filtered by source type
+- Own-words and question notes can be created independently of a reference note
+
+
+4. Design and Accessibility
+- Responsive design across mobile, tablet and desktop
+- Accessibility standards compliance
+- Consistent navigation across all templates
+- Walkthrough/onboarding for new users on the home page
+
+
+5. Search
+- Search notes by keyword
+- Results displayed across all note types
+
+
+6. Tags
+- Assign one or more tags to a note
+- Prompted with existing tags when tagging to avoid duplicates
+- Remove a tag from a note
+- View all notes associated with a tag across all sources
+
+
 ## 4. Database Design
 I'm using the the "Database Design for Mere Mortals" methodology for designing my database, with the following steps: 
 1. **Defining Mission Statement**:  
