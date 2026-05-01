@@ -6,6 +6,7 @@
 - to develop an application with an intuitive design, never assuming users will know what to do
 
 ## User Stories
+**TODO:** Update user stories to replace "course" with "source" and add this user story: As a user, I want to create my own source types, so that I can organise my sources in a way that makes sense to me.
 - **Workflow Theme**
 1. As a student, I want a reminder to be selective when writing a reference note, so that I can evaluate whether an idea is worth capturing.
 2. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.

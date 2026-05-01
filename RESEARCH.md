@@ -113,13 +113,13 @@ I'm using the the "Database Design for Mere Mortals" methodology for designing m
 
    **Defining Mission Objectives**: 
 - Maintain complete user account information
-- Maintain complete course and unit information
+- Maintain complete source and unit information
 - Maintain complete note information
 - Maintain complete tag information
 
 2. **Identifying Subjects and Subjects Characteristics**
 
-**Subjects**: User, Course, Unit, Note, Tag, Note Tag.
+**Subjects**: User, Course, Unit, Note, Tag, Note Tag.  
 
 
 **Subject Characteristics**: 
@@ -128,11 +128,27 @@ I'm using the the "Database Design for Mere Mortals" methodology for designing m
 - Unit: Course, Name, Creation date, Last modified date;
 - Note: Unit, Title, Content, Type, Parent note (applies to own-words and question notes only), Creation date, Last date modified;
 - Tag: Creator, Name;
-- Note Tag: Note, Tag;
+- Note Tag: Note, Tag;  
 
 
+ **Note:** During Step 3, the following revisions were made to this subject list. Course was renamed to Source. Source Type was identified as a new subject. Note was split into three separate subjects: Reference Note, Question Note, and Own Words Note.  
+ See Step 3 for details.
 
 
+## 3. Establishing Table Structures
+
+During this step, two revisions were made to the subject list identified in Step 2:
+
+- **Course renamed to Source**: A Course was found to be too prescriptive. Users may organise their notes around a book, a play, a school subject, or any other body of material. Source is a more accurate and neutral term for this top-level container.
+
+- **Source Type identified as a new subject**: Since users have different and personal ways of categorising their sources, a separate Source Type subject was identified to allow each user to define their own classification labels (e.g. "Course", "Textbook", "Play"), rather than having these prescribed by the app.
+
+- **Note split into three subjects**: A single Note subject with a Type field would actually be a multipurpose table. Reference Notes, Question Notes and Own Words Notes each have different data, different rules, and different relationships to one another. They are therefore treated as three distinct subjects.
+
+**Subjects**: User, Source, Source Type, Unit, Reference Note, Own-Words Note, Question Note, Tag, Note Tag. 
+
+**Subjects with Definitions**:
+- Source — A specific body of material a user is studying. This table is important because it keeps notes organised by the material under study.
 ## Resources
 ### Note-Taking
 - Ahrens, Sonke. 2017 How to Take Smart Notes
