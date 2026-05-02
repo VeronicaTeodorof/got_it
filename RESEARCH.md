@@ -203,23 +203,19 @@ I'm using the the "Database Design for Mere Mortals" methodology for designing m
 
 2. **Identifying Subjects and Subjects Characteristics**
 
-**Subjects**: User, Course, Unit, Note, Tag, Note Tag.  
+**Subjects**: User, Course, Unit, Note, Tag 
 
 
 **Subject Characteristics**: 
-- User: First name, Last name, Email address, Password, Email verification status;
-- Course: Creator, Name, Creation date, Last modified date;
-- Unit: Course, Name, Creation date, Last modified date;
-- Note: Unit, Title, Content, Type, Parent note (applies to own-words and question notes only), Creation date, Last date modified;
-- Tag: Creator, Name;
-- Note Tag: Note, Tag;  
+ First name, Last name, Email address, Password, Email verification status, Name, Creation date, Last modified date, Course, Unit, Title, Content, Type, Parent note, Creation date;
+**Preliminary Field List**: First name, Last name, Email address, Password, Email verification status, Source name, Source date created, Source date last modified, Source type name, Source type date created, Source type date last modified, Parent source, Unit name, Unit type, Unit date created, Unit date last modified, Reference note Parent unit, Reference note title, Reference note content, Reference note date created, Reference note last date modified, Reference note linked status, Own-words note Parent Unit, Own-words title, Own-words content, Own-words date created, Own-words last date modified, Question note Parent Unit, Question Note title, Question Note content, Question Note Date created, Question Note last date modified, Question Note linked status, Question Note answered Status, Tag name, 
 
 
  **Note:** During Step 3, the following revisions were made to this subject list. Course was renamed to Source. Source Type was identified as a new subject. Note was split into three separate subjects: Reference Note, Question Note, and Own Words Note.  
  See Step 3 for details.
 
 
-## 3. Establishing Table Structures
+3. **Establishing Table Structures**
 
 During this step, two revisions were made to the subject list identified in Step 2:
 
@@ -229,10 +225,21 @@ During this step, two revisions were made to the subject list identified in Step
 
 - **Note split into three subjects**: A single Note subject with a Type field would actually be a multipurpose table. Reference Notes, Question Notes and Own Words Notes each have different data, different rules, and different relationships to one another. They are therefore treated as three distinct subjects.
 
-**Subjects**: User, Source, Source Type, Unit, Reference Note, Own-Words Note, Question Note, Tag, Note Tag. 
+**Preliminay Table List**: User, Source, Source Type, Unit, Reference Note, Own-Words Note, Question Note, Tag
 
-**Subjects with Definitions**:
-- Source — A specific body of material a user is studying. This table is important because it keeps notes organised by the material under study.
+
+<h2 align="center">Final Table List</h2>
+| Name | Type | Description |
+|------|------|-------------|
+| User | Data | The people who use the got it? app to take and organise notes while studying. Storing user data allows the app to protect each user's notes and ensure they remain private and accessible only to their owner. |
+| Source | Data | The material a user is studying. Storing sources allows users to organise their notes around a specific piece of study material and trace ideas back to where they came from. |
+| Source Type | Data | The category or kind of a source. Storing source types allows users to categorise and filter their sources, making it easier to navigate study material across different kinds of resources. |
+| Unit | Data | A subsection of a source with a distinct theme. Storing units allows users to refine the scope of their notes and organise them around specific topics or themes within a broader source. |
+| Reference Note | Data | A note that captures an idea or passage from the material being studied, preserving the original wording and its source. Storing reference notes allows users to trace ideas back to their origin. |
+| Own-words Note | Data | A type of note that reflects the user's understanding of what is being learned. Storing own-words notes allows users to record and revisit their understanding of ideas in their own words, making it easier to identify what has been truly grasped. |
+| Question Note | Data | A type of note that reflects the user's gaps in understanding. Storing question notes allows users to keep track of their comprehension gaps, especially when revising, and attempt to clarify them. |
+| Tag | Data | A metadata item that links notes by broad theme. Storing tags allows users to organise and retrieve notes across different sources by shared theme, and ensures consistency by making existing tags visible when tagging a note. |
+
 ## Resources
 ### Note-Taking
 - Ahrens, Sonke. 2017 How to Take Smart Notes

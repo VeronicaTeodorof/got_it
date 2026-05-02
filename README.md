@@ -25,7 +25,7 @@
 13. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
 14. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
 15. As a student I want to be able to quickly access my recent notes, so that I pick up where I left off.
-16. As a new user I want to be given a walkthrough on the home page so that i know what the app is about and how to start using it.
+16. As a new user I want to be given a walkthrough on the home page so that I know what the app is about and how to start using it.
 17. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
 18. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.  
 
@@ -45,14 +45,14 @@
 
 - **Units**
 27. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
-28. As a student I want to be able to rename a unit, so that I can keep it aligned with my course structure.
+28. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
 29. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.  
 
 - **Tags**
-30. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different courses.
+30. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
 31. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
 32. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-33. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across subjects.   
+33. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.   
 
 - **Authentication Theme**
 34. As a new user I want to be able to create a new account, to start using the app.
