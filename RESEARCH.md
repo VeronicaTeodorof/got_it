@@ -245,16 +245,18 @@ During this step, two revisions were made to the subject list identified in Step
 <h2 align="center">Table Structures</h2>
 
 
-| User | Source | Source Type | Unit | Reference Note | Own-Words Note | Question Note | Tag |
-|------|--------|-------------|------|----------------|----------------|---------------|-----|
-| First Name | Source Name | Source Type Name | Parent Source | Ref Note Parent Unit | Own-Words Parent Unit | Question Note Parent Unit | Tag Name |
-| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | Ref Note Title | Own-Words Title | Question Note Title | |
-| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | Ref Note Content | Own-Words Content | Question Note Content | |
-| Password | | | Unit Last Modified Date | Ref Note Creation Date | Own-Words Creation Date | Question Note Creation Date | |
-| Email Verification Status | | | Unit Type | Ref Note Last Modified Date | Own-Words Last Modified Date | Question Note Last Modified Date | |
-| | | | | Ref Note Linked Status | | Question Note Linked Status | |
-| | | | | | Ref Note Parent| Question Note Answered Status | |
-| | | | | | | Ref Note Parent | |
+| User | Source | Source Type | Unit | Reference Note | Own-Words Note | Question Note | Tag | Note Tags |
+|------|--------|-------------|------|----------------|----------------|---------------|-----|-----|
+| First Name | Source Name | Source Type Name | Parent Source | Ref Note Parent Unit | Own-Words Parent Unit | Question Note Parent Unit | Tag Name | Note Title |
+| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | Ref Note Title | Own-Words Title | Question Note Title | | Tag Name |
+| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | Ref Note Content | Own-Words Content | Question Note Content | | |
+| Password |Source Author | | Unit Last Modified Date | Ref Note Creation Date | Own-Words Creation Date | Question Note Creation Date | | |
+| Email Verification Status | | | Unit Type* | Ref Note Last Modified Date | Own-Words Last Modified Date | Question Note Last Modified Date | | |
+| Username | | | | Ref Note Linked Status | Ref Note Parent | Question Note Linked Status | | |
+| | | | | | | Question Note Answered Status | | |
+| | | | | | | Ref Note Parent | | |
+
+* Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user
 
 
 ## Resources
