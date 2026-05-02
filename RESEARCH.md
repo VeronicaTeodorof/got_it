@@ -1,16 +1,13 @@
 # got it?
 
 ## 1. Origin and Personal Need
-The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools.
+The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools. This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced me to the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
 
 
-This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
+The initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. When I discovered it already existed, I thought about simplifying it, as it felt too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
 
 
-Initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. On discovering it already existed, I thought about simplifying it, as I felt it was too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
-
-
-A second observation that reinforced this direction came from my own experience as a student in an online, mostly self-guided course. We have a weekly drop-in session that is very poorly attended. When students do come, they have very few questions; even I find myself reflecting on what I want to ask or what I didn't understand just before the session. Surely one week of self-guided study must generate a lot of questions, but they are unacknowledged, unformed and unwritten.
+A second observation that reinforced this direction came from my experience as a student in an online, mostly self-guided course. I often find myself reflecting on what I want to ask or what I didn't understand just before the session. Surely one week of self-guided study must generate a lot of questions, but they may go unacknowledged, unformed or unwritten.
 
 This too pointed to the need for a structured way to capture thoughts while learning — with clear decision points that make understanding, or the lack of it, explicit.
 
@@ -26,13 +23,14 @@ graph TD
     D --> F{Question answered?}
     F -->|Yes| C
     F -->|No| G[Pending]
+    G --> F
 ```
 **Adopted**
 - The idea of distinguishing between different types of notes, adopted from the Zettelkasten system
-- Cornell Notes — the principle of imposing a structured workflow on the note-taking process
+- The principle of imposing a structured workflow on the note-taking process, adopted from Cornell Notes
 
 **Adopted and verified by existing research**
-- The Feynman Technique — checking understanding by summarising in your own words: if you can explain something simply, you understand it; if you can't, you don't
+- Checking understanding by summarising in your own words: if you can explain something simply, you understand it; if you can't, you don't, adopted from the Feynman Technique
 
 **Adapted**
 - Literature notes in Zettelkasten system become two types of notes in my app: reference notes and own words notes.
@@ -40,11 +38,11 @@ graph TD
 **Extended - product hypothesis, not yet validated**
 - A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.  
 
-While not verified by research, this extension is grounded in a personal observation: students in self-guided learning contexts often arrive at feedback sessions without formed questions, not necessarily because they have none, but possibly because they have no routine of evaluating their understanding of what is being learned. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
+While not verified by research, this extension is grounded in my experience as a student in self-guided learning context: I write my questions just before the drop-in sessions and these questions do not reflect everything I haven't understood in the previous study week, but having no routine of acknowledging and recording questions, most of them remain as gaps in understanding. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality and quantity of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
 
 
-## 3.Scoping the Full Application
-The workflow above, combined with authentication, forms the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above — and then set out to understand what users actually expect from a note-taking app.
+## 3. Scoping the Full Application
+The workflow above, combined with authentication, forms the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above (although the workflow is applicable to any independent learner engaging with source material) — and then set out to understand what users actually expect from a note-taking app.
 
 
 **Market Research for Landing and Dashboard/Editor**  
@@ -105,11 +103,11 @@ Note-taking app users expect:
 
 **Anticipating User Behaviour**  
 
-This being a course project, prototype testing was not possible. The risks and opportunities that would typically surface through user testing were instead anticipated, emerging through design conversations with Claude AI:
-- The binary choice presented to the user after capturing a reference note was the biggest risk identified. Users may feel pressured into making a quick decision about their comprehension and this could lead to abandoning the app altogether. From a pedagogical point of view, the Feynman Technique also recognises that understanding is a process, not a moment. A third option, defer, was considered a good way of mitigating the identified risk while remaining consistent with the underlying pedagogy.
-- One opportunity identified was to reinforce evaluating information and being selective in capturing notes, by displaying a gentle prompt — 'Is it important?' — at the top of the reference note view, as a passive reminder.  
-- Another opportunity identified was to give the user the possibility to capture their own ideas and questions related to the study material but not necessarily stemming from a specific reference note, in a default 'My Thoughts' unit created automatically once a course is created.
-- A question was identified around whether a question note should be automatically marked as answered once linked to an own-words note, or whether that decision should belong to the user. Given that the app is built around conscious comprehension choices, automatic resolution was ruled out — the user should explicitly confirm that they feel the idea is understood.
+This being a course project, prototype testing was not possible, instead I tried to identify the risks and opportunities that would typically surface through user testing; some I worked out myself while others emerged in my design conversations with Claude AI:
+- The binary choice presented to the user after capturing a reference note was the biggest risk identified through my conversations. Users may feel pressured into making a quick decision about their comprehension and this could lead to abandoning the app altogether. From a pedagogical point of view, the Feynman Technique also recognises that understanding is a process, not a moment. So I thought of a third option, defer, as a way of mitigating the identified risk while remaining consistent with the underlying pedagogy.
+- One opportunity I identified was to reinforce evaluating information and being selective in capturing notes, by displaying a gentle prompt — 'Is it important?' — at the top of the reference note view, as a passive reminder.  
+- Another opportunity  I identified was to give the user the possibility to capture their own ideas and questions related to the study material but not necessarily stemming from a specific reference note, in a default 'My Thoughts' unit created automatically once a course is created.
+- Through conversations a question was identified around whether a question note should be automatically marked as answered once linked to an own-words note, or whether that decision should belong to the user. Given that the app is built around conscious comprehension choices, I ruled out automatic resolution — the user should explicitly confirm that they feel the idea is understood.
 
 
 These considerations informed the following updated workflow diagram:  
@@ -270,6 +268,7 @@ During this step, two revisions were made to the subject list identified in Step
 ## Design
 ### App Name:
 How I found the name for the app? My conversation with Claude AI: https://claude.ai/share/275c93ee-878d-457b-aa82-dfbbb6c5250a
+
 
 ### Design Thinking:
 **Questions:**
