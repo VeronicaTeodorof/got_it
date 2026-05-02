@@ -207,7 +207,7 @@ I'm using the the "Database Design for Mere Mortals" methodology for designing m
 
 
 **Subject Characteristics**: 
- First name, Last name, Email address, Password, Email verification status, Name, Creation date, Last modified date, Course, Unit, Title, Content, Type, Parent note, Creation date;
+ First name, Last name, Email address, Password, Email verification status,  Name, Creation date, Last modified date, Course, Unit, Title, Content, Type, Parent note, Creation date;
 **Preliminary Field List**: First name, Last name, Email address, Password, Email verification status, Source name, Source date created, Source date last modified, Source type name, Source type date created, Source type date last modified, Parent source, Unit name, Unit type, Unit date created, Unit date last modified, Reference note Parent unit, Reference note title, Reference note content, Reference note date created, Reference note last date modified, Reference note linked status, Own-words note Parent Unit, Own-words title, Own-words content, Own-words date created, Own-words last date modified, Question note Parent Unit, Question Note title, Question Note content, Question Note Date created, Question Note last date modified, Question Note linked status, Question Note answered Status, Tag name, 
 
 
@@ -240,6 +240,22 @@ During this step, two revisions were made to the subject list identified in Step
 | Own-words Note | Data | A type of note that reflects the user's understanding of what is being learned. | Storing own-words notes allows users to record and revisit their understanding of ideas in their own words, making it easier to identify what has been truly grasped. |
 | Question Note | Data | A type of note that reflects the user's gaps in understanding. | Storing question notes allows users to keep track of their comprehension gaps, especially when revising, and attempt to clarify them. |
 | Tag | Data | A metadata item that links notes by broad theme. | Storing tags allows users to organise and retrieve notes across different sources by shared theme, and ensures consistency by making existing tags visible when tagging a note. |
+
+
+<h2 align="center">Table Structures</h2>
+
+
+| User | Source | Source Type | Unit | Reference Note | Own-Words Note | Question Note | Tag |
+|------|--------|-------------|------|----------------|----------------|---------------|-----|
+| First Name | Source Name | Source Type Name | Parent Source | Ref Note Parent Unit | Own-Words Parent Unit | Question Note Parent Unit | Tag Name |
+| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | Ref Note Title | Own-Words Title | Question Note Title | |
+| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | Ref Note Content | Own-Words Content | Question Note Content | |
+| Password | | | Unit Last Modified Date | Ref Note Creation Date | Own-Words Creation Date | Question Note Creation Date | |
+| Email Verification Status | | | Unit Type | Ref Note Last Modified Date | Own-Words Last Modified Date | Question Note Last Modified Date | |
+| | | | | Ref Note Linked Status | | Question Note Linked Status | |
+| | | | | | Ref Note Parent| Question Note Answered Status | |
+| | | | | | | Ref Note Parent | |
+
 
 ## Resources
 ### Note-Taking
