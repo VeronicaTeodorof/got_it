@@ -244,21 +244,33 @@ During this step, two revisions were made to the subject list identified in Step
 | Note Tag | Data | An association between a note and a tag. | Storing note tags allows the app to retrieve all notes linked to a given theme and maintain the connections a user has drawn between their notes and tags. |
 
 
-<h2 align="center">Table Structures</h2>
+<h2 align="center">Table Structures<br>(first part)</h2>
 
 
-| User | Source | Source Type | Unit | Reference Note | Own-Words Note | Question Note | Tag | Note Tags |
-|------|--------|-------------|------|----------------|----------------|---------------|-----|-----|
-| First Name | Source Name | Source Type Name | Parent Source | Ref Note Parent Unit | Own-Words Parent Unit | Question Note Parent Unit | Tag Name | Note Title |
-| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | Ref Note Title | Own-Words Title | Question Note Title | | Tag Name |
-| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | Ref Note Content | Own-Words Content | Question Note Content | | |
-| Password |Source Author | | Unit Last Modified Date | Ref Note Creation Date | Own-Words Creation Date | Question Note Creation Date | | |
-| Email Verification Status | | | Unit Type* | Ref Note Last Modified Date | Own-Words Last Modified Date | Question Note Last Modified Date | | |
-| Username | | | | Ref Note Linked Status | Ref Note Parent | Question Note Linked Status | | |
-| | | | | | | Question Note Answered Status | | |
-| | | | | | | Ref Note Parent | | |
+| User | Source | Source Type | Unit | Tag | Note Tags |
+|------|--------|-------------|------|-----|-----|
+| First Name | Source Name | Source Type Name | Parent Source | Tag Name | Note Title |
+| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | | Tag Name |
+| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | | |
+| Password |Source Author | | Unit Last Modified Date | | |
+| Email Verification Status | | | Unit Type* | | |
+| Username | | | | | |
+| | | | || | |
 
 * Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user
+
+
+<h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
+
+
+| Note | Reference | Own-Words | Question |
+|-----|------|-----|-----|
+| Parent Unit | Active Status | Ref Note Parent | Answered Status |
+| Title | | | Marked Status |
+| Content | | | Ref Note Parent | 
+| Note Creation Date | | | | 
+| Note Last Modified Date | | | | 
+| | | | |
 
 
 ## Resources
