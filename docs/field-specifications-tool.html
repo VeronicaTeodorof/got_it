@@ -137,8 +137,9 @@
         </div>
         <div class="field"><label>Source specification</label><input type="text" id="source-spec" placeholder="e.g. User.Email Address"></div>
       </div>
-      <div class="row">
+      <div class="row c2">
         <div class="field"><label>Alias(es)</label><input type="text" id="aliases" placeholder="e.g. handle, screen name"></div>
+        <div class="field"><label>Shared by</label><input type="text" id="shared-by" placeholder="e.g. User, Source"></div>
       </div>
       <div class="row">
         <div class="field"><label>Description</label><textarea id="description" placeholder="Describe the field and its purpose..."></textarea></div>
@@ -279,16 +280,18 @@ function getChecked(groupId) {
   return [...document.querySelectorAll(`#${groupId} input:checked`)].map(i => i.value);
 }
 
-document.querySelectorAll('.radio-grid label, .check-grid label').forEach(label => {
+document.querySelectorAll('.radio-grid label').forEach(label => {
+  label.addEventListener('click', function() {
+    const groupId = this.closest('.radio-grid, .edit-rule-group')?.id;
+    if (groupId) document.querySelectorAll(`#${groupId} label`).forEach(l => l.classList.remove('selected'));
+    this.classList.add('selected');
+  });
+});
+
+document.querySelectorAll('.check-grid label').forEach(label => {
   label.addEventListener('click', function() {
     const input = this.querySelector('input');
-    if (input.type === 'radio') {
-      const groupId = this.closest('.radio-grid, .edit-rule-group')?.id;
-      if (groupId) document.querySelectorAll(`#${groupId} label`).forEach(l => l.classList.remove('selected'));
-      this.classList.add('selected');
-    } else {
-      this.classList.toggle('selected');
-    }
+    setTimeout(() => { this.classList.toggle('selected', input.checked); }, 0);
   });
 });
 
@@ -303,6 +306,7 @@ function saveField() {
     specificationType: getRadio('spec-type'),
     sourceSpecification: getVal('source-spec'),
     aliases: getVal('aliases'),
+    sharedBy: getVal('shared-by'),
     description: getVal('description'),
     dataType: getVal('data-type'),
     length: getVal('length'),
@@ -358,6 +362,7 @@ function editField(i) {
   document.getElementById('parent-table').value = f.parentTable;
   document.getElementById('source-spec').value = f.sourceSpecification;
   document.getElementById('aliases').value = f.aliases;
+  document.getElementById('shared-by').value = f.sharedBy || '';
   document.getElementById('description').value = f.description;
   document.getElementById('data-type').value = f.dataType;
   document.getElementById('length').value = f.length;
@@ -402,7 +407,7 @@ function deleteField(i) {
 }
 
 function clearForm() {
-  ['field-name','parent-table','source-spec','aliases','description','length','decimal-places','range-values'].forEach(id => document.getElementById(id).value = '');
+  ['field-name','parent-table','source-spec','aliases','shared-by','description','length','decimal-places','range-values'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('data-type').value = 'Alphanumeric';
   setRadio('spec-type', 'spec-type-group', 'Unique');
   setRadio('edit-rule', 'edit-rule-group', 'Enter now, edits allowed');
@@ -435,6 +440,7 @@ function renderMarkdown() {
       md += `| Specification type | ${f.specificationType} |\n`;
       if (f.sourceSpecification) md += `| Source specification | ${f.sourceSpecification} |\n`;
       if (f.aliases) md += `| Alias(es) | ${f.aliases} |\n`;
+      if (f.sharedBy) md += `| Shared by | ${f.sharedBy} |\n`;
       if (f.description) md += `| Description | ${f.description} |\n`;
       md += `| Data type | ${f.dataType} |\n`;
       if (f.length) md += `| Length | ${f.length} |\n`;

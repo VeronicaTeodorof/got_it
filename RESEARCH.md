@@ -271,6 +271,10 @@ During this step, two revisions were made to the subject list identified in Step
 | Note Last Modified Date | | | | 
 
 
+4. **Field Specifications**  
+
+Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).
+
 ## Resources
 ### Note-Taking
 - Ahrens, Sonke. 2017 How to Take Smart Notes
