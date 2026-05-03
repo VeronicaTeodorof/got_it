@@ -52,40 +52,40 @@ I selected four apps representing different approaches to note-taking: a mainstr
 
 Home Page:  
 
-<img src="research-assets/market-research/one_note_home.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/one_note_home.png" style="height: 400px">  
 
 Dashboard:  
 
-<img src="research-assets/market-research/one_note_dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/one_note_dashboard.png" style="height: 400px">  
 
 
 2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes  
 
 Home Page:  
 
-<img src="research-assets/market-research/notion_home.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/notion_home.png" style="height: 400px">  
 
 Dashboard:  
 
-<img src="research-assets/market-research/notion_dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/notion_dashboard.png" style="height: 400px">  
 
 
 3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/  
 
 Home Page:  
 
-<img src="research-assets/market-research/obsidian-home.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/obsidian-home.png" style="height: 400px">  
 
 Dashboard:  
 
-<img src="research-assets/market-research/obsidian-dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/obsidian-dashboard.png" style="height: 400px">  
 
 
 4. Google Keep - minimal: https://keep.google.com/  
 
 Dashboard:  
 
-<img src="research-assets/market-research/google-keep-dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/google-keep-dashboard.png" style="height: 400px">  
 
 
 To complement the visual research, I also drew on an academic article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview, to further inform my design decisions.
@@ -255,7 +255,6 @@ During this step, two revisions were made to the subject list identified in Step
 | Password |Source Author | | Unit Last Modified Date | | |
 | Email Verification Status | | | Unit Type* | | |
 | Username | | | | | |
-| | | | || | |
 
 * Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user
 
@@ -270,7 +269,6 @@ During this step, two revisions were made to the subject list identified in Step
 | Content | | | Ref Note Parent | 
 | Note Creation Date | | | | 
 | Note Last Modified Date | | | | 
-| | | | |
 
 
 ## Resources
