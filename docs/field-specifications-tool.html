@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Field Specifications — got it?</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #d8d6cf;
+    --border-strong: #b0ada3;
+    --text: #1a1916;
+    --text-muted: #6b6860;
+    --text-faint: #a09e98;
+    --accent: #1a1916;
+    --accent-light: #f0ede6;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); font-family: var(--sans); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+  header { border-bottom: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: baseline; background: var(--surface); }
+  header h1 { font-family: var(--mono); font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  header span { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+
+  .layout { display: grid; grid-template-columns: 1fr 340px; gap: 0; min-height: calc(100vh - 57px); }
+
+  .form-panel { padding: 2rem; border-right: 1px solid var(--border); }
+  .sidebar { padding: 2rem; background: var(--surface); }
+
+  .section { margin-bottom: 1.5rem; }
+  .section-label { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+
+  .row { display: grid; gap: 12px; margin-bottom: 12px; }
+  .row.c2 { grid-template-columns: 1fr 1fr; }
+  .row.c3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label { font-size: 11px; font-family: var(--mono); color: var(--text-muted); font-weight: 500; }
+
+  input[type=text], select, textarea {
+    border: 1px solid var(--border);
+    background: var(--bg);
+    padding: 7px 10px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--text);
+    border-radius: 4px;
+    width: 100%;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+  input[type=text]:focus, select:focus, textarea:focus { border-color: var(--text); background: #fff; }
+  textarea { resize: vertical; min-height: 64px; }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%236b6860' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer; }
+
+  .radio-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .radio-grid label, .check-grid label {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--text); cursor: pointer;
+    background: var(--bg); border: 1px solid var(--border);
+    padding: 4px 10px; border-radius: 3px;
+    transition: all 0.1s;
+    user-select: none;
+  }
+  .radio-grid label:hover, .check-grid label:hover { border-color: var(--border-strong); }
+  .radio-grid input, .check-grid input { display: none; }
+  .radio-grid label.selected, .check-grid label.selected { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+  .check-grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+
+  .edit-rule-group { display: flex; flex-direction: column; gap: 5px; margin-top: 2px; }
+  .edit-rule-group label { justify-content: flex-start; }
+
+  .btn { font-family: var(--mono); font-size: 12px; font-weight: 500; padding: 8px 18px; border-radius: 4px; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: all 0.15s; letter-spacing: 0.02em; }
+  .btn:hover { border-color: var(--text); }
+  .btn.primary { background: var(--text); color: #fff; border-color: var(--text); }
+  .btn.primary:hover { background: #333; }
+  .btn.danger { color: #c0392b; border-color: #e8b8b5; }
+  .btn.danger:hover { background: #fdf0ef; border-color: #c0392b; }
+
+  .actions { display: flex; gap: 8px; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+
+  .sidebar-title { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 14px; }
+  .field-card { border: 1px solid var(--border); border-radius: 4px; padding: 10px 12px; margin-bottom: 8px; background: var(--bg); transition: border-color 0.15s; }
+  .field-card:hover { border-color: var(--border-strong); }
+  .field-card-name { font-family: var(--mono); font-size: 13px; font-weight: 500; }
+  .field-card-meta { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .field-card-actions { display: flex; gap: 6px; margin-top: 8px; }
+  .btn-xs { font-family: var(--mono); font-size: 11px; padding: 3px 9px; border-radius: 3px; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: all 0.12s; }
+  .btn-xs:hover { border-color: var(--border-strong); }
+  .btn-xs.danger { color: #c0392b; }
+  .btn-xs.danger:hover { border-color: #c0392b; background: #fdf0ef; }
+
+  .empty-state { text-align: center; padding: 3rem 1rem; color: var(--text-faint); font-size: 12px; font-family: var(--mono); line-height: 2; }
+
+  .export-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+  .export-section textarea { font-family: var(--mono); font-size: 11px; min-height: 180px; background: #fff; }
+  .copy-notice { font-size: 11px; color: var(--text-muted); margin-top: 6px; font-family: var(--mono); }
+
+  .count-badge { display: inline-block; background: var(--text); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 500; padding: 1px 6px; border-radius: 2px; margin-left: 8px; vertical-align: middle; }
+
+  @media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .form-panel { border-right: none; border-bottom: 1px solid var(--border); }
+    .row.c2, .row.c3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>got it? / field specifications</h1>
+  <span>Database Design for Mere Mortals — Hernandez</span>
+</header>
+
+<div class="layout">
+  <div class="form-panel">
+
+    <div class="section">
+      <div class="section-label">General elements</div>
+      <div class="row c2">
+        <div class="field"><label>Field name</label><input type="text" id="field-name" placeholder="e.g. Username"></div>
+        <div class="field"><label>Parent table</label><input type="text" id="parent-table" placeholder="e.g. User"></div>
+      </div>
+      <div class="row c2">
+        <div class="field">
+          <label>Specification type</label>
+          <div class="radio-grid" id="spec-type-group">
+            <label class="selected"><input type="radio" name="spec-type" value="Unique" checked>Unique</label>
+            <label><input type="radio" name="spec-type" value="Generic">Generic</label>
+            <label><input type="radio" name="spec-type" value="Replica">Replica</label>
+          </div>
+        </div>
+        <div class="field"><label>Source specification</label><input type="text" id="source-spec" placeholder="e.g. User.Email Address"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Alias(es)</label><input type="text" id="aliases" placeholder="e.g. handle, screen name"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Description</label><textarea id="description" placeholder="Describe the field and its purpose..."></textarea></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Physical elements</div>
+      <div class="row c3">
+        <div class="field">
+          <label>Data type</label>
+          <select id="data-type">
+            <option>Alphanumeric</option>
+            <option>Numeric</option>
+            <option>Boolean</option>
+            <option>Date</option>
+            <option>Date/Time</option>
+            <option>Image</option>
+            <option>Binary</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field"><label>Length</label><input type="text" id="length" placeholder="e.g. 50"></div>
+        <div class="field"><label>Decimal places</label><input type="text" id="decimal-places" placeholder="e.g. None"></div>
+      </div>
+      <div class="field">
+        <label>Character support</label>
+        <div class="check-grid" id="char-support-group">
+          <label><input type="checkbox" value="Letters (A–Z)">Letters (A–Z)</label>
+          <label><input type="checkbox" value="Numbers (0–9)">Numbers (0–9)</label>
+          <label><input type="checkbox" value="Keyboard ( . , / $ # % )">Keyboard ( . , / $ # % )</label>
+          <label><input type="checkbox" value="Special ( © ® ™ )">Special ( © ® ™ )</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Logical elements</div>
+      <div class="row c2">
+        <div class="field">
+          <label>Key type</label>
+          <div class="check-grid" id="key-type-group">
+            <label><input type="checkbox" value="Non">Non</label>
+            <label><input type="checkbox" value="Primary">Primary</label>
+            <label><input type="checkbox" value="Foreign">Foreign</label>
+            <label><input type="checkbox" value="Alternate">Alternate</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Edit rule</label>
+          <div class="radio-grid edit-rule-group" id="edit-rule-group">
+            <label class="selected"><input type="radio" name="edit-rule" value="Enter now, edits allowed" checked>Enter now, edits allowed</label>
+            <label><input type="radio" name="edit-rule" value="Enter now, edits not allowed">Enter now, edits not allowed</label>
+            <label><input type="radio" name="edit-rule" value="Enter later, edits allowed">Enter later, edits allowed</label>
+            <label><input type="radio" name="edit-rule" value="Enter later, edits not allowed">Enter later, edits not allowed</label>
+            <label><input type="radio" name="edit-rule" value="Not determined at this time">Not determined at this time</label>
+          </div>
+        </div>
+      </div>
+      <div class="row c3">
+        <div class="field">
+          <label>Key structure</label>
+          <div class="radio-grid" id="key-struct-group">
+            <label><input type="radio" name="key-struct" value="Simple">Simple</label>
+            <label><input type="radio" name="key-struct" value="Composite">Composite</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Uniqueness</label>
+          <div class="radio-grid" id="uniqueness-group">
+            <label class="selected"><input type="radio" name="uniqueness" value="Non-unique" checked>Non-unique</label>
+            <label><input type="radio" name="uniqueness" value="Unique">Unique</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Null support</label>
+          <div class="radio-grid" id="null-group">
+            <label><input type="radio" name="null-support" value="Nulls allowed">Nulls allowed</label>
+            <label class="selected"><input type="radio" name="null-support" value="No nulls" checked>No nulls</label>
+          </div>
+        </div>
+      </div>
+      <div class="row c2">
+        <div class="field">
+          <label>Values entered by</label>
+          <div class="radio-grid" id="values-by-group">
+            <label class="selected"><input type="radio" name="values-by" value="User" checked>User</label>
+            <label><input type="radio" name="values-by" value="System">System</label>
+          </div>
+        </div>
+        <div class="field">
+          <label>Required value</label>
+          <div class="radio-grid" id="required-group">
+            <label class="selected"><input type="radio" name="required" value="Yes" checked>Yes</label>
+            <label><input type="radio" name="required" value="No">No</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label>Range of values</label><input type="text" id="range-values" placeholder="e.g. Any valid email address format"></div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn primary" onclick="saveField()">Save field</button>
+      <button class="btn" onclick="clearForm()">Clear form</button>
+    </div>
+
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-title">
+      Saved fields
+      <span class="count-badge" id="field-count">0</span>
+    </div>
+    <div id="field-list"><div class="empty-state">No fields saved yet.<br>Fill the form and click Save.</div></div>
+
+    <div class="export-section" id="export-section" style="display:none;">
+      <div class="sidebar-title">Markdown export</div>
+      <textarea id="md-output" readonly></textarea>
+      <p class="copy-notice">Copy and paste into field-specifications.md</p>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button class="btn" onclick="copyMarkdown()">Copy to clipboard</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let fields = JSON.parse(localStorage.getItem('gotit-fields') || '[]');
+let editingIndex = -1;
+
+function persist() { localStorage.setItem('gotit-fields', JSON.stringify(fields)); }
+
+function getVal(id) { return (document.getElementById(id)?.value || '').trim(); }
+function getRadio(name) { return document.querySelector(`input[name="${name}"]:checked`)?.value || ''; }
+function getChecked(groupId) {
+  return [...document.querySelectorAll(`#${groupId} input:checked`)].map(i => i.value);
+}
+
+document.querySelectorAll('.radio-grid label, .check-grid label').forEach(label => {
+  label.addEventListener('click', function() {
+    const input = this.querySelector('input');
+    if (input.type === 'radio') {
+      const groupId = this.closest('.radio-grid, .edit-rule-group')?.id;
+      if (groupId) document.querySelectorAll(`#${groupId} label`).forEach(l => l.classList.remove('selected'));
+      this.classList.add('selected');
+    } else {
+      this.classList.toggle('selected');
+    }
+  });
+});
+
+function saveField() {
+  const name = getVal('field-name');
+  const table = getVal('parent-table');
+  if (!name || !table) { alert('Field name and parent table are required.'); return; }
+
+  const field = {
+    fieldName: name,
+    parentTable: table,
+    specificationType: getRadio('spec-type'),
+    sourceSpecification: getVal('source-spec'),
+    aliases: getVal('aliases'),
+    description: getVal('description'),
+    dataType: getVal('data-type'),
+    length: getVal('length'),
+    decimalPlaces: getVal('decimal-places'),
+    characterSupport: getChecked('char-support-group'),
+    keyType: getChecked('key-type-group'),
+    keyStructure: getRadio('key-struct'),
+    uniqueness: getRadio('uniqueness'),
+    nullSupport: getRadio('null-support'),
+    valuesEnteredBy: getRadio('values-by'),
+    required: getRadio('required'),
+    rangeOfValues: getVal('range-values'),
+    editRule: getRadio('edit-rule')
+  };
+
+  if (editingIndex >= 0) {
+    fields[editingIndex] = field;
+    editingIndex = -1;
+  } else {
+    fields.push(field);
+  }
+
+  persist();
+  renderList();
+  renderMarkdown();
+  clearForm();
+}
+
+function renderList() {
+  const list = document.getElementById('field-list');
+  document.getElementById('field-count').textContent = fields.length;
+  if (!fields.length) {
+    list.innerHTML = '<div class="empty-state">No fields saved yet.<br>Fill the form and click Save.</div>';
+    document.getElementById('export-section').style.display = 'none';
+    return;
+  }
+  document.getElementById('export-section').style.display = 'block';
+  list.innerHTML = fields.map((f, i) => `
+    <div class="field-card">
+      <div class="field-card-name">${f.fieldName}</div>
+      <div class="field-card-meta">${f.parentTable} &middot; ${f.dataType}${f.keyType.length ? ' &middot; ' + f.keyType.join(', ') + ' key' : ''}</div>
+      <div class="field-card-actions">
+        <button class="btn-xs" onclick="editField(${i})">Edit</button>
+        <button class="btn-xs danger" onclick="deleteField(${i})">Delete</button>
+      </div>
+    </div>`).join('');
+}
+
+function editField(i) {
+  const f = fields[i];
+  editingIndex = i;
+  document.getElementById('field-name').value = f.fieldName;
+  document.getElementById('parent-table').value = f.parentTable;
+  document.getElementById('source-spec').value = f.sourceSpecification;
+  document.getElementById('aliases').value = f.aliases;
+  document.getElementById('description').value = f.description;
+  document.getElementById('data-type').value = f.dataType;
+  document.getElementById('length').value = f.length;
+  document.getElementById('decimal-places').value = f.decimalPlaces;
+  document.getElementById('range-values').value = f.rangeOfValues;
+
+  setRadio('spec-type', 'spec-type-group', f.specificationType);
+  setRadio('edit-rule', 'edit-rule-group', f.editRule);
+  setRadio('key-struct', 'key-struct-group', f.keyStructure);
+  setRadio('uniqueness', 'uniqueness-group', f.uniqueness);
+  setRadio('null-support', 'null-group', f.nullSupport);
+  setRadio('values-by', 'values-by-group', f.valuesEnteredBy);
+  setRadio('required', 'required-group', f.required);
+  setChecks('char-support-group', f.characterSupport);
+  setChecks('key-type-group', f.keyType);
+
+  document.querySelector('.btn.primary').textContent = 'Update field';
+  window.scrollTo(0, 0);
+}
+
+function setRadio(name, groupId, value) {
+  document.querySelectorAll(`#${groupId} label`).forEach(l => l.classList.remove('selected'));
+  const input = document.querySelector(`input[name="${name}"][value="${value}"]`);
+  if (input) { input.checked = true; input.closest('label').classList.add('selected'); }
+}
+
+function setChecks(groupId, values) {
+  document.querySelectorAll(`#${groupId} label`).forEach(l => {
+    const input = l.querySelector('input');
+    const checked = values.includes(input.value);
+    input.checked = checked;
+    l.classList.toggle('selected', checked);
+  });
+}
+
+function deleteField(i) {
+  if (!confirm(`Delete "${fields[i].fieldName}"?`)) return;
+  fields.splice(i, 1);
+  persist();
+  renderList();
+  renderMarkdown();
+}
+
+function clearForm() {
+  ['field-name','parent-table','source-spec','aliases','description','length','decimal-places','range-values'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('data-type').value = 'Alphanumeric';
+  setRadio('spec-type', 'spec-type-group', 'Unique');
+  setRadio('edit-rule', 'edit-rule-group', 'Enter now, edits allowed');
+  setRadio('uniqueness', 'uniqueness-group', 'Non-unique');
+  setRadio('null-support', 'null-group', 'No nulls');
+  setRadio('values-by', 'values-by-group', 'User');
+  setRadio('required', 'required-group', 'Yes');
+  setChecks('char-support-group', []);
+  setChecks('key-type-group', []);
+  document.querySelectorAll('input[name="key-struct"]').forEach(i => i.checked = false);
+  document.querySelectorAll('#key-struct-group label').forEach(l => l.classList.remove('selected'));
+  editingIndex = -1;
+  document.querySelector('.btn.primary').textContent = 'Save field';
+}
+
+function renderMarkdown() {
+  if (!fields.length) return;
+  const grouped = {};
+  fields.forEach(f => { if (!grouped[f.parentTable]) grouped[f.parentTable] = []; grouped[f.parentTable].push(f); });
+
+  let md = '# Field Specifications\n\n';
+  md += '> Generated from got it? field specification tool\n\n';
+
+  for (const table of Object.keys(grouped)) {
+    md += `## ${table}\n\n`;
+    for (const f of grouped[table]) {
+      md += `### ${f.fieldName}\n\n`;
+      md += `| Property | Value |\n|---|---|\n`;
+      md += `| Parent table | ${f.parentTable} |\n`;
+      md += `| Specification type | ${f.specificationType} |\n`;
+      if (f.sourceSpecification) md += `| Source specification | ${f.sourceSpecification} |\n`;
+      if (f.aliases) md += `| Alias(es) | ${f.aliases} |\n`;
+      if (f.description) md += `| Description | ${f.description} |\n`;
+      md += `| Data type | ${f.dataType} |\n`;
+      if (f.length) md += `| Length | ${f.length} |\n`;
+      if (f.decimalPlaces) md += `| Decimal places | ${f.decimalPlaces} |\n`;
+      if (f.characterSupport.length) md += `| Character support | ${f.characterSupport.join(', ')} |\n`;
+      md += `| Key type | ${f.keyType.length ? f.keyType.join(', ') : 'Non'} |\n`;
+      if (f.keyStructure) md += `| Key structure | ${f.keyStructure} |\n`;
+      md += `| Uniqueness | ${f.uniqueness} |\n`;
+      md += `| Null support | ${f.nullSupport} |\n`;
+      md += `| Values entered by | ${f.valuesEnteredBy} |\n`;
+      md += `| Required | ${f.required} |\n`;
+      if (f.rangeOfValues) md += `| Range of values | ${f.rangeOfValues} |\n`;
+      md += `| Edit rule | ${f.editRule} |\n`;
+      md += '\n';
+    }
+  }
+  document.getElementById('md-output').value = md.trim();
+}
+
+function copyMarkdown() {
+  const ta = document.getElementById('md-output');
+  ta.select();
+  document.execCommand('copy');
+  const btn = event.target;
+  btn.textContent = 'Copied!';
+  setTimeout(() => btn.textContent = 'Copy to clipboard', 1500);
+}
+
+renderList();
+renderMarkdown();
+</script>
+</body>
+</html>
