@@ -236,10 +236,12 @@ During this step, two revisions were made to the subject list identified in Step
 | Source | Data | The material a user is studying. | Storing sources allows users to organise their notes around a specific piece of study material and trace ideas back to where they came from. |
 | Source Type | Data | The category or kind of a source. | Storing source types allows users to categorise and filter their sources, making it easier to navigate study material across different kinds of resources. |
 | Unit | Data | A subsection of a source with a distinct theme. | Storing units allows users to refine the scope of their notes and organise them around specific topics or themes within a broader source. |
+| Note | Data | The atomic unit of capture (what the user actually writes down). | Storing notes allows users to build up a personal knowledge base tied to their study material, which they can  organise and revisit over time. |
 | Reference Note | Data | A note that captures an idea or passage from the material being studied, preserving the original wording and its source. | Storing reference notes allows users to trace ideas back to their origin. |
 | Own-words Note | Data | A type of note that reflects the user's understanding of what is being learned. | Storing own-words notes allows users to record and revisit their understanding of ideas in their own words, making it easier to identify what has been truly grasped. |
 | Question Note | Data | A type of note that reflects the user's gaps in understanding. | Storing question notes allows users to keep track of their comprehension gaps, especially when revising, and attempt to clarify them. |
 | Tag | Data | A metadata item that links notes by broad theme. | Storing tags allows users to organise and retrieve notes across different sources by shared theme, and ensures consistency by making existing tags visible when tagging a note. |
+| Note Tag | Data | An association between a note and a tag. | Storing note tags allows the app to retrieve all notes linked to a given theme and maintain the connections a user has drawn between their notes and tags. |
 
 
 <h2 align="center">Table Structures</h2>
