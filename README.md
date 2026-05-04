@@ -24,7 +24,7 @@
 - **UI/UX Theme**
 13. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
 14. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
-15. As a student I want to be able to quickly access my recent notes, so that I pick up where I left off.
+15. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
 16. As a new user I want to be given a walkthrough on the home page so that I know what the app is about and how to start using it.
 17. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
 18. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.  

@@ -168,6 +168,7 @@ With a clearer picture of user expectations from market research and anticipated
 - View all notes related to a source, organised hierarchically by unit — source expandable into units, units expandable into notes
 - View all sources filtered by source type
 - Own-words and question notes can be created independently of a reference note
+- View most recent activity from the dashboard
 
 
 4. Design and Accessibility
@@ -250,13 +251,19 @@ During this step, two revisions were made to the subject list identified in Step
 | User | Source | Source Type | Unit | Tag | Note Tags |
 |------|--------|-------------|------|-----|-----|
 | First Name | Source Name | Source Type Name | Parent Source | Tag Name | Note Title |
-| Last Name | Source Creation Date | Source Type Creation Date | Unit Name | | Tag Name |
-| Email Address | Source Last Modified Date | Source Type Last Modified Date | Unit Creation Date | | |
-| Password |Source Author | | Unit Last Modified Date | | |
-| Email Verification Status | | | Unit Type* | | |
+| Last Name | Source Creation Date<sup>[3]</sup> | Source Type Creation Date<sup>[2]</sup> | Unit Name | | Tag Name |
+| Email Address | Source Last Modified Date<sup>[4]</sup> | Source Type Last Modified Date<sup>[2]</sup> | Unit Creation Date<sup>[2]</sup> | | |
+| Password |Source Author | | Unit Last Modified Date<sup>[4]</sup> | | |
+| Email Verification Status | | | Unit Type<sup>[1]</sup> | | |
 | Username | | | | | |
 
-* Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user
+[1] Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user. 
+
+[2] These fields were removed at the field specifications stage as they proved of no real value to the app or the user.
+
+[3] Unlike the fields above, Source Creation Date retains real value — a student may want to know when they started studying a specific source, such as a book or course. This is not the case for Source Type timestamps or Unit Creation Date.  
+
+[4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.
 
 
 <h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
