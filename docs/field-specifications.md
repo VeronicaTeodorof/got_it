@@ -300,3 +300,76 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Values entered by | System |
 | Required | Yes |
 | Edit rule | Enter now, edits not allowed |
+
+
+## Tag
+
+### Tag Name
+
+| Property | Value |
+|---|---|
+| Parent table | Tag |
+| Specification type | Unique |
+| Description | A user-defined word or short expression that labels a note to add meaning to it, enabling the student to group and retrieve related notes across all sources within the application. |
+| Data type | Alphanumeric |
+| Length | 50 |
+| Decimal places | None |
+| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ) |
+| Key type | Alternate |
+| Key structure | Simple |
+| Uniqueness | Unique |
+| Null support | No nulls |
+| Values entered by | User |
+| Required | Yes |
+| Edit rule | Enter now, edits allowed |
+
+
+## Tag Notes
+
+### Tag Name
+
+
+| Property | Value |
+|---|---|
+| Parent table | Tag Notes |
+| Specification type | Replica |
+| Shared by | Tag, Tag Notes |
+| Description | A user-defined word or short expression that labels a note to add meaning to it, enabling the student to group and retrieve related notes across all sources within the application. |
+| Data type | Alphanumeric |
+| Length | 50 |
+| Decimal places | None |
+| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ) |
+| Key type | Foreign |
+| Key structure | Simple |
+| Uniqueness | Non-unique |
+| Null support | No nulls |
+| Values entered by | User |
+| Required | Yes |
+| Edit rule | Enter now, edits not allowed |
+
+
+### Note Title
+
+
+| Property | Value |
+|---|---|
+| Parent table | Tag Notes |
+| Specification type | Replica |
+| Shared by | Note, Note Tags |
+| Description | A short heading that summarises the main idea of a note, enabling the student to identify and distinguish it from other notes at a glance |
+| Data type | Alphanumeric |
+| Length | 100 |
+| Decimal places | None |
+| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ) |
+| Key type | Foreign |
+| Key structure | Simple |
+| Uniqueness | Non-unique |
+| Null support | No nulls |
+| Values entered by | User |
+| Required | Yes |
+| Edit rule | Enter now, edits allowed |
+
+
+
+
+
