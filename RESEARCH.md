@@ -250,12 +250,13 @@ During this step, two revisions were made to the subject list identified in Step
 
 | User | Source | Source Type | Unit | Tag | Note Tags |
 |------|--------|-------------|------|-----|-----|
-| First Name | Source Name | Source Type Name | Parent Source | Tag Name | Note Title |
-| Last Name | Source Creation Date<sup>[3]</sup> | Source Type Creation Date<sup>[2]</sup> | Unit Name | | Tag Name |
-| Email Address | Source Last Modified Date<sup>[4]</sup> | Source Type Last Modified Date<sup>[2]</sup> | Unit Creation Date<sup>[2]</sup> | | |
-| Password |Source Author | | Unit Last Modified Date<sup>[4]</sup> | | |
-| Email Verification Status | | | Unit Type<sup>[1]</sup> | | |
-| Username | | | | | |
+| First Name | Source Name | Source Type Name | Parent Source | Tag Name | Note ID |
+| Last Name | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID CK| Tag ID |
+| Email Address CK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | | |
+| Password |Source Author |Source Type ID CK | Unit Last Modified Date<sup>[4]</sup> | | |
+| Email Verification Status |  Source ID CK | | Unit Type<sup>[1]</sup> | | |
+| Username CK| | | Unit ID CK | |
+| User ID CK | | | | | |
 
 [1] Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user. 
 
@@ -265,6 +266,8 @@ During this step, two revisions were made to the subject list identified in Step
 
 [4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.
 
+[5] CK = Candidate Key
+
 
 <h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
 
@@ -272,13 +275,18 @@ During this step, two revisions were made to the subject list identified in Step
 | Note | Reference | Own-Words | Question |
 |-----|------|-----|-----|
 | Parent Unit | Active Status | Ref Note Parent | Answered Status |
-| Title | | | Marked Status |
+| Title | Reference ID CK| Own-Words ID CK | Marked Status |
 | Content | | | Ref Note Parent | 
-| Note Creation Date | | | | 
+| Note Creation Date | | | Question ID CK | 
 | Note Last Modified Date | | | | 
+| Note ID CK| | | |
 
 
-4. **Field Specifications**  
+4. **Keys**  
+
+I initially skipped this step, knowing Django would handle primary keys automatically. However, when I reached the next step — Field Specifications — the absence of explicitly defined primary keys introduced a number of inaccuracies, forcing me to go back and complete it properly.
+
+5. **Field Specifications**  
 
 Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).
 
