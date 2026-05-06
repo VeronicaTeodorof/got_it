@@ -19,7 +19,8 @@
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |  
-| Range of values | Any positive integer |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 ### First Name
 
@@ -160,7 +161,8 @@
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |  
-| Range of values | Any positive integer |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Source Name
@@ -260,7 +262,8 @@
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |  
-| Range of values | Any positive integer |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 ### Source Type Name
 
@@ -279,7 +282,7 @@
 | Values entered by | User |
 | Required | Yes |
 | Edit rule | Enter now, edits allowed |  
-| Range of values | Any title up to 255 characters |
+| Range of values | Any title up to 50 characters. |  
 
 Note: Definitions for Source Type Creation Date and Source Type Last Modified date showed no real value for these fields and therefore they've been removed altogether.
 
@@ -302,7 +305,8 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |  
-| Range of values | Any positive integer |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 ### Parent Source
 
@@ -322,8 +326,8 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Null support | No nulls |
 | Values entered by | User |
 | Required | Yes |  
-| Range of values | Any set of characters up to 255 |
-| Edit rule | Enter now, edits allowed |
+| Range of values | Any positive integer |
+| Edit rule | Enter now, edits allowed |  
 
 
 ### Unit Name
@@ -342,8 +346,8 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Null support | No nulls |
 | Values entered by | User |
 | Required | Yes |  
-| Range of values | Any name up to 255 characters |
-| Edit rule | Enter now, edits allowed |
+| Range of values | Any name up to 100 characters. |
+| Edit rule | Enter now, edits allowed |  
 
 
 Note: Definition for Unit Creation Date showed no real value for this field and therefore it has  been removed.
@@ -364,7 +368,7 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Null support | No nulls |
 | Values entered by | System |
 | Required | Yes |  
-| Range of values | Any date/time not earlier than the app launch date |
+| Range of values | Any date/time not earlier than the unit creation date|
 | Edit rule | Enter now, edits not allowed |
 
 
@@ -383,6 +387,7 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Null support | No nulls |
 | Values entered by | System |
 | Required | Yes |  
+| Range of values | Default, Custom |
 | Edit rule | Enter now, edits not allowed |
 
 
@@ -403,7 +408,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Range of values | Any positive integer |  
+| Required | Yes |  
+| Edit rule | Enter now, edits not allowed |
 
 ### Tag Name
 
@@ -421,7 +428,8 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Unique |
 | Null support | No nulls |
 | Values entered by | User |
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any name up to 50 characters |
 | Edit rule | Enter now, edits allowed |
 
 
@@ -445,7 +453,8 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |
 | Null support | No nulls |
 | Values entered by | User |
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any positive integer |
 | Edit rule | Enter now, edits not allowed |
 
 
@@ -467,8 +476,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |
 | Null support | No nulls |
 | Values entered by | User |
-| Required | Yes |
-| Edit rule | Enter now, edits allowed |
+| Required | Yes |  
+| Range of values | Any positive integer |
+| Edit rule | Enter now, edits not allowed |
 
 
 ## Note 
@@ -488,7 +498,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits allowed |
 
 
 
@@ -508,7 +520,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-unique |  
 | Null support | No nulls |  
 | Values entered by | User |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits allowed |
 
 
 ### Note Title  
@@ -525,7 +539,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-unique |  
 | Null support | Nulls-Allowed |  
 | Values entered by | User |  
-| Required | No |
+| Required | No |  
+| Range of values | Any title up to 100 characters |  
+| Edit rule | Enter now, edits allowed |
 
 
 ### Note Content  
@@ -536,13 +552,15 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Specification type | Unique |  
 | Description | The body of a note, containing the student's written record of the material being studied. It is the primary substance of the note. |  
 | Data type | Alphanumeric |  
-| Length | None |  
+| Length | 10000 |  
 | Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ), Special ( © ® ™ ) |  
 | Key type | Non |  
 | Uniqueness | Non-unique |  
 | Null support | No nulls | 
 | Values entered by | User |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any non-empty string of characters up to 10,000 characters, excluding strings composed entirely of whitespace |  
+| Edit rule | Enter now, edits allowed |
 
 
 
@@ -559,7 +577,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any date/time not earlier than the app launch date. |  
+| Edit rule | Enter now, edits not allowed |
 
 
 
@@ -576,7 +596,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any date/time not earlier than the note creation date. |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ## Reference
@@ -597,6 +619,8 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Ref Active Status  
@@ -612,7 +636,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
 | Values entered by | User |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Yes, No |  
+| Edit rule | Enter now, edits allowed |
 
 
 ## Own-Words 
@@ -632,7 +658,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Own-Words Ref Parent  
@@ -651,6 +679,8 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Null support | Nulls Allowed | 
 | Values entered by | User |  
 | Required | No |
+| Range of values | Any positive integer | 
+| Edit rule | Enter now, edits allowed |
 
 
 ## Question 
@@ -670,7 +700,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Question Ref Parent  
@@ -688,7 +720,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | Nulls-Allowed |  
 | Values entered by | User |  
-| Required | No |
+| Required | No |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits allowed |
 
 
 ### Answered Status  
@@ -704,7 +738,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Yes, No |  
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Marked Status  
@@ -720,7 +756,9 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
 | Values entered by | User |  
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Yes, No |  
+| Edit rule | Enter now, edits allowed |
 
 
 
