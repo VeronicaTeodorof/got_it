@@ -3,6 +3,24 @@
 
 ## User
 
+
+### User ID  
+
+| Property | Value |
+|---|---|
+| Parent table | User |  
+| Specification type | Unique |  
+| Description | A unique integer that identifies a single user record within the database. It serves as the primary key of the User table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |
+
 ### First Name
 
 | Property | Value |
@@ -126,6 +144,25 @@
 
 ## Source
 
+
+### Source ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Source |  
+| Specification type | Unique |
+| Description | A unique integer that identifies a single source record within the database. It serves as the primary key of the Source table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |
+
+
 ### Source Name
 
 | Property | Value |
@@ -143,7 +180,8 @@
 | Values entered by | User |
 | Required | Yes |
 | Range of values | Any title up to 255 characters |
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits allowed |  
+
 
 
 ### Source Creation Date
@@ -153,7 +191,8 @@
 | Parent table | Source |
 | Specification type | Unique |
 | Description | The year, month, day and time a specific source record was created in the app. It allows the app and the user to sort sources in chronological or reverse chronological order. |
-| Data type | Date/Time |
+| Data type | Date/Time |  
+| Length | None |
 | Decimal places | None |
 | Key type | Non |
 | Uniqueness | Non-unique |
@@ -171,7 +210,8 @@
 | Parent table | Source |
 | Specification type | Unique |
 | Description | The year, month, day and time a specific source record was last edited in the app. It allows the app and the user to sort sources by most recent activity, making it easy to return to work in progress. |
-| Data type | Date/Time |
+| Data type | Date/Time |  
+| Length | None |
 | Decimal places | None |
 | Key type | Non |
 | Uniqueness | Non-unique |
@@ -204,6 +244,24 @@
 
 ## Source Type
 
+
+### Source Type ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Source Type |  
+| Specification type | Unique |
+| Description | A unique integer that identifies a single source type record within the database. It serves as the primary key of the Source Type table. |  
+| Data type | Numeric | 
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |
+
 ### Source Type Name
 
 | Property | Value |
@@ -215,17 +273,36 @@
 | Length | 50 |
 | Decimal places | None |
 | Character support | Letters (A–Z), Keyboard ( . , / $ # % ) |
-| Key type | Non |
+| Key type | Alternate |
 | Uniqueness | Unique |
 | Null support | No nulls |
 | Values entered by | User |
 | Required | Yes |
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits allowed |  
+| Range of values | Any title up to 255 characters |
 
 Note: Definitions for Source Type Creation Date and Source Type Last Modified date showed no real value for these fields and therefore they've been removed altogether.
 
 
 ## Unit
+
+
+### Unit ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Unit |  
+| Specification type | Unique |  
+| Description | A unique integer that identifies a single unit record within the database. It serves as the primary key of the Unit table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |
 
 ### Parent Source
 
@@ -234,15 +311,18 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Parent table | Unit |
 | Specification type | Replica |
 | Shared by | Source, Unit |
-| Description | The name of the source a unit belongs to. It allows the app and the user to group and retrieve all units associated with a specific source. |
-| Data type | Other |
-| Decimal places | None |
+| Description | A unique integer that identifies a single source record within the database. It serves as the primary key of the Source table. |
+| Data type | Numeric |  
+| Length | 10|
+| Decimal places | None |  
+| Character support | Numbers (0-9) |
 | Key type | Foreign |
 | Key structure | Simple |
 | Uniqueness | Non-unique |
 | Null support | No nulls |
 | Values entered by | User |
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any set of characters up to 255 |
 | Edit rule | Enter now, edits allowed |
 
 
@@ -261,7 +341,8 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Uniqueness | Non-unique |
 | Null support | No nulls |
 | Values entered by | User |
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any name up to 255 characters |
 | Edit rule | Enter now, edits allowed |
 
 
@@ -275,13 +356,15 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Parent table | Unit |
 | Specification type | Unique |
 | Description | The year, month, day and time a specific unit record was last edited in the app. It allows the app and the user to sort units by most recent activity, making it easy to return to work in progress. |
-| Data type | Date/Time |
+| Data type | Date/Time |  
+| Length | None |
 | Decimal places | None |
 | Key type | Non |
 | Uniqueness | Non-unique |
 | Null support | No nulls |
 | Values entered by | System |
-| Required | Yes |
+| Required | Yes |  
+| Range of values | Any date/time not earlier than the app launch date |
 | Edit rule | Enter now, edits not allowed |
 
 
@@ -292,17 +375,35 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Parent table | Unit |
 | Specification type | Unique |
 | Description | Indicates whether a unit was created automatically by the system or by the user. It allows the app to identify and handle default units differently, for example by sorting "My Thoughts" first in the unit list. |
-| Data type | Boolean |
+| Data type | Boolean |  
+| Length | None |
 | Decimal places | None |
 | Key type | Non |
-| Uniqueness | Unique |
+| Uniqueness | Non-Unique |
 | Null support | No nulls |
 | Values entered by | System |
-| Required | Yes |
+| Required | Yes |  
 | Edit rule | Enter now, edits not allowed |
 
 
-## Tag
+## Tag 
+
+
+### Tag ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Tag |  
+| Specification type | Unique |  
+| Description | A unique integer that identifies a single tag record within the database. It serves as the primary key of the Tag table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
 
 ### Tag Name
 
@@ -324,51 +425,302 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Edit rule | Enter now, edits allowed |
 
 
-## Tag Notes
+## Note Tags
 
-### Tag Name
+### Tag ID
 
 
 | Property | Value |
 |---|---|
-| Parent table | Tag Notes |
+| Parent table | Note Tags |
 | Specification type | Replica |
-| Shared by | Tag, Tag Notes |
-| Description | A user-defined word or short expression that labels a note to add meaning to it, enabling the student to group and retrieve related notes across all sources within the application. |
-| Data type | Alphanumeric |
-| Length | 50 |
+| Shared by | Tag, Note Tags |
+| Description |  A unique integer that identifies a single tag record within the database. It serves as the primary key of the Tag table. |
+| Data type | Numeric |
+| Length | 10 |
 | Decimal places | None |
-| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ) |
+| Character support | Numbers (0–9) |
 | Key type | Foreign |
 | Key structure | Simple |
-| Uniqueness | Non-unique |
+| Uniqueness | Non-Unique |
 | Null support | No nulls |
 | Values entered by | User |
 | Required | Yes |
 | Edit rule | Enter now, edits not allowed |
 
 
-### Note Title
+### Note ID
 
 
 | Property | Value |
 |---|---|
-| Parent table | Tag Notes |
+| Parent table | Note Tags |
 | Specification type | Replica |
 | Shared by | Note, Note Tags |
-| Description | A short heading that summarises the main idea of a note, enabling the student to identify and distinguish it from other notes at a glance |
-| Data type | Alphanumeric |
-| Length | 100 |
+| Description |  A unique integer that identifies a single note record within the database. It serves as the primary key of the Note table. |
+| Data type | Numeric |
+| Length | 10 |
 | Decimal places | None |
-| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ) |
+| Character support | Numbers (0–9) |
 | Key type | Foreign |
 | Key structure | Simple |
-| Uniqueness | Non-unique |
+| Uniqueness | Non-Unique |
 | Null support | No nulls |
 | Values entered by | User |
 | Required | Yes |
 | Edit rule | Enter now, edits allowed |
 
+
+## Note 
+
+
+### Note ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Unique |  
+| Description |  A unique integer that identifies a single note record within the database. It serves as the primary key of the Note table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0–9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+
+
+### Parent Unit  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Replica |  
+| Shared by | Unit, Note | 
+| Description | A unique integer that identifies a single unit record within the database. It serves as the primary key of the Unit table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0–9) |  
+| Key type | Foreign |  
+| Uniqueness | Non-unique |  
+| Null support | No nulls |  
+| Values entered by | User |  
+| Required | Yes |
+
+
+### Note Title  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Unique |  
+| Description | A short heading that summarises the main idea of a note. It allows the student to identify and distinguish it from other notes at a glance. |  
+| Data type | Alphanumeric |  
+| Length | 100 |  
+| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ), Special ( © ® ™ ) |  
+| Key type | Non |  
+| Uniqueness | Non-unique |  
+| Null support | Nulls-Allowed |  
+| Values entered by | User |  
+| Required | No |
+
+
+### Note Content  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Unique |  
+| Description | The body of a note, containing the student's written record of the material being studied. It is the primary substance of the note. |  
+| Data type | Alphanumeric |  
+| Length | None |  
+| Character support | Letters (A–Z), Numbers (0–9), Keyboard ( . , / $ # % ), Special ( © ® ™ ) |  
+| Key type | Non |  
+| Uniqueness | Non-unique |  
+| Null support | No nulls | 
+| Values entered by | User |  
+| Required | Yes |
+
+
+
+### Note Creation Date  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Unique |
+| Description | The year, month, day and time a specific note record was created in the app. It allows the app and the user to sort notes in chronological or reverse chronological order. |  
+| Data type | Date/time |  
+| Length | None |  
+| Key type | Non |  
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+
+### Note Last Modified Date  
+
+| Property | Value |
+|---|---|
+| Parent table | Note |  
+| Specification type | Unique |  
+| Description | The year, month, day and time a specific note record was last edited in the app. It allows the app and the user to sort notes by most recent activity, making it easy to return to work in progress. |  
+| Data type | Date/time |  
+| Length | None |  
+| Key type | Non |  
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+## Reference
+
+
+### Ref ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Reference |  
+| Specification type | Unique |  
+| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Data type | Numeric |  
+| Length | 10 |
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+### Ref Active Status  
+
+| Property | Value |
+|---|---|
+| Parent table | Reference |  
+| Specification type | Unique |  
+| Description | A binary yes or no status indicating whether the student has made a decision regarding the comprehension of a reference note. It allows the user to distinguish between notes that have been acted on and those that have been deferred. |  
+| Data type | Boolean |  
+| Length | None |  
+| Key type | Non |  
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | User |  
+| Required | Yes |
+
+
+## Own-Words 
+
+
+### Own-Words ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Own-Words |  
+| Specification type | Unique |  
+| Description | A unique integer that identifies a single user own-words note within the database. It serves as the primary key of the Own-Words table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+### Own-Words Ref Parent  
+
+| Property | Value |
+|---|---|
+| Parent table | Own-Words |  
+| Specification type | Replica |  
+| Shared by | Reference, Own-Words |  
+| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Uniqueness | Non-Unique |  
+| Null support | Nulls Allowed | 
+| Values entered by | User |  
+| Required | No |
+
+
+## Question 
+
+
+### Question ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Question |  
+| Specification type | Unique |
+| Description | A unique integer that identifies a single question record within the database. It serves as the primary key of the Question table. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Primary |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+### Question Ref Parent  
+
+| Property | Value |
+|---|---|
+| Parent table | Question |  
+| Specification type | Replica |  
+| Shared by | Reference, Question |  
+| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Data type | Numeric | 
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Uniqueness | Non-Unique |  
+| Null support | Nulls-Allowed |  
+| Values entered by | User |  
+| Required | No |
+
+
+### Answered Status  
+
+| Property | Value |
+|---|---|
+| Parent table | Question |  
+| Specification type | Unique |  
+| Description | A binary yes or no status indicating whether a question note has been answered. It allows the user to distinguish between resolved and unresolved questions. |  
+| Data type | Boolean |  
+| Length | None |  
+| Key type | Non |  
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |
+
+
+### Marked Status  
+
+| Property | Value |
+|---|---|
+| Parent table | Question |  
+| Specification type | Unique |
+| Description | A binary yes or no status indicating whether the user is satisfied with their own-words answer and has consciously resolved the question. It allows the user to distinguish between questions they consider fully understood and those they still have doubts about. |  
+| Data type | Boolean |  
+| Length | None |  
+| Key type | Non |  
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | User |  
+| Required | Yes |
 
 
 

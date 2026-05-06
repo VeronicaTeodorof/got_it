@@ -250,7 +250,7 @@ During this step, two revisions were made to the subject list identified in Step
 
 | User | Source | Source Type | Unit | Tag | Note Tags |
 |------|--------|-------------|------|-----|-----|
-| First Name | Source Name | Source Type Name | Parent Source | Tag Name | Note ID |
+| First Name | Source Name | Source Type Name AK | Parent Source | Tag Name AK | Note ID |
 | Last Name | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID PK| Tag ID |
 | Email Address AK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | | |
 | Password |Source Author |Source Type ID PK | Unit Last Modified Date<sup>[4]</sup> | | |
@@ -266,8 +266,6 @@ During this step, two revisions were made to the subject list identified in Step
 
 [4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.
 
-[5] CK = Candidate Key
-
 
 <h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
 
@@ -275,7 +273,7 @@ During this step, two revisions were made to the subject list identified in Step
 | Note | Reference | Own-Words | Question |
 |-----|------|-----|-----|
 | Parent Unit | Ref Active Status | Ref Note Parent | Answered Status |
-| Note Title | Reference ID PK| Own-Words ID PK | Marked Status |
+| Note Title | Ref ID PK| Own-Words ID PK | Marked Status |
 | Note Content | | | Ref Note Parent | 
 | Note Creation Date | | | Question ID PK | 
 | Note Last Modified Date | | | | 
