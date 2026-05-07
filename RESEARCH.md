@@ -306,7 +306,11 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 | **Own-Words** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~ | — | ~~1:1~~ |
 | **Question** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~| ~~1:1~~ | — |
 
-![Table Relationships Diagram](docs/research-assets/database/table-relationships.png)
+[Table Relationships Diagram](docs/research-assets/database/table-relationships.png)  
+
+**Incorporating Foreign Keys**: [One to One](docs/research-assets/database/one-to-one.png), [One to Many](docs/research-assets/database/one-to-many.png), [Many to Many](docs/research-assets/database/many-to-many.png)
+
+
 
 ## Resources
 ### Note-Taking
