@@ -286,7 +286,25 @@ I initially skipped this step, knowing Django would handle primary keys automati
 
 5. **Field Specifications**  
 
-Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).
+Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).  
+
+6. **Table Relationships**  
+
+**Identifying existing relationships**  
+
+
+| | User | Source | Source Type | Unit | Tag | Note Tags | Note | Reference | Own-Words | Question |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **User** | — | 1:N | 1:N | — | 1:N | — | — | — | — | — |
+| **Source** | 1:1 | — | 1:1 | 1:N | — | — | — | — | — | — |
+| **Source Type** | 1:1 | 1:N | — | — | — | — | — | — | — | — |
+| **Unit** | — | 1:1 | — | — | — | — | 1:N | — | — | — |
+| **Tag** | 1:1 | — | — | — | — | M:N | 1:N | — | — | — |
+| **Note Tags** | — | — | — | — | M:N | — | — | — | — | — |
+| **Note** | — | — | — | 1:1 | 1:N | — | — | 1:1 | 1:1 | 1:1 |
+| **Reference** | — | — | — | — | — | — | 1:1 | — | 1:1 | 1:1 |
+| **Own-Words** | — | — | — | — | — | — | 1:1 | 1:1 | — | — |
+| **Question** | — | — | — | — | — | — | 1:1 | 1:1| 1:1 | — |
 
 ## Resources
 ### Note-Taking
