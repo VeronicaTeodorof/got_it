@@ -295,16 +295,18 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 
 | | User | Source | Source Type | Unit | Tag | Note Tags | Note | Reference | Own-Words | Question |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **User** | — | 1:N | 1:N | — | 1:N | — | — | — | — | — |
-| **Source** | 1:1 | — | 1:1 | 1:N | — | — | — | — | — | — |
-| **Source Type** | 1:1 | 1:N | — | — | — | — | — | — | — | — |
-| **Unit** | — | 1:1 | — | — | — | — | 1:N | — | — | — |
-| **Tag** | 1:1 | — | — | — | — | M:N | 1:N | — | — | — |
-| **Note Tags** | — | — | — | — | M:N | — | — | — | — | — |
-| **Note** | — | — | — | 1:1 | 1:N | — | — | 1:1 | 1:1 | 1:1 |
-| **Reference** | — | — | — | — | — | — | 1:1 | — | 1:1 | 1:1 |
-| **Own-Words** | — | — | — | — | — | — | 1:1 | 1:1 | — | — |
-| **Question** | — | — | — | — | — | — | 1:1 | 1:1| 1:1 | — |
+| **User** | — | ~~1:N~~ | ~~1:N~~ | — | ~~1:N~~ | — | — | — | — | — |
+| **Source** | ~~1:1~~ | — | ~~1:1~~ | ~~1:N~~ | — | — | — | — | — | — |
+| **Source Type** | ~~1:1~~ | ~~1:N~~ | — | — | — | — | — | — | — | — |
+| **Unit** | — | ~~1:1~~ | — | — | — | — | ~~1:N~~ | — | — | — |
+| **Tag** | ~~1:1~~ | — | — | — | — | ~~M:N~~ | ~~1:N~~ | — | — | — |
+| **Note Tags** | — | — | — | — | ~~M:N~~ | — | — | — | — | — |
+| **Note** | — | — | — | ~~1:1~~ | ~~1:N~~ | — | — | ~~1:1~~ | ~~1:1~~ | ~~1:1~~ |
+| **Reference** | — | — | — | — | — | — | ~~1:1~~ | — | ~~1:1~~ | ~~1:1~~ |
+| **Own-Words** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~ | — | ~~1:1~~ |
+| **Question** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~| ~~1:1~~ | — |
+
+![Table Relationships Diagram](docs/research-assets/database/table-relationships.png)
 
 ## Resources
 ### Note-Taking
