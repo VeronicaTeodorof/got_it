@@ -250,13 +250,13 @@ During this step, two revisions were made to the subject list identified in Step
 
 | User | Source | Source Type | Unit | Tag | Note Tags |
 |------|--------|-------------|------|-----|-----|
-| First Name | Source Name | Source Type Name AK | Parent Source | Tag Name AK | Note ID |
+| First Name | Source Name | Source Type Name AK | Source ID FK | Tag Name AK | Note ID |
 | Last Name | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID PK| Tag ID |
-| Email Address AK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | | |
+| Email Address AK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | User ID FK | |
 | Password |Source Author |Source Type ID PK | Unit Last Modified Date<sup>[4]</sup> | | |
-| Email Verification Status |  Source ID PK | | Unit Type<sup>[1]</sup> | | |
-| Username AK| | | Unit ID PK | |
-| User ID PK | | | | | |
+| Email Verification Status |  Source ID PK | User ID FK | Unit Type<sup>[1]</sup> | | |
+| Username AK| User ID FK | | Unit ID PK | |
+| User ID PK | Source Type ID FK| | | | |
 
 [1] Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user. 
 
@@ -272,12 +272,12 @@ During this step, two revisions were made to the subject list identified in Step
 
 | Note | Reference | Own-Words | Question |
 |-----|------|-----|-----|
-| Parent Unit | Ref Active Status | Ref Note Parent | Answered Status |
+| Unit ID FK | Ref Active Status | Ref ID FK | Answered Status |
 | Note Title | Ref ID PK| Own-Words ID PK | Marked Status |
-| Note Content | | | Ref Note Parent | 
+| Note Content | Note ID FK| Note ID FK| Ref ID FK | 
 | Note Creation Date | | | Question ID PK | 
-| Note Last Modified Date | | | | 
-| Note ID PK| | | |
+| Note Last Modified Date | | | Note ID FK| 
+| Note ID PK| | | Own-Words ID FK|
 
 
 4. **Keys**  
