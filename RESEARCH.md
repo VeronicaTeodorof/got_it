@@ -166,7 +166,12 @@ With a clearer picture of user expectations from market research and anticipated
 - Rename a unit
 - Delete a unit with confirmation step
 - View all notes related to a source, organised hierarchically by unit — source expandable into units, units expandable into notes
-- View all sources filtered by source type
+- View all sources filtered by source type:  
+(Source type is selected from a controlled list (not user-defined);   
+List: Uncategorised (default), Book, Textbook, Course, Article, Video, Podcast, Other;   
+"Other" includes a free-text note field;  
+Uncategorised is pre-populated in the Source Type table at setup ) 
+
 - Own-words and question notes can be created independently of a reference note
 - View most recent activity from the dashboard
 

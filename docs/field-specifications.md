@@ -10,7 +10,7 @@
 |---|---|
 | Parent table | User |  
 | Specification type | Unique |  
-| Description | A unique integer that identifies a single user record within the database. It serves as the primary key of the User table. |  
+| Description | A unique integer that identifies a single user record within the database. It enables the app to keep track of all its users. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -152,7 +152,7 @@
 |---|---|
 | Parent table | Source |  
 | Specification type | Unique |
-| Description | A unique integer that identifies a single source record within the database. It serves as the primary key of the Source table. |  
+| Description | A unique integer that identifies a single source record within the database. It enables the app and the user to keep track of all Sources. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -162,7 +162,51 @@
 | Values entered by | System |  
 | Required | Yes |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits not allowed |
+| Edit rule | Enter now, edits not allowed |  
+
+
+### User ID   
+
+| Property | Value |
+|---|---|
+| Parent table | Source |  
+| Specification type | Replica |  
+| Source specification | User ID number from the User table |
+| Shared by | User, Source, Source Type, Tag | 
+| Description | A unique integer that identifies a single user record within the database. It enables the app to keep track of all its users. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Key structure | Simple |
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed | 
+
+
+### Source Type ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Source |
+| Specification type | Replica |  
+| Source specification | Source Type ID number from the Source Type table |  
+| Shared by | Source Type, Source |
+| Description | A unique integer that identifies a single source type record within the database. It enables the app to keep track of all its source types. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Key structure | Simple |
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits allowed | 
 
 
 ### Source Name
@@ -241,7 +285,7 @@
 | Values entered by | User |
 | Required | No |
 | Range of values | Any name up to 100 characters |
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits allowed |  
 
 
 ## Source Type
@@ -253,7 +297,7 @@
 |---|---|
 | Parent table | Source Type |  
 | Specification type | Unique |
-| Description | A unique integer that identifies a single source type record within the database. It serves as the primary key of the Source Type table. |  
+| Description | A unique integer that identifies a single source type record within the database. It enables the app to keep track of all Source Types. |  
 | Data type | Numeric | 
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -263,7 +307,29 @@
 | Values entered by | System |  
 | Required | Yes |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits not allowed |
+| Edit rule | Enter now, edits not allowed |   
+
+
+### User ID   
+
+| Property | Value |
+|---|---|
+| Parent table | Source Type |  
+| Specification type | Replica |  
+| Source specification | User ID number from the User table |
+| Shared by | User, Source, Source Type, Tag | 
+| Description | A unique integer that identifies a single user record within the database. It enables the app to keep track of all its users. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Key structure | Simple |
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed | 
 
 ### Source Type Name
 
@@ -296,7 +362,7 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 |---|---|
 | Parent table | Unit |  
 | Specification type | Unique |  
-| Description | A unique integer that identifies a single unit record within the database. It serves as the primary key of the Unit table. |  
+| Description | A unique integer that identifies a single unit record within the database. It enables the app and the user to keep track of all Units. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -308,26 +374,26 @@ Note: Definitions for Source Type Creation Date and Source Type Last Modified da
 | Range of values | Any positive integer |  
 | Edit rule | Enter now, edits not allowed |
 
-### Parent Source
+### Source ID
 
 | Property | Value |
 |---|---|
 | Parent table | Unit |
 | Specification type | Replica |
+| Source specification | Source identification number from Source table |
 | Shared by | Source, Unit |
-| Description | A unique integer that identifies a single source record within the database. It serves as the primary key of the Source table. |
+| Description | A unique integer that identifies a single source record within the database. It enables the app to keep track of all sources. |
 | Data type | Numeric |  
-| Length | 10|
-| Decimal places | None |  
+| Length | 10| 
 | Character support | Numbers (0-9) |
 | Key type | Foreign |
 | Key structure | Simple |
 | Uniqueness | Non-unique |
 | Null support | No nulls |
-| Values entered by | User |
+| Values entered by | System |
 | Required | Yes |  
 | Range of values | Any positive integer |
-| Edit rule | Enter now, edits allowed |  
+| Edit rule | Enter now, edits not allowed |  
 
 
 ### Unit Name
@@ -400,17 +466,40 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 |---|---|
 | Parent table | Tag |  
 | Specification type | Unique |  
-| Description | A unique integer that identifies a single tag record within the database. It serves as the primary key of the Tag table. |  
+| Description | A unique integer that identifies a single tag record within the database. It enables the app to keep track of all tags. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
 | Key type | Primary |  
+| Key structure | Simple |
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
 | Range of values | Any positive integer |  
 | Required | Yes |  
-| Edit rule | Enter now, edits not allowed |
+| Edit rule | Enter now, edits not allowed |  
+
+
+### User ID   
+
+| Property | Value |
+|---|---|
+| Parent table | Tag |  
+| Specification type | Replica |  
+| Source specification | User ID number from the User table |
+| Shared by | User, Source, Source Type, Tag | 
+| Description | A unique integer that identifies a single user record within the database. It enables the app to keep track of all its users. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Key structure | Simple |
+| Uniqueness | Non-Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed | 
 
 ### Tag Name
 
@@ -441,18 +530,19 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Property | Value |
 |---|---|
 | Parent table | Note Tags |
-| Specification type | Replica |
+| Specification type | Replica |  
+| Source specification | Tag identification number from the Tag table |
 | Shared by | Tag, Note Tags |
-| Description |  A unique integer that identifies a single tag record within the database. It serves as the primary key of the Tag table. |
+| Description |  A unique integer that identifies a single tag record within the database. It enables the app to keep track of all tags. |
 | Data type | Numeric |
 | Length | 10 |
 | Decimal places | None |
 | Character support | Numbers (0–9) |
 | Key type | Foreign |
-| Key structure | Simple |
+| Key structure | Composite |
 | Uniqueness | Non-Unique |
 | Null support | No nulls |
-| Values entered by | User |
+| Values entered by | System |
 | Required | Yes |  
 | Range of values | Any positive integer |
 | Edit rule | Enter now, edits not allowed |
@@ -464,18 +554,18 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Property | Value |
 |---|---|
 | Parent table | Note Tags |
-| Specification type | Replica |
-| Shared by | Note, Note Tags |
-| Description |  A unique integer that identifies a single note record within the database. It serves as the primary key of the Note table. |
+| Specification type | Replica |  
+| Shared by | Note, Note Tags, Reference, Own-Words, Question | 
+| Source specification | Note identification number from the Note table |
+| Description |  A unique integer that identifies a single note record within the database. It enables the app to keep track of all notes. |
 | Data type | Numeric |
 | Length | 10 |
-| Decimal places | None |
 | Character support | Numbers (0–9) |
 | Key type | Foreign |
-| Key structure | Simple |
+| Key structure | Composite |
 | Uniqueness | Non-Unique |
 | Null support | No nulls |
-| Values entered by | User |
+| Values entered by | System |
 | Required | Yes |  
 | Range of values | Any positive integer |
 | Edit rule | Enter now, edits not allowed |
@@ -489,8 +579,8 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Property | Value |
 |---|---|
 | Parent table | Note |  
-| Specification type | Unique |  
-| Description |  A unique integer that identifies a single note record within the database. It serves as the primary key of the Note table. |  
+| Specification type | Unique |   
+| Description |  A unique integer that identifies a single note record within the database. It enables the app and to keep track of all notes. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0–9) |  
@@ -500,29 +590,29 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Values entered by | System |  
 | Required | Yes |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits not allowed |
 
 
-
-
-### Parent Unit  
+### Unit ID
 
 | Property | Value |
 |---|---|
 | Parent table | Note |  
 | Specification type | Replica |  
+| Source specification | Unit identification number from Unit table | 
 | Shared by | Unit, Note | 
-| Description | A unique integer that identifies a single unit record within the database. It serves as the primary key of the Unit table. |  
+| Description | A unique integer that identifies a single unit record within the database. It enables the app to keep track of all units. |
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0–9) |  
 | Key type | Foreign |  
+| Key structure | Simple |  
 | Uniqueness | Non-unique |  
 | Null support | No nulls |  
-| Values entered by | User |  
+| Values entered by | System |  
 | Required | Yes |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits not allowed |
 
 
 ### Note Title  
@@ -610,7 +700,7 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 |---|---|
 | Parent table | Reference |  
 | Specification type | Unique |  
-| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Description | A unique integer that identifies a single reference record within the database. It enables the app to keep track of all Reference notes. |  
 | Data type | Numeric |  
 | Length | 10 |
 | Character support | Numbers (0-9) |  
@@ -619,6 +709,28 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Null support | No nulls |  
 | Values entered by | System |  
 | Required | Yes |
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |  
+
+
+### Note ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Reference |  
+| Specification type | Replica |  
+| Shared by | Note, Note Tags, Reference, Own-Words, Question |  
+| Source specification | Note identification number from Note table |  
+| Description |  A unique integer that identifies a single note record within the database. It enables the app to keep track of all notes. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0–9) |  
+| Key type | Foreign |  
+| Key structure | Simple | 
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
 | Range of values | Any positive integer |  
 | Edit rule | Enter now, edits not allowed |
 
@@ -650,11 +762,34 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 |---|---|
 | Parent table | Own-Words |  
 | Specification type | Unique |  
-| Description | A unique integer that identifies a single user own-words note within the database. It serves as the primary key of the Own-Words table. |  
+| Description | A unique integer that identifies a single user own-words note within the database. It enables the app to keep track of all the Own-Words Notes. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
 | Key type | Primary |  
+| Key structure | Simple |  
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |  
+
+
+### Note ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Own-Words |  
+| Specification type | Replica |  
+| Shared by | Note, Note Tags, Reference, Own-Words, Question |  
+| Source specification | Note identification number from Note table |  
+| Description |  A unique integer that identifies a single note record within the database. It enables the app to keep track of all notes. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0–9) |  
+| Key type | Foreign |  
+| Key structure | Simple | 
 | Uniqueness | Unique |  
 | Null support | No nulls |  
 | Values entered by | System |  
@@ -663,24 +798,26 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Edit rule | Enter now, edits not allowed |
 
 
-### Own-Words Ref Parent  
+### Ref ID
 
 | Property | Value |
 |---|---|
 | Parent table | Own-Words |  
 | Specification type | Replica |  
-| Shared by | Reference, Own-Words |  
-| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Source specification | Reference identification number from Reference table |   
+| Shared by | Reference, Own-Words, Question |  
+| Description | A unique integer that identifies a single reference record within the database. It enables the app to keep track of all Reference notes. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
 | Key type | Foreign |  
+| Key structure | Simple |  
 | Uniqueness | Non-Unique |  
 | Null support | Nulls Allowed | 
-| Values entered by | User |  
+| Values entered by | System |  
 | Required | No |
 | Range of values | Any positive integer | 
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits not allowed |
 
 
 ## Question 
@@ -692,7 +829,7 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 |---|---|
 | Parent table | Question |  
 | Specification type | Unique |
-| Description | A unique integer that identifies a single question record within the database. It serves as the primary key of the Question table. |  
+| Description | A unique integer that identifies a single question record within the database. It enables the app to keep track of all Questions. |  
 | Data type | Numeric |  
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -702,17 +839,40 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Values entered by | System |  
 | Required | Yes |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits not allowed |
+| Edit rule | Enter now, edits not allowed |  
 
 
-### Question Ref Parent  
+### Note ID  
 
 | Property | Value |
 |---|---|
 | Parent table | Question |  
 | Specification type | Replica |  
-| Shared by | Reference, Question |  
-| Description | A unique integer that identifies a single reference record within the database. It serves as the primary key of the Reference table. |  
+| Shared by | Note, Note Tags, Reference, Own-Words, Question |  
+| Source specification | Note identification number from Note table |  
+| Description |  A unique integer that identifies a single note record within the database. It enables the app to keep track of all notes. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0–9) |  
+| Key type | Foreign |  
+| Key structure | Simple | 
+| Uniqueness | Unique |  
+| Null support | No nulls |  
+| Values entered by | System |  
+| Required | Yes |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |
+
+
+### Ref ID 
+
+| Property | Value |
+|---|---|
+| Parent table | Question |  
+| Specification type | Replica |  
+| Source specification | Reference identification number from Reference table |  
+| Shared by | Reference, Question, Own-Words |  
+| Description | A unique integer that identifies a single reference record within the database. It enables the app and the user to keep track of all Reference notes.|  
 | Data type | Numeric | 
 | Length | 10 |  
 | Character support | Numbers (0-9) |  
@@ -722,7 +882,29 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Values entered by | User |  
 | Required | No |  
 | Range of values | Any positive integer |  
-| Edit rule | Enter now, edits allowed |
+| Edit rule | Enter now, edits allowed |  
+
+
+### Own-Words ID  
+
+| Property | Value |
+|---|---|
+| Parent table | Own-Words |  
+| Specification type | Replica |  
+| Shared by | Own-Words, Question |  
+| Source specification | Own-Words identification number from Own-words table |
+| Description | A unique integer that identifies a single Own-Words record within the database. It allows the app and the user to keep track of all Own-Words notes. |  
+| Data type | Numeric |  
+| Length | 10 |  
+| Character support | Numbers (0-9) |  
+| Key type | Foreign |  
+| Key structure | Simple |  
+| Uniqueness | Non-Unique |  
+| Null support | Nulls allowed |  
+| Values entered by | User |  
+| Required | No |  
+| Range of values | Any positive integer |  
+| Edit rule | Enter now, edits not allowed |  
 
 
 ### Answered Status  
@@ -737,10 +919,10 @@ Note: Definition for Unit Creation Date showed no real value for this field and 
 | Key type | Non |  
 | Uniqueness | Non-Unique |  
 | Null support | No nulls |  
-| Values entered by | System |  
+| Values entered by | User |  
 | Required | Yes |  
 | Range of values | Yes, No |  
-| Edit rule | Enter now, edits not allowed |
+| Edit rule | Enter now, edits allowed |
 
 
 ### Marked Status  
