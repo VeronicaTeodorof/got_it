@@ -109,7 +109,7 @@
 |---|---|
 | Parent table | User |
 | Specification type | Unique |
-| Description | A binary yes or no status indicating whether the user has confirmed ownership of the address they provided. It tells the app whether the user is permitted to access their account. |
+| Description | A binary yes or no status indicating whether the user has confirmed ownership of their email address, for future use in password reset and account recovery.|
 | Data type | Boolean |
 | Length | None |
 | Decimal places | None |
