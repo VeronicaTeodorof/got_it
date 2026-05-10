@@ -61,3 +61,23 @@
 37. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
 38. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
 39. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+
+
+## Deployment  
+### Prerequisites  
+- Heroku account
+- GitHub accout
+- Git installed locally 
+- gunicorn latest version installed locally and added to requirements.txt
+
+### Files Required  
+- Procfile in the root directory of your project containing the command that Heroku will use to start the server:  
+ web: gunicorn your-project.wsgi
+
+### Steps  
+1. Create the Heroku app: sign into your Heroku account, navigate to your dashboard and create a  new app with a unique name;  
+2. In your app click on the Deploy tab;
+3. In the Deployment method section enable GitHub integration by clicking on Connect to GitHub. You may be asked to authenticate with GitHub if this is the first project you deploy with GitHub;
+4. In the Search box start typing the name of your project and choose it from the list displayed;
+5. Scroll to the bottom of the page and click Deploy Branch to start a manual deployment of the main branch.
+6. Click on Open App to view your deployed project;
