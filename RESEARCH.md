@@ -259,7 +259,7 @@ During this step, two revisions were made to the subject list identified in Step
 | Last Name | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID PK| Tag ID |
 | Email Address AK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | User ID FK | |
 | Password |Source Author |Source Type ID PK | Unit Last Modified Date<sup>[4]</sup> | | |
-| Email Verification Status |  Source ID PK | User ID FK | Unit Type<sup>[1]</sup> | | |
+| Email Verification Status |  Source ID PK | | Unit Type<sup>[1]</sup> | | |
 | Username AK| User ID FK | | Unit ID PK | |
 | User ID PK | Source Type ID FK| | | | |
 
@@ -300,9 +300,9 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 
 | | User | Source | Source Type | Unit | Tag | Note Tags | Note | Reference | Own-Words | Question |
 |---|---|---|---|---|---|---|---|---|---|---|
-| **User** | — | ~~1:N~~ | ~~1:N~~ | — | ~~1:N~~ | — | — | — | — | — |
+| **User** | — | ~~1:N~~ | — | — | ~~1:N~~ | — | — | — | — | — |
 | **Source** | ~~1:1~~ | — | ~~1:1~~ | ~~1:N~~ | — | — | — | — | — | — |
-| **Source Type** | ~~1:1~~ | ~~1:N~~ | — | — | — | — | — | — | — | — |
+| **Source Type** | — | ~~1:N~~ | — | — | — | — | — | — | — | — |
 | **Unit** | — | ~~1:1~~ | — | — | — | — | ~~1:N~~ | — | — | — |
 | **Tag** | ~~1:1~~ | — | — | — | — | ~~M:N~~ | ~~1:N~~ | — | — | — |
 | **Note Tags** | — | — | — | — | ~~M:N~~ | — | — | — | — | — |
@@ -313,7 +313,13 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 
 [Table Relationships Diagram](docs/research-assets/database/table-relationships.png)  
 
-**Incorporating Foreign Keys**: [One to One](docs/research-assets/database/one-to-one.png), [One to Many](docs/research-assets/database/one-to-many.png), [Many to Many](docs/research-assets/database/many-to-many.png)
+**Incorporating Foreign Keys**: [One to One](docs/research-assets/database/one-to-one.png), [One to Many](docs/research-assets/database/one-to-many.png), [Many to Many](docs/research-assets/database/many-to-many.png)  
+
+
+Notes: 
+1. Initially I imagined Source type being created by the User, but this feature would have added extra complexity in development and extra friction for the user. So I decided to use instead a list of predefined Source Types with Uncategorized and Other included. The One to Many diagram still shows the initial User - Source Type relationship for documenting purposes, while relevent tables and field specifications document have been updated.
+2. The One to Many diagrams has one more error, namely the relationship between Own-Words and Question should be reversed; a Question resolves into a Own-Words note, not the other way around.
+
 
 
 

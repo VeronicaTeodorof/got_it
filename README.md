@@ -63,6 +63,14 @@
 39. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
 
+## ERD
+Entity Relationship Diagram showing the core data structure: User, Source, Source Type, Unit, Note, Tags, Note Tags, Reference, Own-Words and Questions.
+
+![ERD](docs/readme-assets/got_it_erd.png)
+
+
+
+
 ## Deployment  
 ### Prerequisites  
 - Heroku account

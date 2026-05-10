@@ -308,28 +308,7 @@
 | Required | Yes |  
 | Range of values | Any positive integer |  
 | Edit rule | Enter now, edits not allowed |   
-
-
-### User ID   
-
-| Property | Value |
-|---|---|
-| Parent table | Source Type |  
-| Specification type | Replica |  
-| Source specification | User ID number from the User table |
-| Shared by | User, Source, Source Type, Tag | 
-| Description | A unique integer that identifies a single user record within the database. It enables the app to keep track of all its users. |  
-| Data type | Numeric |  
-| Length | 10 |  
-| Character support | Numbers (0-9) |  
-| Key type | Foreign |  
-| Key structure | Simple |
-| Uniqueness | Non-Unique |  
-| Null support | No nulls |  
-| Values entered by | System |  
-| Required | Yes |  
-| Range of values | Any positive integer |  
-| Edit rule | Enter now, edits not allowed | 
+ 
 
 ### Source Type Name
 
