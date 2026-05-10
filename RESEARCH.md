@@ -352,7 +352,7 @@ Notes:
 ### Database Design
 - Database Design for Mere Mortals by Michael Hernandez
 ### ERDs
-- https://www.lucidchart.com/pages/er-diagrams
+- https://docs.dbdiagram.io/
 
 
 ## Design
