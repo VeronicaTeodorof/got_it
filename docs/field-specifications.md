@@ -22,44 +22,7 @@
 | Range of values | Any positive integer |  
 | Edit rule | Enter now, edits not allowed |
 
-### First Name
-
-| Property | Value |
-|---|---|
-| Parent table | User |
-| Specification type | Unique |
-| Description | The first part of a user's full name. It exists to personalise the user's experience within the application. |
-| Data type | Alphanumeric |
-| Length | 50 |
-| Decimal places | None |
-| Character support | Letters (A–Z) |
-| Key type | Non |
-| Uniqueness | Non-unique |
-| Null support | No nulls |
-| Values entered by | User |
-| Required | Yes |
-| Range of values | Any string of characters up to 50 |
-| Edit rule | Enter now, edits allowed |
-
-
-### Last Name
-
-| Property | Value |
-|---|---|
-| Parent table | User |
-| Specification type | Unique |
-| Description | Last part of a user's full name. Together with the first name, it forms the user's complete name for personalisation purposes. |
-| Data type | Alphanumeric |
-| Length | 50 |
-| Decimal places | None |
-| Character support | Letters (A–Z) |
-| Key type | Non |
-| Uniqueness | Non-unique |
-| Null support | No nulls |
-| Values entered by | User |
-| Required | Yes |
-| Range of values | Any string of characters up to 50 |
-| Edit rule | Enter now, edits allowed |
+Note: First Name and Last Name fields were removed because the implementation uses Django's built in User model with allauth and no custom profile is needed.
 
 
 ### Email Address

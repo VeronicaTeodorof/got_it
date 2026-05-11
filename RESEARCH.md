@@ -255,8 +255,8 @@ During this step, two revisions were made to the subject list identified in Step
 
 | User | Source | Source Type | Unit | Tag | Note Tags |
 |------|--------|-------------|------|-----|-----|
-| First Name | Source Name | Source Type Name AK | Source ID FK | Tag Name AK | Note ID |
-| Last Name | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID PK| Tag ID |
+| ~~First Name~~<sup>[5]</sup> | Source Name | Source Type Name AK | Source ID FK | Tag Name AK | Note ID |
+| ~~Last Name~~<sup>[5]</sup> | Source Creation Date<sup>[3]</sup> | ~~Source Type Creation Date~~<sup>[2]</sup> | Unit Name | Tag ID PK| Tag ID |
 | Email Address AK| Source Last Modified Date<sup>[4]</sup> | ~~Source Type Last Modified Date~~<sup>[2]</sup> | ~~Unit Creation Date~~<sup>[2]</sup> | User ID FK | |
 | Password |Source Author |Source Type ID PK | Unit Last Modified Date<sup>[4]</sup> | | |
 | Email Verification Status |  Source ID PK | | Unit Type<sup>[1]</sup> | | |
@@ -269,7 +269,9 @@ During this step, two revisions were made to the subject list identified in Step
 
 [3] Unlike the fields above, Source Creation Date retains real value — a student may want to know when they started studying a specific source, such as a book or course. This is not the case for Source Type timestamps or Unit Creation Date.  
 
-[4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.
+[4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.  
+
+[5] These fields were removed during implementation phase because Django's User built in User model with allauth is used.
 
 
 <h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
