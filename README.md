@@ -55,9 +55,13 @@
 33. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.   
 
 - **Authentication Theme**
-34. As a new user I want to be able to create a new account, to start using the app.
-35. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.
-36. As a user, I want to log out of my account so that I can securely end my session
+34. As a new user I want to be able to create a new account, to start using the app.   
+Acceptance criteria: 
+- User can access the signup page 
+35. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
+Acceptance criteria:  
+- User can access the signin page
+36. As a user, I want to log out of my account so that I can securely end my session, 
 37. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
 38. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
 39. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
