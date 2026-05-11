@@ -128,6 +128,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# allauth settings
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'username*', 'password1*', 'password2*']
+ACCOUNT_UNIQUE_EMAIL = True
 # Remember to remove when working on email verification feature
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 
