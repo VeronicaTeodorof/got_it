@@ -57,7 +57,9 @@
 - **Authentication Theme**
 34. As a new user I want to be able to create a new account, to start using the app.   
 Acceptance criteria: 
-- User can access the signup page 
+- User can access the signup page
+- User must provide a username and password
+- User is redirected to the homepage after successful signup 
 35. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
 Acceptance criteria:  
 - User can access the signin page
