@@ -136,7 +136,7 @@ With a clearer picture of user expectations from market research and anticipated
 
 1. Authentication
 - User registration — email, username, password
-- Email verification after registration
+- Mandatory email verification after registration to properly prevent email enumeration;
 - Sign in
 - Session persistence (stay logged in between sessions)
 - Password reset
@@ -317,8 +317,15 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 
 
 Notes: 
-1. Initially I imagined Source type being created by the User, but this feature would have added extra complexity in development and extra friction for the user. So I decided to use instead a list of predefined Source Types with Uncategorized and Other included. The One to Many diagram still shows the initial User - Source Type relationship for documenting purposes, while relevent tables and field specifications document have been updated.
-2. The One to Many diagrams has one more error, namely the relationship between Own-Words and Question should be reversed; a Question resolves into a Own-Words note, not the other way around.
+[1] Initially I imagined Source type being created by the User, but this feature would have added extra complexity in development and extra friction for the user. So I decided to use instead a list of predefined Source Types with Uncategorized and Other included. The One to Many diagram still shows the initial User - Source Type relationship for documenting purposes, while relevent tables and field specifications document have been updated.
+[2] The One to Many diagrams has one more error, namely the relationship between Own-Words and Question should be reversed; a Question resolves into a Own-Words note, not the other way around.  
+
+
+7. **Business Rules**:
+- A user must verify their email address before they can access the application.
+
+
+
 
 
 
@@ -348,11 +355,16 @@ Notes:
 - Conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 - Mermaid diagramming syntax: https://mermaid.js.org
 - Project management documentation: https://docs.github.com/en/issues
+- Sub-issues: https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/adding-sub-issues
 
 ### Database Design
 - Database Design for Mere Mortals by Michael Hernandez
 ### ERDs
 - https://docs.dbdiagram.io/
+
+
+### Django:
+- Django allauth official documentation: https://docs.allauth.org/ 
 
 
 ## Design

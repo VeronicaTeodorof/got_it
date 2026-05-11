@@ -70,6 +70,16 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 ![ERD](docs/readme-assets/got_it_erd.png)
 
 
+## Features 
+### Security and Data Protection Features: 
+- Rate limiting (control of how many requests a user/IP can make to an app within a certain time period) provided by Django allauth;
+- Account enumeration prevention (stops attackers from figuring out which email addresses/usernames are registered in an app by giving intentionally vague error messages) provided by Django allauth;
+
+
+### Future features
+- Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
+
+
 
 
 ## Deployment  

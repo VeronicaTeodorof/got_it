@@ -109,7 +109,7 @@
 |---|---|
 | Parent table | User |
 | Specification type | Unique |
-| Description | A binary yes or no status indicating whether the user has confirmed ownership of their email address, for future use in password reset and account recovery.|
+| Description | A binary yes or no status indicating whether the user has confirmed ownership of their email address, for use in password reset and account recovery.|
 | Data type | Boolean |
 | Length | None |
 | Decimal places | None |
