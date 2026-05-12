@@ -271,7 +271,7 @@ During this step, two revisions were made to the subject list identified in Step
 
 [4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.  
 
-[5] These fields were removed during implementation phase because Django's User built in User model with allauth is used.
+[5] These fields were removed during implementation phase because Django's built in User model with allauth is used.
 
 
 <h2 align="center">Table Structures<br>(second part — parent and subset tables )</h2>
@@ -351,8 +351,6 @@ Notes:
 ### Digital note taking research:
 - https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d
 
-
-
 ### GitHub
 - Conventional-commits-cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
 - Mermaid diagramming syntax: https://mermaid.js.org
@@ -364,6 +362,9 @@ Notes:
 ### ERDs
 - https://docs.dbdiagram.io/
 
+
+### Bash 
+- https://linuxcommand.org/
 
 ### Django:
 - Django allauth official documentation: https://docs.allauth.org/ 
