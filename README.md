@@ -59,7 +59,9 @@
 Acceptance criteria: 
 - User can access the signup page
 - User must provide a username and password
+- Error messages are shown for invalid or missing fields
 - User is redirected to the homepage after successful signup 
+- Password must meet minimum security requirements (length, complexity)
 35. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
 Acceptance criteria:  
 - User can access the signin page
