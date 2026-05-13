@@ -27,7 +27,7 @@
 15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
 16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
 17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
-18. As a new user I want to trigger a walkthrough from the landing page so that I can understand how the app works before signing up.
+18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
 19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
 20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.  
 
