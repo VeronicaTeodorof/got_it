@@ -22,54 +22,56 @@
 12. As a student, I want to create a question note optionally linked to a reference note or an own-words note, so that I can track gaps in my understanding whether they arise from a source or my own thinking.  
 
 - **UI/UX Theme**
-13. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
-14. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
-15. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
-16. As a new user I want to be given a walkthrough on the home page so that I know what the app is about and how to start using it.
-17. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
-18. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.  
+13. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started
+14. As a user I want a dashboard so that I have a central place to access and manage my content
+15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
+16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
+17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
+18. As a new user I want to trigger a walkthrough from the landing page so that I can understand how the app works before signing up.
+19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
+20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.  
 
 - **CRUD Functionality Theme**  
 
 - **Notes**
-19. As a student I want to be able to modify any note, so that I keep my notes up to date with my understanding.
-20. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
-21. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.  
+21. As a student I want to be able to modify any note, so that I keep my notes up to date with my understanding.
+22. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
+23. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.  
 
 - **Sources**
-22. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
-23. As a user, I want to create my own source types, so that I can organise my sources in a way that makes sense to me.
-24. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
-25. As a student I want to be able to edit a source name or type, so that I can keep it accurate.
-26. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.  
+24. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+25. As a user, I want to create my own source types, so that I can organise my sources in a way that makes sense to me.
+26. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
+27. As a student I want to be able to edit a source name or type, so that I can keep it accurate.
+28. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.  
 
 - **Units**
-27. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
-28. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
-29. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.  
+29. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
+30. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
+31. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.  
 
 - **Tags**
-30. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
-31. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
-32. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-33. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.   
+32. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
+33. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
+34. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
+35. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.   
 
 - **Authentication Theme**
-34. As a new user I want to be able to create a new account, to start using the app.   
+36. As a new user I want to be able to create a new account, to start using the app.   
 Acceptance criteria: 
 - User can access the signup page
 - User must provide a username and password
 - Error messages are shown for invalid or missing fields
 - User is redirected to the homepage after successful signup 
 - Password must meet minimum security requirements (length, complexity)
-35. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
+37. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
 Acceptance criteria:  
 - User can access the signin page
-36. As a user, I want to log out of my account so that I can securely end my session, 
-37. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
-38. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
-39. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
-40. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+38. As a user, I want to log out of my account so that I can securely end my session, 
+39. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
+40. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
+41. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
+42. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
 
 ## ERD
