@@ -18,7 +18,13 @@
 | MT10 | Submit signup form with password similar to other personal information | Form rejected, error shown | Form rejected, "Password too similar to username" shown | Pass | |
 | MT11 | Submit signup form with password too short | Form rejected, error shown | Form rejected, "This password is too short. It must contain at least 8 characters." shown | Pass | |
 | MT12 | Submit signup form with password too common | Form rejected, error shown | Form rejected, "This password is too common." shown | Pass | |
-| MT13 | Submit signup  form with password entirely numeric | Form refected, error shown | Form rejected, "This password is entirely numeric." shown. | Pass | |
-
+| MT13 | Submit signup form with password entirely numeric | Form rejected, error shown | Form rejected, "This password is entirely numeric." shown. | Pass | |
+| MT14 | Submit signup form with already registered email address | Form rejected, feedback message shown | Form rejected, "A user with that email already exists" shown | Pass | |
+| MT15 | Submit signup form with already registered username | Form rejected, feedback message shown | Form rejected, "A user with that username already exists" shown | Pass | |
+| MT16 | Submit signin form with valid credentials | Signed in, redirect to homepage | Signed in, redirect to homepage | Pass | |
+| MT17 | Submit signin form with incorrect password | Form rejected, error shown | Form rejected, "The username and/or password you specified are not correct." shown | Pass | |
+| MT18 | Submit signin form with unregistered email | Form rejected, error shown | Form rejected, "The username and/or password you specified are not correct." shown | Pass | |
+| MT19 | Submit signin form without email | Form rejected, error shown | Form refected, user prompted to fill out email field | Pass | |
+| MT19 | Submit signin form without password | Form rejected, error shown | Form refected, user prompted to fill out password field | Pass | |
 
 
