@@ -8,7 +8,7 @@ def home(request):
 
 
 def dashboard(request):
-    return HttpResponse("Hello, Dashboard")
+    return render(request, 'notes/dashboard.html')
 
 
 def base(request):

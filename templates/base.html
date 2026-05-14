@@ -6,6 +6,13 @@
     <title>got it?</title>
 </head>
 <body>
+    {% block navbar %}
+        <nav>
+            <ul>
+                <li>Logo</li>
+            </ul>
+        </nav>
+    {% endblock %}
     <h1>It works!</h1>
     {% block content %}{% endblock %}
 </body>
