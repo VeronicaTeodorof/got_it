@@ -369,6 +369,11 @@ Notes:
 ### Django:
 - Django allauth official documentation: https://docs.allauth.org/ 
 
+### Automated testing
+- python unittest: https://docs.python.org/3/library/unittest.html#
+- Python testing on Real Ptthon: https://realpython.com/python-testing/
+- Testing in Django by Net Ninja: https://www.youtube.com/playlist?list=PL4cUxeGkcC9ic9O6xDW2d1qMp3rMOb0Nu
+
 
 ## Design
 ### App Name:
