@@ -28,7 +28,7 @@
 | MT20 | Submit signin form without password | Form rejected, error shown | Form refected, user prompted to fill out password field | Pass | |
 | MT21 | Dashboard page loads without errors | Dashboard page loads, no errors shown in terminal dev tools | Dashboard page loads, no errors shown in terminal or dev tools | Pass | |
 | MT22 | User can see Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | |
-| MT23 | Clicking logout ends the session | Session_id cookie in dev tools application is cleared after clicking logout | Session_id cookie in dev tools application is not cleared after clicking logout | Fail | | 
+| MT23 | Clicking logout ends the session | Session_id cookie in dev tools application is cleared after clicking logout | Session_id cookie in dev tools application is cleared after clicking logout | Pass | | 
 | MT24 | Unlogged users cannot access dashboard page | Writing '/dashboard/' suffix in the url bar redirects to login | Writing '/dashboard/' suffix in the url bar loads the dashboard page | Fail | | 
 
 

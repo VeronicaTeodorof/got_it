@@ -2,9 +2,11 @@
 
 {% block navbar %}
     <nav>
-        <ul>
-            <li><a href="{% url 'base' %}">Log out</a></li>
-        </ul>
+        <!-- form code source: https://learndjango.com/tutorials/django-login-and-logout-tutorial-->
+        <form method="POST" action="{% url 'account_logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+        </form>
     </nav>
 {% endblock %}
 
