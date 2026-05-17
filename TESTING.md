@@ -24,11 +24,15 @@
 | MT16 | Submit signin form with valid credentials | Signed in, redirect to dashboard page | Signed in, redirect to dashboard page | Pass | |
 | MT17 | Submit signin form with incorrect password | Form rejected, error shown | Form rejected, "The username and/or password you specified are not correct." shown | Pass | |
 | MT18 | Submit signin form with unregistered email | Form rejected, error shown | Form rejected, "The username and/or password you specified are not correct." shown | Pass | |
-| MT19 | Submit signin form without email | Form rejected, error shown | Form refected, user prompted to fill out email field | Pass | |
-| MT20 | Submit signin form without password | Form rejected, error shown | Form refected, user prompted to fill out password field | Pass | |
+| MT19 | Submit signin form without email | Form rejected, error shown | Form rejected, user prompted to fill out email field | Pass | |
+| MT20 | Submit signin form without password | Form rejected, error shown | Form rejected, user prompted to fill out password field | Pass | |
 | MT21 | Dashboard page loads without errors | Dashboard page loads, no errors shown in terminal dev tools | Dashboard page loads, no errors shown in terminal or dev tools | Pass | |
 | MT22 | User can see Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | |
 | MT23 | Clicking logout ends the session | Session_id cookie in dev tools application is cleared after clicking logout | Session_id cookie in dev tools application is cleared after clicking logout | Pass | | 
 | MT24 | Unlogged users cannot access dashboard page | Writing '/dashboard/' suffix in the url bar redirects to login | Writing '/dashboard/' suffix in the url bar redirects to login| Pass | | 
-
-
+| MT25 | "Remember me" checkbox is visible on login page | "Remember me" checkbox is visible on login page | "Remember me" checkbox is visible on login page | Pass | |
+| MT26 | Remembered users stay logged in between sessions | Closing and reopening the browser loads the dashboard without prompting login | Closing and reopening the browser loads the dashboard without prompting login | Pass | | 
+| MT27 | Remembered users are redirected away from login page | Visiting /accounts/login/ with an active remembered session redirects to dashboard | Visiting /accounts/login/ with an active remembered session redirects to dashboard | Pass | |
+| MT28 | Non-remembered users are logged out when browser closes | Closing and reopening the browser redirects to login | Closing and reopening the browser redirects to login | Pass | |
+| MT29 | Session expires after inactivity even with Remember Me checked | User is redirected to login after session duration expires | Not tested - relies on Django default session expiry behaviour (SESSION_COOKIE_AGE = 1209600) | - | - |
+| MT30 | User can manually log out ends session regardless of Remember Me | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Pass | |

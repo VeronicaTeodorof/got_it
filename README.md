@@ -112,11 +112,9 @@ Acceptance criteria:
 
 - AC 3: When a user logs in without "Remember me" checked, their session ends when the browser is closed.  
 
-- AC4:  When a user is remembered, they are not prompted to log in again when navigating back to the app within the session duration.  
+- AC4: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked.  
 
-- AC5: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked.  
-
-- AC6: The user can manually log out at any time, which ends the session immediately regardless of "Remember me"
+- AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me".
 </details>
 41. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
 42. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
