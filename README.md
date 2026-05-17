@@ -57,19 +57,67 @@
 35. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.   
 
 - **Authentication Theme**
-36. As a new user I want to be able to create a new account, to start using the app.   
-Acceptance criteria: 
-- User can access the signup page
-- User must provide a username and password
-- Error messages are shown for invalid or missing fields
-- User is redirected to the homepage after successful signup 
-- Password must meet minimum security requirements (length, complexity)
-37. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.  
+<details>
+<summary>36. As a new user I want to be able to create a new account, to start using the app.</summary>   
 Acceptance criteria:  
-- User can access the signin page
-38. As a user, I want to log out of my account so that I can securely end my session, 
+
+- AC1: User can access the signup page  
+
+- AC2: User must provide a username and password  
+
+- AC3: Error messages are shown for invalid or missing fields  
+
+- AC4: User is redirected to the homepage after successful signup   
+
+- AC5: Password must meet minimum security requirements (length, complexity)
+</details>
+<details>
+<summary>37. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary> 
+Acceptance criteria:  
+
+- AC1: User can access the signin page  
+
+- AC2: User can sign in with valid credential  
+
+- AC3: Error shown for incorrect password  
+
+- AC4: Error shown for unregistered email/username  
+
+- AC5: Error shown for missing fields  
+
+- AC6: User is redirected to homepage on successful signin  
+
+- AC7: User remains on signin page if login fails
+</details>
+<details>
+<summary>38. As a user, I want to log out of my account so that I can securely end my session.</summary>
+Acceptance criteria:  
+
+- AC1: User can see a logout link on the dashboard;  
+
+- AC2: Clicking logout ends the user's session;  
+
+- AC3: User is redirected to the index page after logging out;  
+
+- AC4: User cannot access the dashboard after logging out; 
+</details>
 39. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
-40. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.
+<details>
+<summary>40. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
+Acceptance criteria: 
+
+- AC 1: User sees a "Remember Me" checkbox on sign in page;  
+
+- AC 2: When a user logs in with "Remember me" checked, their session persists after closing and reopening the browser.  
+
+- AC 3: When a user logs in without "Remember me" checked, their session ends when the browser is closed.  
+
+- AC4:  When a user is remembered, they are not prompted to log in again when navigating back to the app within the session duration.  
+
+- AC5: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked.  
+
+- AC6: The user can manually log out at any time, which ends the session immediately regardless of "Remember me"
+</details>
 41. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
 42. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
