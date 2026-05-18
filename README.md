@@ -136,6 +136,24 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 ![ERD](docs/readme-assets/got_it_erd.png)
 
 
+## Development Process (Agile Workflow)
+
+1. Check the user story;
+2. Write acceptance criteria and tasks if not already in issue;
+3. Move to respective iteration if not already there;
+4. Move to In Progress in Project Board;
+5. Write acceptance criteria in README user story;
+6. Plan the code;
+7. Write code;
+8. Write automated tests;
+9. Run automated tests, fix if failing, and document in TESTING.md;
+10. Write manual tests in TESTING.md;
+11. Link tests with acceptance criteria in README;
+12. Update README if any decisions were made;
+13. Move issue to done on project board;
+14. Commit;
+
+
 ## Features 
 ### Security and Data Protection Features: 
 - Rate limiting (control of how many requests a user/IP can make to an app within a certain time period) provided by Django allauth;
