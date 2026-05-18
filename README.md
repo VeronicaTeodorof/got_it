@@ -71,7 +71,7 @@ Acceptance Criteria:
 <summary>36. As a new user I want to be able to create a new account, to start using the app.</summary>   
 Acceptance criteria:  
 
-- AC1: User can access the signup page  
+- AC1: User can access the signup page 
 
 - AC2: User must provide a username and password  
 
