@@ -36,3 +36,24 @@
 | MT28 | Non-remembered users are logged out when browser closes | Closing and reopening the browser redirects to login | Closing and reopening the browser redirects to login | Pass | |
 | MT29 | Session expires after inactivity even with Remember Me checked | User is redirected to login after session duration expires | Not tested - relies on Django default session expiry behaviour (SESSION_COOKIE_AGE = 1209600) | - | - |
 | MT30 | User can manually log out ends session regardless of Remember Me | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Pass | |
+
+
+### Home Page 
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| MT-HP-01 | Home page displays correctly | Logo, Sign Up and Sign In links visible | As expected | Pass | |
+| MT-HP-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | | 
+| MT-HP-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | |
+
+
+## Automated Testing (AT)
+
+
+### Home Page
+
+
+| Test ID | Test | Covers | Result |
+|---------|------|----------|-------|
+| AT-HP-01 | test_home_page_loads | Home page returns 200 | Pass |

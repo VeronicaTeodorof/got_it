@@ -22,7 +22,17 @@
 12. As a student, I want to create a question note optionally linked to a reference note or an own-words note, so that I can track gaps in my understanding whether they arise from a source or my own thinking.  
 
 - **UI/UX Theme**
-13. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started
+<details>
+<summary>13. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
+
+
+Acceptance Criteria:   
+- AC1: Home page loads without errors - see AT-HP-01  
+- AC2: User can see a navigation bar with a signup and login link - see MT-HP-01
+- AC3: Clicking signup takes the user to the signup page - see MT-HP-02
+- AC4: Clicking login takes the user to the login page - see MT-HP-03
+</details>
+
 14. As a user I want a dashboard so that I have a central place to access and manage my content
 15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
 16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.

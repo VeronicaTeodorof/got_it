@@ -21,6 +21,6 @@ from notes import views as notes_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', notes_views.base, name='base'),
+    path('', notes_views.home, name='home'),
     path('dashboard/', notes_views.dashboard, name='dashboard'),
 ]
