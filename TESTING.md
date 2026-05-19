@@ -37,7 +37,7 @@
 | AUTH-MT-29 |  After signing out and being redirected to signin page, visit /dashboard/ | Login form loads with empty fields and no reference to previous user | Flash message reveals who was signed in | Fail | Fail |
 | AUTH-MT-30 | Successful signup redirects to dashboard page | User is redirected to dashboard page after successful signup | As expected | Pass | Pass |
 | AUTH-MT-31 | Clicking logout redirects to home page | User is redirected to home page after clicking logout | As expected | Pass | Pass |
-| AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Fail | Fail |
+| AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Pass |  |
 
 ### Home Page 
 
@@ -75,11 +75,21 @@
 
 ### AUTH - Username disclosed after signout (AUTH-MT-29)
 
-**Description:** After signing out and visiting `/dashboard/`, the login page displayed a flash message revealing the previous user's username("Successfully signed in as vteodorof"). The email field also appeared pre-filled, however testing in an incognito window confirmed this was browser autofill, not a backend issue. The flash message persisted in incognito, confirming it originates from Django/allauth.
+**Description:** After signing out and visiting `/dashboard/`, the login page displayed a flash message revealing the previous user's username("Successfully signed in as vteodorof"). The email field also appeared pre-filled, however testing in an incognito window confirmed this was browser autofill, not a backend issue. The flash message persisted in incognito, confirming it originates from Django/allauth.  
+**Also observed:** The same flash message leak occurs when navigating back after logout via the browser back button (AUTH-MT-32). Fixing AUTH-MT-32 with `@never_cache` exposed this behaviour on back navigation as well.
 
 **Evidence:** 
 [MT31 - Username disclosed after signout](testing_screenshots/auth-mt-29.png)
 
 **Fix:** [brief description of what was changed]
+
+**Commit:** `abc1234`
+
+## Solved Bugs
+### AUTH - Dashboard accessible via browser back button after logout (AUTH-MT-32)
+
+**Description:** After logging out and being redirected to the home page, pressing the browser's back button displays the dashboard as if the user is still logged in. This is caused by the browser serving a cached version of the page without re-validating with the server, bypassing Django's session authentication check.  
+
+**Fix:** Add cache-control headers to the dashboard view to prevent the browser from caching the page.  
 
 **Commit:** `abc1234`
