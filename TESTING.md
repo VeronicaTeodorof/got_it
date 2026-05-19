@@ -34,17 +34,19 @@
 | AUTH-MT-26 | Non-remembered users are logged out when browser closes | Closing and reopening the browser redirects to login | Closing and reopening the browser redirects to login | Pass | Pass |
 | AUTH-MT-27 | Session expires after inactivity even with Remember Me checked | User is redirected to login after session duration expires | Not tested - relies on Django default session expiry behaviour (SESSION_COOKIE_AGE = 1209600) | - | - |
 | AUTH-MT-28 | User can manually log out ends session regardless of Remember Me | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Pass | Pass |
-| AUTH-MT-29 |  After signing out and being redirected to signin page, visit /dashboard/ | Login form loads with empty fields and no reference to previous user | Email field pre-filled with previous username (vteodorof) and flash message reveals who was signed in |  | Fail |
-
+| AUTH-MT-29 |  After signing out and being redirected to signin page, visit /dashboard/ | Login form loads with empty fields and no reference to previous user | Flash message reveals who was signed in | Fail | Fail |
+| AUTH-MT-30 | Successful signup redirects to dashboard page | User is redirected to dashboard page after successful signup | As expected | Pass | Pass |
+| AUTH-MT-31 | Clicking logout redirects to home page | User is redirected to home page after clicking logout | As expected | Pass | Pass |
+| AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Fail | Fail |
 
 ### Home Page 
 
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| MT-HP-01 | Home page displays correctly | Logo, Sign Up and Sign In links visible | As expected | Pass | Pass |
-| MT-HP-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass | 
-| MT-HP-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
+| HP-MT-01 | Home page displays correctly | Logo, Sign Up and Sign In links visible | As expected | Pass | Pass |
+| HP-MT-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass | 
+| HP-MT-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
 
 
 ### Dashboard Page
@@ -52,7 +54,7 @@
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| MT-DP-01 | Dashboard page displays correctly with Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | Pass |
+| DP-MT-01 | Dashboard page displays correctly with Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | Pass |
 
 
 
@@ -66,14 +68,14 @@
 
 | Test ID | Test | Covers | Result |
 |---------|------|----------|-------|
-| AT-HP-01 | test_home_page_loads | Home page returns 200 | Pass |
+| HP-AT-01 | test_home_page_loads | Home page returns 200 | Pass |
 
 
 ## Known Bugs
 
 ### AUTH - Username disclosed after signout (AUTH-MT-29)
 
-**Description:** After signing out and visiting `/dashboard/`, the login page pre-filled the email field with the previous user's username and displayed a flash message revealing who was signed in.
+**Description:** After signing out and visiting `/dashboard/`, the login page displayed a flash message revealing the previous user's username("Successfully signed in as vteodorof"). The email field also appeared pre-filled, however testing in an incognito window confirmed this was browser autofill, not a backend issue. The flash message persisted in incognito, confirming it originates from Django/allauth.
 
 **Evidence:** 
 [MT31 - Username disclosed after signout](testing_screenshots/auth-mt-29.png)

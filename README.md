@@ -27,10 +27,10 @@
 
 
 Acceptance Criteria:   
-- AC1: Home page loads without errors - see AT-HP-01  
-- AC2: User can see a navigation bar with a signup and login link - see MT-HP-01
-- AC3: Clicking signup takes the user to the signup page - see MT-HP-02
-- AC4: Clicking login takes the user to the login page - see MT-HP-03
+- AC1: Home page loads without errors - see HP-AT-01  
+- AC2: User can see a navigation bar with a signup and login link - see HP-AT-01
+- AC3: Clicking signup takes the user to the signup page - see HP-MT-02
+- AC4: Clicking login takes the user to the login page - see HP-MT-03
 </details>
 
 14. As a user I want a dashboard so that I have a central place to access and manage my content
@@ -71,60 +71,60 @@ Acceptance Criteria:
 <summary>36. As a new user I want to be able to create a new account, to start using the app.</summary>   
 Acceptance criteria:  
 
-- AC1: User can access the signup page 
+- AC1: User can access the signup page - see AUTH-MT-01
 
-- AC2: User must provide a username and password  
+- AC2: User must provide a username and password - see AUTH-MT-03 and AUTH-MT-04
 
-- AC3: Error messages are shown for invalid or missing fields  
+- AC3: Error messages are shown for invalid or missing fields - see AUTH-MT-03 to AUTH-MT-07 and AUTH-MT-09
 
-- AC4: User is redirected to the homepage after successful signup   
+- AC4: User is redirected to dashboard page after successful signup - see AUTH-MT-30
 
-- AC5: Password must meet minimum security requirements (length, complexity)
+- AC5: Password must meet minimum security requirements (length, complexity) - see  AUTH-MT-10 to AUTH-MT-13
 </details>
 <details>
 <summary>37. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary> 
 Acceptance criteria:  
 
-- AC1: User can access the signin page  
+- AC1: User can access the signin page - see AUTH-MT-02
 
-- AC2: User can sign in with valid credential  
+- AC2: User can sign in with valid credentials - see AUTH-MT-16
 
-- AC3: Error shown for incorrect password  
+- AC3: Error shown for incorrect password - see AUTH-MT-17
 
-- AC4: Error shown for unregistered email/username  
+- AC4: Error shown for unregistered email/username - see AUTH-MT-18 
 
-- AC5: Error shown for missing fields  
+- AC5: Error shown for missing fields - see AUTH-MT-19 and AUTH-MT-20
 
-- AC6: User is redirected to homepage on successful signin  
+- AC6: User is redirected to dashboard on successful signin - see AUTH-MT-16
 
-- AC7: User remains on signin page if login fails
+- AC7: User remains on signin page if login fails - see AUTH-MT-17 to AUTH-MT-20
 </details>
 <details>
 <summary>38. As a user, I want to log out of my account so that I can securely end my session.</summary>
 Acceptance criteria:  
 
-- AC1: User can see a logout link on the dashboard;  
+- AC1: User can see a logout link on the dashboard - see DP-MT-01
 
-- AC2: Clicking logout ends the user's session;  
+- AC2: Clicking logout ends the user's session - see AUTH-MT-21 
 
-- AC3: User is redirected to the index page after logging out;  
+- AC3: User is redirected to the home page after logging out - see AUTH-MT-31
 
-- AC4: User cannot access the dashboard after logging out; 
+- AC4: User cannot access the dashboard after logging out - see AUTH-MT-22 and AUTH-MT-32
 </details>
 39. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
 <details>
 <summary>40. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
 Acceptance criteria: 
 
-- AC 1: User sees a "Remember Me" checkbox on sign in page;  
+- AC 1: User sees a "Remember Me" checkbox on sign in page - see AUTH-MT-23
 
-- AC 2: When a user logs in with "Remember me" checked, their session persists after closing and reopening the browser.  
+- AC 2: When a user logs in with "Remember me" checked, their session persists after closing and reopening the browser - see AUTH-MT-24
 
-- AC 3: When a user logs in without "Remember me" checked, their session ends when the browser is closed.  
+- AC 3: When a user logs in without "Remember me" checked, their session ends when the browser is closed - see AUTH-MT-26 
 
-- AC4: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked.  
+- AC4: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked - see AUTH-MT-27 
 
-- AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me".
+- AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me" - see AUTH-MT-28
 </details>
 41. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
 42. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
