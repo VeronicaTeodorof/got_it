@@ -31,6 +31,7 @@ Acceptance Criteria:
 - AC2: User can see a navigation bar with a signup and login link - see HP-AT-01
 - AC3: Clicking signup takes the user to the signup page - see HP-MT-02
 - AC4: Clicking login takes the user to the login page - see HP-MT-03
+- AC5: Logged-in users see a logout link in the navbar instead of sign up and login links - see HP-MT-04
 </details>
 
 14. As a user I want a dashboard so that I have a central place to access and manage my content

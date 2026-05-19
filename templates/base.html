@@ -6,13 +6,34 @@
     <title>got it?</title>
 </head>
 <body>
+    <!-- Understanding request.user.is_authenticated, given to me by Claude AI:--> 
+    <!-- request is an instance of the HttpRequest class, an object that Django creates every time a page is requested -->
+    <!-- user is a property of the HttpRequest object, set by Django's authentication middleware: 
+        django.contrib.auth.middleware.AuthenticationMiddleware 
+        It returns the current User instance if logged in, or an AnonymousUser instance if not -->
+    <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean 
+    request.user translates into:  the particular user that made that particulat request
+    request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? --> 
     <nav>
         <ul>
-            <li>Logo</li>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% if request.user.is_authenticated %}
+                {% if request.path != '/dashboard/' %}
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                {% endif %}
+                <li>
+                    <form method="POST" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button type="submit">Log out</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'account_login'%}">Sign In</a></li>
+                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
         </ul>
     </nav>
-    {% block navbar %}{% endblock %}
-    <h1>It works!</h1>
+    
     {% block content %}{% endblock %}
 </body>
 </html>

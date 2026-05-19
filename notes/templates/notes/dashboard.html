@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
-{% block navbar %}
-    <nav>
-        <!-- form code source: https://learndjango.com/tutorials/django-login-and-logout-tutorial-->
-        <form method="POST" action="{% url 'account_logout' %}">
-            {% csrf_token %}
-            <button type="submit">Log out</button>
-        </form>
-    </nav>
-{% endblock %}
-
 {% block content %}
-    <h2>Dashboard</h2>
+    <h1>Dashboard</h1>
 {% endblock %}

@@ -44,9 +44,10 @@
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| HP-MT-01 | Home page displays correctly | Logo, Sign Up and Sign In links visible | As expected | Pass | Pass |
+| HP-MT-01 | Logged-out user visits home page | Sign In and Sign Up links visible in navbar, no Dashboard link or Logout button | As expected | Pass | |
 | HP-MT-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass | 
 | HP-MT-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
+| HP-MT-04 | Logged-in user visits home page | Dashboard link and Logout button visible in navbar, no Sign In and Sign Up links| As expected | Pass | |
 
 
 ### Dashboard Page
@@ -92,4 +93,4 @@
 
 **Fix:** Add cache-control headers to the dashboard view to prevent the browser from caching the page.  
 
-**Commit:** `abc1234`
+**Commit:** `c9dd47c`
