@@ -41,9 +41,9 @@ Acceptance Criteria:
 
 
 Acceptance Criteria:
-- AC1: Page layout adapts correctly on mobile, tablet and desktop
-- AC2: Navbar collapses to a hamburger menu on mobile
-- AC3: No horizontal scrolling on any screen size
+- AC1: Page layout adapts correctly on mobile, tablet and desktop - see RES-MT-01 to RES-MT-04
+- AC2: Navbar collapses to a hamburger menu on mobile and tablet and expands on desktop -see RES-MT-02 and RES-MT-03
+- AC3: No horizontal scrolling on any screen size - see RES-MT-04
 </details>
 17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
 18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
