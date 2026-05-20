@@ -34,10 +34,10 @@
 | AUTH-MT-26 | Non-remembered users are logged out when browser closes | Closing and reopening the browser redirects to login | Closing and reopening the browser redirects to login | Pass | Pass |
 | AUTH-MT-27 | Session expires after inactivity even with Remember Me checked | User is redirected to login after session duration expires | Not tested - relies on Django default session expiry behaviour (SESSION_COOKIE_AGE = 1209600) | - | - |
 | AUTH-MT-28 | User can manually log out ends session regardless of Remember Me | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Clicking logout with Remember Me checked ends the session, redirects to login, and attempting to access /dashboard/ redirects to login | Pass | Pass |
-| AUTH-MT-29 |  After signing out and being redirected to signin page, visit /dashboard/ | Login form loads with empty fields and no reference to previous user | Flash message reveals who was signed in | Fail | Fail |
+| AUTH-MT-29 |  After signing out and being redirected to signin page, visit /dashboard/ | Login form loads with empty fields and no reference to previous user | Flash message reveals who was signed in | Pass | Pass |
 | AUTH-MT-30 | Successful signup redirects to dashboard page | User is redirected to dashboard page after successful signup | As expected | Pass | Pass |
 | AUTH-MT-31 | Clicking logout redirects to home page | User is redirected to home page after clicking logout | As expected | Pass | Pass |
-| AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Pass |  |
+| AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Pass | Pass |
 
 ### Home Page 
 
@@ -47,7 +47,7 @@
 | HP-MT-01 | Logged-out user visits home page | Sign In and Sign Up links visible in navbar, no Dashboard link or Logout button | As expected | Pass | |
 | HP-MT-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass | 
 | HP-MT-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
-| HP-MT-04 | Logged-in user visits home page | Dashboard link and Logout button visible in navbar, no Sign In and Sign Up links| As expected | Pass | |
+| HP-MT-04 | Logged-in user visits home page | Dashboard link and Logout button visible in navbar, no Sign In and Sign Up links| As expected | Pass | Pass |
 
 
 ### Dashboard Page
@@ -63,10 +63,10 @@
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-|SUP-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | |
-|SUP-MT-02 | Sign In link navigates to Sing In page | Sign In page loads | As expected | Pass | |
-|SUP-MT-03 | Sign Up link reloads Sing Up page | Sign Up page reloads | As expected | Pass | |
-|SUP-MT-04 | Sign In link in paragraph navigates to Sing In page | Sign In page loads | As expected | Pass | |
+|SUP-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | Pass |
+|SUP-MT-02 | Sign In link navigates to Sing In page | Sign In page loads | As expected | Pass | Pass|
+|SUP-MT-03 | Sign Up link reloads Sing Up page | Sign Up page reloads | As expected | Pass | Pass |
+|SUP-MT-04 | Sign In link in paragraph navigates to Sing In page | Sign In page loads | As expected | Pass | Pass |
 
 
 ### Sign In Page 
@@ -74,20 +74,20 @@
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-|SIN-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | |
-|SIN-MT-02 | Sign Up link navigates to Sing Up page | Sign Up page loads | As expected | Pass | |
-|SIN-MT-03 | Sign In link reloads Sing In page | Sign In page reloads | As expected | Pass | |
-|SIN-MT-04 | Sign Up link in paragraph navigates to Sing Up page | Sign Up page loads | As expected | Pass | |
+|SIN-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | Pass|
+|SIN-MT-02 | Sign Up link navigates to Sing Up page | Sign Up page loads | As expected | Pass | Pass|
+|SIN-MT-03 | Sign In link reloads Sing In page | Sign In page reloads | As expected | Pass | Pass |
+|SIN-MT-04 | Sign Up link in paragraph navigates to Sing Up page | Sign Up page loads | As expected | Pass | Pass |
 
 
 ### Responsiveness
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|--------|-------|------------|
-| RES-MT-01 | Navbar on mobile | Hamburger menu shows, links hidden | As expected | Pass | |
-| RES-MT-02 | Clicking hamburger on mobile | Links expand below navbar | As expected | Pass | |
-| RES-MT-03 | Navbar on desktop | All links visible, no hamburger | As expected | Pass | |
-| RES-MT-04 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | |
+| RES-MT-01 | Navbar on mobile | Burger menu shows, links hidden | As expected | Pass | Pass |
+| RES-MT-02 | Clicking burger on mobile | Links expand below navbar | As expected | Pass | Pass |
+| RES-MT-03 | Navbar on desktop | All links visible, no burger | As expected | Pass | Pass |
+| RES-MT-04 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | Pass |
 
 
 ## Automated Testing (AT)
@@ -119,17 +119,6 @@
 
 ## Known Bugs
 
-### AUTH - Username disclosed after signout (AUTH-MT-29)
-
-**Description:** After signing out and visiting `/dashboard/`, the login page displayed a flash message revealing the previous user's username("Successfully signed in as vteodorof"). The email field also appeared pre-filled, however testing in an incognito window confirmed this was browser autofill, not a backend issue. The flash message persisted in incognito, confirming it originates from Django/allauth.  
-**Also observed:** The same flash message leak occurs when navigating back after logout via the browser back button (AUTH-MT-32). Fixing AUTH-MT-32 with `@never_cache` exposed this behaviour on back navigation as well.
-
-**Evidence:** 
-[MT31 - Username disclosed after signout](testing_screenshots/auth-mt-29.png)
-
-**Fix:** [brief description of what was changed]
-
-**Commit:** `abc1234`
 
 ## Solved Bugs
 ### AUTH - Dashboard accessible via browser back button after logout (AUTH-MT-32)
@@ -139,3 +128,16 @@
 **Fix:** Add cache-control headers to the dashboard view to prevent the browser from caching the page.  
 
 **Commit:** `c9dd47c`
+
+
+### AUTH - Username disclosed after signout (AUTH-MT-29)
+
+**Description:** After signing out and visiting `/dashboard/`, the login page displayed a flash message revealing the previous user's username("Successfully signed in as vteodorof"). The email field also appeared pre-filled, however testing in an incognito window confirmed this was browser autofill, not a backend issue. The flash message persisted in incognito, confirming it originates from Django/allauth.  
+**Also observed:** The same flash message leak occurs when navigating back after logout via the browser back button (AUTH-MT-32). Fixing AUTH-MT-32 with `@never_cache` exposed this behaviour on back navigation as well.
+
+**Evidence:** 
+[MT31 - Username disclosed after signout](testing_screenshots/auth-mt-29.png)
+
+**Fix:** Tests on deplyed version didn't show the above bug.
+
+**Commit:** `abc1234`
