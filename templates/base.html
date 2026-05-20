@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>got it?</title>
+
+    <!-- Bootstrap css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 </head>
 <body>
     <!-- Understanding request.user.is_authenticated, given to me by Claude AI:--> 
@@ -13,27 +16,47 @@
         It returns the current User instance if logged in, or an AnonymousUser instance if not -->
     <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean 
     request.user translates into:  the particular user that made that particulat request
-    request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? --> 
-    <nav>
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            {% if request.user.is_authenticated %}
-                {% if request.path != '/dashboard/' %}
-                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
-                {% endif %}
-                <li>
-                    <form method="POST" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        <button type="submit">Log out</button>
-                    </form>
-                </li>
-            {% else %}
-                <li><a href="{% url 'account_login'%}">Sign In</a></li>
-                <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+    request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? -->
+    
+    <!-- Header -->
+    <header>
+        <!-- Navigation --> 
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <!-- Logo on the left -->
+                <a  class="nav-link" href="{% url 'home' %}">got it?</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" 
+                               aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
+                        {% if request.user.is_authenticated %}
+                            {% if request.path != '/dashboard/' %}
+                                <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                            {% endif %}
+                            <li>
+                                <form method="POST" action="{% url 'account_logout' %}">
+                                    {% csrf_token %}
+                                    <button class="btn btn-link nav-link" type="submit">Log out</button>
+                                </form>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_login'%}">Sign In</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            
+            </div>
+        </nav>
+    </header>
     
     {% block content %}{% endblock %}
+
+
+     <!--Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

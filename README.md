@@ -36,7 +36,15 @@ Acceptance Criteria:
 
 14. As a user I want a dashboard so that I have a central place to access and manage my content
 15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
-16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
+<details>
+<summary>16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.</summary> 
+
+
+Acceptance Criteria:
+- AC1: Page layout adapts correctly on mobile, tablet and desktop
+- AC2: Navbar collapses to a hamburger menu on mobile
+- AC3: No horizontal scrolling on any screen size
+</details>
 17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off. 
 18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
 19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.

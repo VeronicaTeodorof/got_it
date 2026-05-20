@@ -80,6 +80,16 @@
 |SIN-MT-04 | Sign Up link in paragraph navigates to Sing Up page | Sign Up page loads | As expected | Pass | |
 
 
+### Responsiveness
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| RES-MT-01 | Navbar on mobile | Hamburger menu shows, links hidden | As expected | Pass | |
+| RES-MT-02 | Clicking hamburger on mobile | Links expand below navbar | As expected | Pass | |
+| RES-MT-03 | Navbar on desktop | All links visible, no hamburger | As expected | Pass | |
+| RES-MT-04 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | |
+
+
 ## Automated Testing (AT)
 
 
