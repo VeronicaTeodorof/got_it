@@ -87,6 +87,14 @@
 | HP-AT-01 | test_home_page_loads | Home page returns 200 | Pass |
 
 
+### Sign Up Page
+
+| Test ID | Test | Covers | Result |
+|---------|------|----------|-------|
+| SUP-AT-01 | test_signup_page_loads | Signup page returns 200 | Pass |
+| SUP-AT-02 | test_signup_page_contains_signin_link | Signup page contains link to signin | Pass |
+
+
 ## Known Bugs
 
 ### AUTH - Username disclosed after signout (AUTH-MT-29)
