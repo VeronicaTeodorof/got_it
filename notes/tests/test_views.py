@@ -26,3 +26,18 @@ class SignUpViewTest(TestCase):
             response,
             f'Already have an account? <a href="{reverse("account_login")}">'
         )
+
+
+class SignInViewTest(TestCase):
+    """Tests for the signin page."""
+
+    def test_signin_page_loads(self):
+        response = self.client.get(reverse('account_login'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_signin_page_contains_signin_link(self):
+        response = self.client.get(reverse('account_login'))
+        self.assertContains(
+            response,
+            f'then please <a href="{reverse("account_signup")}">'
+        )

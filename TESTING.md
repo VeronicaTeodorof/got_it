@@ -69,11 +69,15 @@
 |SUP-MT-04 | Sign In link in paragraph navigates to Sing In page | Sign In page loads | As expected | Pass | |
 
 
+### Sign In Page 
 
 
-
-
-
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+|SIN-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | |
+|SIN-MT-02 | Sign Up link navigates to Sing Up page | Sign Up page loads | As expected | Pass | |
+|SIN-MT-03 | Sign In link reloads Sing In page | Sign In page reloads | As expected | Pass | |
+|SIN-MT-04 | Sign Up link in paragraph navigates to Sing Up page | Sign Up page loads | As expected | Pass | |
 
 
 ## Automated Testing (AT)
@@ -93,6 +97,14 @@
 |---------|------|----------|-------|
 | SUP-AT-01 | test_signup_page_loads | Signup page returns 200 | Pass |
 | SUP-AT-02 | test_signup_page_contains_signin_link | Signup page contains link to signin | Pass |
+
+
+### Sign In Page
+
+| Test ID | Test | Covers | Result |
+|---------|------|----------|-------|
+| SIN-AT-01 | test_signin_page_loads | Signin page returns 200 | Pass |
+| SIN-AT-02 | test_signin_page_contains_signin_link | Signin page contains link to signin | Pass |
 
 
 ## Known Bugs
