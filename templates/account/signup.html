@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block head_title %}Signup{% endblock head_title %}
+{% block content %}
+    <h1>Sign Up</h1>
+    <p>Already have an account? <a href="{{ login_url }}">Sign in</a></p>
+    <form method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+
+        <!-- form.as_p renders all form fields automatically, each wrapped in a <p> tag, provided by allauth SignupView -->
+        {{ form.as_p }}
+
+        <!-- redirect_field is a hidden input that stores where to send the user after signup, provided by allauth SignupView -->
+        {{ redirect_field }}
+        <button type="submit">Sign Up</button>
+    </form>
+{% endblock %}

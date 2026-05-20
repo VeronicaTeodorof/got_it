@@ -154,6 +154,11 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 13. Move issue to done on project board;
 14. Commit;
 
+## Design Decisions
+
+
+### Internationalisation (i18n)
+While overriding allauth templates, I came across the i18n library and had to decide whether to implement it across all my templates or remove it from the authentication ones for consistency. Although a note-taking app would benefit from it, this being my first Django project, I considered internationalisation an unnecessary overhead at this stage and added it to the future features list instead.
 
 ## Features 
 ### Security and Data Protection Features: 
@@ -163,6 +168,7 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 
 ### Future features
 - Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
+- Internationalisation (i18n) support for multi-language translations using Django's built-in i18n framework
 
 
 

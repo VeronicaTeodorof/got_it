@@ -58,6 +58,21 @@
 | DP-MT-01 | Dashboard page displays correctly with Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | Pass |
 
 
+### Sign Up Page 
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+|SUP-MT-01 | Home link navigates to home page | Home page loads | As expected | Pass | |
+|SUP-MT-02 | Sign In link navigates to Sing In page | Sign In page loads | As expected | Pass | |
+|SUP-MT-03 | Sign Up link reloads Sing Up page | Sign Up page reloads | As expected | Pass | |
+|SUP-MT-04 | Sign In link in paragraph navigates to Sing In page | Sign In page loads | As expected | Pass | |
+
+
+
+
+
+
 
 
 
