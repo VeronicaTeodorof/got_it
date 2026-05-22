@@ -140,4 +140,4 @@
 
 **Fix:** Tests on deplyed version didn't show the above bug.
 
-**Commit:** `abc1234`
+**Commit:** `1c35a47`
