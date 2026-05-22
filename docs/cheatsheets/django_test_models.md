@@ -1,28 +1,4 @@
-# TDD Model Testing in Django
-
-
-## The cycle:
-1. Write the test — red;
-2. Write the code to make it pass — green;
-3. Move to the next test
-
-
-## Testing model existence:
-<pre>
-def test_your_model_exists(self):
-    self.assertTrue(Model
-    )
-</pre>
-
-
-## Testing field existence:
-<pre>
-def test_model_has_field(self):
-    self.assertTrue(hasattr(Model, 'field'))
-
-</pre>
-
-- hasattr is a built-in Python function that takes 2 parameters: the model name and field name as a string
+# Model Testing
 
 
 ## Testing behaviour:
