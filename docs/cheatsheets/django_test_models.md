@@ -50,3 +50,30 @@ Any time you've added or changed a model and haven't migrated yet, setUp will fa
 - makemigrations
 - migrate
 - Run tests
+
+
+## Assertions:
+
+- assertEqual(a, b) — passes if a == b
+- assertIsNotNone(x) — passes if x is not None; use to confirm an object was saved (check its pk)
+- assertRaises(ExceptionType) — passes if the code inside the with block raises that exception; use to test constraints
+
+<pre>
+with self.assertRaises(IntegrityError):
+    Model.objects.create(...)
+</pre>
+
+IntegrityError must be imported: from django.db import IntegrityError
+
+
+## What is worth testing on a model:
+
+- __str__ output — test each branch separately (e.g. with and without author)
+- constraints — UniqueConstraint and CheckConstraint; test that violations raise IntegrityError
+- optional fields — confirm None saves correctly
+- get_fieldname_display() — confirm human readable label is correct for at least one choice
+
+## What is not worth testing:
+
+- auto_now_add and auto_now timestamps — Django built-in behaviour
+- on_delete behaviour on ForeignKey — Django built-in behaviour
