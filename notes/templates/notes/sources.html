@@ -3,8 +3,8 @@
 {% block content %}
     <h1>Sources</h1>
     {% for source in sources %}
-        <ul>
-            <li>{{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}</li>
+        <ul class="list-group">
+            <li class="list-group-item">{{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}</li>
         </ul>
     {% empty %}
         <p>No sources yet. Add one to get started.</p>
