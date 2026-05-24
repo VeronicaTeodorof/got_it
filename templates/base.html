@@ -9,23 +9,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- Understanding request.user.is_authenticated, given to me by Claude AI:--> 
+    <!-- Understanding request.user.is_authenticated, given to me by Claude AI:-->
     <!-- request is an instance of the HttpRequest class, an object that Django creates every time a page is requested -->
-    <!-- user is a property of the HttpRequest object, set by Django's authentication middleware: 
-        django.contrib.auth.middleware.AuthenticationMiddleware 
+    <!-- user is a property of the HttpRequest object, set by Django's authentication middleware:
+        django.contrib.auth.middleware.AuthenticationMiddleware
         It returns the current User instance if logged in, or an AnonymousUser instance if not -->
-    <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean 
+    <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean
     request.user translates into:  the particular user that made that particulat request
     request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? -->
-    
+
     <!-- Header -->
     <header>
-        <!-- Navigation --> 
+        <!-- Navigation -->
         <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <!-- Logo on the left -->
                 <a  class="nav-link" href="{% url 'home' %}">got it?</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" 
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
                                aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,9 +33,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
                         {% if request.user.is_authenticated %}
-                            {% if request.path != '/dashboard/' %}
-                                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
-                            {% endif %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
                             <li>
                                 <form method="POST" action="{% url 'account_logout' %}">
                                     {% csrf_token %}
@@ -48,11 +46,11 @@
                         {% endif %}
                     </ul>
                 </div>
-            
+
             </div>
         </nav>
     </header>
-    
+
     {% block content %}{% endblock %}
 
 

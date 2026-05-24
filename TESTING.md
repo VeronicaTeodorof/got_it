@@ -56,6 +56,7 @@
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
 | DP-MT-01 | Dashboard page displays correctly with Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | Pass |
+| DP-MT-02 | 02Sources link on dashboard navigates to sources page | Sources page loads | As expected | Pass | Pass |
 
 
 ### Sign Up Page
@@ -86,7 +87,9 @@
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
 | SP-MT-01 | Unauthenticated user visits /sources/ | Redirected to login page | As expected | Pass | |
-| SP-MT-02 | Authenticated user visits /sources/ | Sources page loads | As expected | Pass |
+| SP-MT-02 | Authenticated user visits /sources/ | Sources page loads | As expected | Pass | |
+| SP-MT-03 | Dashboard link on sources page navigates to dashboard | As expected | Pass | |
+| SP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | Pass |
 
 
 

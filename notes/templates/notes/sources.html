@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sources</title>
-</head>
-<body>
+{% extends "notes/dashboard.html" %}
+
+{% block content %}
     <h1>Sources</h1>
-</body>
-</html>
+    {% for source in sources %}
+        <ul>
+            <li>{{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}</li>
+        </ul>
+    {% empty %}
+        <p>No sources yet. Add one to get started.</p>
+    {% endfor %}
+{% endblock %}
