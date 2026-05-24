@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.shortcuts import render
+from .models import Source
 
 
 # Create your views here.
@@ -14,3 +15,9 @@ def dashboard(request):
 
 def home(request):
     return render(request, 'notes/index.html')
+
+
+@login_required
+def sources_list(request):
+    sources = Source.objects.filter(user=request.user)
+    return render(request, 'notes/sources.html', {'sources': sources})
