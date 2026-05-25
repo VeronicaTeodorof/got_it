@@ -50,3 +50,18 @@ With context the template is dynamic — renders differently based on the data p
 - The context dictionary can hold anything: querysets, strings, numbers, lists, booleans
 - Keep context assembly in the view, not the template — templates should only display, not query
 - Can be passed inline for simple views: return render(request, 'template.html', {'key': value})
+
+
+## Detail views
+
+A detail view retrieves a single object by its pk (primary key), which is captured from the URL.
+
+
+**Key things to remember:**
+
+- Use get_object_or_404() instead of Model.objects.get() — it handles the missing object case automatically by returning a 404 page instead of crashing
+- Always filter by user as well as pk — otherwise a logged-in user could access another user's data by guessing the URL
+- Use @login_required on any view that displays user data — it redirects unauthenticated users to the login page
+- The URL parameter name (source_pk) must match the view function parameter name exactly
+- For nested URLs (e.g. /sources/4/units/3/), name parameters distinctly (source_pk, unit_pk) and validate the hierarchy: get_object_or_404(Unit, pk=unit_pk, source_id=source_pk)
+- The context key is arbitrary — {'source': ...} makes it available as {{ source }} in the template, but any name works

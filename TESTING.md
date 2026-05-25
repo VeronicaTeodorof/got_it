@@ -142,6 +142,16 @@
 | SP-AT-04 | test_user_cannot_see_another_users_sources | Another user's sources do not appear in context | Pass |
 
 
+### Source Detail Page
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| SDP-AT-01 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
+| SDP-AT-02 | test_authenticated_user_can_see_own_source | Page loads with correct template and context | Pass |
+| SDP-AT-03 | test_user_cannot_access_another_users_source | Another user's source returns 404 | Pass |
+| SDP-AT-04 | test_nonexistent_source_returns_404 | Nonexistent source returns 404 | Pass |
+
+
 ## Known Bugs
 
 

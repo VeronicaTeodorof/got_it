@@ -88,3 +88,54 @@ class SourcesListViewTest(TestCase):
         self.client.force_login(user2)
         response = self.client.get(reverse('sources-list'))
         self.assertNotIn(self.source, response.context['sources'])
+
+
+class SourceDetailViewTest(TestCase):
+    """Tests for source detail page"""
+
+    def setUp(self):
+        """Create test user and source"""
+        self.user = User.objects.create_user(
+            username='user', email="user@testing.com", password="test"
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_type=Source.SourceType.BOOK,
+            source_name='Test Source',
+            source_author='Test Author'
+        )
+
+    def test_unauthenticated_user_is_redirected(self):
+        """SDP-AT-01: Unauthenticated user is redirected to the login page."""
+        url = reverse('source-detail', args=[self.source.pk])
+        response = self.client.get(url)
+        self.assertRedirects(response, f'/accounts/login/?next={url}')
+
+    def test_authenticated_user_can_see_own_source(self):
+        """SDP-AT-02: Page requested by authenticated user loads correctly,
+        with the right template and right context"""
+        self.client.login(username='user', password='test')
+        response = self.client.get(
+            reverse('source-detail', args=[self.source.pk])
+            )
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'notes/source_detail.html')
+        self.assertEqual(response.context['source'], self.source)
+
+    def test_nonexistent_source_returns_404(self):
+        """SDP-AT-03: 404 is returned for inexistent source"""
+        self.client.login(username='user', password='test')
+        response = self.client.get(reverse('source-detail', args=[1234]))
+        self.assertEqual(response.status_code, 404)
+
+    def test_user_cannot_access_other_users_source(self):
+        """SDP-AT-04: Authenticated user cannot see another user's
+        source detail"""
+        user2 = User.objects.create_user(
+            username='user2', password='test'
+        )
+        self.client.force_login(user2)
+        response = self.client.get(
+            reverse('source-detail', args=[self.source.pk])
+            )
+        self.assertEqual(response.status_code, 404)
