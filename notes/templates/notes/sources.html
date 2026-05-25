@@ -1,12 +1,16 @@
 {% extends "notes/dashboard.html" %}
 
-{% block content %}
+{% block dashboard_content %}
     <h1>Sources</h1>
-    {% for source in sources %}
-        <ul class="list-group">
-            <li class="list-group-item">{{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}</li>
-        </ul>
-    {% empty %}
+    <ul class="list-group">
+        {% for source in sources %}
+            <li class="list-group-item">
+                <a href="{% url 'source-detail' source.pk %}">
+                    {{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}
+                </a>
+            </li>
+        {% empty %}
         <p>No sources yet. Add one to get started.</p>
     {% endfor %}
+</ul>
 {% endblock %}
