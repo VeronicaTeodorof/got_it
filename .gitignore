@@ -8,3 +8,6 @@ env/
 # Python
 *.pyc
 __pycache__/
+
+# Static Files
+staticfiles/
