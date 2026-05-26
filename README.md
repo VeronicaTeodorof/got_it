@@ -89,7 +89,20 @@ Acceptance Criteria:
 - AC12: Page meets accessibility standards
 </details>
 
-26. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<detail>
+<summary>26. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.</summary>
+Acceptance Criteria:
+
+- AC1: Only accessible to logged-in users
+- AC2: User can enter a source name and a source author
+- AC3: User can select a source type
+- AC4: Name field cannot be empty — error shown if submitted blank
+- AC5: Source type has to be selected
+- AC6: On successful creation user is redirected to the new source page
+- AC7: Source is only visible to the user who created it
+- AC8: Form is responsive
+- AC9: Form meets WCAG accessibility standards
+</detail>
 27. As a user, I want to create my own source types, so that I can organise my sources in a way that makes sense to me.
 28. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
 29. As a student I want to be able to edit a source name or type, so that I can keep it accurate.
