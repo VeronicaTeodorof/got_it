@@ -152,6 +152,16 @@
 | SDP-AT-04 | test_nonexistent_source_returns_404 | Nonexistent source returns 404 | Pass |
 
 
+### Create Source Page
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| CSP-AT-01 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
+| CSP-AT-02 | test_authenticated_user_can_access_create_source_page | Authenticated user can access create source page | Pass |
+| CSP-AT-03 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page |Pass |
+| CSP-AT-04 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Pass |
+
+
 ## Known Bugs
 
 

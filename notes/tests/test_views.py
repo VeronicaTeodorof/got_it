@@ -139,3 +139,63 @@ class SourceDetailViewTest(TestCase):
             reverse('source-detail', args=[self.source.pk])
             )
         self.assertEqual(response.status_code, 404)
+
+
+class CreateSourceViewTest(TestCase):
+    """Tests for create source page"""
+    def setUp(self):
+        """Create test user"""
+        self.user = User.objects.create_user(
+            username='user', email="user@testing.com", password="test")
+        self.form_data = {
+            'source_name': 'Name',
+            'source_author': 'Author',
+            'source_type': 'book'
+        }
+
+    def test_unauthenticated_user_is_redirected(self):
+        """Unauthenticated user is redirected to the login page"""
+        url = reverse('create-source')
+        response = self.client.get(reverse('create-source'))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, f'/accounts/login/?next={url}')
+
+    def test_authenticated_user_can_access_create_source_page(self):
+        """Authenticated user has access to create source page"""
+        self.client.login(username='user', password='test')
+        response = self.client.get(reverse('create-source'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_valid_submission_creates_source(self):
+        """Valid submission creates source
+        and redirects to source detail page"""
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('create-source'), data=self.form_data
+            )
+        source = Source.objects.get(source_name='Name')
+        self.assertRedirects(
+            response, reverse('source-detail', kwargs={'source_pk': source.pk})
+            )
+
+        def test_source_saved_with_correct_user(self):
+            """Source is saved with the correct user"""
+            self.client.force_login(self.user)
+            self.client.post(reverse('create-source'), data=self.form_data)
+            source = Source.objects.get(source_name='Name')
+            self.assertEqual(self.user, source.user)
+
+        def test_duplicate_source_name_raises_error(self):
+            """
+            Test duplicate name for same user returns 200
+            and raises error
+            """
+            self.client.force_login(self.user)
+            Source.objects.source(user=self.user, source_name="Test")
+            response = self.client.post(
+                reverse('create-source', data={'name': "Test"})
+                )
+            self.assertEqual(response.status_code, 200)
+            self.assertIn(
+                'error', response.context['form']['name'].errors.as_text()
+                )
