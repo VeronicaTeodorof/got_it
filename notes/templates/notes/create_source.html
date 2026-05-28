@@ -1,0 +1,10 @@
+{% extends "notes/dashboard.html" %}
+
+{% block dashboard_content %}
+    <h1>Create source</h1>
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+{% endblock %}
