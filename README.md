@@ -33,11 +33,8 @@ Acceptance Criteria:
 - AC4: Clicking login takes the user to the login page - see HP-MT-03
 - AC5: Logged-in users see a logout link in the navbar instead of sign up and login links - see HP-MT-04
 </details>
-
-14. As a user I want a dashboard so that I have a central place to access and manage my content
-15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
 <details>
-<summary>16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.</summary>
+<summary>14. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
 
 Acceptance Criteria:
 - AC1: Page layout adapts correctly on mobile, tablet and desktop - see RES-MT-01 to RES-MT-04
@@ -45,6 +42,8 @@ Acceptance Criteria:
 - AC3: No horizontal scrolling on any screen size - see RES-MT-04
 </details>
 
+15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
+16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
 17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
 18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
 19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
@@ -72,9 +71,11 @@ Acceptance Criteria:
 - AC8: Page meets accessibility standards;
 </details>
 <details>
-<summary>"As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on"</summary>
+<summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
 
 Acceptance Criteria:
+
+
 - AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01 and SDP-AT-02
 - AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03
 - AC3: If source does not exist, return 404 - see SDP-AT-04
@@ -87,10 +88,11 @@ Acceptance Criteria:
 - AC10: Edit and delete actions accessible from this page
 - AC11: Page is responsive
 - AC12: Page meets accessibility standards
-</details>
 
-<detail>
-<summary>26. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.</summary>
+</details>
+<details>
+<summary>26. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+</summary>
 Acceptance Criteria:
 
 - AC1: Only accessible to logged-in users -see CSP-AT-01 and CSP-AT-02
@@ -103,26 +105,39 @@ Acceptance Criteria:
 - AC8: Form is responsive
 - AC9: Form meets WCAG accessibility standards
 - AC10: A user cannot create two sources with the same name, an error is shown if they try - see CSP-AT-04
-</detail>
-27. As a user, I want to create my own source types, so that I can organise my sources in a way that makes sense to me.
-28. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
-29. As a student I want to be able to edit a source name or type, so that I can keep it accurate.
-30. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.
+</details>
+
+27. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
+<details>
+<summary>28. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+
+Acceptance Criteria:
+
+- AC1: Only accessible to logged-in users
+- AC2: Only accessible to the source owner — another logged-in user gets a 403
+- AC3: User can edit source name, author, and type
+- AC4: Name field cannot be empty — error shown if submitted blank
+- AC5: On successful edit user is redirected back to the source page
+- AC6: Form is responsive
+- AC7: Form meets accessibility standards
+</details>
+
+29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.
 
 - **Units**
-31. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
-32. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
-33. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
+30. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
+31. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
+32. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
 
 - **Tags**
-34. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
-35. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
-36. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-37. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.
+33. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
+34. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
+35. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
+36. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.
 
 - **Authentication Theme**
 <details>
-<summary>38. As a new user I want to be able to create a new account, to start using the app.</summary>
+<summary>37. As a new user I want to be able to create a new account, to start using the app.</summary>
 Acceptance criteria:
 
 - AC1: User can access the signup page - see AUTH-MT-01
@@ -136,7 +151,7 @@ Acceptance criteria:
 - AC5: Password must meet minimum security requirements (length, complexity) - see  AUTH-MT-10 to AUTH-MT-13
 </details>
 <details>
-<summary>39. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
+<summary>38. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
 Acceptance criteria:
 
 - AC1: User can access the signin page - see AUTH-MT-02
@@ -154,7 +169,7 @@ Acceptance criteria:
 - AC7: User remains on signin page if login fails - see AUTH-MT-17 to AUTH-MT-20
 </details>
 <details>
-<summary>40. As a user, I want to log out of my account so that I can securely end my session.</summary>
+<summary>39. As a user, I want to log out of my account so that I can securely end my session.</summary>
 Acceptance criteria:
 
 - AC1: User can see a logout link on the dashboard - see DP-MT-01
@@ -165,9 +180,9 @@ Acceptance criteria:
 
 - AC4: User cannot access the dashboard after logging out - see AUTH-MT-22 and AUTH-MT-32
 </details>
-41. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
+40. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
 <details>
-<summary>42. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
+<summary>41. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
 Acceptance criteria:
 
 - AC 1: User sees a "Remember Me" checkbox on sign in page - see AUTH-MT-23
@@ -180,8 +195,8 @@ Acceptance criteria:
 
 - AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me" - see AUTH-MT-28
 </details>
-43. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
-44. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+42. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
+43. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
 
 ## ERD
