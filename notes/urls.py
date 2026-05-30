@@ -10,4 +10,7 @@ urlpatterns = [
         'sources/<int:source_pk>/', views.source_detail, name='source-detail'
         ),
     path('sources/create_source/', views.create_source, name='create-source'),
+    path(
+        'sources/<int:source_pk>/edit/', views.edit_source, name='edit_source'
+        ),
 ]

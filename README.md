@@ -232,6 +232,9 @@ While overriding allauth templates, I came across the i18n library and had to de
 - Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
 - Internationalisation (i18n) support for multi-language translations using Django's built-in i18n framework
 
+## Future Improvements
+- Extend source uniqueness constraint to include 'source_author' and 'source_type' to handle edge cases where same title exists across different authors or formats
+
 
 
 

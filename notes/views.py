@@ -55,3 +55,17 @@ def create_source(request):
     else:
         form = SourceForm()
     return render(request, "notes/create_source.html", {"form": form})
+
+
+@login_required
+def edit_source(request, source_pk):
+    """ View for the editSourceModal"""
+    # Retrieve the specific record from the database using the pk
+    source = get_object_or_404(Source, pk=source_pk)
+    # Instantiate the form with the fetched source
+    form = SourceForm(instance=source)
+    return render(
+        request,
+        'notes/edit_source_form.html',
+        {'form': form, 'source': source}
+        )
