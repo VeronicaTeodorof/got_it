@@ -65,8 +65,8 @@ Acceptance Criteria:
 - AC2: Only shows sources belonging to the logged-in user - see SP-AT-03 and SP-AT-04
 - AC3: Sources listed in reverse chronological order — most recent first - see SP-MT-05
 - AC4: Each source shows name,type, author, and date created - see SP-MT-04
-- AC5: Each source links to its unit list page 
-- AC6: Empty state shown when no sources exist, encouraging user to create one;
+- AC5: Each source links to its unit list page
+- AC6: Empty state shown when no sources exist, encouraging user to create one - see SP-MT-06
 </details>
 <details>
 <summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>

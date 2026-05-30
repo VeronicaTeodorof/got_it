@@ -91,7 +91,7 @@
 | SP-MT-03 | Dashboard link on sources page navigates to dashboard | Clicking Dashboard link on sources page links to dashboard page | As expected | Pass | |
 | SP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | As expected |Pass | |
 | SP-MT-05 | Sources are displayed in reverse chronological order | Sources are displayed in reverse chronological order | As expected | Pass | |
-| SP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | Sources of another user are shown | Fail | |
+| SP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | As expected | Pass | |
 
 
 ### Responsiveness
