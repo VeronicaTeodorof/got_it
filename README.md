@@ -74,18 +74,16 @@ Acceptance Criteria:
 Acceptance Criteria:
 
 
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01 and SDP-AT-02
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01, SDP-AT-02, SDP-MT-01, SDP-MT-02
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03 and SDP-MT-03
 - AC3: If source does not exist, return 404 - see SDP-AT-04
-- AC4: Source name and author displayed
+- AC4: Source name and author displayed - see SDP-AT-05
 - AC5: Units listed in chronological order — reflecting source structure
 - AC6: Each unit shows name and note count
 - AC7: Each unit links to its three-column unit page
 - AC8: My Thoughts default unit always present
 - AC9: Breadcrumbs show Source
-- AC10: Edit and delete actions accessible from this page
-- AC11: Page is responsive
-- AC12: Page meets accessibility standards
+- AC10: Edit and delete source actions accessible from this page
 
 </details>
 <details>
@@ -93,15 +91,13 @@ Acceptance Criteria:
 </summary>
 Acceptance Criteria:
 
-- AC1: Only accessible to logged-in users -see CSP-AT-01 and CSP-AT-02
-- AC2: User can enter a source name and a source author
-- AC3: User should select a source type from the available options
-- AC4: Name field cannot be empty — error shown if submitted blank
-- AC5: Source type has to be selected
+- AC1: Only accessible to logged-in users -see CSP-AT-01, CSP-AT-02, CSP-MT-01 and CSP-MT-02
+- AC2: User can enter a source name and a source author - see CSP-MT-03;
+- AC3: User should select a source type from the available options - see CSP-MT-04;
+- AC4: Name field cannot be empty — error shown if submitted blank - see CSP-MT-05;
+- AC5: Source type has to be selected - error shown if not selected - see CSP-MT-06;
 - AC6: On successful creation user is redirected to the new source detail page - see CSP-AT-03
-- AC7: Source is only visible to the user who created it - see SDP-AT-04
-- AC8: Form is responsive
-- AC9: Form meets WCAG accessibility standards
+- AC7: Source is only visible to the user who created it - see SDP-AT-04 and SDP-MT-04
 - AC10: A user cannot create two sources with the same name, an error is shown if they try - see CSP-AT-04
 </details>
 

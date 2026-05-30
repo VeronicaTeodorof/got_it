@@ -94,6 +94,33 @@
 | SP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | As expected | Pass | |
 
 
+### Sources Detail Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SDP-MT-01 | Page accessible to logged in user | Logged in user can access the page showing details of a selected source | As expected | Pass | |
+| SDP-MT-02 | Page unavailable to unauthenticated users; redirects to login page | User not logged in trying to access a source_detail page by writing the url in the browser is redirected to login page | As expected | Pass |
+| SDP-MT-03 | Page only accessible to the source owner — another logged-in user gets a 404 | User with no sources created visits /sources/10/ gets 404 page | As expected | Pass | |
+| SDP-MT-04 | If source does not exist, return 404  | User with ten sources created visits /sources/11/ gets 404 | As expected | Pass | |
+| SDP-MT-05 | Source name and author displayed | Source name and author displayed | As expected | Pass | |
+
+
+### Create Source Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| CSP-MT-01 | Logged in user visits '/sources/create_source/' | Page loads with no errors | Pass | |
+| CSP-MT-02 | Unauthenticated user visits '/sources/create_source/' | User is redirected to login page | Pass | |
+| CSP-MT-03 | User can enter a source name and a source author | User can enter a source name and a source author | As expected | Pass | |
+| CSP-MT-04 | User should select a source type from the available options | User should select a source type from the available options | Pass | |
+| CSP-MT-05 | Name field cannot be empty — error shown if submitted blank | Name field cannot be empty — error shown if submitted blank | As expected | Pass | |
+| CSP-MT-06 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
+| CSP-MT-07 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
+
+
+
 ### Responsiveness
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
