@@ -20,7 +20,14 @@ def home(request):
 
 @login_required
 def sources_list(request):
-    sources = Source.objects.filter(user=request.user)
+    """
+    Retrieve and display a list of sources belonging to the current user.
+    """
+    # Filter by user first, then order —
+    # chained to avoid overwriting the user filter
+    sources = Source.objects.filter(user=request.user).order_by(
+        '-source_creation_date'
+        )
     return render(request, 'notes/sources.html', {'sources': sources})
 
 

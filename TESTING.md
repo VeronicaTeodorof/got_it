@@ -88,11 +88,10 @@
 |---------|------|----------|-------|-------|------------|
 | SP-MT-01 | Unauthenticated user visits /sources/ | Redirected to login page | As expected | Pass | |
 | SP-MT-02 | Authenticated user visits /sources/ | Sources page loads | As expected | Pass | |
-| SP-MT-03 | Dashboard link on sources page navigates to dashboard | As expected | Pass | |
-| SP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | Pass |
-
-
-
+| SP-MT-03 | Dashboard link on sources page navigates to dashboard | Clicking Dashboard link on sources page links to dashboard page | As expected | Pass | |
+| SP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | As expected |Pass | |
+| SP-MT-05 | Sources are displayed in reverse chronological order | Sources are displayed in reverse chronological order | As expected | Pass | |
+| SP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | Sources of another user are shown | Fail | |
 
 
 ### Responsiveness
@@ -186,3 +185,23 @@
 **Fix:** Tests on deplyed version didn't show the above bug.
 
 **Commit:** `1c35a47`
+
+
+### SP - User with no sources created sees another user's sources instead of empty state (SP-MT-06)
+
+**Description:** When manually testing whether a user with no sources sees the empty page with a message encouraging them to create one, another user's sources were visible instead.
+
+**Automated Test:** Confirmed by `test_authenticated_user_cannot_see_another_user_sources` (SP-AT-04) — failing.
+
+**Root Cause:** The `order_by('-source_creation_date')` line in `sources_list`was written as a separate queryset instead of being chained onto
+`.filter(user=request.user)`, overwriting the user filter and returning all sources:
+
+<pre>
+@login_required
+def sources_list(request):
+    sources = Source.objects.filter(user=request.user)
+    sources = Source.objects.order_by('-source_creation_date')
+    return render(request, 'notes/sources.html', {'sources': sources})
+</pre>
+
+**Fix:** Chained `.filter(user=request.user)` with `.order_by()` in the queryset.
