@@ -3,6 +3,7 @@ from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Source
 from .forms import SourceForm
+from django.http import JsonResponse
 
 
 # Create your views here.
@@ -62,6 +63,12 @@ def edit_source(request, source_pk):
     """ View for the editSourceModal"""
     # Retrieve the specific record from the database using the pk
     source = get_object_or_404(Source, pk=source_pk)
+    if request.method == 'POST':
+        # Bind the submitted data to the form in the POST block
+        form = SourceForm(request.POST, instance=source)
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True})
     # Instantiate the form with the fetched source
     form = SourceForm(instance=source)
     return render(

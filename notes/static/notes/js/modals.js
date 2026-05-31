@@ -15,6 +15,31 @@ sourceEditButtons.forEach(button => {
             // Inject the returned HTML into the modal body
             .then(html => {
                 document.querySelector('#editSourceModal .modal-body').innerHTML = html;
+                const form = document.querySelector('#editSourceModal form');
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: new FormData(form),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            return response.json();
+                        } else {
+                             return response.text();
+                        }
+                    })
+
+                    .then(data => {
+                        if (typeof data === 'object' && data.success) {
+                            const modal = bootstrap.Modal.getInstance(document.querySelector('#editSourceModal'));
+                            modal.hide();
+                            location.reload();
+                        } else {
+                            document.querySelector('#editSourceModal .modal-body').innerHTML = data;
+                        }
+                    })
+                })
             });
 
     });
