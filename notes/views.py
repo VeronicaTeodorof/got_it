@@ -62,7 +62,7 @@ def create_source(request):
 def edit_source(request, source_pk):
     """ View for the editSourceModal"""
     # Retrieve the specific record from the database using the pk
-    source = get_object_or_404(Source, pk=source_pk)
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
     if request.method == 'POST':
         # Bind the submitted data to the form in the POST block
         form = SourceForm(request.POST, instance=source)
