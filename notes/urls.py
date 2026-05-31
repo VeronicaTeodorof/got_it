@@ -13,4 +13,9 @@ urlpatterns = [
     path(
         'sources/<int:source_pk>/edit/', views.edit_source, name='edit_source'
         ),
+    path(
+        'sources/<int:source_pk>/delete/',
+        views.delete_source,
+        name='delete_source'
+    )
 ]

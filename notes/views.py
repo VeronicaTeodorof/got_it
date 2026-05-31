@@ -76,3 +76,12 @@ def edit_source(request, source_pk):
         'notes/edit_source_form.html',
         {'form': form, 'source': source}
         )
+
+
+def delete_source(request, source_pk):
+    """View for deleteSourceModal
+    """
+    if request.method == 'POST':
+        source = get_object_or_404(Source, pk=source_pk, user=request.user)
+        source.delete()
+        return redirect('sources-list')

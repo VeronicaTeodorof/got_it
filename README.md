@@ -116,6 +116,11 @@ Acceptance Criteria:
 </details>
 
 29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.
+- AC1: Only accessible to logged-in users
+- AC2: Only accessible to the source owner — another logged-in user gets a 403/404
+- AC3: Deleting a source removes it from the database
+- AC4: User is redirected to the sources page after deletion
+- AC5: A confirmation step is required before deletion
 
 - **Units**
 30. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
