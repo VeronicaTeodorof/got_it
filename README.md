@@ -107,13 +107,12 @@ Acceptance Criteria:
 
 Acceptance Criteria:
 
-- AC1: Only accessible to logged-in users
-- AC2: Only accessible to the source owner — another logged-in user gets a 403
-- AC3: User can edit source name, author, and type
-- AC4: Name field cannot be empty — error shown if submitted blank
-- AC5: On successful edit user is redirected back to the source page
-- AC6: Form is responsive
-- AC7: Form meets accessibility standards
+- AC1: Only accessible to logged-in users - see ESP-MT-01
+- AC2: Only accessible to the source owner — another logged-in user gets a 404 - see ESP-MT-02
+- AC3: User can edit source name, author, and type - see ESP-MT-03
+- AC4: Name field cannot be empty — error shown if submitted blank - see ESP-MT-04
+- AC5: On successful edit user is redirected back to the source page - see ESP-MT-05
+- AC6: One type choice has to be selected - error shown if no choice is selected - see ESP-MT-06
 </details>
 
 29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.

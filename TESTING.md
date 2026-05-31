@@ -120,6 +120,16 @@
 | CSP-MT-07 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
 
 
+### Edit Source Page
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| ESP-MT-01 | Unauthenticated user navigates directly to edit URL | Visiting /sources/9/edit/ redirects to login page | As expected | Pass | |
+| ESP-MT-02 | Authenticated user navigates directly to edit URL for another user's source | 404 returned | As expected | Pass | |
+| ESP-MT-03 | Owner edits source name, author, and type and submits | Changes saved and visible on source detail page | As expected | Pass | |
+| ESP-MT-04 | Owner submits edit form with name field empty | Form rejected, error shown | As expected | Pass | |
+| ESP-MT-05 | Owner submits valid edit form | Redirected to source detail page | As expected | Pass | |
+| ESP-MT-06 | Owner submits edit form with no type selected | Form rejected, error shown | As expected | Pass | |
 
 ### Responsiveness
 
