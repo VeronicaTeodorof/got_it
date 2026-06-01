@@ -223,6 +223,47 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 ## Design Decisions
 
 
+### Navigation & Layout
+
+- Persistent sidebar with two sections separated by a horizontal rule: organisational (Sources, Units) and note types (Reference, My Words, Questions)
+- ... dropdown for edit/delete actions on list items, keeping lists clean
+- Arrow indicator on list rows to signal they are clickable links
+- Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab
+- Sidebar on note detail pages provides navigation back to unit context
+
+### Notes Display
+
+- Reference notes displayed as Bootstrap card grid (3 columns, h-100 for equal height)
+- Cards show title and truncated content preview only
+- Evaluated/Pending distinction: green border = evaluated, blue border = pending
+- Filter on Reference and Questions tabs: All / Evaluated / Pending (References), All / Answered / Unanswered (Questions)
+
+### Note Relationships
+
+- Reference notes have one-to-many relationship with My Words and Question notes
+- Foreign key to parent reference note is nullable — My Words and Question notes can exist independently within a unit (linked to source and unit but not to a specific reference note)
+- Answered questions link to one or more My Words notes
+
+### Modals vs Full Pages
+
+- Modals: create/edit source, create/edit unit, delete confirmations
+- Full pages: create, read, edit individual notes
+- Rationale: notes deserve space and focus; modals suit quick transactional actions
+
+### Terminology
+
+- Consistent naming throughout: Reference, My Words, Questions
+- E- valuated/Pending for reference note status
+- Answered/Unanswered for question status
+
+### Visual Identity
+
+- Single green accent colour throughout
+- "got it?" logo as branding in navbar
+- "got it?" logo reused as pending/unanswered indicator on note detail pages
+- Bootstrap defaults otherwise — minimal additional styling
+
+
 ### Internationalisation (i18n)
 While overriding allauth templates, I came across the i18n library and had to decide whether to implement it across all my templates or remove it from the authentication ones for consistency. Although a note-taking app would benefit from it, this being my first Django project, I considered internationalisation an unnecessary overhead at this stage and added it to the future features list instead.
 
