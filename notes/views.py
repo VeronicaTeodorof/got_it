@@ -17,7 +17,9 @@ def dashboard(request):
     """
     # Filter by user first, then order —
     # chained to avoid overwriting the user filter
-    sources = Source.objects.filter(user=request.user).order_by('-source_creation_date')
+    sources = Source.objects.filter(user=request.user).order_by(
+        '-source_creation_date'
+        )
     return render(request, 'notes/dashboard.html', {'sources': sources})
 
 

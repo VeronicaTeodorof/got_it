@@ -52,11 +52,24 @@
 
 ### Dashboard Page
 
+### Access Control
+
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| DP-MT-01 | Dashboard page displays correctly with Logout link | Logout link present on dashboard page | Logout link present on dashboard page | Pass | Pass |
-| DP-MT-02 | 02Sources link on dashboard navigates to sources page | Sources page loads | As expected | Pass | Pass |
+| DP-MT-01 | Unauthenticated user visits /dashboard/ | Redirected to login page | As expected | Pass | |
+| DP-MT-02 | Authenticated user visits /dashboard/ | Dashboard page loads | As expected | Pass | |
+
+
+### Sources List
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| DP-MT-03 | Sources list or empty state present on dashboard | Page shows a list of sources belonging to the logged in user or empty state | As expected | Pass | |
+| DP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | As expected |Pass | |
+| DP-MT-05 | Sources are displayed in reverse chronological order | Sources are displayed in reverse chronological order | As expected | Pass | |
+| DP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | As expected | Pass | |
 
 
 ### Sign Up Page
@@ -79,19 +92,6 @@
 | SIN-MT-02 | Sign Up link navigates to Sing Up page | Sign Up page loads | As expected | Pass | Pass|
 | SIN-MT-03 | Sign In link reloads Sing In page | Sign In page reloads | As expected | Pass | Pass |
 | SIN-MT-04 | Sign Up link in paragraph navigates to Sing Up page | Sign Up page loads | As expected | Pass | Pass |
-
-
-### Sources Page
-
-
-| Test ID | Test | Expected | Actual |Local | Deployment |
-|---------|------|----------|-------|-------|------------|
-| SP-MT-01 | Unauthenticated user visits /sources/ | Redirected to login page | As expected | Pass | |
-| SP-MT-02 | Authenticated user visits /sources/ | Sources page loads | As expected | Pass | |
-| SP-MT-03 | Dashboard link on sources page navigates to dashboard | Clicking Dashboard link on sources page links to dashboard page | As expected | Pass | |
-| SP-MT-04 | Each source displays name, type, author and date created | All four fields visible for each source | As expected |Pass | |
-| SP-MT-05 | Sources are displayed in reverse chronological order | Sources are displayed in reverse chronological order | As expected | Pass | |
-| SP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | As expected | Pass | |
 
 
 ### Sources Detail Page
@@ -171,14 +171,14 @@
 | SIN-AT-02 | test_signin_page_contains_signin_link | Signin page contains link to signin | Pass |
 
 
-### Sources Page
+### Dashboard Page
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
-| SP-AT-01 | test_authenticated_user_gets_200 | Authenticated user can access sources page | Pass |
-| SP-AT-02 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
-| SP-AT-03 | test_user_sees_own_sources | User's own sources appear in context | Pass |
-| SP-AT-04 | test_user_cannot_see_another_users_sources | Another user's sources do not appear in context | Pass |
+| DP-AT-01 | test_authenticated_user_gets_200 | Authenticated user can access sources page | Pass |
+| DP-AT-02 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
+| DP-AT-03 | test_user_sees_own_sources | User's own sources appear in context | Pass |
+| DP-AT-04 | test_user_cannot_see_another_users_sources | Another user's sources do not appear in context | Pass |
 
 
 ### Source Detail Page

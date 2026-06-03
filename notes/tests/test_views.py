@@ -45,8 +45,8 @@ class SignInViewTest(TestCase):
         )
 
 
-class SourcesListViewTest(TestCase):
-    """Tests for sources page"""
+class DashboardViewTest(TestCase):
+    """Tests for dashboard page"""
     def setUp(self):
         """Create test user and source"""
         self.user = User.objects.create_user(
@@ -60,16 +60,16 @@ class SourcesListViewTest(TestCase):
         )
 
     def test_authenticated_user_gets_200(self):
-        """SP-AT-01: Authenticated user can access the sources page."""
+        """SP-AT-01: Authenticated user can access the dashboard page."""
         self.client.login(
             username='user', email='user@testing.com', password='test'
             )
-        response = self.client.get(reverse('sources-list'))
+        response = self.client.get(reverse('dashboard'))
         self.assertEqual(response.status_code, 200)
 
     def test_unauthenticated_user_is_redirected(self):
         """SP-AT-02: Unauthenticated user is redirected to the login page."""
-        response = self.client.get(reverse('sources-list'))
+        response = self.client.get(reverse('dashboard'))
         self.assertEqual(response.status_code, 302)
 
     def test_authenticated_user_sees_own_sources(self):
@@ -77,7 +77,7 @@ class SourcesListViewTest(TestCase):
         self.client.login(
             username='user', email='user@testing.com', password='test'
         )
-        response = self.client.get(reverse('sources-list'))
+        response = self.client.get(reverse('dashboard'))
         self.assertIn(self.source, response.context['sources'])
 
     def test_authenticated_user_cannot_see_another_user_sources(self):
@@ -86,7 +86,7 @@ class SourcesListViewTest(TestCase):
             username='user2', email='user2@testing.com', password="test"
         )
         self.client.force_login(user2)
-        response = self.client.get(reverse('sources-list'))
+        response = self.client.get(reverse('dashboard'))
         self.assertNotIn(self.source, response.context['sources'])
 
 

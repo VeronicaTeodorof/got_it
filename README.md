@@ -37,9 +37,9 @@ Acceptance Criteria:
 <summary>14. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
 
 Acceptance Criteria:
-- AC1: Page layout adapts correctly on mobile, tablet and desktop - see RES-MT-01 to RES-MT-04
-- AC2: Navbar collapses to a hamburger menu on mobile and tablet and expands on desktop -see RES-MT-02 and RES-MT-03
-- AC3: No horizontal scrolling on any screen size - see RES-MT-04
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login -see DP-AT-01 and DP-AT-02;
+- AC2: Page shows a list of sources belonging to the logged in user - see DP-MT-03;
+
 </details>
 
 15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
@@ -70,12 +70,12 @@ Acceptance Criteria:
 <summary>24. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
 
 Acceptance Criteria:
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SP-MT-01, SP-MT-02, SP-AT-01, SP-AT-02
-- AC2: Only shows sources belonging to the logged-in user - see SP-AT-03 and SP-AT-04
-- AC3: Sources listed in reverse chronological order — most recent first - see SP-MT-05
-- AC4: Each source shows name,type, author, and date created - see SP-MT-04
-- AC5: Each source links to its unit list page
-- AC6: Empty state shown when no sources exist, encouraging user to create one - see SP-MT-06
+
+- AC1: Only shows sources belonging to the logged-in user - see DP-AT-03 and DP-AT-04
+- AC2: Sources listed in reverse chronological order — most recent first - see DP-MT-05
+- AC3: Each source shows name,type, author, and date created - see DP-MT-04
+- AC4: Each source links to its unit list page
+- AC5: Empty state shown when no sources exist, encouraging user to create one - see DP-MT-06
 </details>
 <details>
 <summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
