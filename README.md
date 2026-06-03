@@ -55,7 +55,7 @@ Acceptance Criteria:
 - Toggler is visible on mobile and hidden on desktop → RES-MT-04
 - Sidebar sits below the navbar on all screen sizes → RES-MT-07
 - No horizontal scrolling on any screen size → RES-MT-01
-</details>  
+</details>
 20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
 
 - **CRUD Functionality Theme**
@@ -276,6 +276,12 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 ### Internationalisation (i18n)
 While overriding allauth templates, I came across the i18n library and had to decide whether to implement it across all my templates or remove it from the authentication ones for consistency. Although a note-taking app would benefit from it, this being my first Django project, I considered internationalisation an unnecessary overhead at this stage and added it to the future features list instead.
 
+
+## Accessibility
+## Accessibility
+- The offcanvas sidebar includes a visually hidden heading so screen readers can identify the region when it opens.
+- The sidebar's top offset and height are calculated at runtime via JavaScript rather than hardcoded, so the layout remains correct if a user increases their font size or zoom level.
+
 ## Features
 ### Security and Data Protection Features:
 - Rate limiting (control of how many requests a user/IP can make to an app within a certain time period) provided by Django allauth;
@@ -310,3 +316,7 @@ While overriding allauth templates, I came across the i18n library and had to de
 4. In the Search box start typing the name of your project and choose it from the list displayed;
 5. Scroll to the bottom of the page and click Deploy Branch to start a manual deployment of the main branch.
 6. Click on Open App to view your deployed project;
+
+
+## Technologies Used
+- SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependency.
