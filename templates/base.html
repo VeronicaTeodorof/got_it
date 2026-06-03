@@ -28,9 +28,9 @@
     <header>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg">
-            <div class="container">
+            <div class="container-fluid">
                 <!-- Logo on the left -->
-                <a  class="nav-link" href="{% url 'home' %}">got it?</a>
+                <a  class="navbar-brand me-auto" href="{% url 'home' %}"><img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" height="65"></a>
                 <!-- 'd-flex flex-row' added to force horizontal layout -->
                 <ul class="navbar-nav d-flex flex-row">
                     <li class="nav-item"><a class="nav-link px-2" href="{% url 'home'%}">Home</a></li>
