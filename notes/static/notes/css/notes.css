@@ -1,0 +1,18 @@
+/* || CSS VARIABLES */
+:root {
+  /* Fallback value overwritten by JavaScript at runtime with the navbar's actual rendered height */
+  --navbar-height: 56px;
+}
+
+/* || LAYOUT */
+
+/* Sidebar: offset from top and reduced height to sit below the navbar */
+#sideNavbar {
+  --bs-offcanvas-width: 280px;
+  height: calc(100vh - var(--navbar-height));
+  top: var(--navbar-height);
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-top-right-radius: 5px;
+
+}

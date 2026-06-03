@@ -12,6 +12,7 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
 </head>
 <body>
     <!-- Understanding request.user.is_authenticated, given to me by Claude AI:-->
@@ -30,28 +31,25 @@
             <div class="container">
                 <!-- Logo on the left -->
                 <a  class="nav-link" href="{% url 'home' %}">got it?</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-                               aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
-                        {% if request.user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
-                            <li>
-                                <form method="POST" action="{% url 'account_logout' %}">
-                                    {% csrf_token %}
-                                    <button class="btn btn-link nav-link" type="submit">Log out</button>
+                <!-- 'd-flex flex-row' added to force horizontal layout -->
+                <ul class="navbar-nav d-flex flex-row">
+                    <li class="nav-item"><a class="nav-link px-2" href="{% url 'home'%}">Home</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link px-2" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li>
+                            <form method="POST" action="{% url 'account_logout' %}">
+                                {% csrf_token %}
+                                <button class="btn btn-link nav-link px-2" type="submit">Log out</button>
                                 </form>
-                            </li>
-                        {% else %}
-                            <li class="nav-item"><a class="nav-link" href="{% url 'account_login'%}">Sign In</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
-                        {% endif %}
-                    </ul>
-                </div>
-
+                        </li>
+                    {% else %}
+                        <li class="nav-item px-1"><a class="nav-link" href="{% url 'account_login'%}">Sign In</a></li>
+                        <li class="mx-1">
+                            <div class="vr h-100 opacity-100"></div>
+                        </li>
+                        <li class="nav-item px-1"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+                    {% endif %}
+                </ul>
             </div>
         </nav>
     </header>
