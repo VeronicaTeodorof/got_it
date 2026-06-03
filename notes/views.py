@@ -12,24 +12,17 @@ from django.http import JsonResponse
 @never_cache
 @login_required
 def dashboard(request):
-    return render(request, 'notes/dashboard.html')
-
-
-def home(request):
-    return render(request, 'notes/index.html')
-
-
-@login_required
-def sources_list(request):
     """
     Retrieve and display a list of sources belonging to the current user.
     """
     # Filter by user first, then order —
     # chained to avoid overwriting the user filter
-    sources = Source.objects.filter(user=request.user).order_by(
-        '-source_creation_date'
-        )
-    return render(request, 'notes/sources.html', {'sources': sources})
+    sources = Source.objects.filter(user=request.user).order_by('-source_creation_date')
+    return render(request, 'notes/dashboard.html', {'sources': sources})
+
+
+def home(request):
+    return render(request, 'notes/index.html')
 
 
 @login_required
