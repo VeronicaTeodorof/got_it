@@ -135,10 +135,13 @@
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|--------|-------|------------|
-| RES-MT-01 | Navbar on mobile | Burger menu shows, links hidden | As expected | Pass | Pass |
-| RES-MT-02 | Clicking burger on mobile | Links expand below navbar | As expected | Pass | Pass |
-| RES-MT-03 | Navbar on desktop | All links visible, no burger | As expected | Pass | Pass |
-| RES-MT-04 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | Pass |
+| RES-MT-01 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | Pass |
+| RES-MT-02 | Sidebar visible by default on desktop | Sidebar displayed as a permanent fixture in the layout | As expected | Pass | |
+| RES-MT-03 | Sidebar hidden by default on mobile | Sidebar hidden by default on mobile | As expected | Pass | |
+| RES-MT-04 | Toggler visible on mobile, hidden on desktop | Toggler visible on mobile, hidden on desktop | As expected | Pass | |
+| RES-MT-05 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
+| RES-MT-06 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
+| RES-MT-07 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
 
 
 ## Automated Testing (AT)

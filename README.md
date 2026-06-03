@@ -46,7 +46,16 @@ Acceptance Criteria:
 16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
 17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
 18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
-19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.
+<details>
+<summary>19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
+
+Acceptance Criteria:
+- Sidebar is visible by default on desktop → RES-MT-02
+- Sidebar is hidden by default on mobile and can be opened via the toggler → RES-MT-03, RES-MT-05
+- Toggler is visible on mobile and hidden on desktop → RES-MT-04
+- Sidebar sits below the navbar on all screen sizes → RES-MT-07
+- No horizontal scrolling on any screen size → RES-MT-01
+</details>  
 20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
 
 - **CRUD Functionality Theme**
