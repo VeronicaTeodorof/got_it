@@ -15,28 +15,6 @@ def dashboard(request):
     """
     Retrieve and display a list of sources belonging to the current user.
     """
-    # Filter by user first, then order —
-    # chained to avoid overwriting the user filter
-    sources = Source.objects.filter(user=request.user).order_by(
-        '-source_creation_date'
-        )
-    return render(request, 'notes/dashboard.html', {'sources': sources})
-
-
-def home(request):
-    return render(request, 'notes/index.html')
-
-
-@login_required
-def source_detail(request, source_pk):
-    """Retrieve and display a single source belonging to the current user."""
-
-    source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    return render(request, "notes/source_detail.html", {"source": source})
-
-
-@login_required
-def create_source(request):
     # if this is a POST request we need to process the form data
     if request.method == "POST":
         # create a form instance and populate it with data from the request:
@@ -50,7 +28,26 @@ def create_source(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SourceForm()
-    return render(request, "notes/create_source.html", {"form": form})
+    # Filter by user first, then order —
+    # chained to avoid overwriting the user filter
+    sources = Source.objects.filter(user=request.user).order_by(
+        '-source_creation_date'
+        )
+    return render(
+        request, 'notes/dashboard.html', {'form': form, 'sources': sources}
+        )
+
+
+def home(request):
+    return render(request, 'notes/index.html')
+
+
+@login_required
+def source_detail(request, source_pk):
+    """Retrieve and display a single source belonging to the current user."""
+
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    return render(request, "notes/source_detail.html", {"source": source})
 
 
 @login_required

@@ -72,6 +72,18 @@
 | DP-MT-06 | Empty state shown when no sources exist | Empty state shown when no sources exist | As expected | Pass | |
 
 
+### Create Source
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| DP-MT-03 | User can enter a source name and a source author | User can enter a source name and a source author | As expected | Pass | |
+| DP-MT-04 | User should select a source type from the available options | User should select a source type from the available options | Pass | |
+| DP-MT-05 | Name field cannot be empty — error shown if submitted blank | Name field cannot be empty — error shown if submitted blank | As expected | Pass | |
+| DP-MT-06 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
+| DP-MT-07 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
+| DP-MT-08 | Duplicate name error | Submitting a source with an already existing name returns a form error | Raises Integrity Error | Fai | |
+
 ### Sign Up Page
 
 
@@ -104,20 +116,6 @@
 | SDP-MT-03 | Page only accessible to the source owner — another logged-in user gets a 404 | User with no sources created visits /sources/10/ gets 404 page | As expected | Pass | |
 | SDP-MT-04 | If source does not exist, return 404  | User with ten sources created visits /sources/11/ gets 404 | As expected | Pass | |
 | SDP-MT-05 | Source name and author displayed | Source name and author displayed | As expected | Pass | |
-
-
-### Create Source Page
-
-
-| Test ID | Test | Expected | Actual |Local | Deployment |
-|---------|------|----------|-------|-------|------------|
-| CSP-MT-01 | Logged in user visits '/sources/create_source/' | Page loads with no errors | Pass | |
-| CSP-MT-02 | Unauthenticated user visits '/sources/create_source/' | User is redirected to login page | Pass | |
-| CSP-MT-03 | User can enter a source name and a source author | User can enter a source name and a source author | As expected | Pass | |
-| CSP-MT-04 | User should select a source type from the available options | User should select a source type from the available options | Pass | |
-| CSP-MT-05 | Name field cannot be empty — error shown if submitted blank | Name field cannot be empty — error shown if submitted blank | As expected | Pass | |
-| CSP-MT-06 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
-| CSP-MT-07 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
 
 
 ### Edit Source Page
@@ -173,12 +171,26 @@
 
 ### Dashboard Page
 
+### Access Control
+
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | DP-AT-01 | test_authenticated_user_gets_200 | Authenticated user can access sources page | Pass |
 | DP-AT-02 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
+
+### Sources List
+
 | DP-AT-03 | test_user_sees_own_sources | User's own sources appear in context | Pass |
 | DP-AT-04 | test_user_cannot_see_another_users_sources | Another user's sources do not appear in context | Pass |
+
+### Create Source
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| DP-AT-05 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
+| DP-AT-06 | test_authenticated_user_can_access_create_source_page | Authenticated user can access create source page | Pass |
+| DP-AT-07 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page |Pass |
+| DP-AT-08 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Fail |
 
 
 ### Source Detail Page
@@ -189,16 +201,6 @@
 | SDP-AT-02 | test_authenticated_user_can_see_own_source | Page loads with correct template and context | Pass |
 | SDP-AT-03 | test_user_cannot_access_another_users_source | Another user's source returns 404 | Pass |
 | SDP-AT-04 | test_nonexistent_source_returns_404 | Nonexistent source returns 404 | Pass |
-
-
-### Create Source Page
-
-| Test ID | Test | Covers | Result |
-|---------|------|--------|--------|
-| CSP-AT-01 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
-| CSP-AT-02 | test_authenticated_user_can_access_create_source_page | Authenticated user can access create source page | Pass |
-| CSP-AT-03 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page |Pass |
-| CSP-AT-04 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Pass |
 
 
 ## Known Bugs
@@ -227,7 +229,7 @@
 **Commit:** `1c35a47`
 
 
-### SP - User with no sources created sees another user's sources instead of empty state (SP-MT-06)
+### DP - User with no sources created sees another user's sources instead of empty state (DP-MT-06)
 
 **Description:** When manually testing whether a user with no sources sees the empty page with a message encouraging them to create one, another user's sources were visible instead.
 
@@ -245,3 +247,12 @@ def sources_list(request):
 </pre>
 
 **Fix:** Chained `.filter(user=request.user)` with `.order_by()` in the queryset.
+
+
+### DP test_duplicate_source_name_raises_error fails (DP-AT-08)
+**Description:** Automated test fails and raises Integrity Error at database level, instead of returning a 200 status code wit a form error.
+
+**Verified manually:** Confirmed in browser — submitting a duplicate source name at `/dashboard/` raised an unhandled `IntegrityError` before the fix.  
+[Unhandled Integrity Error](testing_screenshots/dp-mt-08.png)
+
+

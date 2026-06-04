@@ -47,15 +47,27 @@
                     <ul class="nav flex-column">
                         <li class="nav-item d-flex">
                             <a class="nav-link" href="{% url 'dashboard' %}">Sources</a>
-                            <a class="nav-link ps-0" href="{% url 'create-source' %}" title="Add source">+</a>
+                            <a class="nav-link ps-0" href="{% url 'dashboard' %}" title="Add source">+</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
+
+        <!-- Main -->
         <div class="flex-grow-1 p-3">
             {% block dashboard_content %}
                 <h1>Sources</h1>
+
+                <!-- Create Source -->
+                <h2>Create source</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Save</button>
+                </form>
+
+                <!-- Sources List -->
                 <ul class="list-group">
                     {% for source in sources %}
                         <li class="list-group-item">
