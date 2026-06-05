@@ -83,6 +83,7 @@
 | DP-MT-10 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
 | DP-MT-11 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
 | DP-MT-12 | Duplicate name error | Submitting a source with an already existing name returns a form error | Raises Integrity Error | Pass | |
+| DP-MT-13 | Expandable form | When create source button is clicked, form expands/collapses | As expected | Pass| |
 
 ### Sign Up Page
 
