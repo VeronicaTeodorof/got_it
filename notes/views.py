@@ -17,8 +17,11 @@ def dashboard(request):
     """
     # if this is a POST request we need to process the form data
     if request.method == "POST":
-        # create a form instance and populate it with data from the request:
-        form = SourceForm(request.POST)
+        # create a form instance and populate it with data from the request
+        # user=request.user is passed in as a keyword argument because
+        # there are many optional arguments that could be passed and here those
+        # ones are skipped
+        form = SourceForm(request.POST, user=request.user)
         # check whether it's valid:
         if form.is_valid():
             source = form.save(commit=False)
@@ -27,7 +30,7 @@ def dashboard(request):
             return redirect('source-detail', source_pk=source.pk)
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = SourceForm()
+        form = SourceForm(user=request.user)
     # Filter by user first, then order —
     # chained to avoid overwriting the user filter
     sources = Source.objects.filter(user=request.user).order_by(

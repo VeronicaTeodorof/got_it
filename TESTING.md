@@ -77,12 +77,12 @@
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| DP-MT-03 | User can enter a source name and a source author | User can enter a source name and a source author | As expected | Pass | |
-| DP-MT-04 | User should select a source type from the available options | User should select a source type from the available options | Pass | |
-| DP-MT-05 | Name field cannot be empty — error shown if submitted blank | Name field cannot be empty — error shown if submitted blank | As expected | Pass | |
-| DP-MT-06 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
-| DP-MT-07 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
-| DP-MT-08 | Duplicate name error | Submitting a source with an already existing name returns a form error | Raises Integrity Error | Fai | |
+| DP-MT-07 | User can enter a source name and a source author | User can enter a source name and a source author | As expected | Pass | |
+| DP-MT-08 | User should select a source type from the available options | User should select a source type from the available options | Pass | |
+| DP-MT-09 | Name field cannot be empty — error shown if submitted blank | Name field cannot be empty — error shown if submitted blank | As expected | Pass | |
+| DP-MT-10 | Source type has to be selected - error shown if not selected | Source type has to be selected - error shown if not selected | As expected | Pass | |
+| DP-MT-11 | On successful creation user is redirected to the new source detail page | On successful creation user is redirected to the new source detail page | Pass | |
+| DP-MT-12 | Duplicate name error | Submitting a source with an already existing name returns a form error | Raises Integrity Error | Pass | |
 
 ### Sign Up Page
 
@@ -187,10 +187,8 @@
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
-| DP-AT-05 | test_unauthenticated_user_is_redirected | Unauthenticated user is redirected to login | Pass |
-| DP-AT-06 | test_authenticated_user_can_access_create_source_page | Authenticated user can access create source page | Pass |
-| DP-AT-07 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page |Pass |
-| DP-AT-08 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Fail |
+| DP-AT-05 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page |Pass |
+| DP-AT-06 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Pass |
 
 
 ### Source Detail Page
@@ -249,10 +247,14 @@ def sources_list(request):
 **Fix:** Chained `.filter(user=request.user)` with `.order_by()` in the queryset.
 
 
-### DP test_duplicate_source_name_raises_error fails (DP-AT-08)
+### DP test_duplicate_source_name_raises_error fails (DP-AT-06)
 **Description:** Automated test fails and raises Integrity Error at database level, instead of returning a 200 status code wit a form error.
 
-**Verified manually:** Confirmed in browser — submitting a duplicate source name at `/dashboard/` raised an unhandled `IntegrityError` before the fix.  
+**Verified manually:** Confirmed in browser — submitting a duplicate source name at `/dashboard/` raised an unhandled `IntegrityError` before the fix.
 [Unhandled Integrity Error](testing_screenshots/dp-mt-08.png)
+
+**Cause:** Missing form-level validation — duplicate data passed `form.is_valid()` and reached the database, which rejected it with an `Integrity Error`.
+
+**Fix:** Added `__init__` to `SourceForm` to accept `user` as a keyword argument; updated dashboard view to pass `user=request.user` to the form; added `clean()` to validate duplicate source names per user before saving.
 
 

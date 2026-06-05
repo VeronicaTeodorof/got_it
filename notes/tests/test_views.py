@@ -109,7 +109,27 @@ class DashboardViewTest(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertIn(
-            'error', response.context['form']['name'].errors.as_text()
+            'You already have a source with this name.',
+            response.context['form']['source_name'].errors.as_text()
+        )
+
+    def test_source_saved_with_correct_user(self):
+        """Source is saved with the correct user"""
+        self.client.force_login(self.user)
+        self.client.post(reverse('dashboard'), data=self.form_data)
+        source = Source.objects.get(source_name='Name')
+        self.assertEqual(self.user, source.user)
+
+    def test_valid_submission_creates_source(self):
+        """Valid submission creates source
+        and redirects to source detail page"""
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('dashboard'), data=self.form_data
+            )
+        source = Source.objects.get(source_name='Name')
+        self.assertRedirects(
+            response, reverse('source-detail', kwargs={'source_pk': source.pk})
             )
 
 
@@ -162,35 +182,3 @@ class SourceDetailViewTest(TestCase):
             reverse('source-detail', args=[self.source.pk])
             )
         self.assertEqual(response.status_code, 404)
-
-
-class CreateSourceViewTest(TestCase):
-    """Tests for create source page"""
-    def setUp(self):
-        """Create test user"""
-        self.user = User.objects.create_user(
-            username='user', email="user@testing.com", password="test")
-        self.form_data = {
-            'source_name': 'Name',
-            'source_author': 'Author',
-            'source_type': 'book'
-        }
-
-    def test_valid_submission_creates_source(self):
-        """Valid submission creates source
-        and redirects to source detail page"""
-        self.client.force_login(self.user)
-        response = self.client.post(
-            reverse('dashboard'), data=self.form_data
-            )
-        source = Source.objects.get(source_name='Name')
-        self.assertRedirects(
-            response, reverse('source-detail', kwargs={'source_pk': source.pk})
-            )
-
-    def test_source_saved_with_correct_user(self):
-        """Source is saved with the correct user"""
-        self.client.force_login(self.user)
-        self.client.post(reverse('create-source'), data=self.form_data)
-        source = Source.objects.get(source_name='Name')
-        self.assertEqual(self.user, source.user)

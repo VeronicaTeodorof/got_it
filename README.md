@@ -100,14 +100,12 @@ Acceptance Criteria:
 </summary>
 Acceptance Criteria:
 
-- AC1: Only accessible to logged-in users -see CSP-AT-01, CSP-AT-02, CSP-MT-01 and CSP-MT-02
-- AC2: User can enter a source name and a source author - see CSP-MT-03;
-- AC3: User should select a source type from the available options - see CSP-MT-04;
-- AC4: Name field cannot be empty — error shown if submitted blank - see CSP-MT-05;
-- AC5: Source type has to be selected - error shown if not selected - see CSP-MT-06;
-- AC6: On successful creation user is redirected to the new source detail page - see CSP-AT-03
-- AC7: Source is only visible to the user who created it - see SDP-AT-04 and SDP-MT-04
-- AC10: A user cannot create two sources with the same name, an error is shown if they try - see CSP-AT-04
+- AC1: User can enter a source name and a source author - see DP-MT-07;
+- AC2: User should select a source type from the available options - see DP-MT-08;
+- AC3: Name field cannot be empty — error shown if submitted blank - see DP-MT-09;
+- AC4: Source type has to be selected - error shown if not selected - see DP-MT-10;
+- AC5: On successful creation user is redirected to the new source detail page - see DP-MT-11
+- AC6: A user cannot create two sources with the same name, an error is shown if they try - see DP-MT-12 and DP-AT-06
 </details>
 
 27. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
