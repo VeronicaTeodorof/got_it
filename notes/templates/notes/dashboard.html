@@ -10,64 +10,65 @@
 {% block content %}
 <!-- Main-->
 <div class="container-fluid">
-    <div class="d-flex">
 
-        <!--Side Navbar -->
-        <!-- Main Wrapper -->
-        <div>
-            <!-- Custom Toggler Button from Bootstrap Icons-->
-            <div class="d-flex d-lg-none justify-content-start p-2">
-                <button class="btn p-2 border-0"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#sideNavbar"
-                    aria-controls="sideNavbar"
-                    aria-label="Open sidebar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Sidebar Content -->
-            <div class="offcanvas-md offcanvas-start" tabindex="-1" id="sideNavbar" aria-labelledby="sidebarLabel">
-                <div class="offcanvas-header">
-                    <!-- Visually hidden heading for accessibility: screen readers use aria-labelledby to
-                    announce the offcanvas region by its heading when it opens, so users who can't
-                    see the screen know what the panel is for. The Bootstrap "visually-hidden" class
-                    removes the element from view (using absolute positioning and rendering it invisibly small)
-                    without removing it from the accessibility tree, so screen readers can still read it. -->
-                    <h5 class="visually-hidden" id="sidebarLabel">Site navigation</h5>
-                    <button type="button" class="border-0 bg-transparent ms-auto" data-bs-dismiss="offcanvas" data-bs-target="#sideNavbar" aria-label="Close sidebar">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="nav flex-column">
-                        <li class="nav-item d-flex">
-                            <a class="nav-link" href="{% url 'dashboard' %}">Sources</a>
-                            <a class="nav-link ps-0" href="{% url 'dashboard' %}" title="Add source">+</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <!--Side Navbar -->
+    <div class="d-none offcanvas-start" tabindex="-1" id="sideNavbar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+            <!-- Visually hidden heading for accessibility: screen readers use aria-labelledby to
+            announce the offcanvas region by its heading when it opens, so users who can't
+            see the screen know what the panel is for. The Bootstrap "visually-hidden" class
+            removes the element from view (using absolute positioning and rendering it invisibly small)
+            without removing it from the accessibility tree, so screen readers can still read it. -->
+            <h5 class="visually-hidden" id="sidebarLabel">Site navigation</h5>
+            <button type="button" class="border-0 bg-transparent ms-auto" data-bs-dismiss="offcanvas" data-bs-target="#sideNavbar" aria-label="Close sidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                </svg>
+            </button>
         </div>
+        <div class="offcanvas-body">
+            {% block sidebar_content %}
+            <!--Remove after copying on source_detail page -->
+            <!-- <ul class="nav flex-column">
+                <li class="nav-item d-flex">
+                    <a class="nav-link" href="{% url 'dashboard' %}">Sources</a>
+                    <a class="nav-link ps-0" href="{% url 'dashboard' %}" title="Add source">+</a>
+                </li>
+            </ul> -->
+            {% endblock %}
+        </div>
+    </div>
 
-        <!-- Main -->
-        <div class="flex-grow-1 p-3 m-3">
-            {% block dashboard_content %}
-                <h1>Sources</h1>
+    <!-- Main -->
+    <main class="p-2 p-md-3">
+        <!-- Remove after copying on source_detail page -->
+        <!-- Custom Toggler Button from Bootstrap Icons-->
+        <!-- <div class="d-flex d-lg-none justify-content-start p-2">
+            <button class="btn p-2 border-0"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#sideNavbar"
+                aria-controls="sideNavbar"
+                aria-label="Open sidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                </svg>
+            </button>
+        </div> -->
 
-                <!-- Create Source -->
+        {% block dashboard_content %}
+            <h1 class="visually-hidden">Sources</h1>
+
+            <!-- Create Source -->
+            <section>
+                <h2 class="visually-hidden">Create Source</h2>
                 <div class="m-3">
                     <button class="btn btn-primary"
-                                   type="button"
-                                   data-bs-toggle="collapse"
-                                   data-bs-target="#create-source-form"
-                                   aria-expanded="false"
-                                   aria-controls="create-source-form">
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#create-source-form"
+                        aria-expanded="false"
+                        aria-controls="create-source-form">
                         Create source
                     </button>
                 </div>
@@ -76,26 +77,44 @@
                         <form method="post">
                             {% csrf_token %}
                             {{ form|crispy }}
-                            <button type="submit" class="btn btn-primary m-2">Save</button>
+                        <button type="submit" class="btn btn-primary m-2">Save</button>
                         </form>
                     </div>
                 </div>
+            </section>
 
-                <!-- Sources List -->
+            <!-- Sources List -->
+            <section>
+                <h2 class="visually-hidden">Your Sources</h2>
                 <ul class="list-group">
                     {% for source in sources %}
-                        <li class="list-group-item">
+                        <li class="list-group-item d-flex align-items-center justify-content-between">
                             <a href="{% url 'source-detail' source.pk %}">
-                            {{ source }} - {{ source.get_source_type_display }} - {{ source.source_creation_date|date:"d M Y" }}
+                                {{ source }}
+                                <span class="d-none d-md-inline">- {{ source.get_source_type_display }}
+                                    - {{ source.source_creation_date|date:"d M Y" }}
+                                </span>
                             </a>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    ...
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><button class="dropdown-item" type="button">Edit</button></li>
+                                    <li><button class="dropdown-item" type="button">Delete</button></li>
+                                </ul>
+                            </div>
                         </li>
                     {% empty %}
                         <p>No sources yet. Add one to get started.</p>
                     {% endfor %}
                 </ul>
-            {% endblock %}
-        </div>
-    </div>
+            </section>
+        {% endblock %}
+    </main>
 </div>
 {% endblock %}
 
