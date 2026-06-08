@@ -85,6 +85,23 @@
 | DP-MT-12 | Duplicate name error | Submitting a source with an already existing name returns a form error | Raises Integrity Error | Pass | |
 | DP-MT-13 | Expandable form | When create source button is clicked, form expands/collapses | As expected | Pass| |
 
+
+### Edit Source
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| DP-MT-14 | Unauthenticated user navigates directly to edit URL | Visiting /sources/9/edit/ redirects to login page | As expected | Pass | |
+| DP-MT-15 | Authenticated user navigates directly to edit URL for another user's source | 404 returned | As expected | Pass | |
+| DP-MT-16 | Owner edits source name, author, and type and submits | Changes saved and visible on dashboard page | As expected | Pass | |
+| DP-MT-17 | Owner submits edit form with name field empty | Form rejected, error shown | As expected | Pass | |
+| DP-MT-18 | Owner submits valid edit form | Redirected to source dashboard page | As expected | Pass | |
+| DP-MT-19 | Owner submits edit form with no type selected | Form rejected, error shown | As expected | Pass | |
+| DP-MT-20 | Edit button correctly displayed in the dropdown when clicked | Dropdown button displays the edit button when clicked | As expected | Pass |
+| DP-MT-21 | Clicking edit button expands edit form | Edit form correctly displayed under source when edit button is clicked | As expected | Pass | |
+| DP-MT-22 | Clicking edit button expands only corresponding form, not all forms | Only the form under the targeted source is expanded when edit button is clicked |As expected | Pass | |
+| DP-MT-23 | Edit form correctly prepopulated with corresponding data | Edit form displays the correct data in all its fields | As expected | Pass |
+| DP-MT-24 | Cancel button on form correctly collapses the form | Form collapses when cancel is clicked | As expected | Pass | |
+
 ### Sign Up Page
 
 
@@ -118,17 +135,6 @@
 | SDP-MT-04 | If source does not exist, return 404  | User with ten sources created visits /sources/11/ gets 404 | As expected | Pass | |
 | SDP-MT-05 | Source name and author displayed | Source name and author displayed | As expected | Pass | |
 
-
-### Edit Source Page
-
-| Test ID | Test | Expected | Actual | Local | Deployment |
-|---------|------|----------|--------|-------|------------|
-| ESP-MT-01 | Unauthenticated user navigates directly to edit URL | Visiting /sources/9/edit/ redirects to login page | As expected | Pass | |
-| ESP-MT-02 | Authenticated user navigates directly to edit URL for another user's source | 404 returned | As expected | Pass | |
-| ESP-MT-03 | Owner edits source name, author, and type and submits | Changes saved and visible on source detail page | As expected | Pass | |
-| ESP-MT-04 | Owner submits edit form with name field empty | Form rejected, error shown | As expected | Pass | |
-| ESP-MT-05 | Owner submits valid edit form | Redirected to source detail page | As expected | Pass | |
-| ESP-MT-06 | Owner submits edit form with no type selected | Form rejected, error shown | As expected | Pass | |
 
 ### Responsiveness
 
@@ -192,6 +198,13 @@
 | DP-AT-06 | test_duplicate_source_name_raises_error | duplicate name for same user returns 200 and raises error | Pass |
 
 
+### Edit Source
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| DP-AT-07 | test_authenticated_user_gets_404_for_another_user_source | Authenticated user cannot access another user's source | Pass |
+
+
 ### Source Detail Page
 
 | Test ID | Test | Covers | Result |
@@ -203,6 +216,8 @@
 
 
 ## Known Bugs
+### Edit cancel button preserves state in DOM
+**Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
 
 
 ## Solved Bugs

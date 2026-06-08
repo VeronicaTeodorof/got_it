@@ -132,6 +132,21 @@ class DashboardViewTest(TestCase):
             response, reverse('source-detail', kwargs={'source_pk': source.pk})
             )
 
+    def test_source_forms_is_passed_in_context(self):
+        """Context includes source_forms"""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('dashboard'))
+        self.assertIn('source_forms', response.context)
+
+    def test_prepopulated_data_in_edit_form_matches_source(self):
+        """Correct data prepopulates the fields in an edit form"""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('dashboard'))
+        source_forms = response.context['source_forms']
+        source, form = source_forms[0]
+        self.assertEqual(self.source, source)
+        self.assertEqual(form.instance, self.source)
+
 
 class SourceDetailViewTest(TestCase):
     """Tests for source detail page"""
@@ -182,3 +197,89 @@ class SourceDetailViewTest(TestCase):
             reverse('source-detail', args=[self.source.pk])
             )
         self.assertEqual(response.status_code, 404)
+
+
+class EditSourceViewTest(TestCase):
+    """
+    Tests for the edit_source view.
+    """
+    def setUp(self):
+        """Creates temporary user"""
+        self.user = User.objects.create_user(
+            email='something.com', password='test',  username='tester',
+            )
+        self.user2 = User.objects.create_user(
+            username='tester2', password='example'
+            )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='name',
+            source_type='book'
+        )
+        self.form_data = {
+            'source_name': 'Name2',
+            'source_author': 'Author',
+            'source_type': 'book'
+        }
+
+    def test_authenticated_owner_gets_200(self):
+        """Authenticated user requesting to edit their
+        source gets a 200 status code.
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'edit_source', args=[self.source.pk]
+            ))
+        self.assertEqual(response.status_code, 200)
+
+    def test_authenticated_user_gets_404_for_another_user_source(self):
+        """Authenticated user trying to edit a source
+        that does not belong to them gets 404.
+        """
+        self.client.force_login(self.user2)
+        response = self.client.get(reverse(
+            'edit_source', args=[self.source.pk]
+            ))
+        self.assertEqual(response.status_code, 404)
+
+    def test_authenticated_user_gets_404_for_missing_source(self):
+        """
+        Authenticated user trying to edit a source that is missing
+        gets 404.
+        """
+        self.client.force_login(self.user)
+        pk = self.source.pk
+        self.source.delete()
+        response = self.client.get(reverse(
+            'edit_source', args=[pk]
+            ))
+        self.assertEqual(response.status_code, 404)
+
+    def test_valid_edit_submission_redirects_to_dashboard(self):
+        """
+        User is redirected to dashboard
+        after successfully editing their source
+        """
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('edit_source', args=[self.source.pk]), data=self.form_data
+            )
+        self.assertEqual(response.status_code, 302)
+
+    def test_form_is_passed_in_context(self):
+        """Context includes form"""
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'edit_source', args=[self.source.pk]
+            ))
+        self.assertIn('form', response.context)
+
+    def test_correct_template_is_used(self):
+        """
+        Correct template is given in response
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(
+            reverse('edit_source', args=[self.source.pk]
+                    ))
+        self.assertTemplateUsed(response, 'notes/dashboard.html')

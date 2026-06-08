@@ -3,7 +3,6 @@ from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Source
 from .forms import SourceForm
-from django.http import JsonResponse
 
 
 # Create your views here.
@@ -36,8 +35,16 @@ def dashboard(request):
     sources = Source.objects.filter(user=request.user).order_by(
         '-source_creation_date'
         )
+    # Creates a list of prepopulated forms, one per source
+    forms = [SourceForm(instance=source) for source in sources]
+    # Creates a list of source, form tuples
+    # pairing each source with its corresponding prepopulated form
+    # to be passed to the context
+    source_forms = list(zip(sources, forms))
     return render(
-        request, 'notes/dashboard.html', {'form': form, 'sources': sources}
+        request,
+        'notes/dashboard.html',
+        {'form': form, 'sources': sources, 'source_forms': source_forms}
         )
 
 
@@ -63,12 +70,18 @@ def edit_source(request, source_pk):
         form = SourceForm(request.POST, instance=source)
         if form.is_valid():
             form.save()
-            return JsonResponse({'success': True})
+            return redirect('dashboard')
+
+        return render(
+            request,
+            'notes/dashboard.html',
+            {'form': form, 'source': source}
+            )
     # Instantiate the form with the fetched source
     form = SourceForm(instance=source)
     return render(
         request,
-        'notes/edit_source_form.html',
+        'notes/dashboard.html',
         {'form': form, 'source': source}
         )
 
