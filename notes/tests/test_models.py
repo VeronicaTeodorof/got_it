@@ -1,7 +1,8 @@
 from django.test import TestCase
-from notes.models import Source
+from notes.models import Source, Unit
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.core.exceptions import ValidationError
 
 
 class SourceModelTest(TestCase):
@@ -42,3 +43,34 @@ class SourceModelTest(TestCase):
 
     def test_source_type_displays_correctly(self):
         self.assertEqual(self.source.get_source_type_display(), 'Book')
+
+
+class UnitModelTest(TestCase):
+    """Tests for Unit Model"""
+
+    def setUp(self):
+        """
+        Creates user, source and unit instances for the unit model tests
+        """
+        self.user = User.objects.create_user(
+            username='tester',
+            password='test'
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='test_source',
+            source_author='author',
+            source_type='book'
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='test_unit'
+        )
+
+        def test_duplicate_unit_name_raises_error(self):
+            """
+            Creating a new unit with a duplicate name raises error
+            """
+            unit2 = Unit(source=self.source, unit_name='test_unit')
+            with self.assertRaises(ValidationError):
+                unit2.full_clean()

@@ -57,3 +57,28 @@ class Source(models.Model):
                 name='valid_source_type'
             )
         ]
+
+
+class Unit(models.Model):
+    """
+    A unit created by the user inside a source,
+    a second level container.
+    """
+    source = models.ForeignKey(
+        Source, on_delete=models.CASCADE, related_name='units'
+        )
+    unit_name = models.CharField(max_length=255)
+    unit_last_modified_date = models.DateTimeField(auto_now=True)
+    unit_order = models.PositiveIntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.unit_name
+
+    class Meta:
+        constraints = [
+            # prevents duplicate unit names per source,
+            #  enforced at database level
+            models.UniqueConstraint(
+                fields=['source', 'unit_name'], name='unique_unit_per_source'
+                )
+        ]
