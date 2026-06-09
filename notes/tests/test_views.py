@@ -320,5 +320,5 @@ class DeleteSourceView(TestCase):
         """
         self.client.force_login(self.user)
         self.source.delete()
-        response = self.client.get('/sources/800/delete')
+        response = self.client.get('/sources/800/delete/')
         self.assertEqual(response.status_code, 404)

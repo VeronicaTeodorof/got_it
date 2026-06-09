@@ -246,6 +246,15 @@
 **Automated test**
 
 Confirmed by `test_authenticated_user_gets_404_for_missing_source` - DP-AT-08 failing with `AssertionError: 301 != 404`
+Initial automated test returned 301 (redirect) due to missing trailing slash in test URL. Once corrected, test confirmed the same ValueError seen in the browser.
+
+**Root cause**
+The view had no return for GET requests which were falling through and getting a None.
+
+**Fix**
+Add return for GET requests. Both manual and automated tests now passing.
+
+**Commit:**
 
 
 
