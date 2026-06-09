@@ -110,7 +110,7 @@
 |---------|------|----------|--------|-------|------------|
 | DP-MT-25 | Authenticated user visis`sources/<non-existing-source>/delete/`| Authenticated user visits sources/800/delete/ gets 404| As expected | Pass | |
 | DP-MT-26 | Authenticated user visits `sources/<existing-source>/delete/` | Authenticated user visits `sources/<existing-source>/delete` is redirected to dashboard | Authenticated user visits existing `sources/22/delete/` is redirected to dashboard | Pass | |
-| DP-MT-27 | Unauthenticated user visits `sources/<existing-source>/delete/` | Unauthenticated user visiting `sources/<existing-source>/delete/`is redirected to login page | TypeError shown | Fail | |
+| DP-MT-27 | Unauthenticated user visits `sources/<existing-source>/delete/` | Unauthenticated user visiting `sources/<existing-source>/delete/`is redirected to login page | As expected | Pass | |
 
 ### Sign Up Page
 
@@ -220,7 +220,7 @@
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | DP-AT-08 | test_authenticated_user_gets_404_for_missing_source | Authenticated user gets 404 for inexisting source | Pass |
-| DP-AT-09 | test_unauthenticated_user_visits_source_delete_url_redirects | Unauthenticated user gets redirected to login for trying to access delete view of an existent source | Fails with TypeError | Fail | |
+| DP-AT-09 | test_unauthenticated_user_visits_source_delete_url_redirects | Unauthenticated user gets redirected to login for trying to access delete view of an existent source | Pass |
 
 
 
@@ -249,6 +249,9 @@
 **Automated test**
 
 Confirmed by `test_unauthenticated_user_visits_source_delete_url_redirects` (DP-AT-09) failing with TypeError.
+
+**Fix**
+`login_required` decorator was added, initially omitted.
 
 
 

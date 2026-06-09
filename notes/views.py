@@ -86,7 +86,7 @@ def edit_source(request, source_pk):
         {'form': form, 'source': source}
         )
 
-
+@login_required
 def delete_source(request, source_pk):
     """View for deleteSourceModal
     """
