@@ -124,13 +124,13 @@ Acceptance Criteria:
 <details>
 <summary>29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
-- AC1: Only accessible to logged-in users
-- AC2: Only accessible to the source owner — another logged-in user gets a 404
-- AC3: Deleting a source removes it from the sources list
-- AC4: User is redirected to the sources page after deletion
-- AC5: A confirmation step is required before deletion
-- AC6: source name and author appear in confirmation step to avoid confusions
-- AC7: A confimation message appears after successful deletion
+- AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page - see DP-MT-26, DP-MT-27, DP-AT-09
+- AC2: Only accessible to the source owner — another logged-in user gets a 404 see DP-MT-25 and DP-MT-26
+- AC3: Deleting a source removes it from the sources list - see DP-MT-28
+- AC4: User is redirected to the sources page after deletion - see DP-MT-28
+- AC5: A confirmation step is required before deletion - see DP-MT-29
+- AC6: Source name and author appear in confirmation step to avoid confusions - DP-MT-30
+- AC7: A confimation message appears after successful deletion - DP-MT-31
 - AC8: When a source is deleted, all its units and notes are deleted as well
 </details>
 

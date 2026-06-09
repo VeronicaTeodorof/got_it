@@ -111,6 +111,10 @@
 | DP-MT-25 | Authenticated user visis`sources/<non-existing-source>/delete/`| Authenticated user visits sources/800/delete/ gets 404| As expected | Pass | |
 | DP-MT-26 | Authenticated user visits `sources/<existing-source>/delete/` | Authenticated user visits `sources/<existing-source>/delete` is redirected to dashboard | Authenticated user visits existing `sources/22/delete/` is redirected to dashboard | Pass | |
 | DP-MT-27 | Unauthenticated user visits `sources/<existing-source>/delete/` | Unauthenticated user visiting `sources/<existing-source>/delete/`is redirected to login page | As expected | Pass | |
+| DP-MT-28 | Deleting a source removes it from sources list | Source is removed from sources list after deletion | As expected | Pass | |
+| DP-MT-29 | Confirmation is required before deleting | Clicking delete button opens a modal asking user to confirm or cancel deletion | As expected | Pass | |
+| DP-MT-30 | Confirmatiion message includes source name and author if present | Confirmation message includes source name and message if present | Pass | |
+| DP-MT-31 | Successful deletion message on dashboard after delete | Message present on dashboard after delete | As expected | Pass | |
 
 ### Sign Up Page
 
