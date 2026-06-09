@@ -108,7 +108,9 @@
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|--------|-------|------------|
-| DP-MT-25 | Trying to access inexisting source returns 404 | Visit sources/800/delete/ returns 404 | Visit sources/800/delete/ returns ValueError | Fail | |
+| DP-MT-25 | Authenticated user visis`sources/<non-existing-source>/delete/`| Authenticated user visits sources/800/delete/ gets 404| As expected | Pass | |
+| DP-MT-26 | Authenticated user visits `sources/<existing-source>/delete/` | Authenticated user visits `sources/<existing-source>/delete` is redirected to dashboard | Authenticated user visits existing `sources/22/delete/` is redirected to dashboard | Pass | |
+| DP-MT-27 | Unauthenticated user visits `sources/<existing-source>/delete/` | Unauthenticated user visiting `sources/<existing-source>/delete/`is redirected to login page | TypeError shown | Fail | |
 
 ### Sign Up Page
 
@@ -217,7 +219,8 @@
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
-| DP-AT-08 | test_authenticated_user_gets_404_for_missing_source | Authenticated user gets 404 for inexisting source | Fails with AssertionError: 301 != 404 |
+| DP-AT-08 | test_authenticated_user_gets_404_for_missing_source | Authenticated user gets 404 for inexisting source | Pass |
+| DP-AT-09 | test_unauthenticated_user_visits_source_delete_url_redirects | Unauthenticated user gets redirected to login for trying to access delete view of an existent source | Fails with TypeError | Fail | |
 
 
 
@@ -236,25 +239,16 @@
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
 
-### Visiting sources/800/delete/ returns Value Error instead of 404
-**Description** Authenticated user types sources/800/delete/ in local environment and gets ValueError.
+
+### Unauthenticated user visits `sources/<existing-source>/delete/` (DP-MT-27)
+**Description** Unauthenticated user visiting `sources/<existing-source>/delete/` (actual url `sources/22/delete`) gets TypeError instead of being redirected to login.
 
 **Evidence**
-
-[DP-MT-25 Value Error](testing_screenshots/dp-mt-25.png)
+[DP-MT-27 Value Error](testing_screenshots/dp-mt-27.png)
 
 **Automated test**
 
-Confirmed by `test_authenticated_user_gets_404_for_missing_source` - DP-AT-08 failing with `AssertionError: 301 != 404`
-Initial automated test returned 301 (redirect) due to missing trailing slash in test URL. Once corrected, test confirmed the same ValueError seen in the browser.
-
-**Root cause**
-The view had no return for GET requests which were falling through and getting a None.
-
-**Fix**
-Add return for GET requests. Both manual and automated tests now passing.
-
-**Commit:**
+Confirmed by `test_unauthenticated_user_visits_source_delete_url_redirects` (DP-AT-09) failing with TypeError.
 
 
 
@@ -310,5 +304,26 @@ def sources_list(request):
 **Cause:** Missing form-level validation — duplicate data passed `form.is_valid()` and reached the database, which rejected it with an `Integrity Error`.
 
 **Fix:** Added `__init__` to `SourceForm` to accept `user` as a keyword argument; updated dashboard view to pass `user=request.user` to the form; added `clean()` to validate duplicate source names per user before saving.
+
+
+### Visiting sources/800/delete/ returns Value Error instead of 404
+**Description** Authenticated user types sources/800/delete/ in local environment and gets ValueError.
+
+**Evidence**
+
+[DP-MT-25 Value Error](testing_screenshots/dp-mt-25.png)
+
+**Automated test**
+
+Confirmed by `test_authenticated_user_gets_404_for_missing_source` - DP-AT-08 failing with `AssertionError: 301 != 404`
+Initial automated test returned 301 (redirect) due to missing trailing slash in test URL. Once corrected, test confirmed the same ValueError seen in the browser.
+
+**Root cause**
+The view had no return for GET requests which were falling through and getting a None.
+
+**Fix**
+Add return for GET requests. Both manual and automated tests now passing.
+
+**Commit:** `1b4bcdd`
 
 

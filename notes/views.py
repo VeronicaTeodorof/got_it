@@ -92,7 +92,6 @@ def delete_source(request, source_pk):
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     if request.method == 'POST':
-        source = get_object_or_404(Source, pk=source_pk, user=request.user)
         source.delete()
         messages.success(request, "Source deleted successfully!")
     return redirect('dashboard')

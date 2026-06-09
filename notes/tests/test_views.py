@@ -322,3 +322,13 @@ class DeleteSourceView(TestCase):
         self.source.delete()
         response = self.client.get('/sources/800/delete/')
         self.assertEqual(response.status_code, 404)
+
+    def test_unauthenticated_user_visits_source_delete_url_redirects(self):
+        """
+        Unauthenticated user requests delete url of an existing source and
+        gets redirected to login page
+        """
+        response = self.client.get(reverse(
+            'delete_source', args=[self.source.pk]
+            ))
+        self.assertEqual(response.status_code, 302)
