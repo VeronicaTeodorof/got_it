@@ -2,8 +2,54 @@
 {% load static %}
 
 {% block dashboard_content %}
+    <!-- Main -->
+    <main>
+        <div class="container-fluid d-flex">
+            <!-- Custom Open Sidebar Button from Bootstrap Icons-->
+            <div class="justify-content-start p-2">
+                <button class="d-lg-none btn p-2 border-0"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#sideNavbar"
+                    aria-controls="sideNavbar"
+                    aria-label="Open sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+                    </svg>
+                </button>
+            </div>
 
-    <!-- Header -->
-    <h1>{{source}}</h1>
+            <!--Side Navbar -->
+            <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sideNavbar" aria-labelledby="sidebarLabel">
+                <div class="offcanvas-header">
+                    <!-- Visually hidden heading for accessibility: screen readers use aria-labelledby to
+                    announce the offcanvas region by its heading when it opens, so users who can't
+                    see the screen know what the panel is for. The Bootstrap "visually-hidden" class
+                    removes the element from view (using absolute positioning and rendering it invisibly small)
+                    without removing it from the accessibility tree, so screen readers can still read it. -->
+                    <h5 class="visually-hidden" id="sidebarLabel">Site navigation</h5>
+                    <!-- Custom Close Sidebar Button -->
+                    <button type="button" class="border-0 bg-transparent ms-auto" data-bs-dismiss="offcanvas" data-bs-target="#sideNavbar" aria-label="Close sidebar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="offcanvas-body">
+                    {% block sidebar_content %}
+                    <ul class="nav flex-column">
+                        <li class="nav-item d-flex">
+                            <a class="nav-link" href="{% url 'dashboard' %}">Sources</a>
+                            <a class="nav-link ps-0" href="{% url 'dashboard' %}" title="Add source">+</a>
+                        </li>
+                    </ul>
+                    {% endblock %}
+                </div>
+            </div>
+            <div>
+            <h1 class="m-4">{{source}}</h1>
+            </div>
+        </div>
+    </main>
 
 {% endblock %}
