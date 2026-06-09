@@ -283,3 +283,42 @@ class EditSourceViewTest(TestCase):
             reverse('edit_source', args=[self.source.pk]
                     ))
         self.assertTemplateUsed(response, 'notes/dashboard.html')
+
+
+class DeleteSourceView(TestCase):
+    """
+    Tests for delete source view
+    """
+
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email='something.com', password='test',  username='tester',
+            )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='name',
+            source_type='book'
+        )
+        self.source2 = Source.objects.create(
+            user=self.user,
+            source_name='other name',
+            source_type='website'
+        )
+
+    def test_right_source_is_deleted_and_no_other_source_is(self):
+        self.client.force_login(self.user)
+        sources = Source.objects.all()
+        self.client.post(
+            reverse('delete_source', args=[self.source.pk]))
+        self.assertNotIn(self.source, sources)
+        self.assertEqual(1, len(sources))
+
+    def test_authenticated_user_gets_404_for_missing_source(self):
+        """
+        Authenticated user trying to delete a source that doesn't exist
+        gets 404.
+        """
+        self.client.force_login(self.user)
+        self.source.delete()
+        response = self.client.get('/sources/800/delete')
+        self.assertEqual(response.status_code, 404)

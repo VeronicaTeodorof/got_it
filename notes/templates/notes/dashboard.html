@@ -8,7 +8,7 @@
 
 
 {% block content %}
-<!-- Main-->
+<!-- Main -->
 <div class="container-fluid">
 
     <!--Side Navbar -->
@@ -57,6 +57,7 @@
         </div> -->
 
         {% block dashboard_content %}
+
             <h1 class="visually-hidden">Sources</h1>
 
             <!-- Create Source -->
@@ -89,6 +90,29 @@
                 <div class="container-fluid">
                     <ul class="list-group">
                         {% for source, form in source_forms %}
+
+                            <!-- Delete Modal -->
+                            <div class="modal fade" id="deleteSourceModal-{{source.pk}}" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>Deleting "{{source}}" source will also delete all units and notes associated with it.</p>
+                                            <p>Are you sure you want to continue?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form method="POST" action="{% url 'delete_source' source.pk %}">
+                                                {% csrf_token %}
+                                                <button type="button" class="btn btn-sm btn-primary" data-bs-dismiss="modal">Cancel</button>
+                                                <button type="submit"class="btn btn-sm btn-primary">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <li class="list-group-item">
                                 <div class="row">
                                     <div class="col-8">
@@ -109,6 +133,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>
+                                                <!-- Edit -->
                                                 <button class="dropdown-item btn btn-primary"
                                                     type="button"
                                                     data-bs-toggle="collapse"
@@ -117,8 +142,18 @@
                                                     aria-controls="#edit-source-form-{{source.pk}}">
                                                     Edit
                                                 </button>
+
+                                                <!-- Delete button -->
+                                                <button
+                                                    type="button"
+                                                    class="dropdown-item btn btn-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#deleteSourceModal-{{source.pk}}"
+                                                >
+                                                Delete
+                                                </button>
                                             </li>
-                                            <li><button class="dropdown-item" type="button">Delete</button></li>
+
                                         </ul>
                                     </div>
                                 <div class="row">

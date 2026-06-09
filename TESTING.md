@@ -102,6 +102,14 @@
 | DP-MT-23 | Edit form correctly prepopulated with corresponding data | Edit form displays the correct data in all its fields | As expected | Pass |
 | DP-MT-24 | Cancel button on form correctly collapses the form | Form collapses when cancel is clicked | As expected | Pass | |
 
+
+### Delete Source
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| DP-MT-25 | Trying to access inexisting source returns 404 | Visit sources/800/delete/ returns 404 | Visit sources/800/delete/ returns ValueError | Fail | |
+
 ### Sign Up Page
 
 
@@ -205,6 +213,15 @@
 | DP-AT-07 | test_authenticated_user_gets_404_for_another_user_source | Authenticated user cannot access another user's source | Pass |
 
 
+### Delete Source
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| DP-AT-08 | test_authenticated_user_gets_404_for_missing_source | Authenticated user gets 404 for inexisting source | Fails with AssertionError: 301 != 404 |
+
+
+
+
 ### Source Detail Page
 
 | Test ID | Test | Covers | Result |
@@ -218,6 +235,18 @@
 ## Known Bugs
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
+
+### Visiting sources/800/delete/ returns Value Error instead of 404
+**Description** Authenticated user types sources/800/delete/ in local environment and gets ValueError.
+
+**Evidence**
+
+[DP-MT-25 Value Error](testing_screenshots/dp-mt-25.png)
+
+**Automated test**
+
+Confirmed by `test_authenticated_user_gets_404_for_missing_source` - DP-AT-08 failing with `AssertionError: 301 != 404`
+
 
 
 ## Solved Bugs

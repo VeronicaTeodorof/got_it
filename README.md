@@ -121,15 +121,21 @@ Acceptance Criteria:
 - AC5: On successful edit user is redirected back to the dashboard page - see DP-MT-18
 - AC6: One type choice has to be selected - error shown if no choice is selected - see DP-MT-19
 </details>
+<details>
+<summary>29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
-29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.
 - AC1: Only accessible to logged-in users
-- AC2: Only accessible to the source owner — another logged-in user gets a 403/404
-- AC3: Deleting a source removes it from the database
+- AC2: Only accessible to the source owner — another logged-in user gets a 404
+- AC3: Deleting a source removes it from the sources list
 - AC4: User is redirected to the sources page after deletion
 - AC5: A confirmation step is required before deletion
+- AC6: source name and author appear in confirmation step to avoid confusions
+- AC7: A confimation message appears after successful deletion
+- AC8: When a source is deleted, all its units and notes are deleted as well
+</details>
 
-- **Units**
+ - **Units**
+
 30. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
 31. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
 32. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.

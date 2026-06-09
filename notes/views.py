@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
 from .models import Source
 from .forms import SourceForm
 
@@ -92,4 +93,5 @@ def delete_source(request, source_pk):
     if request.method == 'POST':
         source = get_object_or_404(Source, pk=source_pk, user=request.user)
         source.delete()
-        return redirect('sources-list')
+        messages.success(request, "Source deleted successfully!")
+        return redirect('dashboard')
