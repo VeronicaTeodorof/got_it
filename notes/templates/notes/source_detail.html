@@ -46,8 +46,30 @@
                     {% endblock %}
                 </div>
             </div>
-            <div>
-            <h1 class="m-4">{{source}}</h1>
+
+            <!-- Units List -->
+             <section>
+                <h2 class="visually-hidden">List of Units</h2>
+                <div class="container-fluid">
+                    <div>
+                        <h1 class="m-4">{{current_source}}</h1>
+                    </div>
+                    <ul class="list-group">
+                        {% for unit in units %}
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <a href="{% url 'source-detail' unit.pk %}">
+                                            {{ unit }}
+                                        </a>
+                                    </div>
+                            </li>
+                        {% empty %}
+                            <p>No units yet. Add one to get started.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </section>
             </div>
         </div>
     </main>

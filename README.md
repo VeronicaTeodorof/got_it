@@ -78,25 +78,7 @@ Acceptance Criteria:
 - AC5: Empty state shown when no sources exist, encouraging user to create one - see DP-MT-06
 </details>
 <details>
-<summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
-
-Acceptance Criteria:
-
-
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01, SDP-AT-02, SDP-MT-01, SDP-MT-02
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03 and SDP-MT-03
-- AC3: If source does not exist, return 404 - see SDP-AT-04
-- AC4: Source name and author displayed - see SDP-AT-05
-- AC5: Units listed in chronological order — reflecting source structure
-- AC6: Each unit shows name and note count
-- AC7: Each unit links to its three-column unit page
-- AC8: My Thoughts default unit always present
-- AC9: Breadcrumbs show Source
-- AC10: Edit and delete source actions accessible from this page
-
-</details>
-<details>
-<summary>26. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<summary>25. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
 </summary>
 Acceptance Criteria:
 
@@ -108,9 +90,9 @@ Acceptance Criteria:
 - AC6: A user cannot create two sources with the same name, an error is shown if they try - see DP-MT-12 and DP-AT-06
 </details>
 
-27. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
+26. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
 <details>
-<summary>28. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+<summary>27. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
 
 Acceptance Criteria:
 
@@ -122,7 +104,7 @@ Acceptance Criteria:
 - AC6: One type choice has to be selected - error shown if no choice is selected - see DP-MT-19
 </details>
 <details>
-<summary>29. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
+<summary>28. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
 - AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page - see DP-MT-26, DP-MT-27, DP-AT-09
 - AC2: Only accessible to the source owner — another logged-in user gets a 404 see DP-MT-25 and DP-MT-26
@@ -135,6 +117,26 @@ Acceptance Criteria:
 </details>
 
  - **Units**
+
+<details>
+<summary>29. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
+
+Acceptance Criteria:
+
+
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01, SDP-AT-02, SDP-MT-01, SDP-MT-02
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03 and SDP-MT-03
+- AC3: If source does not exist, return 404 - see SDP-AT-04
+- AC4: Source name and author displayed - see SDP-AT-05
+- AC5: Units listed in most recent edited order
+- AC6: Each unit shows name and note count
+- AC7: Each unit links to its three-column unit page
+- AC8: Sidebar shows Sources link - see SDP-MT-06
+- AC9: Edit and delete unit actions accessible for each unit on this page
+- AC10: Only and all units belonging to current source are displayed in the list of units - see SDP-AT-05, SDP-AT-06, SDP-MT-08, and SDP-MT-09
+- AC11: Empty state shown when no unitss exist, encouraging user to create one - see SDP-MT-07
+
+</details>
 
 30. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
 31. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.

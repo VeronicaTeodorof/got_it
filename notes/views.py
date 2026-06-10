@@ -2,18 +2,26 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
-from .models import Source
+from .models import Source, Unit
 from .forms import SourceForm
 
 
 # Create your views here.
+
+# --- Home ---
+def home(request):
+    return render(request, 'notes/index.html')
+
+
+# --- Dashboard/ Sources ---
 # Prevent browser caching
 # so back button forces a fresh server request after logout
 @never_cache
 @login_required
 def dashboard(request):
     """
-    Retrieve and display a list of sources belonging to the current user.
+    Retrieve and display a list of sources belonging to the current user,
+    and create source form
     """
     # if this is a POST request we need to process the form data
     if request.method == "POST":
@@ -49,21 +57,9 @@ def dashboard(request):
         )
 
 
-def home(request):
-    return render(request, 'notes/index.html')
-
-
-@login_required
-def source_detail(request, source_pk):
-    """Retrieve and display a single source belonging to the current user."""
-
-    source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    return render(request, "notes/source_detail.html", {"source": source})
-
-
 @login_required
 def edit_source(request, source_pk):
-    """ View for the editSourceModal"""
+    """ View for the edit source form"""
     # Retrieve the specific record from the database using the pk
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     if request.method == 'POST':
@@ -96,3 +92,19 @@ def delete_source(request, source_pk):
         source.delete()
         messages.success(request, "Source deleted successfully!")
     return redirect('dashboard')
+
+
+# --- Source detail/Units ---
+@login_required
+def source_detail(request, source_pk):
+    """
+    Retrieve and display a single source belonging to the current user
+    and a list of its units.
+    """
+    current_source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    units = Unit.objects.filter(source=current_source).order_by(
+        'unit_last_modified_date'
+    )
+    return render(request,
+                  "notes/source_detail.html",
+                  {"current_source": current_source, "units": units})

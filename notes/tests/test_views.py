@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from notes.models import Source
+from notes.models import Source, Unit
 
 
 class HomeViewTest(TestCase):
@@ -152,7 +152,7 @@ class SourceDetailViewTest(TestCase):
     """Tests for source detail page"""
 
     def setUp(self):
-        """Create test user and source"""
+        """Create test user, source and unit"""
         self.user = User.objects.create_user(
             username='user', email="user@testing.com", password="test"
         )
@@ -162,6 +162,14 @@ class SourceDetailViewTest(TestCase):
             source_name='Test Source',
             source_author='Test Author'
         )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='Unit 1'
+        )
+        self.unit2 = Unit.objects.create(
+                source=self.source,
+                unit_name='unit2'
+            )
 
     def test_unauthenticated_user_is_redirected(self):
         """SDP-AT-01: Unauthenticated user is redirected to the login page."""
@@ -178,7 +186,7 @@ class SourceDetailViewTest(TestCase):
             )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'notes/source_detail.html')
-        self.assertEqual(response.context['source'], self.source)
+        self.assertEqual(response.context['current_source'], self.source)
 
     def test_nonexistent_source_returns_404(self):
         """SDP-AT-03: 404 is returned for inexistent source"""
@@ -197,6 +205,32 @@ class SourceDetailViewTest(TestCase):
             reverse('source-detail', args=[self.source.pk])
             )
         self.assertEqual(response.status_code, 404)
+
+    def test_units_only_show_on_source_they_belong_to(self):
+        """
+        Tests that units are only displayed
+        in the list of units belonging to their parent source
+        """
+        self.client.force_login(self.user)
+        source2 = Source.objects.create(
+            user=self.user,
+            source_name='source2',
+            source_type='book'
+        )
+        pk = source2.pk
+        response = self.client.get(
+            reverse('source-detail', args=[pk])
+        )
+        self.assertNotIn(self.unit, response.context['units'])
+
+        def test_all_units_in_source_fetched_in_list(self):
+            """Tests that all units belonging to a source
+            are filtered in the queryset
+            """
+            response = self.client.get(
+                reverse('source-detail', args=[self.source.pk])
+                )
+            self.assertEqual(len(response.context['units']), 2)
 
 
 class EditSourceViewTest(TestCase):
