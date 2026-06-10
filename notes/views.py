@@ -108,3 +108,20 @@ def source_detail(request, source_pk):
     return render(request,
                   "notes/source_detail.html",
                   {"current_source": current_source, "units": units})
+
+
+# --- Unit detail/Notes ---
+@login_required
+def unit_detail(request, source_pk, unit_pk):
+    """Retrieve and display a single unit belonging to a source
+    and a list of all related notes
+    """
+    unit = get_object_or_404(Unit,
+                             pk=unit_pk,
+                             source__pk=source_pk,
+                             source__user=request.user
+                             )
+    source = unit.source
+    return render(request,
+                  'notes/unit_detail.html',
+                  {'source': source, 'unit': unit})

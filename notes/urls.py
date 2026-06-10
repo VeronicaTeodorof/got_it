@@ -15,5 +15,10 @@ urlpatterns = [
         'sources/<int:source_pk>/delete/',
         views.delete_source,
         name='delete_source'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/',
+        views.unit_detail,
+        name='unit-detail'
     )
 ]

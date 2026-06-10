@@ -42,12 +42,11 @@ Acceptance Criteria:
 
 </details>
 
-15. As a student I want to be able to see a list of all the reference notes, own words notes and question notes related to a particular source, so that I have an ensemble view of what's done and what's left.
-16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
-17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
-18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
+15. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
+16. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
+17. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
 <details>
-<summary>19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
+<summary>18. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
 
 Acceptance Criteria:
 - Sidebar is visible by default on desktop → RES-MT-02
@@ -56,18 +55,13 @@ Acceptance Criteria:
 - Sidebar sits below the navbar on all screen sizes → RES-MT-07
 - No horizontal scrolling on any screen size → RES-MT-01
 </details>
-20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
+19. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
 
 - **CRUD Functionality Theme**
 
-- **Notes**
-21. As a student I want to be able to modify any note, so that I keep my notes up to date with my understanding.
-22. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
-23. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
-
 - **Sources**
 <details>
-<summary>24. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
+<summary>20. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
 
 Acceptance Criteria:
 
@@ -78,7 +72,7 @@ Acceptance Criteria:
 - AC5: Empty state shown when no sources exist, encouraging user to create one - see DP-MT-06
 </details>
 <details>
-<summary>25. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<summary>21. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
 </summary>
 Acceptance Criteria:
 
@@ -90,9 +84,9 @@ Acceptance Criteria:
 - AC6: A user cannot create two sources with the same name, an error is shown if they try - see DP-MT-12 and DP-AT-06
 </details>
 
-26. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
+22. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
 <details>
-<summary>27. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+<summary>23. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
 
 Acceptance Criteria:
 
@@ -104,7 +98,7 @@ Acceptance Criteria:
 - AC6: One type choice has to be selected - error shown if no choice is selected - see DP-MT-19
 </details>
 <details>
-<summary>28. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
+<summary>24. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
 - AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page - see DP-MT-26, DP-MT-27, DP-AT-09
 - AC2: Only accessible to the source owner — another logged-in user gets a 404 see DP-MT-25 and DP-MT-26
@@ -119,7 +113,7 @@ Acceptance Criteria:
  - **Units**
 
 <details>
-<summary>29. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
+<summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
 
 Acceptance Criteria:
 
@@ -138,9 +132,30 @@ Acceptance Criteria:
 
 </details>
 
-30. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
-31. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
-32. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
+26. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
+27. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
+28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
+
+
+- **Notes**
+<details>
+<summary>29. As a student I want to be able to see a list of all my notes in a specific unit, organized by type, so that I have an ensemble view of what's done and what's left and easily access the ones I need.</summary>
+
+Acceptance Criteria:
+
+
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404
+- AC3: If unit does not exist, return 404
+- AC4: Unit name is displayed
+- AC5: Notes are organized by type
+- AC6: Sidebar shows Sources and Units links
+</details>
+
+
+30. As a student I want to be able to modify any note, so that I keep my notes up to date with my understanding.
+31. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
+32. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
 
 - **Tags**
 33. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.

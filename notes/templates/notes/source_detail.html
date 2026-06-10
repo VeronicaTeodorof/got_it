@@ -36,40 +36,43 @@
                     </button>
                 </div>
                 <div class="offcanvas-body">
-                    {% block sidebar_content %}
                     <ul class="nav flex-column">
                         <li class="nav-item d-flex">
                             <a class="nav-link" href="{% url 'dashboard' %}">Sources</a>
                             <a class="nav-link ps-0" href="{% url 'dashboard' %}" title="Add source">+</a>
                         </li>
+                        {% block sidebar_content %}
+                        {% endblock %}
                     </ul>
-                    {% endblock %}
+
                 </div>
             </div>
 
-            <!-- Units List -->
-             <section>
-                <h2 class="visually-hidden">List of Units</h2>
-                <div class="container-fluid">
-                    <div>
-                        <h1 class="m-4">{{current_source}}</h1>
+            {% block source-detail %}
+                <!-- Units List -->
+                    <section>
+                    <h2 class="visually-hidden">List of Units</h2>
+                    <div class="container-fluid">
+                        <div>
+                            <h1 class="m-4">{{current_source}}</h1>
+                        </div>
+                        <ul class="list-group">
+                            {% for unit in units %}
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <a href="{% url 'unit-detail' current_source.pk unit.pk %}">
+                                                {{ unit }}
+                                            </a>
+                                        </div>
+                                </li>
+                            {% empty %}
+                                <p>No units yet. Add one to get started.</p>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <ul class="list-group">
-                        {% for unit in units %}
-                            <li class="list-group-item">
-                                <div class="row">
-                                    <div class="col-8">
-                                        <a href="{% url 'source-detail' unit.pk %}">
-                                            {{ unit }}
-                                        </a>
-                                    </div>
-                            </li>
-                        {% empty %}
-                            <p>No units yet. Add one to get started.</p>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </section>
+                </section>
+            {% endblock %}
             </div>
         </div>
     </main>

@@ -1,0 +1,17 @@
+{% extends 'notes/source_detail.html' %}
+{% load static %}
+
+    {% block sidebar_content %}
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="{% url 'source-detail' source.pk %}">Units</a>
+            <a class="nav-link ps-0" href="{% url 'source-detail'  source.pk %}" title="Add unit">+</a>
+        </li>
+    {% endblock %}
+
+    {% block source-detail %}
+        <div>
+            <h1 class="m-4">{{source}}</h1>
+            <h2 class="m-4">{{unit}}</h2>
+        </div>
+    {% endblock %}
+
