@@ -366,3 +366,88 @@ class DeleteSourceView(TestCase):
             'delete_source', args=[self.source.pk]
             ))
         self.assertEqual(response.status_code, 302)
+
+
+class UnitDetailView(TestCase):
+    """
+    Tests for unit detail view
+    """
+
+    def setUp(self):
+        """
+        Creates user, source and unit
+        """
+        self.user = User.objects.create_user(
+            username='tester',
+            password='test'
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='source',
+            source_type='book'
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='unit'
+        )
+
+    def test_authenticated_owner_accessing_unit_detail_page_gets_200(self):
+        """
+        Authenticated owner gets 200 status code when requesting
+            detail page of a unit
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'unit-detail',
+            args=[self.source.pk, self.unit.pk]
+            ))
+        self.assertEqual(response.status_code, 200)
+
+    def test_unauthenticated_user_redirected(self):
+        """
+        Any unauthenticated user is redirected
+        when trying to access a unit detail page
+        """
+        response = self.client.get(reverse(
+            'unit-detail',
+            args=[self.source.pk, self.unit.pk]
+        ))
+        self.assertEqual(response.status_code, 302)
+
+    def test_authenticated_user_gets_404_for_another_user_unit(self):
+        """
+        Authenticated user trying to access another user's unit detail page
+        gets 404 response
+        """
+        user2 = User.objects.create_user(
+            username='tester2',
+            password='test'
+        )
+        self.client.force_login(user2)
+        response = self.client.get(reverse(
+            'unit-detail',
+            args=[self.source.pk, self.unit.pk]
+            ))
+        self.assertEqual(response.status_code, 404)
+
+    def test_authenticated_user_gets_404_for_inexistent_unit(self):
+        """
+        Authenticated user requesting a unit that doesn't exists gets 404
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'unit-detail',
+            args=[self.source.pk, 800]
+        ))
+        self.assertEqual(response.status_code, 404)
+
+    def test_unit_name_is_correctly_displayed(self):
+        """
+        Unit name correctly shows on unit detail page
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'unit-detail',
+            args=[self.source.pk, self.unit.pk]
+        ))
+        self.assertContains(response, self.unit.unit_name)

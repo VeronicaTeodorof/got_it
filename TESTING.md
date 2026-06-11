@@ -154,6 +154,18 @@
 | SDP-MT-09 | One source does not display another source's units | Only units belonging to current source show in list | Pass | |
 
 
+### Unit Detail Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| UDP-MT-01 | Unit detail page loads with no error | Unit detail page loads with no error for authenticated owner | As expected | Pass | |
+| UDP-MT-02 | Unauthenticated user is redirected | Unauthenticated user is redirected when trying to access a unit detail page | As expected | Pass | |
+| UDP-MT-03 | Authenticated user cannot access another user's unit detail page | Authenticated user trying to access another user's unit detail page gets 404 | As expected | Pass | |
+| UDP-MT-04 | Authenticated user gets 404 for inexistent unit detail page | Authenticated user gets 404 for inexistent unit detail page | As expected | Pass | |
+| UDP-MT-05 | Unit name displayed in unit detail page | Unit name correctly appears on unit detail page | As expected | Pass | |
+
+
 
 ### Responsiveness
 
@@ -232,8 +244,6 @@
 | DP-AT-09 | test_unauthenticated_user_visits_source_delete_url_redirects | Unauthenticated user gets redirected to login for trying to access delete view of an existent source | Pass |
 
 
-
-
 ### Source Detail Page
 
 | Test ID | Test | Covers | Result |
@@ -244,6 +254,20 @@
 | SDP-AT-04 | test_nonexistent_source_returns_404 | Nonexistent source returns 404 | Pass |
 | SDP-AT-05 | test_units_only_show_on_source_they_belong_to | A source does not display units of another source | Pass |
 | SDP-AT-06 | test_all_units_in_source_fetched_in_list | A source displays all units that belong to it | Pass |
+
+
+### Unit Detail Page
+
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| UDP-AT-01 | test_authenticated_owner_accessing_unit_detail_page_gets_200 | Authenticated owner can access unit detail page | Pass |
+| UDP-AT-02 | test_unauthenticated_user_redirected | Any unauthenticated user trying to access a unit detail page is redirected | Pass |
+| UDP-AT-03 | test_authenticated_user_gets_404_for_another_user_unit | Authenticated user trying to access another user's unit detail page gets 404 | Pass |
+| UDP-AT-04 | test_authenticated_user_gets_404_for_inexistent_unit | Authenticated user trying to access a unit detail page for a unit that doesn't exist gets 404 | Pass |
+| UDP-AT_05 | test_unit_name_is_correctly_displayed | Unit name appears on the unit detail page | Pass |
+
+
 
 
 ## Known Bugs

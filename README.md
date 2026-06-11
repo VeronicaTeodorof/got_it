@@ -144,10 +144,10 @@ Acceptance Criteria:
 Acceptance Criteria:
 
 
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404
-- AC3: If unit does not exist, return 404
-- AC4: Unit name is displayed
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see UDP-AT-01, UDP-AT-02, UDP-MT-01 and UDP-MT-02
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see UDP-AT-03 and UDP-MT-03
+- AC3: If unit does not exist, return 404 - see UDP-AT-04 and UDP-MT-04
+- AC4: Unit name is displayed - see UDP-AT-05 and UDP-MT-05
 - AC5: Notes are organized by type
 - AC6: Sidebar shows Sources and Units links
 </details>
