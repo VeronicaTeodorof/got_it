@@ -147,8 +147,21 @@ Acceptance Criteria:
 - AC9: A user cannot create duplicate name units within a source -  an error is shown if they try - see SDP-MT-18 and SDP-AT-07
 - AC10: When there are errors on the form, page loads with expanded form so feedback is immediately visible - see SDP-MT-19
 </details>
+<details>
+<summary>27. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
 
-27. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
+Acceptance Criteria:
+- AC1: Edit button present in list element dropdown - see SDP-MT-20
+- AC2: Clicking Edit button expands inline form - see SDP-MT-21
+- AC3: Edit form is prepopulated with correct data - see SDP-MT-22 and SDP-AT-08
+- AC4: User can edit unit name in form - see SDP-MT-23
+- AC5: Save and Cancel buttons present on the form - SDP-MT-24
+- AC6: Submitting empty unit name field rerenders the form with errors
+- AC7: Submitting form with valid data saves the form and reloads source detail page with edited unit
+- AC8: Cancel button collapses the form
+- AC9: Cancel button resets the form
+- AC10: Submitting the form with duplicate name rerenders the form with error
+</details>
 28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
 
 

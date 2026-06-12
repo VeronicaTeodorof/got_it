@@ -135,6 +135,21 @@ def source_detail(request, source_pk):
                    })
 
 
+@login_required
+def edit_unit(request, source_pk, unit_pk):
+    """
+    View for the edit unit form
+    """
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    form = UnitForm(instance=unit)
+    return render(
+        request,
+        'notes/source_detail.html',
+        {'source': source, 'unit': unit, 'form': form}
+    )
+
+
 # --- Unit detail/Notes ---
 @login_required
 def unit_detail(request, source_pk, unit_pk):

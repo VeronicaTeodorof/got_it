@@ -105,6 +105,49 @@
                                                 {{ unit }}
                                             </a>
                                         </div>
+                                        <div class="dropdown col">
+                                        <button class="btn btn-secondary dropdown-toggle"
+                                            type="button"
+                                            data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        </button>
+
+                                         <!-- Edit and Delete buttons -->
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <!-- Edit -->
+                                                <button class="dropdown-item btn btn-primary"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#edit-unit-form-{{unit.pk}}"
+                                                    aria-expanded="false"
+                                                    aria-controls="#edit-unit-form-{{unit.pk}}">
+                                                    Edit
+                                                </button>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="row">
+                                    <!-- Edit Unit Form -->
+                                    <div class="row collapse" id="edit-unit-form-{{unit.pk}}">
+                                        <div class="col-md-6">
+                                            <form method="post" action="{% url 'source-detail' unit.id %}">
+                                                {% csrf_token %}
+                                                {{ form.as_p }}
+                                                <button type="submit" class="btn btn-primary">Save</button>
+                                                <button class="btn btn-primary"
+                                                    type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#edit-unit-form-{{unit.pk}}"
+                                                    aria-expanded="false"
+                                                    aria-controls="#edit-unit-form-{{unit.pk}}">
+                                                    Cancel
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                                 </li>
                             {% empty %}
                                 <p>No units yet. Add one to get started.</p>

@@ -20,5 +20,10 @@ urlpatterns = [
         'sources/<int:source_pk>/units/<int:unit_pk>/',
         views.unit_detail,
         name='unit-detail'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/edit/',
+        views.edit_unit,
+        name='edit-unit'
     )
 ]

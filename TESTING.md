@@ -171,6 +171,18 @@
 | SDP-MT-19 | Form loaded expanded when errors shown | On page load, form is expanded when it includes error feedback | As expected | Pass | |
 
 
+### Edit Unit
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SDP-MT-20 | Edit button present in dropdown on each element in list | Edit button present in dropdown on each element in list | As expected | Pass | |
+| SDP-MT-21 | Clicking edit button expands the inline form | Form is expanded when edit button is clicked | As expected | Pass | |
+| SDP-MT-22 | Each form is prepopulated with correct data | Form has correct data | As expected | Pass | |
+| SDP-MT-23 | User can edit name in form | User can edit name in form | As expected | Pass | |
+| SDP-MT-24 | Save and Cancel buttons present on the form | Save and Cancel buttons present on the form | As expected | Pass | |
+
+
 ### Unit Detail Page
 
 
@@ -278,6 +290,13 @@
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | SDP-AT-07 | test_duplicate_unit_name_raises_error | Duplicate unit names whithin a source reloads the form with error | Pass |
+
+
+### Edit Unit
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| SDP-AT-08 | test_get_request_for_edit_unit | 200 status code, right template, and right context for edit unit get request | Pass | |
 
 
 

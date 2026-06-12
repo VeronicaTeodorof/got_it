@@ -273,7 +273,7 @@ class EditSourceViewTest(TestCase):
     Tests for the edit_source view.
     """
     def setUp(self):
-        """Creates temporary user"""
+        """Creates temporary user, source and form"""
         self.user = User.objects.create_user(
             email='something.com', password='test',  username='tester',
             )
@@ -509,3 +509,41 @@ class UnitDetailView(TestCase):
                              reverse('unit-detail',
                                      kwargs={'source_pk': self.source.pk,
                                              'unit_pk': unit.pk}))
+
+
+class EditUnitView(TestCase):
+    """
+    Tests for the edit unit view
+    """
+    def setUp(self):
+        """
+        Creates user, source, unit and unit form
+        """
+        self.user = User.objects.create_user(
+            username='tester',
+            password='test'
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='name',
+            source_type='book'
+
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='unit'
+        )
+
+    def test_get_request_for_edit_unit(self):
+        """Test if get request for edit unit form gives 200 status code,
+        the right template, and the right context.
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'edit-unit', args=[self.source.pk, self.unit.pk]
+        ))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'notes/source_detail.html')
+        self.assertIn('form', response.context)
+        # asserts that the form is prepopulated with correct data
+        self.assertEqual(response.context['form'].instance, self.unit)
