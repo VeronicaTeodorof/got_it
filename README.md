@@ -131,8 +131,23 @@ Acceptance Criteria:
 - AC11: Empty state shown when no unitss exist, encouraging user to create one - see SDP-MT-07
 
 </details>
+<details>
+<summary>26. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
 
-26. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.
+Acceptance Criteria:
+
+- AC1: Create unit button is present on source detail page - see SDP-MT-10
+- AC2: Clicking create unit button will expand the create unit form - see SDP-MT-11
+- AC3: Save and Cancel buttons are present on create unit form - see SDP-MT-12
+- AC4: Cancel button collapses the form - see SDP-MT-13
+- AC5: Cancel button resets the form - see SDP-MT-14
+- AC6: User can enter a unit name - see SDP-MT-15
+- AC7: Name field cannot be empty — error shown if submitted blank - see SDP-MT-16
+- AC8: On successful creation user is redirected to the new unit detail page
+- AC9: A user cannot create duplicate name units within a source -  an error is shown if they try - see SDP-MT-18 and SDP-AT-07
+- AC10: When there are errors on the form, page loads with expanded form so feedback is immediately visible - see SDP-MT-19
+</details>
+
 27. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.
 28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
 

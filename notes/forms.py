@@ -1,5 +1,5 @@
 from django import forms
-from .models import Source
+from .models import Source, Unit
 
 
 class SourceForm(forms.ModelForm):
@@ -43,7 +43,7 @@ class SourceForm(forms.ModelForm):
 
     def clean(self):
         """
-        Ensures duplicate names per user are rejected with an error
+        Ensures duplicate source names per user are rejected with an error
         at form validation level
         """
         cleaned_data = super().clean()
@@ -52,5 +52,35 @@ class SourceForm(forms.ModelForm):
                                  source_name=source_name).exists():
             raise forms.ValidationError({
                 'source_name': "You already have a source with this name."
+            })
+        return cleaned_data
+
+
+class UnitForm(forms.ModelForm):
+    """
+    A form for creating and editing a unit instance
+    """
+    def __init__(self, *args, **kwargs):
+        self.source = kwargs.pop('source', None)
+        super().__init__(*args, **kwargs)
+
+    class Meta:
+        model = Unit
+        fields = ["unit_name"]
+        labels = {
+            'unit_name': 'Unit name'
+        }
+
+    def clean(self):
+        """
+        Ensures duplicate unit names per source are rejected with an error
+        at form validation level
+        """
+        cleaned_data = super().clean()
+        unit_name = cleaned_data.get('unit_name')
+        if Unit.objects.filter(source=self.source,
+                               unit_name=unit_name).exists():
+            raise forms.ValidationError({
+                'unit_name': "You already have a unit with this name."
             })
         return cleaned_data

@@ -151,7 +151,24 @@
 | SDP-MT-06 | Sources link present in sidebar | Sidebar correctly displays sources link | As expected | Pass | |
 | SDP-MT-07 | Empty state | Empty state shown when no unitss exist, encouraging user to create one | As expected | Pass | |
 | SDP-MT-08 | All units of a source displayed in list | All units of a source appear in the list | As expected | Pass | |
-| SDP-MT-09 | One source does not display another source's units | Only units belonging to current source show in list | Pass | |
+| SDP-MT-09 | One source does not display another source's units | Only units belonging to current source show in list | As expected | Pass | |
+
+
+### Create Unit
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SDP-MT-10 | Create unit button present | Create unit button is present on the page | As expected | Pass | |
+| SDP-MT-11 | Clicking create unit button expands form | Create unit form is expanded by clicking Create unit button | As expected | Pass | |
+| SDP-MT-12 | Save and cancel buttons present on form | Save and Cancel buttons present on form | As expected | Pass | |
+| SDP-MT-13 | Cancel button on Create unit form collapses the form | Cancel button collapses the form | As expected | Pass | |
+| SDP-MT-14 | Cancel button on Create unit form resets the form | Cancel button resets the form | As expected | Pass | |
+| SDP-MT-15 | User can enter name for a unit | Form has a unit name input and label | As expected | Pass | |
+| SDP-MT-16 | Submitting form with blank unit name | Form rejected, error shown | As expected | Pass | |
+| SDP-MT-17 | On successful creation user is redirected to unit detail page | On successful creation user is redirected to unit detail page | As expected | Pass | |
+| SDP-MT-18 | Duplicate unit names within a source | Form rejected, error shown | As expected | Pass | |
+| SDP-MT-19 | Form loaded expanded when errors shown | On page load, form is expanded when it includes error feedback | As expected | Pass | |
 
 
 ### Unit Detail Page
@@ -254,6 +271,14 @@
 | SDP-AT-04 | test_nonexistent_source_returns_404 | Nonexistent source returns 404 | Pass |
 | SDP-AT-05 | test_units_only_show_on_source_they_belong_to | A source does not display units of another source | Pass |
 | SDP-AT-06 | test_all_units_in_source_fetched_in_list | A source displays all units that belong to it | Pass |
+
+
+### Create Unit
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| SDP-AT-07 | test_duplicate_unit_name_raises_error | Duplicate unit names whithin a source reloads the form with error | Pass |
+
 
 
 ### Unit Detail Page

@@ -167,8 +167,8 @@ class SourceDetailViewTest(TestCase):
             unit_name='Unit 1'
         )
         self.unit2 = Unit.objects.create(
-                source=self.source,
-                unit_name='unit2'
+            source=self.source,
+            unit_name='unit2'
             )
 
     def test_unauthenticated_user_is_redirected(self):
@@ -223,14 +223,49 @@ class SourceDetailViewTest(TestCase):
         )
         self.assertNotIn(self.unit, response.context['units'])
 
-        def test_all_units_in_source_fetched_in_list(self):
-            """Tests that all units belonging to a source
-            are filtered in the queryset
-            """
-            response = self.client.get(
-                reverse('source-detail', args=[self.source.pk])
-                )
-            self.assertEqual(len(response.context['units']), 2)
+    def test_all_units_in_source_fetched_in_list(self):
+        """Tests that all units belonging to a source
+        are filtered in the queryset
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(
+            reverse('source-detail', args=[self.source.pk])
+            )
+        self.assertEqual(len(response.context['units']), 2)
+
+    def test_form_with_blank_unit_name_rerenders_page_with_errors(self):
+        """
+        When a form is submitted blank, page reloads with form errors
+        """
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('source-detail',
+                    args=[self.source.pk]),
+            data={'unit_name': ''}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('form', response.context)
+        self.assertContains(response, 'This field is required.')
+        self.assertTemplateUsed(response, 'notes/source_detail.html')
+
+    def test_duplicate_unit_name_raises_error(self):
+        """
+        SDP-AT-07: Test duplicate unit name for same source returns 200
+        and raises error
+        """
+        self.client.force_login(self.user)
+        Unit.objects.create(
+            source=self.source, unit_name='Unit1'
+            )
+        response = self.client.post(
+            reverse('source-detail', args=[self.source.pk]),
+            data={'unit_name': "Unit1"}
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(
+            'You already have a unit with this name.',
+            response.context['form']['unit_name'].errors.as_text()
+        )
 
 
 class EditSourceViewTest(TestCase):
@@ -337,6 +372,10 @@ class DeleteSourceView(TestCase):
             user=self.user,
             source_name='other name',
             source_type='website'
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='unit'
         )
 
     def test_right_source_is_deleted_and_no_other_source_is(self):
@@ -451,3 +490,22 @@ class UnitDetailView(TestCase):
             args=[self.source.pk, self.unit.pk]
         ))
         self.assertContains(response, self.unit.unit_name)
+
+    def test_successful_unit_creation_redirects_to_unit_page(self):
+        """
+        User is redirected to unit detail page
+        after successfully creating a unit.
+        """
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('source-detail',
+                    args=[self.source.pk]
+                    ),
+            data={'unit_name': 'Unit1'}
+        )
+        self.assertEqual(response.status_code, 302)
+        unit = Unit.objects.get(unit_name='Unit1')
+        self.assertRedirects(response,
+                             reverse('unit-detail',
+                                     kwargs={'source_pk': self.source.pk,
+                                             'unit_pk': unit.pk}))

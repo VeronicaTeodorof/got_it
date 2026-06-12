@@ -3,7 +3,7 @@ from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .models import Source, Unit
-from .forms import SourceForm
+from .forms import SourceForm, UnitForm
 
 
 # Create your views here.
@@ -105,9 +105,34 @@ def source_detail(request, source_pk):
     units = Unit.objects.filter(source=current_source).order_by(
         'unit_last_modified_date'
     )
+    if request.method == 'POST':
+        # a bound copy of the form is created with
+        # request.POST being passed to this copy
+        form = UnitForm(request.POST, source=current_source)
+        # is_valid() triggers field-level then form-level cleaning.
+        if form.is_valid():
+            unit = form.save(commit=False)
+            unit.source = current_source
+            unit.save()
+            return redirect('unit-detail',
+                            source_pk=current_source.pk,
+                            unit_pk=unit.pk
+                            )
+        else:
+            return render(request,
+                          "notes/source_detail.html",
+                          {"current_source": current_source,
+                           "units": units,
+                           "form": form
+                           })
+    # unbound form
+    form = UnitForm(source=current_source)
     return render(request,
                   "notes/source_detail.html",
-                  {"current_source": current_source, "units": units})
+                  {"current_source": current_source,
+                   "units": units,
+                   "form": form
+                   })
 
 
 # --- Unit detail/Notes ---
