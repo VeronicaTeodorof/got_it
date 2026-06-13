@@ -127,9 +127,12 @@ def source_detail(request, source_pk):
                            })
     # unbound form
     form = UnitForm(source=current_source)
+    forms = [UnitForm(instance=unit, source=current_source) for unit in units]
+    unit_forms = list(zip(units, forms))
     return render(request,
                   "notes/source_detail.html",
                   {"current_source": current_source,
+                   "unit_forms": unit_forms,
                    "units": units,
                    "form": form
                    })
@@ -140,13 +143,13 @@ def edit_unit(request, source_pk, unit_pk):
     """
     View for the edit unit form
     """
-    source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
-    form = UnitForm(instance=unit)
+    current_source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
+    form = UnitForm(instance=unit, current_source=current_source)
     return render(
         request,
         'notes/source_detail.html',
-        {'source': source, 'unit': unit, 'form': form}
+        {'current_source': current_source, 'unit': unit, 'form': form}
     )
 
 

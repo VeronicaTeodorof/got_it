@@ -409,3 +409,8 @@ Add return for GET requests. Both manual and automated tests now passing.
 **Commit:** `1b4bcdd`
 
 
+## Biases in Testing
+
+Test `SDP-MT-22: Each form is prepopulated with correct data` was a false positive in commit `8a61774` because of a confirmation bias, or because of the fact that unit name visible above form masked the fact that the corresponding field was not actually prepopulated.
+
+
