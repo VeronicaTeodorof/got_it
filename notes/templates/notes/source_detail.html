@@ -132,7 +132,7 @@
                                     <!-- Edit Unit Form -->
                                     <div class="row collapse" id="edit-unit-form-{{unit.pk}}">
                                         <div class="col-md-6">
-                                            <form method="post" action="{% url 'source-detail' unit.id %}">
+                                            <form method="post" action="{% url 'edit-unit' current_source.pk unit.pk %}">
                                                 {% csrf_token %}
                                                 {{ form.as_p }}
                                                 <button type="submit" class="btn btn-primary">Save</button>
