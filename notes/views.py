@@ -74,7 +74,9 @@ def edit_source(request, source_pk):
             'notes/dashboard.html',
             {'form': form, 'source': source}
             )
-    # Instantiate the form with the fetched source
+    # GET fallback in this view is never actually reached,
+    # handled by dashboard view
+    # left for readability and eventual UI changes
     form = SourceForm(instance=source)
     return render(
         request,
@@ -142,6 +144,7 @@ def source_detail(request, source_pk):
                    "form": form
                    })
 
+
 # while source_detail view can handle displaying both create and edit forms
 # it needs to distinguish between POST requests for create and POST requests
 # for edit
@@ -153,31 +156,61 @@ def edit_unit(request, source_pk, unit_pk):
     """
     View for the POST branch of the edit unit form
     """
+    # the view has to first run its security checks and fetch the required
+    # objects to bind to the new form if they exists
+    # takes source_pk argument and has to see whether it exists or not
+    # goes to Source table, checks the indicated pk exists, checks the user
+    # is the one that made the request
+    # fetches object if it passes security checks
+    # returns 404 otherwise
+    current_source = get_object_or_404(
+        Source, pk=source_pk, user=request.user
+        )
+    # now takes unit_pk argument and checks whether it exists or not
+    # goes to Unit table, checks the indicated pk exists, checks it
+    # belongs to the source indicated in current_source
+    # fetches or returns 404
+    unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
+    # now you want the view to make a copy or the UnitForm and attach
+    # to it data received in request.POST
+    # you take a copy of the UnitForm and with instance=unit you tell
+    # Django that in the previously fetched unit record you want the
+    # data from request.POST, not the old data
     if request.method == 'POST':
-        # the view has to first run its security checks and fetch the required
-        # objects to bind to the new form if they exists
-        # takes source_pk argument and has to see whether it exists or not
-        # goes to Source table, checks the indicated pk exists, checks the user
-        # is the one that made the request
-        # fetches object if it passes security checks
-        # returns 404 otherwise
-        current_source = get_object_or_404(
-            Source, pk=source_pk, user=request.user
-            )
-        # now takes unit_pk argument and checks whether it exists or not
-        # goes to Unit table, checks the indicated pk exists, checks it
-        # belongs to the source indicated in current_source
-        # fetches or returns 404
-        unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
-        # now you want the view to make a copy or the UnitForm and attach
-        # to it data received in request.POST
-        # you take a copy of the UnitForm and with instance=unit you tell
-        # Django that in the previously fetched unit record you want the
-        # data from request.POST, not the old data
         form = UnitForm(request.POST, instance=unit, source=current_source)
         if form.is_valid():
             form.save()
             return redirect('source-detail', source_pk=current_source.pk)
+        units = Unit.objects.filter(source=current_source).order_by(
+            'unit_last_modified_date')
+        # for each unit in the list, if the pk matches the one that just
+        # failed, respective form is brought back with errors intace,
+        # all other ones are given fresh prepopulated forms as normal
+        forms = [
+            form if u.pk == unit.pk
+            else UnitForm(instance=u, source=current_source)
+            for u in units
+        ]
+        unit_forms = list(zip(units, forms))
+        return render(request,
+                      'notes/source_detail.html',
+                      {"current_source": current_source,
+                       "unit_forms": unit_forms,
+                       "units": units,
+                       "form": UnitForm(source=current_source),
+                       'failed_unit_pk': unit_pk})
+
+    # GET fallback - never actually reached,
+    # edit forms are pre-rendered in source_detail view
+    # left for readability and eventual UI changes
+    form = UnitForm(instance=unit, source=current_source)
+    return render(request,
+                  'notes/source_detail.html',
+                  {"current_source": current_source,
+                   "units": Unit.objects.filter(
+                       source=current_source).order_by(
+                       'unit_last_modified_date'),
+                   "form": UnitForm(source=current_source)})
 
 
 # --- Unit detail/Notes ---

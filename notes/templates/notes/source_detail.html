@@ -128,26 +128,27 @@
                                         </ul>
                                     </div>
 
-                                    <div class="row">
                                     <!-- Edit Unit Form -->
-                                    <div class="row collapse" id="edit-unit-form-{{unit.pk}}">
+                                    <div class="row collapse expand-on-error" id="edit-unit-form-{{unit.pk}}">
                                         <div class="col-md-6">
-                                            <form method="post" action="{% url 'edit-unit' current_source.pk unit.pk %}">
+                                            <!-- novalidate added to form to skip browser validatrion,
+                                             for consistent error messages display through crispy forms -->
+                                            <form method="post" action="{% url 'edit-unit' current_source.pk unit.pk %}" novalidate>
                                                 {% csrf_token %}
-                                                {{ form.as_p }}
+                                                {{ form|crispy }}
                                                 <button type="submit" class="btn btn-primary">Save</button>
                                                 <button class="btn btn-primary"
                                                     type="button"
                                                     data-bs-toggle="collapse"
                                                     data-bs-target="#edit-unit-form-{{unit.pk}}"
                                                     aria-expanded="false"
-                                                    aria-controls="#edit-unit-form-{{unit.pk}}">
+                                                    aria-controls="#edit-unit-form-{{unit.pk}}"
+                                                    data-action="cancel-form">
                                                     Cancel
                                                 </button>
                                             </form>
                                         </div>
                                     </div>
-                                </div>
                                 </li>
                             {% empty %}
                                 <p>No units yet. Add one to get started.</p>

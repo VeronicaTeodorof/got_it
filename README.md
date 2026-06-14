@@ -155,12 +155,12 @@ Acceptance Criteria:
 - AC2: Clicking Edit button expands inline form - see SDP-MT-21
 - AC3: Edit form is prepopulated with correct data - see SDP-MT-22 and SDP-AT-08
 - AC4: User can edit unit name in form - see SDP-MT-23
-- AC5: Save and Cancel buttons present on the form - SDP-MT-24
-- AC6: Submitting empty unit name field rerenders the form with errors
-- AC7: Submitting form with valid data saves the form and reloads source detail page with edited unit
-- AC8: Cancel button collapses the form
-- AC9: Cancel button resets the form
-- AC10: Submitting the form with duplicate name rerenders the form with error
+- AC5: Save and Cancel buttons present on the form - see SDP-MT-24
+- AC6: Submitting empty unit name field rerenders the form with errors - see SDP-MT-25
+- AC7: Submitting form with valid data saves the form and reloads source detail page with edited unit - see SDP-MT-26
+- AC8: Cancel button collapses the form - see SDP-MT-27
+- AC9: Cancel button resets the form -see SDP-MT-28
+- AC10: Submitting the form with duplicate name rerenders the form with error - see SDP-MT-29
 </details>
 28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
 

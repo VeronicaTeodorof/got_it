@@ -181,6 +181,12 @@
 | SDP-MT-22 | Each form is prepopulated with correct data | Form has correct data | As expected | Pass | |
 | SDP-MT-23 | User can edit name in form | User can edit name in form | As expected | Pass | |
 | SDP-MT-24 | Save and Cancel buttons present on the form | Save and Cancel buttons present on the form | As expected | Pass | |
+| SDP-MT-25 | Submitting empty unit name rerenders form with errors | Form rejected, error shown | As expected | Pass | |
+| SDP-MT-26 | Valid submission saves edited unit and loads updated list | Valid submission saves edited unit and loads updated list | As expected | Pass | |
+| SDP-MT-27 | Cancel button collapses the form | Cancel button collapses the form | As expected | Pass | |
+| SDP-MT-28 | Cancel button resets the form | Cancel button resets the form | Reset does not work after invalid submission | Fail | |
+| SDP-MT-29 | Submitting the form with duplicate name rerenders form with errors | Form rejected, error shown | As expected | Pass | |
+
 
 
 ### Unit Detail Page
@@ -331,6 +337,11 @@ Confirmed by `test_unauthenticated_user_visits_source_delete_url_redirects` (DP-
 
 **Fix**
 `login_required` decorator was added, initially omitted.
+
+
+### Cancel button does not reset unit edit form after invalid submission (SDP-MT-28)
+
+**Description** After invalid submission clicking cancel button does not reset the form. Clicking edit again will expand the form with previous errors and edits still present. This is a known limmitation to be revisited.
 
 
 
