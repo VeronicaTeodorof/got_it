@@ -188,6 +188,21 @@
 | SDP-MT-29 | Submitting the form with duplicate name rerenders form with errors | Form rejected, error shown | As expected | Pass | |
 
 
+### Delete Unit
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SDP-MT-30 | Delete button present in dropdown on each element in list | Delete button present in dropdown on each element in list | As expected | Pass | |
+| SDP-MT-31 | Clicking delete button opens a confirmation modal | Clicking delete button opens a confirmation modal | As expected | Pass | |
+| SDP-MT-32 | Source and unit names included in confirmation modal | Source and unit names included in confirmation modal | As expected | Pass | |
+| SDP-MT-33 | Delete and Cancel buttons present on modal | Delete and Cancel buttons present on modal | As expected | Pass | |
+| SDP-MT-34 | Delete button rerenders page with deleted unit removed from list | Delete button rerenders page with deleted unit removed from list | As expected | Pass | |
+| SDP-MT-35 | Cancel button closes modal | Canncel button closes modal | As expected | Pass | |
+| SDP-MT-36 | Authenticated owner typing `sources/<existent_source>/units/<inexistent_unit>/delete/ gets 404 | Authinticated owner typing `sources/<existent_source>/units/<inexistent_unit>/delete gets 404 | As expected | Pass | |
+| SDP-MT-37 | Unauthenticated user typing Authinticated owner typing `sources/<existent_source>/units/<existent_unit>/delete/ is redirected to login |
+| SDP-MT-38 | Authenticated owner typing `sources/<exostent_source>/units/<existent_unit>/delete/ gets to 'source_detail.html' page | Authenticated owner typing `sources/<exostent_source>/units/<existent_unit>/delete/ gets to 'source_detail.html' page | As expected | Pass | |
+
 
 ### Unit Detail Page
 

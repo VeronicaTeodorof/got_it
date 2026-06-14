@@ -213,6 +213,17 @@ def edit_unit(request, source_pk, unit_pk):
                    "form": UnitForm(source=current_source)})
 
 
+@login_required
+def delete_unit(request, source_pk, unit_pk):
+    """View for deleting units"""
+    current_source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
+    if request.method == 'POST':
+        unit.delete()
+        messages.success(request, "Uni deleted successfully!")
+    return redirect('source-detail', source_pk=source_pk)
+
+
 # --- Unit detail/Notes ---
 @login_required
 def unit_detail(request, source_pk, unit_pk):

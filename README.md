@@ -162,7 +162,19 @@ Acceptance Criteria:
 - AC9: Cancel button resets the form -see SDP-MT-28
 - AC10: Submitting the form with duplicate name rerenders the form with error - see SDP-MT-29
 </details>
-28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.
+<details>
+<summary>28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
+
+Acceptance Criteria:
+- AC1: Delete button present on inline dropdown - see SDP-MT-30
+- AC2: Clicking delete button opens a confirmation modal - see SDP-MT-31
+- AC3: Confirmation modal has source and unit names included along with risks warnings, so that user does not accidentaly delete wrong unit - see SDP-MT-32
+- AC4: Delete and Cancel buttons present on modal - see SDP-MT-33
+- AC5: Delete button deletes unit, closes modal and rerenders page with updated units list - see SDP-MT-34
+- AC6: Cancel button closes modal - see SDP-MT-35
+- AC7: Page accessible to logged in owners, unauthenticated users are redirected to login - see SDP-MT-36 and SDP-MT-38
+- AC8: Trying to access an inexisting unit gives 404 - see SDP-MT-37
+</details>
 
 
 - **Notes**
