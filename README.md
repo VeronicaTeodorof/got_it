@@ -192,6 +192,21 @@ Acceptance Criteria:
 - AC6: Sidebar shows Sources and Units links
 </details>
 
+**Reference Notes**
+<details>
+<summary>30. As a user, I want to view the full content of a reference note, see its location, add linked notes, and view any notes already linked to it, so that I can engage with the material and build on my understanding.</summary>
+
+Acceptance Criteria:
+
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login -see RDP-MT-01, RDP-MT-02 and RDP-AT-01
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404 -see RDP-MT-03
+- AC3: If reference note does not exist, return 404 - see RDP-MT-04
+- AC4: Title, content and location show on the page - see RDP-MT-05
+- AC5: Add dropdown visible on the page
+- AC6: A button to show/hide notes linked to this reference is visible on the page
+- AC7: Clicking the links button expands a list of linked notes
+- AC8: Empty state message is shown when no links exist and 'got it?' logo appears above the add button
+</details>
 
 30. As a student I want to be able to modify any note, so that I keep my notes up to date with my understanding.
 31. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.

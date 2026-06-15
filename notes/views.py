@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
-from .models import Source, Unit
+from .models import Source, Unit, Reference
 from .forms import SourceForm, UnitForm
 
 
@@ -125,7 +125,7 @@ def source_detail(request, source_pk):
                           "notes/source_detail.html",
                           {"current_source": current_source,
                            "units": units,
-                           "form": form
+                           "form": form,
                            })
     # unbound form, passed as form in context for create unit form
     form = UnitForm(source=current_source)
@@ -242,3 +242,17 @@ def unit_detail(request, source_pk, unit_pk):
                   {'source': source,
                    'unit': unit,
                    'references': references})
+
+
+@login_required
+def reference_detail(request, source_pk, unit_pk, reference_pk):
+    """Retrieve and display a single reference"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+    return render(request,
+                  'notes/reference_detail.html',
+                  {'source': source,
+                   'unit': unit,
+                   'reference': reference}
+                  )

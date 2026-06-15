@@ -30,5 +30,11 @@ urlpatterns = [
         'sources/<int:source_pk>/units/<int:unit_pk>/delete/',
         views.delete_unit,
         name='delete-unit'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/'
+        'reference/<int:reference_pk>/',
+        views.reference_detail,
+        name='reference-detail'
     )
 ]

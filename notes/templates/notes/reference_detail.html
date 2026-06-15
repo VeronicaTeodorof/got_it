@@ -1,0 +1,10 @@
+{% extends 'notes/note_base.html' %}
+{% load static %}
+
+{% block notes %}
+    <div class="m-4">
+        <h3>{{ reference.title }} - {{ reference.location }}</h3>
+        <p>{{ reference.content }}</p>
+    </div>
+    
+{% endblock %}

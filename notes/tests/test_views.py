@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.urls import reverse
 from django.contrib.auth.models import User
-from notes.models import Source, Unit
+from notes.models import Source, Unit, Reference
 
 
 class HomeViewTest(TestCase):
@@ -547,3 +547,40 @@ class EditUnitView(TestCase):
         self.assertIn('form', response.context)
         # asserts that the form is prepopulated with correct data
         self.assertEqual(response.context['form'].instance, self.unit)
+
+
+class ReferenceDetailVeiw(TestCase):
+    """
+    Tests for reference detail view
+    """
+    def setUp(self):
+        """
+        Creates user, source, unit and reference note
+        """
+        self.user = User.objects.create_user(
+            username='tester',
+            password='test'
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='name',
+            source_type='book'
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='name',
+        )
+        self.reference = Reference.objects.create(
+            unit=self.unit,
+            content='content'
+        )
+
+    def test_authenticated_owner_gets_200(self):
+        """
+        Authenticated owner can access reference note
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(
+            reverse('reference-detail',
+                    args=[self.source.pk, self.unit.pk, self.reference.pk]))
+        self.assertEqual = (response.status_code, 200)

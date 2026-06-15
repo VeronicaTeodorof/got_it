@@ -221,6 +221,17 @@
 | UDP-MT-10 | "No reference notes yet" message for empty state | Message appears correctly | As expected | Pass | |
 
 
+### Reference Detail Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| RDP-MT-01 | Reference detail page loads with no error | For authenticated owner reference detail page loads with no error | As expected | Pass | |
+| RDP-MT-02 | Page not accessible for unauthenticated users | Unauthenticated user visits 'sources/<existant source>/units/<existant unit>/reference/<existant reference>' - redirected to login | As expected | Pass | |
+| RDP-MT-03 | Authenticated user tries to access another user's reference note | Gets 404 | As expected | Pass | |
+| RDP-MT-04 | Authenticated user tries to access inexistent reference note | Gets 404 | As expected | Pass | |
+| RDP-MT-05 | Title, content and location shown on page | Title, content and location shown on page | As expected | Pass | |
+
 
 ### Responsiveness
 
@@ -335,8 +346,15 @@
 | UDP-AT-02 | test_unauthenticated_user_redirected | Any unauthenticated user trying to access a unit detail page is redirected | Pass |
 | UDP-AT-03 | test_authenticated_user_gets_404_for_another_user_unit | Authenticated user trying to access another user's unit detail page gets 404 | Pass |
 | UDP-AT-04 | test_authenticated_user_gets_404_for_inexistent_unit | Authenticated user trying to access a unit detail page for a unit that doesn't exist gets 404 | Pass |
-| UDP-AT_05 | test_unit_name_is_correctly_displayed | Unit name appears on the unit detail page | Pass |
+| UDP-AT-05 | test_unit_name_is_correctly_displayed | Unit name appears on the unit detail page | Pass |
 
+
+### Reference Detail Page
+
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| RDP-AT-01 | test_authenticated_owner_gets_200 | Authenticated owner can access existing reference note | 
 
 
 
