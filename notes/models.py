@@ -82,3 +82,36 @@ class Unit(models.Model):
                 fields=['source', 'unit_name'], name='unique_unit_per_source'
                 )
         ]
+
+
+class Note(models.Model):
+    """
+    An abstract base model for all types of notes
+    """
+    unit = models.ForeignKey(Unit,
+                             on_delete=models.CASCADE,
+                             related_name='%(class)s_notes')
+    title = models.CharField(max_length=100, blank=True)
+    content = models.CharField(max_length=10000)
+    order = models.PositiveIntegerField(null=True, blank=True)
+    creation_date = models.DateTimeField(auto_now_add=True)
+    last_modified_date = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        if self.title:
+            return self.title
+        return f"{self.__class__.__name__} - {self.unit}"
+
+
+class Reference(Note):
+    """
+    A note anchored in the raw source material
+    """
+    location = models.CharField(
+        max_length=255,
+        help_text='stores location on source material: page, timestamp, url',
+        blank=True
+        )
