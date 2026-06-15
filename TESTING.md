@@ -214,6 +214,11 @@
 | UDP-MT-03 | Authenticated user cannot access another user's unit detail page | Authenticated user trying to access another user's unit detail page gets 404 | As expected | Pass | |
 | UDP-MT-04 | Authenticated user gets 404 for inexistent unit detail page | Authenticated user gets 404 for inexistent unit detail page | As expected | Pass | |
 | UDP-MT-05 | Unit name displayed in unit detail page | Unit name correctly appears on unit detail page | As expected | Pass | |
+| UDP-MT-06 | Reference, My Words and Questions tabs present on the page | Reference, My Words and Questions tabs present on the page | As expected | Pass | |
+| UDP-MT-07 | Clicking Reference tab correctly displays reference notes list | Clicking Reference tab correctly displays reference notes list | As expected | Pass | |
+| UDP-MT-08 | Reference note cards correctly display title, content preview and timestamp | Reference note cards correctly display title, content preview and timestamp | As expected | Pass | |
+| UDP-MT-09 | Sidebar correctly shows links to the three note types | Sidebar correctly shows links to the three note types | As expected | Pass | |
+| UDP-MT-10 | "No reference notes yet" message for empty state | Message appears correctly | As expected | Pass | |
 
 
 

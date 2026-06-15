@@ -236,6 +236,9 @@ def unit_detail(request, source_pk, unit_pk):
                              source__user=request.user
                              )
     source = unit.source
+    references = unit.reference_notes.all()
     return render(request,
                   'notes/unit_detail.html',
-                  {'source': source, 'unit': unit})
+                  {'source': source,
+                   'unit': unit,
+                   'references': references})

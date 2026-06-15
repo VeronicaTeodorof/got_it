@@ -6,12 +6,64 @@
             <a class="nav-link" href="{% url 'source-detail' source.pk %}">Units</a>
             <a class="nav-link ps-0" href="{% url 'source-detail'  source.pk %}" title="Add unit">+</a>
         </li>
+        <li class="nav-item"><hr></li>
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="#">Reference</a>
+            <a class="nav-link" href="#">+</a>
+        </li>
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="#">My Words</a>
+            <a class="nav-link" href="#">+</a>
+        </li>
+        <li class="nav-item d-flex">
+            <a class="nav-link" href="#">Questions</a>
+            <a class="nav-link" href="#">+</a>
+        </li>
     {% endblock %}
 
     {% block source-detail %}
         <div>
             <h1 class="m-4">{{source}}</h1>
             <h2 class="m-4">{{unit}}</h2>
+
+            <!-- Navigation tabs for note types -->
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" href="#reference" data-bs-toggle="tab">Reference</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#questions" data-bs-toggle="tab">Questions</a>
+                </li>
+            </ul>
+
+            <!-- Panels for note types -->
+            <div class="tab-content">
+                <div class="tab-pane m-3" id="reference">
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+                        {% for reference in references %}
+                        <div class="col">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h5 class="card-title">{{ reference}}</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text"> {{ reference.content|truncatewords:10 }} </p>
+                                    <a href="#" class="btn btn-primary">Detail</a>
+                                </div>
+                                <div class="card-footer text-body-secondary">
+                                    {{ reference.last_modified_date|date }}
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                            <p>No reference notes yet.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
     {% endblock %}
 
