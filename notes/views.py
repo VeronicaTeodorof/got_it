@@ -287,3 +287,32 @@ def create_reference(request, source_pk, unit_pk):
                    'unit': unit,
                    'form': form}
                   )
+
+
+@login_required
+def edit_reference(request, source_pk, unit_pk, reference_pk):
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+    if request.method == 'POST':
+        form = ReferenceForm(
+            request.POST, instance=reference, unit=unit)
+        if form.is_valid():
+            reference = form.save()
+            return redirect(
+                'reference-detail', source_pk, unit_pk, reference_pk
+                )
+        return render(request,
+                      'notes/edit_reference.html',
+                      {'source': source,
+                       'unit': unit,
+                       'reference': reference,
+                       'form': form
+                       })
+    form = ReferenceForm(instance=reference, unit=unit)
+    return render(request,
+                  'notes/edit_reference.html',
+                  {'source': source,
+                   'unit': unit,
+                   'reference': reference,
+                   'form': form})

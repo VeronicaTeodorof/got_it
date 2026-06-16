@@ -41,5 +41,11 @@ urlpatterns = [
         'sources/<int:source_pk>/units/<int:unit_pk>/reference/create/',
         views.create_reference,
         name='create-reference'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/reference/'
+        '<int:reference_pk>/edit/',
+        views.edit_reference,
+        name='edit-reference'
     )
 ]

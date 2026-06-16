@@ -24,5 +24,10 @@ expandForms.forEach(form => {
     }
 })
 
+// ===== Tooltips =====
+// Initializes Bootstrap tooltips
+const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+tooltips.forEach(el => new bootstrap.Tooltip(el))
+
 
 

@@ -231,6 +231,9 @@
 | RDP-MT-03 | Authenticated user tries to access another user's reference note | Gets 404 | As expected | Pass | |
 | RDP-MT-04 | Authenticated user tries to access inexistent reference note | Gets 404 | As expected | Pass | |
 | RDP-MT-05 | Title, content and location shown on page | Title, content and location shown on page | As expected | Pass | |
+| RDP-MT-06 | Edit icon displayed on page | Edit icon present | As expected | Pass | |
+| RDP-MT-07 | Tooltip display | Tooltip displays on hover | As expected | Pass | |
+| RDP-MT-08 | Click edit icon | Loads edit detail page | As expected | Pass | |
 
 
 ### Create Reference Page
@@ -249,6 +252,17 @@
 | CRP-MT-09 | Save button present on page | Save button presetn on page | As expected | Pass | |
 | CRP-MT-10 | Form submitted with valid data | Redirects to unit detail page with new reference note showing first in grid | As expected | Pass | |
 | CRP-MT-11 | Success message on unit detail page | Successful reference note save prompts success message on unit detail page | As expected | Pass | |
+
+
+### Edit Reference Page
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| ERP-MT-01 | Cancel button present on page | Cancel button present on page | As expected | Pass | |
+| ERP-MT-02 | Cancel button click | Loads reference detail page | As expected | Pass | |
+| ERP-MT-03 | Form is preloaded with correct data | Form is preloaded with correct data | As expected |Pass | |
+| ERP-MT-04 | Save with valid data | Redirects to reference detail page | As expected | Pass | |
+| ERP-MT-05 | Save with empty content | Form rejected, error shown | As expected | Pass | |
 
 
 
