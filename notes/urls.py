@@ -36,5 +36,10 @@ urlpatterns = [
         'reference/<int:reference_pk>/',
         views.reference_detail,
         name='reference-detail'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/reference/create/',
+        views.create_reference,
+        name='create-reference'
     )
 ]

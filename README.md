@@ -9,7 +9,23 @@
 
 - **Workflow Theme**
 1. As a student, I want a reminder to be selective when writing a reference note, so that I can evaluate whether an idea is worth capturing.
-2. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.
+<details>
+<summary>2. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.</summary>
+
+Acceptance Criteria:
+
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see CRP-MT-03 and CRP-MT-06
+- AC2: `New` link visible below Reference tab - see CRP-MT-04
+- AC3: `+` link visible in sidebar near Reference link - see CRP-MT-05
+- AC4: Clicking either create reference buttons links to create_reference.html - see CRP-MT-01, CRP-MT-02
+- AC5: User can enter title, content and location - see CRP-MT-07
+- AC6: Saving note without content prompts error message - see CRP-MT-08
+- AC7: Save button present on the page - see CRP-MT-09
+- AC8: Submitting form with valid data redirects to unit-detail page with new note displaying first in grid see CRP-MT-10
+- AC9: Success message displayed on unit detail page after valid reference note save - see CRP-MT-11
+
+</details>
+
 3. As a student I want to be asked whether I understood a reference note after saving it, so that I can immediately link it to an own words note, a question note, or defer the decision for later.
 4. As a student I want the option to defer the comprehension check on a reference note when I'm not ready to evaluate my understanding, so that I can return to it later without pressure.
 5. As a student, I want to link my own-words and question notes to the reference note they stem from, so that I can trace ideas back to their source and evaluate how well I understood them.

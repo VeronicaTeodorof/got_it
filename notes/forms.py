@@ -1,5 +1,5 @@
 from django import forms
-from .models import Source, Unit
+from .models import Source, Unit, Reference
 
 
 class SourceForm(forms.ModelForm):
@@ -84,3 +84,20 @@ class UnitForm(forms.ModelForm):
                 'unit_name': "You already have a unit with this name."
             })
         return cleaned_data
+
+
+class ReferenceForm(forms.ModelForm):
+    """
+    A form for creating and editing reference notes
+    """
+    class Meta:
+        model = Reference
+        fields = ['title', 'content', 'location']
+        widgets = {
+            'content': forms.Textarea(attrs={'rows': 5})
+        }
+        labels = {
+            'title': 'Title',
+            'content': 'Note',
+            'location': 'Location'
+        }

@@ -10,7 +10,7 @@
         {% block sidebar_note_links %}
             <li class="nav-item d-flex">
                 <a class="nav-link" href="#reference" data-bs-toggle="tab">Reference</a>
-                <a class="nav-link" href="#">+</a>
+                <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}" title="Add reference">+</a>
             </li>
             <li class="nav-item d-flex">
                 <a class="nav-link" href="#">My Words</a>
@@ -33,6 +33,7 @@
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link" href="#reference" data-bs-toggle="tab">Reference</a>
+                        <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}">New</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>

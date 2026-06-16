@@ -5,7 +5,7 @@
 {% block sidebar_note_links %}
     <li class="nav-item d-flex">
         <a class="nav-link" href="{% url 'unit-detail' source.pk unit.pk %}">Reference</a>
-        <a class="nav-link" href="#">+</a>
+        <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}" title="Add reference">+</a>
     </li>
     <li class="nav-item d-flex">
         <a class="nav-link" href="{% url 'unit-detail' source.pk unit.pk %}">My Words</a>

@@ -233,6 +233,26 @@
 | RDP-MT-05 | Title, content and location shown on page | Title, content and location shown on page | As expected | Pass | |
 
 
+### Create Reference Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| CRP-MT-01 | User clicks `+` Add reference in sidebar | Create Reference Page loads | As expected | Pass | |
+| CRP-MT-02 | User clicks `New` link under Reference tab | Create Reference Page loads | As expected | Pass |
+| CRP-MT-03 | Unauthenticated user visits `/sources/<existent source>/units/<existent unit>/reference/create/` | Redirected to login | As expected | Pass | |
+| CRP-MT-04 | `New` link visible under Reference tab | Link visible | As expected | Pass | |
+| CRP-MT-05 | `+` link visible near Reference link in sidebar | Link visible | As expected | Pass | |
+| CRP-MT-06 | Authenticated user visits `/sources/<existent source>/units/<existent unit>/reference/create/`  Create Reference Page loads | As expected | Pass | |
+| CRP-MT-07 | User can enter title, note and location | Title, note and location fields present on the page | As expected | Pass | |
+| CRP-MT-08 | Save form with blank body | Form rejected, error shown | As expected | Pass | |
+| CRP-MT-09 | Save button present on page | Save button presetn on page | As expected | Pass | |
+| CRP-MT-10 | Form submitted with valid data | Redirects to unit detail page with new reference note showing first in grid | As expected | Pass | |
+| CRP-MT-11 | Success message on unit detail page | Successful reference note save prompts success message on unit detail page | As expected | Pass | |
+
+
+
+
 ### Responsiveness
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
@@ -354,7 +374,7 @@
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
-| RDP-AT-01 | test_authenticated_owner_gets_200 | Authenticated owner can access existing reference note | 
+| RDP-AT-01 | test_authenticated_owner_gets_200 | Authenticated owner can access existing reference note |
 
 
 

@@ -3,7 +3,7 @@ from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from .models import Source, Unit, Reference
-from .forms import SourceForm, UnitForm
+from .forms import SourceForm, UnitForm, ReferenceForm
 
 
 # Create your views here.
@@ -220,7 +220,7 @@ def delete_unit(request, source_pk, unit_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
     if request.method == 'POST':
         unit.delete()
-        messages.success(request, "Uni deleted successfully!")
+        messages.success(request, "Unit deleted successfully!")
     return redirect('source-detail', source_pk=source_pk)
 
 
@@ -236,7 +236,7 @@ def unit_detail(request, source_pk, unit_pk):
                              source__user=request.user
                              )
     source = unit.source
-    references = unit.reference_notes.all()
+    references = unit.reference_notes.all().order_by('-last_modified_date')
     return render(request,
                   'notes/unit_detail.html',
                   {'source': source,
@@ -244,6 +244,7 @@ def unit_detail(request, source_pk, unit_pk):
                    'references': references})
 
 
+# --- Reference Notes ---
 @login_required
 def reference_detail(request, source_pk, unit_pk, reference_pk):
     """Retrieve and display a single reference"""
@@ -255,4 +256,34 @@ def reference_detail(request, source_pk, unit_pk, reference_pk):
                   {'source': source,
                    'unit': unit,
                    'reference': reference}
+                  )
+
+
+@login_required
+def create_reference(request, source_pk, unit_pk):
+    """
+    Create reference notes
+    """
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    if request.method == 'POST':
+        form = ReferenceForm(request.POST)
+        if form.is_valid():
+            reference = form.save(commit=False)
+            reference.unit = unit
+            reference.save()
+            messages.success(request, "Reference note saved.")
+            return redirect('unit-detail', source_pk, unit_pk)
+        return render(request,
+                      'notes/create_reference.html',
+                      {'source': source,
+                       'unit': unit,
+                       'form': form}
+                      )
+    form = ReferenceForm()
+    return render(request,
+                  'notes/create_reference.html',
+                  {'source': source,
+                   'unit': unit,
+                   'form': form}
                   )
