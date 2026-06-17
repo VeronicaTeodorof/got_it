@@ -16,3 +16,9 @@
   border-top-right-radius: 5px;
 
 }
+
+/* || ACTIONS DROPDOWN */
+
+.dropdown-menu {
+    --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
+}
