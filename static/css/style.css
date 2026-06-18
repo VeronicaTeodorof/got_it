@@ -1,7 +1,57 @@
-body {
-    background-color: #F9FAFC;
+/* || VARIABLES */
+
+:root {
+--primary-font: 'Inter', 'Arial', sans-serif;
+--handwriting: "Architects Daughter", cursive;
+--navtext: #10341f;
+--navbg: #f5f5f5;
+
 }
 
+/* body {
+  background-color: #f5f5f5;
+}
+
+.lines {
+  border-left: 1px solid #ffaa9f;
+  border-right: 1px solid #ffaa9f;
+  width: 2px;
+  float: left;
+  height: 495px;
+  margin-left: 40px;
+}​ */
+
+/* || NAVBAR */
+.navbar {
+  background-color: var(--navbg);
+}
 .navbar-brand {
   text-decoration: none;
+}
+
+.nav-link {
+  padding: 0.3rem;
+  color: var(--navtext);
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: var(--primary-font);
+}
+
+/* .sign-in {
+  border: 1px solid var(--navtext);
+  border-radius: 6px;
+} */
+
+.sign-up {
+  background-color: var(--navtext);
+  color: var(--navbg);
+  border-radius: 6px;
+}
+
+.logo {
+  height: auto;
+  display: block;
+  width: 6rem;
+  border: 1px solid whitesmoke;
+  border-radius: 50%;
 }
