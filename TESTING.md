@@ -38,6 +38,8 @@
 | AUTH-MT-30 | Successful signup redirects to dashboard page | User is redirected to dashboard page after successful signup | As expected | Pass | Pass |
 | AUTH-MT-31 | Clicking logout redirects to home page | User is redirected to home page after clicking logout | As expected | Pass | Pass |
 | AUTH-MT-32 | After logout, pressing browser back button does not show dashboard | Login page or home page loads (not dashboard) | Browser displays cached dashboard page | Pass | Pass |
+| AUTH-MT-33 | Logged in success message | Message does not appear after successful log in | As expected | Pass | |
+| AUTH-MT-34 | Logged out success message | Message does not appear after successful log out | As expected | Pass | |
 
 ### Home Page
 
