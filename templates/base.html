@@ -5,7 +5,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>got it?</title>
+    <meta name="description" content="got it? - a note-taking app for active learning: capture a source,
+                                      restate it in your own words, or turn it into a question to sit with.">
+    <title>{% block title %}got it?{% endblock %}</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
     <!-- Bootstrap css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
@@ -27,15 +38,15 @@
     <!-- Header -->
     <header>
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar sticky-top">
             <div class="container-fluid">
                 <!-- Logo on the left -->
-                <a  class="navbar-brand me-auto" href="{% url 'home' %}"><img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" height="65"></a>
+                <a  class="navbar-brand me-auto" href="{% url 'home' %}"><img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo"></a>
                 <!-- 'd-flex flex-row' added to force horizontal layout -->
                 <ul class="navbar-nav d-flex flex-row">
-                    <li class="nav-item"><a class="nav-link px-2" href="{% url 'home'%}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link px-2" href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a></li>
                         <li>
                             <form method="POST" action="{% url 'account_logout' %}">
                                 {% csrf_token %}
@@ -43,11 +54,8 @@
                                 </form>
                         </li>
                     {% else %}
-                        <li class="nav-item px-1"><a class="nav-link" href="{% url 'account_login'%}">Sign In</a></li>
-                        <li class="mx-1">
-                            <div class="vr h-100 opacity-100"></div>
-                        </li>
-                        <li class="nav-item px-1"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+                        <li class="nav-item"><a class="nav-link sign-in mx-1" href="{% url 'account_login'%}">Sign In</a></li>
+                        <li class="nav-item"><a class="nav-link sign-up" href="{% url 'account_signup' %}">Sign Up</a></li>
                     {% endif %}
                 </ul>
             </div>
@@ -62,7 +70,12 @@
         </ul>
     {% endif %}
 
+    <!-- Main -->
     {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    {% block footer %}{% endblock %}
+
 
      <!--Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
