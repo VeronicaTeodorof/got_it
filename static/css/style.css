@@ -10,6 +10,9 @@
 
 body {
   font-family: var(--primary-font);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* .lines {
@@ -37,10 +40,20 @@ body {
   font-family: var(--primary-font);
 }
 
+.nav-link:hover {
+  background-color: var(--navtext);
+  color:var(--navbg);
+  border-radius: 6px;
+}
+
 .sign-up {
   background-color: var(--navtext);
   color: var(--navbg);
   border-radius: 6px;
+}
+.sign-up:hover {
+  background-color: rgb(71, 163, 71);
+  color: var(--navbg);
 }
 
 .logo {
@@ -49,4 +62,25 @@ body {
   width: 6rem;
   border: 1px solid whitesmoke;
   border-radius: 50%;
+}
+
+/* || MEDIA QUERIES */
+/* for small and medium screens between 375px and 768px */
+@media screen and (min-width: 375px) and (max-width: 768px) {
+  .nav-link {
+    font-size: 1rem;
+  }
+  .logo {
+    width: 7rem;
+  }
+}
+
+/* for small and medium screens between 375px and 768px */
+@media screen and (min-width: 768px) {
+  .nav-link {
+    font-size: 1.1rem;
+  }
+  .logo {
+    width: 7.5rem;
+  }
 }

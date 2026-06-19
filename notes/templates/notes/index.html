@@ -9,21 +9,28 @@
   <!-- Main -->
   <main class="notebook-bg">
     <div class="container">
-    <div class="row align-items-center">
-        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+      <div class="row align-items-center">
+        <div class="col-12 d-flex flex-column align-items-center">
           <h1 class="tagline text-center mt-4 mb-0">The note-taking app that makes you <br> <span class="motto">question your understanding.</span></h1>
-          <a href="{% url 'account_signup'%}" class="btn cta mt-0 mb-5">Get started</a>
+          <a href="{% url 'account_signup'%}" class="btn cta mt-0 mb-5 mb-md-0">Get started</a>
         </div>
-        <div class="col-12 col-md-6 mt-4 d-flex flex-column align-items-center">
-          <h2 class="fs-6 mb-0">How it works:</h2>
-          <img src="{% static 'images/hero-image-clean.svg' %}" class="workflow mt-0" alt="app workflow">
-          <p class="ms-5">Capture raw material in reference notes. Explain it in your own words - or turn it into a question to sit with until it clicks.</p>
-        </div>
+      </div>
+      <div class="row align-items-center">
+          <div class="col-12 col-md-5 d-flex flex-column align-items-center">
+            <h2 class="fs-6 mb-0 d-lg-none">How it works:</h2>
+            <img src="{% static 'images/hero-image-clean.svg' %}" class="workflow mt-0" alt="app workflow">
+          </div>
+          <div class="col-12 col-md-7 align-items-start">
+            <h2 class="fs-6 d-none d-md-block">How it works:</h2>
+            <p class="how-to">Capture raw material in reference notes. Explain it in your own words - or turn it into a question to sit with until it clicks.</p>
+          </div>
+      </div>
+    </div>
   </main>
 
   <!-- Footer -->
   <div class="footer-wrapper">
-    <footer class="footer m-3 mt-3">
+    <footer class="footer m-3 mt-auto">
       <p class="pt-3">
         &copy; 2026 <span class='name'>Veronica Teodorof</span> ·
         <a href="https://github.com/VeronicaTeodorof" target="_blank" rel="noopener">GitHub</a> ·

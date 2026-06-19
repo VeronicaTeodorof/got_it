@@ -24,12 +24,11 @@
 <details>
 <summary>12 As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
 
-
 Acceptance Criteria:
-AC1: Home page displays the app's value proposition (tagline/headline)
-AC2: Home page displays a "How it works" explanation of the note-taking flow
-AC3: Home page displays a primary "Get started" CTA
-AC4: Home page footer displays attribution and relevant links
+- AC1: Home page displays the app's value proposition (tagline/headline)
+- AC2: Home page displays a "How it works" explanation of the note-taking flow
+- AC3: Home page displays a primary "Get started" CTA
+- AC4: Home page footer displays attribution and relevant links
 </details>
 <details>
 <summary>13. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
@@ -47,6 +46,13 @@ Acceptance Criteria:
 <summary>17. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
 
 Acceptance Criteria:
+**Home Page**:
+- AC1: Home page content reflows correctly on mobile viewports (single-column stack: headline, CTA, diagram, text, footer all stack vertically) -see RES-MT-08
+- AC2: Home page content displays as a two-column layout on tablet/desktop viewports (≥768px) for the "How it works" diagram and explanation -see RES-MT-09
+- AC3: Navigation bar remains usable and readable at all tested breakpoints (no overlapping or cut-off links) - see RES-MT-10
+- AC4: Footer remains pinned to the bottom of the viewport when content is shorter than the screen, on all tested breakpoints -see RES-MT-11
+- AC5: Images/diagrams scale appropriately without distortion or overflow at each breakpoint - see RES-MT-12
+
 - Sidebar is visible by default on desktop → RES-MT-02
 - Sidebar is hidden by default on mobile and can be opened via the toggler → RES-MT-03, RES-MT-05
 - Toggler is visible on mobile and hidden on desktop → RES-MT-04

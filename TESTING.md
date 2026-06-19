@@ -292,6 +292,11 @@
 | RES-MT-05 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
 | RES-MT-06 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
 | RES-MT-07 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
+| RES-MT-08 | Home page content stacks in single column on mobile | Headline, CTA, diagram, text, and footer stack vertically | As expected | Pass | |
+| RES-MT-09 | "How it works" diagram and text display side by side on tablet/desktop | Two-column layout from md breakpoint up | As expected | Pass | |
+| RES-MT-10 | Navbar remains usable at all tested breakpoints | All nav links visible, no overlap or cut-off | As expected | Pass | |
+| RES-MT-11 | Footer sits at bottom of viewport when content is shorter than screen | Footer pinned to bottom, no gap below it | As expected | Pass | |
+| RES-MT-12 | Images/diagram scale without distortion across breakpoints | Diagram resizes proportionally, no overflow or stretching | as expected | Pass | |
 
 
 ## Automated Testing (AT)
