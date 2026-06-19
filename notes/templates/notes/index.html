@@ -1,5 +1,35 @@
 {% extends "base.html" %}
+{% load static %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+{% endblock %}
+
 
 {% block content %}
-    <h1>Home</h1>
+  <!-- Main -->
+  <main class="notebook-bg">
+    <div class="container">
+    <div class="row align-items-center">
+        <div class="col-12 col-md-6 d-flex flex-column align-items-center">
+          <h1 class="tagline text-center mt-4 mb-0">The note-taking app that makes you <br> <span class="motto">question your understanding.</span></h1>
+          <a href="{% url 'account_signup'%}" class="btn cta mt-0 mb-5">Get started</a>
+        </div>
+        <div class="col-12 col-md-6 mt-4 d-flex flex-column align-items-center">
+          <h2 class="fs-6 mb-0">How it works:</h2>
+          <img src="{% static 'images/hero-image-clean.svg' %}" class="workflow mt-0" alt="app workflow">
+          <p class="ms-5">Capture raw material in reference notes. Explain it in your own words - or turn it into a question to sit with until it clicks.</p>
+        </div>
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-wrapper">
+    <footer class="footer m-3 mt-3">
+      <p class="pt-3">
+        &copy; 2026 <span class='name'>Veronica Teodorof</span> ·
+        <a href="https://github.com/VeronicaTeodorof" target="_blank" rel="noopener">GitHub</a> ·
+        <!-- TODO: add real LinkedIn URL -->
+        <a href="https://www.linkedin.com/in/veronica-teodorof-b32b34206/" target="_blank" rel="noopener">LinkedIn</a>
+      </p>
+    </footer>
+  </div>
 {% endblock %}

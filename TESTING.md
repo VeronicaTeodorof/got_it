@@ -41,7 +41,8 @@
 | AUTH-MT-33 | Logged in success message | Message does not appear after successful log in | As expected | Pass | |
 | AUTH-MT-34 | Logged out success message | Message does not appear after successful log out | As expected | Pass | |
 
-### Home Page
+
+### Navigation
 
 
 | Test ID | Test | Expected | Actual |Local | Deployment |
@@ -50,6 +51,17 @@
 | HP-MT-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass |
 | HP-MT-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
 | HP-MT-04 | Logged-in user visits home page | Dashboard link and Logout button visible in navbar, no Sign In and Sign Up links| As expected | Pass | Pass |
+
+
+### Home Page
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| HP-MT-01 | Tagline present on home page | Tagline present on home page | As expected | Pass | |
+| HP-MT-02 | How it works diagram and text | Diagram and text present on home page | As expected | Pass | |
+| HP-MT-03 | Primary CTA | Get started button present on home page | As expected | Pass | |
+| HP-MT-04 | Footer attribution and links | Attribution and links present on page footer | As expected | Pass | |
 
 
 ### Dashboard Page
@@ -395,6 +407,10 @@
 
 
 ## Known Bugs
+### Sticky top bug
+**Description** Sticky-top not sticking in Chrome/Edge despite correct computed CSS (position: sticky, top: 0); overflow/transform ruled out on all ancestors via getComputedStyle loop; no inline styles; getBoundingClientRect confirms nav moves with scroll instead of pinning. Confirmed broken specifically on mobile viewport; untested on desktop due to insufficient content to scroll.
+
+
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
 

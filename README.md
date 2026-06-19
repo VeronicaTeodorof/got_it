@@ -26,11 +26,10 @@
 
 
 Acceptance Criteria:
-- AC1: Home page loads without errors - see HP-AT-01
-- AC2: User can see a navigation bar with a signup and login link - see HP-AT-01
-- AC3: Clicking signup takes the user to the signup page - see HP-MT-02
-- AC4: Clicking login takes the user to the login page - see HP-MT-03
-- AC5: Logged-in users see a logout link in the navbar instead of sign up and login links - see HP-MT-04
+AC1: Home page displays the app's value proposition (tagline/headline)
+AC2: Home page displays a "How it works" explanation of the note-taking flow
+AC3: Home page displays a primary "Get started" CTA
+AC4: Home page footer displays attribution and relevant links
 </details>
 <details>
 <summary>13. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
