@@ -1,17 +1,51 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block head_title %}Signup{% endblock head_title %}
+{% block head_title %}got it? | Sign Up{% endblock head_title %}
 {% block content %}
-    <h1>Sign Up</h1>
-    <p>Already have an account? <a href="{{ login_url }}">Sign in</a></p>
-    <form method="post" action="{% url 'account_signup' %}">
-        {% csrf_token %}
+    <main class="notebook-bg">
+        <div class="auth-card text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h1 class="auth-title">Sign Up</h1>
+                    </div>
 
-        <!-- form.as_p renders all form fields automatically, each wrapped in a <p> tag, provided by allauth SignupView -->
-        {{ form.as_p }}
+                </div>
+                <!-- <div class="row">
+                    <div class="col-12">
+                        <p>Already have an account? <a href="{{ login_url }}">Sign in</a></p>
+                    </div>
+                </div> -->
+                <form method="post" action="{% url 'account_signup' %}" novalidate>
+                    {% csrf_token %}
+                    <div class="auth-field">
+                        <label for="{{form.email.id_for_label}}" class="visually-hidden">email: </label>
+                        {{form.email}}
+                        {{form.email.errors}}
+                    </div>
+                    <div class="auth-field">
+                        <label for="{{form.username.id_for_label}}" class="visually-hidden">username: </label>
+                        {{form.username}}
+                        {{form.username.errors}}
+                    </div>
+                    <div class="auth-field">
+                        <label for="{{form.password1.id_for_label}}" class="visually-hidden">password: </label>
+                        {{form.password1}}
+                        {{form.password1.errors}}
+                    </div>
+                    <div class="auth-field">
+                        <label for="{{form.password2.id_for_label}}" class="visually-hidden">confirm password: </label>
+                        {{form.password2}}
+                        {{form.password2.errors}}
+                    </div>
 
-        <!-- redirect_field is a hidden input that stores where to send the user after signup, provided by allauth SignupView -->
-        {{ redirect_field }}
-        <button type="submit">Sign Up</button>
-    </form>
+                    <!-- redirect_field is a hidden input that stores where to send the user after signup, provided by allauth SignupView -->
+                    {{ redirect_field }}
+                    <button class="btn btn-auth" type="submit">Get Started</button>
+                </form>
+                <p class="text-center auth-link">already have an account? <a href="{% url 'account_login' %}">sign in</a></p>
+            </div>
+        </div>
+    </main>
 {% endblock %}

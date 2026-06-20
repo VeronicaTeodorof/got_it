@@ -64,6 +64,88 @@ body {
   border-radius: 50%;
 }
 
+/* Notebook ruled-paper background, designed with Claude (Anthropic) */
+.notebook-bg {
+  background-image:
+    repeating-linear-gradient(to bottom, transparent, transparent 31px, #d6d6d6 32px),
+    linear-gradient(to right, transparent, transparent 39px, #f4b8b8 40px, transparent 41px);
+}
+
+main.notebook-bg {
+  flex: 1;
+}
+
+/* || Authentication*/
+.auth-card {
+  background-color: transparent;
+  margin: 3rem 1rem 2rem 3rem;
+  padding: 1rem;
+}
+
+.auth-title {
+  font-size: 2rem;
+  font-family: var(--handwriting);
+  font-weight: bold;
+}
+
+.auth-field {
+  margin-bottom: 2.5rem;
+}
+.auth-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1.5px solid #1B3B2D;
+    border-radius: 0;
+    background: transparent;
+    padding: 4px 4px;
+    font-size: 1rem;
+}
+.auth-input:focus {
+    outline: none;
+    border-bottom-width: 2px;
+}
+.btn-auth {
+  width: 100%;
+  background: #1B3B2D;
+  color: #fff;
+  border: none;
+  padding: 11px;
+  font-size: 15px;
+  border-radius: 6px;
+  font-weight: 500;
+  max-width: 150px;
+}
+
+.btn-auth:hover {
+  background:rgb(71, 163, 71);
+  color: white;
+}
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    color: #e14444;
+    font-size: 0.9rem;
+}
+.auth-link {
+    font-size: 1rem;
+    color: #5C7568;
+    margin-top: 2rem;
+}
+
+.auth-link a {
+    color: #20543d;
+    font-weight: 500;
+}
+
+/* || SIGN UP PAGE */
+.log {
+  background-color: var(--navbg);
+}
+#sign-in {
+  margin-top: 6rem;
+}
+
 /* || MEDIA QUERIES */
 /* for small and medium screens between 375px and 768px */
 @media screen and (min-width: 375px) and (max-width: 768px) {
@@ -75,12 +157,15 @@ body {
   }
 }
 
-/* for small and medium screens between 375px and 768px */
+/* for medium  and large screens 768px and above */
 @media screen and (min-width: 768px) {
   .nav-link {
     font-size: 1.1rem;
   }
   .logo {
     width: 7.5rem;
+  }
+  .auth-input {
+    width: 480px;
   }
 }

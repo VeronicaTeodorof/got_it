@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1']
 
@@ -141,6 +141,10 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_LOGIN_METHODS = {'email'}
 # Remember to remove when working on email verification feature
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_FORMS = {
+    'signup': 'gotit.forms.CustomSignupForm',
+    'login': 'gotit.forms.CustomLoginForm',
+}
 
 
 # Internationalization
