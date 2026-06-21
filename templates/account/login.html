@@ -24,6 +24,10 @@
                         {{form.password}}
                         {{form.password.errors}}
                     </div>
+                    <div class="auth-field">
+                        {{form.remember}}
+                        <label for="{{form.remember.id_for_label}}">remember me</label>
+                    </div>
 
                     <!-- redirect_field is a hidden input that stores where to send the user after signup, provided by allauth SignupView -->
                     {{ redirect_field }}
