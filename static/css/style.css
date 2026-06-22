@@ -120,6 +120,8 @@ main.notebook-bg {
   background:rgb(71, 163, 71);
   color: white;
 }
+
+/* .errorlist is Django's default class for {{field.errors}} output */
 .errorlist {
     list-style: none;
     padding: 0;

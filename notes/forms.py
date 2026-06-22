@@ -17,6 +17,13 @@ class SourceForm(forms.ModelForm):
         # None is the fallback if 'user' is not passed
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+        new_choices = []
+        for choice in self.fields['source_type'].choices:
+            if choice[0] == '':
+                new_choices.append(('', 'type'))
+            else:
+                new_choices.append(choice)
+        self.fields['source_type'].choices = new_choices
 
     class Meta:
         model = Source
@@ -25,6 +32,14 @@ class SourceForm(forms.ModelForm):
             'source_name': 'Name',
             'source_author': 'Author',
             'source_type': 'Type'
+        }
+        widgets = {
+            'source_name': forms.TextInput(attrs={'class': 'form-input',
+                                                  'placeholder': 'name'}),
+            'source_author': forms.TextInput(attrs={'class': 'form-input',
+                                                    'placeholder': 'author'}),
+            'source_type': forms.Select(attrs={'class': 'form-input',
+                                               'placeholder': 'type'}),
         }
 
     def clean_source_author(self):
