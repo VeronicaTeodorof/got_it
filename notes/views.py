@@ -35,7 +35,8 @@ def dashboard(request):
             source = form.save(commit=False)
             source.user = request.user
             source.save()
-            return redirect('source-detail', source_pk=source.pk)
+            messages.success(request, "Source added successfully.")
+            return redirect('dashboard')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SourceForm(user=request.user)
