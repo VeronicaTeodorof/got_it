@@ -209,3 +209,15 @@ span.motto {
     font-size: 1.1rem;
   }
 }
+  /* for large screens 1024px and larger*/
+  @media screen and (min-width: 1024px) {
+    /* || Forms */
+    .form-input {
+      width: 80%;
+    }
+    /* || Dashboard */
+    .dashboard-margin-line {
+      background-image:
+      linear-gradient(to right, transparent, transparent 125px, #f4b8b8 126px, transparent 127px);
+    }
+  }

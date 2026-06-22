@@ -7,8 +7,8 @@
 
 {% block content %}
   <!-- Main -->
-  <main>
-    <div class="container-fluid">
+  <main class="dashboard-margin-line">
+    <div class="container-fluid container-md">
       {% block dashboard_content %}
         <h1 class="visually-hidden">Sources</h1>
 
@@ -60,7 +60,7 @@
 
         <!-- Sources List -->
         <section>
-          <h2 class="your-sources-heading">Your Sources</h2>
+          <h2 class="your-sources-heading">My Sources</h2>
           <ul class="your-sources-list">
             {% for source in sources %}
               <li class="custom-list-item">
