@@ -14,7 +14,7 @@ main {
 .messages {
   list-style: none;
   margin: 0;
-  padding: 12px 0;
+  padding-top:3rem;
   text-align: center;
   background-color: #f9f9f9;
 }
@@ -91,6 +91,25 @@ main {
   line-height: 2;
   text-align: center;
 }
+
+/* || Lists */
+.custom-list-item {
+  list-style: none;
+  margin: 0.8rem 0;
+  padding: 0 0 0.1rem 0;
+  border-bottom: 1.5px solid #1B3B2D;
+  max-width: 80%;
+}
+
+.custom-list-item a {
+  color: #1B3B2D;
+  text-decoration: none;
+}
+
+.custom-list-item a:hover {
+  text-decoration: underline;
+}
+
 /* || HOME PAGE */
 .notebook-bg {
   background-image:
@@ -145,6 +164,14 @@ span.motto {
 .name {
   font-family: var(--handwriting);
   font-style: italic;
+}
+
+/* || DASHBOARD */
+.your-sources-heading {
+  text-align:left;
+  color:#bb6f6f;
+  margin-top: 1rem;
+  padding-left: 1.7rem
 }
 /* || LAYOUT */
 
