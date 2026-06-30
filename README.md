@@ -243,6 +243,7 @@ Acceptance Criteria:
 - AC9: Saving note with blank body prompts error - see ERP-MT-05
 - AC10: Cancel button present on edit page - see ERP-MT-01
 - AC11: Clicking cancel button loads reference detail page - see ERP-MT-02
+</details>
 
 32. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
 33. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
@@ -342,17 +343,50 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 
 ## Design Decisions
 
+### Navigation Architecture
+**Problem**
+The original mobile layout used a single unlabeled forward arrow to open the offcanvas navigation. This created a real usability gap: nothing on the page told users how to get back to the sources list. The arrow itself pointed forward, so even users who tried it for that purpose were working against its visual meaning, and there was no separate, correctly-oriented control for returning to a previous page at all. Users had no reliable way to navigate back.
 
-### Navigation & Layout
+**Goals:**
 
-- Persistent sidebar with two sections separated by a horizontal rule: organisational (Sources, Units) and note types (Reference, My Words, Questions)
-- ... dropdown for edit/delete actions on list items, keeping lists clean
-- Arrow indicator on list rows to signal they are clickable links
-- Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab
-- Sidebar on note detail pages provides navigation back to unit context
+- Make every navigation control state where it leads.
+- Avoid redundant navigation paths (the same destination reachable two different visible ways on the same screen).
+- Reflect the app's actual hierarchy (Source → Unit → Note) rather than imposing a flat menu that implies destinations aren't really reachable.
+- Scale gracefully from mobile to desktop without maintaining two unrelated navigation systems.
+
+**Approach considered and rejected: persistent icon rail**
+An early option was a slim, always-visible sidebar with single-letter abbreviations (S / U / N) for Sources, Units, Notes. This was rejected because:
+
+Notes aren't reachable without first selecting a Unit, so a flat S/U/N rail would need disabled/dimmed states at shallower depths, which adds complexity without adding real navigation.
+The rail's contents would need to change shape depending on the current page (dashboard vs. source detail vs. unit detail), undermining the consistency it was meant to provide.
+
+**Final approach: two-tier navigation + depth-aware menu**
+Top navbar (unchanged): brand mark, Home, Dashboard, Log out. Persistent across all pages and breakpoints.
+Mobile: second nav bar, directly below the top navbar, contextual per page:
+
+Left: a single labelled back-link combining "go up" and "go to creation" into one destination, since both land on the same list/index page (e.g. "Change source or add one", "Change unit or add one", "Change note or add a new one"). On the new-note page specifically, this becomes "View all notes", since there's nothing yet to "change."
+Right (only on pages with more than one add-action or a multi-level jump need): "Menu" + hamburger icon, opening a Bootstrap offcanvas.
+
+Offcanvas menu appears only from Unit detail downward, since that's the point where a single inline button can no longer represent all available content types. It groups:
+
+Navigation shortcuts to jump more than one level up (Sources, Units).
+Add-actions per content type (Sources, Units, Reference, Own words, Questions).
+
+Source detail and Dashboard don't need the menu. For Source detail its only one-level-up path is inline, as are all available actions (single "Create unit" button, three-dot dropdown for edit/delete).
+Inline actions (three-dot dropdown for edit/delete) are used consistently at every depth next to the relevant title (source title, unit title), rather than living in the menu, since edit/delete apply to "the thing I'm looking at," not "something I want to navigate to."
+Desktop: the second nav bar and offcanvas are replaced by a permanent sidebar, occupying the space already implied by the app's existing vertical accent border. The sidebar shows the same depth-appropriate actions as the offcanvas/back-link combination would on mobile, but always visible, with no back-link duplicate, since showing the same destination two different ways on one screen was judged to be redundant rather than helpful.
+
+**Rule of thumb**
+Show exactly what's reachable from the current page, once. A menu (offcanvas or sidebar) is only introduced where a page needs more than one add-action or a jump of more than one level; everything else stays inline.
+
+**Open item**
+
+Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.
+
 
 ### Notes Display
 
+- Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab
 - Reference notes displayed as Bootstrap card grid (3 columns, h-100 for equal height)
 - Cards show title and truncated content preview only
 - Evaluated/Pending distinction: green border = evaluated, blue border = pending
@@ -373,7 +407,7 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 ### Terminology
 
 - Consistent naming throughout: Reference, My Words, Questions
-- E- valuated/Pending for reference note status
+- Evaluated/Pending for reference note status
 - Answered/Unanswered for question status
 
 ### Visual Identity
