@@ -412,6 +412,9 @@
 
 
 ## Known Bugs
+### No user feedback on incorrect login credentials
+When a user submits the login form with an incorrect username/password combination, no error message is displayed to the user.
+
 ### Sticky top bug
 **Description** Sticky-top not sticking in Chrome/Edge despite correct computed CSS (position: sticky, top: 0); overflow/transform ruled out on all ancestors via getComputedStyle loop; no inline styles; getBoundingClientRect confirms nav moves with scroll instead of pinning. Confirmed broken specifically on mobile viewport; untested on desktop due to insufficient content to scroll.
 
