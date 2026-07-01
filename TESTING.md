@@ -90,7 +90,10 @@
 | HP-MT-01 | Tagline present on home page | Tagline present on home page | As expected | Pass | |
 | HP-MT-02 | How it works diagram and text | Diagram and text present on home page | As expected | Pass | |
 | HP-MT-03 | Primary CTA | Get started button present on home page | As expected | Pass | |
-| HP-MT-04 | Footer attribution and links | Attribution and links present on page footer | As expected | Pass | |
+| HP-MT-04 | Click 'Get started' link | Navigates to Sign up page | As expected | Pass | |
+| HP-MT-05 | Footer attribution and links | Attribution and links present on page footer | As expected | Pass | |
+| HP-MT-06 | Click GitHub link | Opens correct GitHub page in a new tab | As expected | Pass | |
+| HP-MT-07 | Click LinkedIn link | Opens correct LinkedIn page in a new tab | As expected | Pass | |
 
 
 ### Dashboard Page
@@ -315,18 +318,32 @@
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|--------|-------|------------|
 | RES-MT-01 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | Pass |
+
+
+#### Navigation
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
 | RES-MT-02 | Navbar container switches from full-width to constrained width at breakpoint | Navbar spans full viewport width on mobile (container-fluid); switches to a constrained, centered container at medium breakpoint and above (container-md) | As expected | Pass | |
-| RES-MT-03 | Sidebar visible by default on desktop | Sidebar displayed as a permanent fixture in the layout | As expected | Pass | |
-| RES-MT-04 | Sidebar hidden by default on mobile | Sidebar hidden by default on mobile | As expected | Pass | |
-| RES-MT-05 | Toggler visible on mobile, hidden on desktop | Toggler visible on mobile, hidden on desktop | As expected | Pass | |
-| RES-MT-06 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
-| RES-MT-07 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
-| RES-MT-08 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
-| RES-MT-09 | Home page content stacks in single column on mobile | Headline, CTA, diagram, text, and footer stack vertically | As expected | Pass | |
-| RES-MT-10 | "How it works" diagram and text display side by side on tablet/desktop | Two-column layout from md breakpoint up | As expected | Pass | |
-| RES-MT-11 | Navbar remains usable at all tested breakpoints | All nav links visible, no overlap or cut-off | As expected | Pass | |
-| RES-MT-12 | Footer sits at bottom of viewport when content is shorter than screen | Footer pinned to bottom, no gap below it | As expected | Pass | |
-| RES-MT-13 | Images/diagram scale without distortion across breakpoints | Diagram resizes proportionally, no overflow or stretching | as expected | Pass | |
+| RES-MT-03 | Navbar remains usable at all tested breakpoints | All nav links visible, no overlap or cut-off | As expected | Pass | |
+| RES-MT-04 | Sidebar visible by default on desktop | Sidebar displayed as a permanent fixture in the layout | As expected | Pass | |
+| RES-MT-05 | Sidebar hidden by default on mobile | Sidebar hidden by default on mobile | As expected | Pass | |
+| RES-MT-06 | Toggler visible on mobile, hidden on desktop | Toggler visible on mobile, hidden on desktop | As expected | Pass | |
+| RES-MT-07 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
+| RES-MT-08 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
+| RES-MT-09 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
+
+#### Home Page
+
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| RES-MT-10 | Home page content stacks in single column on mobile | Headline, CTA, diagram, text, and footer stack vertically | As expected | Pass | |
+| RES-MT-11 | "How it works" diagram and text display side by side on tablet/desktop | Two-column layout from md breakpoint up | As expected | Pass | |
+| RES-MT-12 | "How it works" heading display across breakpoints | Visible above diagram on small sreens (> 768px) and above text on all other screen sizes; no duplicates | As expected | |
+| RES-MT-13 | Footer sits at bottom of viewport when content is shorter than screen | Footer pinned to bottom, no gap below it | As expected | Pass | |
+| RES-MT-14 | Images/diagram scale without distortion across breakpoints | Diagram resizes proportionally, no overflow or stretching | as expected | Pass | |
 
 
 ## Automated Testing (AT)

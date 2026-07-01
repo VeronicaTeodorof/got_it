@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
 {% endblock %}
 
+{% block head_title %}got it? | Home{% endblock head_title %}
 
 {% block content %}
   <!-- Main -->
@@ -17,7 +18,7 @@
       </div>
       <div class="row align-items-center">
           <div class="col-12 col-md-5 d-flex flex-column align-items-center">
-            <h2 class="fs-6 mb-0 d-lg-none">How it works:</h2>
+            <h2 class="fs-6 mb-0 d-md-none">How it works:</h2>
             <img src="{% static 'images/hero-image-clean.svg' %}" class="workflow mt-0" alt="app workflow">
           </div>
           <div class="col-12 col-md-7 align-items-start">

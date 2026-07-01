@@ -31,13 +31,15 @@
 - AC4: Navbar container switches between full-width and constrained-width layout at the medium breakpoint - see MNAV-MT-02
 - AC5: All navbar links are keyboard-navigable with visible focus indicators
 </details>
+<details>
 <summary>13 As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
 
 Acceptance Criteria:
-- AC1: Home page displays the app's value proposition (tagline/headline)
-- AC2: Home page displays a "How it works" explanation of the note-taking flow
-- AC3: Home page displays a primary "Get started" CTA
-- AC4: Home page footer displays attribution and relevant links
+- AC1: Home page displays the app's value proposition (tagline/headline) - see  HP-MT-01
+- AC2: Home page displays a "How it works" explanation of the note-taking flow - see HP-MT-02
+- AC3: Home page displays a primary "Get started" CTA - see HP-MT-03
+- AC4: Clicking 'Get started' link navigates to Sign up page - see HP-MT-04
+- AC5: Home page footer displays attribution and relevant links - see HP-MT-05, HP-MT-06 and HP-MT-07
 </details>
 <details>
 <summary>14. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
