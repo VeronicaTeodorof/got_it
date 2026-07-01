@@ -1,5 +1,34 @@
 ## Manual Testing (MT)
 
+### Base
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| BASE-MT-01 | Favicon and static assets load correctly | Favicon displays in browser tab; no 404s in console for static files | As expected | Pass | |
+| BASE-MT-02 | Navbar remains fixed at top of viewport when scrolling | Navbar stays visible/sticky at top of page as user scrolls down | Fails — navbar scrolls with content instead of pinning. Confirmed on mobile and desktop, Chrome/Edge, devtools emulation. See Known Bugs: Sticky top bug | Fail | |
+
+
+### Navigation
+
+#### Main Navigation
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| MNAV-MT-01 | Logo image loads and links to home page | Logo displays correctly in navbar; clicking logo navigates to home page | As expected | Pass | |
+| MNAV-MT-02 | "Home" nav link navigates to home page | Home page | As expected | Pass | |
+| MNAV-MT-03 | Dashboard link visible for authenticated user | Dashboard link appears in navbar when user is logged in | As expected | Pass | |
+| MNAV-MT-04 | Dashboard link hidden for unauthenticated user | Dashboard link does not appear in navbar when user is logged out | As expected | Pass | |
+| MNAV-MT-05 | Clicking "Dashboard" link navigates to dashboard page | Dashboard page loads | As expected | Pass | |
+| MNAV-MT-06 | Logout button visible for authenticated user | Logout button appears in navbar when user is logged in | As expected | Pass | |
+| MNAV-MT-07 | Logout button hidden for unauthenticated user | Logout button does not appear in navbar when user is logged out | As expected | Pass | |
+| MNAV-MT-08 | Clicking Logout redirects to home page | User is redirected to home page after logging out | As expected | Pass | |
+| MNAV-MT-09 | Sign In and Sign Up links visible for unauthenticated user | Sign In and Sign Up links appear in navbar when user is logged out | As expected | Pass | |
+| MNAV-MT-10 | Sign In and Sign Up links hidden for authenticated user | Sign In and Sign Up links do not appear in navbar when user is logged in | As expected | Pass | |
+| MNAV-MT-11 | Clicking "Sign In" link navigates to sign in page | Sign in page loads | As expected | Pass | |
+| MNAV-MT-12 | Clicking "Sign Up" link navigates to sign up page | Sign up page loads | As expected | Pass | |
+
+
+
 
 ### Authentication
 
@@ -286,17 +315,18 @@
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|--------|-------|------------|
 | RES-MT-01 | No horizontal scrolling on any screen size | Page fits within screen width on all devices | As expected | Pass | Pass |
-| RES-MT-02 | Sidebar visible by default on desktop | Sidebar displayed as a permanent fixture in the layout | As expected | Pass | |
-| RES-MT-03 | Sidebar hidden by default on mobile | Sidebar hidden by default on mobile | As expected | Pass | |
-| RES-MT-04 | Toggler visible on mobile, hidden on desktop | Toggler visible on mobile, hidden on desktop | As expected | Pass | |
-| RES-MT-05 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
-| RES-MT-06 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
-| RES-MT-07 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
-| RES-MT-08 | Home page content stacks in single column on mobile | Headline, CTA, diagram, text, and footer stack vertically | As expected | Pass | |
-| RES-MT-09 | "How it works" diagram and text display side by side on tablet/desktop | Two-column layout from md breakpoint up | As expected | Pass | |
-| RES-MT-10 | Navbar remains usable at all tested breakpoints | All nav links visible, no overlap or cut-off | As expected | Pass | |
-| RES-MT-11 | Footer sits at bottom of viewport when content is shorter than screen | Footer pinned to bottom, no gap below it | As expected | Pass | |
-| RES-MT-12 | Images/diagram scale without distortion across breakpoints | Diagram resizes proportionally, no overflow or stretching | as expected | Pass | |
+| RES-MT-02 | Navbar container switches from full-width to constrained width at breakpoint | Navbar spans full viewport width on mobile (container-fluid); switches to a constrained, centered container at medium breakpoint and above (container-md) | As expected | Pass | |
+| RES-MT-03 | Sidebar visible by default on desktop | Sidebar displayed as a permanent fixture in the layout | As expected | Pass | |
+| RES-MT-04 | Sidebar hidden by default on mobile | Sidebar hidden by default on mobile | As expected | Pass | |
+| RES-MT-05 | Toggler visible on mobile, hidden on desktop | Toggler visible on mobile, hidden on desktop | As expected | Pass | |
+| RES-MT-06 | On mobile, toggler opens sidebar | Toggler opens sidebar on mobile | As expected | Pass | |
+| RES-MT-07 | On mobile, close arrow closes sidebar | Close arrow closes sidebar on mobile | As expected | Pass | |
+| RES-MT-08 | Sidebar sits below navbar | Sidebar top edge aligns with bottom of navbar | As expected | Pass | |
+| RES-MT-09 | Home page content stacks in single column on mobile | Headline, CTA, diagram, text, and footer stack vertically | As expected | Pass | |
+| RES-MT-10 | "How it works" diagram and text display side by side on tablet/desktop | Two-column layout from md breakpoint up | As expected | Pass | |
+| RES-MT-11 | Navbar remains usable at all tested breakpoints | All nav links visible, no overlap or cut-off | As expected | Pass | |
+| RES-MT-12 | Footer sits at bottom of viewport when content is shorter than screen | Footer pinned to bottom, no gap below it | As expected | Pass | |
+| RES-MT-13 | Images/diagram scale without distortion across breakpoints | Diagram resizes proportionally, no overflow or stretching | as expected | Pass | |
 
 
 ## Automated Testing (AT)
@@ -416,8 +446,32 @@
 When a user submits the login form with an incorrect username/password combination, no error message is displayed to the user.
 
 ### Sticky top bug
-**Description** Sticky-top not sticking in Chrome/Edge despite correct computed CSS (position: sticky, top: 0); overflow/transform ruled out on all ancestors via getComputedStyle loop; no inline styles; getBoundingClientRect confirms nav moves with scroll instead of pinning. Confirmed broken specifically on mobile viewport; untested on desktop due to insufficient content to scroll.
+**Description:** Sticky-top not sticking in Chrome/Edge despite correct computed CSS (`position: sticky`, `top: 0`); confirmed broken on both mobile and desktop viewports, independent of pagination changes. `getBoundingClientRect` confirms nav moves with scroll instead of pinning.
 
+**Ruled out:**
+- Overflow on ancestors (checked via computed style loop)
+- Inline style overrides
+- Body/html overflow-x (removed entirely, no effect)
+- `display: flex` on body (removed temporarily, no effect)
+- CSS specificity/override — `.sticky-top` rule confirmed winning in Styles panel,
+  no strikethroughs on position/top/z-index
+- `<header>` structure/sizing — confirmed normal display:block, reasonable height,
+  DOM matches source exactly, no injected wrappers
+- Browser extensions — still fails in Incognito with extensions disabled
+- Bootstrap CDN loading correctly (200 status, not a stale/cached version)
+- Zoom level (confirmed 100%)
+
+**To investigate further:**
+- Test on an actual physical phone (not devtools mobile emulation) — this is the
+  highest-priority next step, since it would confirm whether this is a real bug
+  or a devtools-emulation-specific artifact
+- Build a minimal reproduction: bare navbar + long content, Bootstrap CSS only,
+  no custom style.css — isolate whether it's a Bootstrap version issue or
+  something project-specific
+- Try a completely different browser (Firefox/Safari) to see if it's
+  Chrome/Edge-specific rendering behavior
+- Check for async layout shift (e.g. Google Fonts loading late) affecting sticky's
+  initial containing-block calculation
 
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.

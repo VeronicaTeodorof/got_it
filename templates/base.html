@@ -42,7 +42,6 @@
             <div class="container-fluid container-md">
                 <!-- Logo on the left -->
                 <a  class="navbar-brand me-auto" href="{% url 'home' %}"><img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo"></a>
-                <!-- 'd-flex flex-row' added to force horizontal layout -->
                 <ul class="navbar-nav d-flex flex-row">
                     <li class="nav-item"><a class="nav-link" href="{% url 'home'%}">Home</a></li>
                     {% if request.user.is_authenticated %}
