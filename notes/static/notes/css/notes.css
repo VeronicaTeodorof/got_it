@@ -95,19 +95,24 @@ main {
 /* || Lists */
 .custom-list-item {
   list-style: none;
-  margin: 0.8rem 0;
-  padding: 0 0 0.1rem 0;
   border-bottom: 1.5px solid #1B3B2D;
   max-width: 80%;
 }
 
 .custom-list-item a {
-  color: #1B3B2D;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  padding: 0.8rem 0 0.1rem 0.5rem;
   text-decoration: none;
+  color: inherit;
+  gap: 0.4rem;
 }
 
 .custom-list-item a:hover {
-  text-decoration: underline;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
 /* || HOME PAGE */
@@ -173,6 +178,42 @@ span.motto {
   margin-top: 1rem;
   padding-left: 1.7rem
 }
+
+/* || Source display */
+.source-name{
+  font-weight: bolder;
+}
+
+.badge {
+  border: 1px solid #085041;
+  color: #085041;
+}
+/* .badge-website {
+  background: #E1F5EE;
+  color: #085041;
+}
+
+.badge-video {
+  background: #FAECE7;
+  color: #4A1B0C;
+}
+
+.badge-course {
+  background: #FAEEDA;
+  color: #412402;
+}
+
+.badge-other {
+  background: #F1EFE8;
+  color: #444441;
+} */
+
+.source-date {
+  font-size: 12px;
+  color: #6B6A63;
+  white-space: nowrap;
+}
+
 /* || LAYOUT */
 
 /* Sidebar: offset from top and reduced height to sit below the navbar */
