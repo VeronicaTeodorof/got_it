@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
+from django.core.paginator import Paginator
 from .models import Source, Unit, Reference
 from .forms import SourceForm, UnitForm, ReferenceForm
 
@@ -45,6 +46,9 @@ def dashboard(request):
     sources = Source.objects.filter(user=request.user).order_by(
         '-source_creation_date'
         )
+    paginator = Paginator(sources, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     # Creates a list of prepopulated forms, one per source
     forms = [SourceForm(instance=source) for source in sources]
     # Creates a list of source, form tuples
@@ -54,7 +58,8 @@ def dashboard(request):
     return render(
         request,
         'notes/dashboard.html',
-        {'form': form, 'sources': sources, 'source_forms': source_forms}
+        {'form': form, 'sources': sources, 'source_forms': source_forms,
+         "page_obj": page_obj}
         )
 
 

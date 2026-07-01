@@ -423,9 +423,17 @@ While overriding allauth templates, I came across the i18n library and had to de
 
 
 ## Accessibility
-## Accessibility
 - The offcanvas sidebar includes a visually hidden heading so screen readers can identify the region when it opens.
 - The sidebar's top offset and height are calculated at runtime via JavaScript rather than hardcoded, so the layout remains correct if a user increases their font size or zoom level.
+
+
+### Pagination
+
+- Pagination controls are wrapped in a `<nav>` element with a descriptive `aria-label` ("Source list pagination"), distinct from the site's main navigation, so screen reader users can identify and jump to the pagination landmark independently.
+- Previous/Next links use `rel="prev"` and `rel="next"` to provide anadditional semantic hint for assistive technology and browsers.
+- Previous/Next links are only rendered when a previous or next page actually exists — rather than rendering a disabled or non-functional link, avoiding confusing "dead" links being announced to screen readers.
+- Interactive elements inherit the site-wide `:focus-visible` styling (WCAG 2.4.7), ensuring pagination links remain keyboard-navigable with
+a visible focus indicator.
 
 ## Features
 ### Security and Data Protection Features:

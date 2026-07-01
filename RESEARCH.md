@@ -36,7 +36,7 @@ graph TD
 - Literature notes in Zettelkasten system become two types of notes in my app: reference notes and own words notes.
 
 **Extended - product hypothesis, not yet validated**
-- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.  
+- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.
 
 While not verified by research, this extension is grounded in my experience as a student in self-guided learning context: I write my questions just before the drop-in sessions and these questions do not reflect everything I haven't understood in the previous study week, but having no routine of acknowledging and recording questions, most of them remain as gaps in understanding. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality and quantity of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
 
@@ -45,53 +45,53 @@ While not verified by research, this extension is grounded in my experience as a
 The workflow above, combined with authentication, forms the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above (although the workflow is applicable to any independent learner engaging with source material) — and then set out to understand what users actually expect from a note-taking app.
 
 
-**Market Research for Landing and Dashboard/Editor**  
+**Market Research for Landing and Dashboard/Editor**
 
 I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
-1. OneNote - mainstream app: https://onenote.cloud.microsoft/  
+1. OneNote - mainstream app: https://onenote.cloud.microsoft/
 
-Home Page:  
+Home Page:
 
-<img src="docs/research-assets/market-research/one_note_home.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/one_note_home.png" style="height: 400px">
 
-Dashboard:  
+Dashboard:
 
-<img src="docs/research-assets/market-research/one_note_dashboard.png" style="height: 400px">  
-
-
-2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes  
-
-Home Page:  
-
-<img src="docs/research-assets/market-research/notion_home.png" style="height: 400px">  
-
-Dashboard:  
-
-<img src="docs/research-assets/market-research/notion_dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/one_note_dashboard.png" style="height: 400px">
 
 
-3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/  
+2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes
 
-Home Page:  
+Home Page:
 
-<img src="docs/research-assets/market-research/obsidian-home.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/notion_home.png" style="height: 400px">
 
-Dashboard:  
+Dashboard:
 
-<img src="docs/research-assets/market-research/obsidian-dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/notion_dashboard.png" style="height: 400px">
 
 
-4. Google Keep - minimal: https://keep.google.com/  
+3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/
 
-Dashboard:  
+Home Page:
 
-<img src="docs/research-assets/market-research/google-keep-dashboard.png" style="height: 400px">  
+<img src="docs/research-assets/market-research/obsidian-home.png" style="height: 400px">
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/obsidian-dashboard.png" style="height: 400px">
+
+
+4. Google Keep - minimal: https://keep.google.com/
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/google-keep-dashboard.png" style="height: 400px">
 
 
 To complement the visual research, I also drew on an academic article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview, to further inform my design decisions.
 
 
-**Key Takeaways**  
+**Key Takeaways**
 
 Note-taking app users expect:
 - a minimalist UI,
@@ -101,16 +101,16 @@ Note-taking app users expect:
 - recent notes visibility.
 
 
-**Anticipating User Behaviour**  
+**Anticipating User Behaviour**
 
 This being a course project, prototype testing was not possible, instead I tried to identify the risks and opportunities that would typically surface through user testing; some I worked out myself while others emerged in my design conversations with Claude AI:
 - The binary choice presented to the user after capturing a reference note was the biggest risk identified through my conversations. Users may feel pressured into making a quick decision about their comprehension and this could lead to abandoning the app altogether. From a pedagogical point of view, the Feynman Technique also recognises that understanding is a process, not a moment. So I thought of a third option, defer, as a way of mitigating the identified risk while remaining consistent with the underlying pedagogy.
-- One opportunity I identified was to reinforce evaluating information and being selective in capturing notes, by displaying a gentle prompt — 'Is it important?' — at the top of the reference note view, as a passive reminder.  
+- One opportunity I identified was to reinforce evaluating information and being selective in capturing notes, by displaying a gentle prompt — 'Is it important?' — at the top of the reference note view, as a passive reminder.
 - Another opportunity  I identified was to give the user the possibility to capture their own ideas and questions related to the study material but not necessarily stemming from a specific reference note, in a default 'My Thoughts' unit created automatically once a course is created.
 - Through conversations a question was identified around whether a question note should be automatically marked as answered once linked to an own-words note, or whether that decision should belong to the user. Given that the app is built around conscious comprehension choices, I ruled out automatic resolution — the user should explicitly confirm that they feel the idea is understood.
 
 
-These considerations informed the following updated workflow diagram:  
+These considerations informed the following updated workflow diagram:
 
 ```mermaid
 graph TD
@@ -125,14 +125,14 @@ graph TD
     H -->|Yes| I[Solved]
     H -->|No| J[Pending]
     J --> F
-    E --> B 
-``` 
+    E --> B
+```
 
 
 With a clearer picture of user expectations from market research and anticipated behaviour risks and opportunities, I wrote user stories covering the complete feature set — not just the MVP — to ensure the data model could support the full application from the start. These can be found in the README and translated into the following features and content requirements.
 
 
-**Features and Content Requirements**  
+**Features and Content Requirements**
 
 1. Authentication
 - User registration — email, username, password
@@ -166,11 +166,11 @@ With a clearer picture of user expectations from market research and anticipated
 - Rename a unit
 - Delete a unit with confirmation step
 - View all notes related to a source, organised hierarchically by unit — source expandable into units, units expandable into notes
-- View all sources filtered by source type:  
-(Source type is selected from a controlled list (not user-defined);   
-List: Uncategorised (default), Book, Textbook, Course, Article, Video, Podcast, Other;   
-"Other" includes a free-text note field;  
-Uncategorised is pre-populated in the Source Type table at setup ) 
+- View all sources filtered by source type:
+(Source type is selected from a controlled list (not user-defined);
+List: Uncategorised (default), Book, Textbook, Course, Article, Video, Podcast, Other;
+"Other" includes a free-text note field;
+Uncategorised is pre-populated in the Source Type table at setup )
 
 - Own-words and question notes can be created independently of a reference note
 - View most recent activity from the dashboard
@@ -196,12 +196,12 @@ Uncategorised is pre-populated in the Source Type table at setup )
 
 
 ## 4. Database Design
-I'm using the the "Database Design for Mere Mortals" methodology for designing my database, with the following steps: 
-1. **Defining Mission Statement**:  
-"The purpose of the "got i?" database is to maintain the data necessary to support users in transforming source material into personal knowledge." 
+I'm using the the "Database Design for Mere Mortals" methodology for designing my database, with the following steps:
+1. **Defining Mission Statement**:
+"The purpose of the "got i?" database is to maintain the data necessary to support users in transforming source material into personal knowledge."
 
 
-   **Defining Mission Objectives**: 
+   **Defining Mission Objectives**:
 - Maintain complete user account information
 - Maintain complete source and unit information
 - Maintain complete note information
@@ -209,15 +209,15 @@ I'm using the the "Database Design for Mere Mortals" methodology for designing m
 
 2. **Identifying Subjects and Subjects Characteristics**
 
-**Subjects**: User, Course, Unit, Note, Tag 
+**Subjects**: User, Course, Unit, Note, Tag
 
 
-**Subject Characteristics**: 
+**Subject Characteristics**:
  First name, Last name, Email address, Password, Email verification status,  Name, Creation date, Last modified date, Course, Unit, Title, Content, Type, Parent note, Creation date;
-**Preliminary Field List**: First name, Last name, Email address, Password, Email verification status, Source name, Source date created, Source date last modified, Source type name, Source type date created, Source type date last modified, Parent source, Unit name, Unit type, Unit date created, Unit date last modified, Reference note Parent unit, Reference note title, Reference note content, Reference note date created, Reference note last date modified, Reference note linked status, Own-words note Parent Unit, Own-words title, Own-words content, Own-words date created, Own-words last date modified, Question note Parent Unit, Question Note title, Question Note content, Question Note Date created, Question Note last date modified, Question Note linked status, Question Note answered Status, Tag name, 
+**Preliminary Field List**: First name, Last name, Email address, Password, Email verification status, Source name, Source date created, Source date last modified, Source type name, Source type date created, Source type date last modified, Parent source, Unit name, Unit type, Unit date created, Unit date last modified, Reference note Parent unit, Reference note title, Reference note content, Reference note date created, Reference note last date modified, Reference note linked status, Own-words note Parent Unit, Own-words title, Own-words content, Own-words date created, Own-words last date modified, Question note Parent Unit, Question Note title, Question Note content, Question Note Date created, Question Note last date modified, Question Note linked status, Question Note answered Status, Tag name,
 
 
- **Note:** During Step 3, the following revisions were made to this subject list. Course was renamed to Source. Source Type was identified as a new subject. Note was split into three separate subjects: Reference Note, Question Note, and Own Words Note.  
+ **Note:** During Step 3, the following revisions were made to this subject list. Course was renamed to Source. Source Type was identified as a new subject. Note was split into three separate subjects: Reference Note, Question Note, and Own Words Note.
  See Step 3 for details.
 
 
@@ -263,13 +263,13 @@ During this step, two revisions were made to the subject list identified in Step
 | Username AK| User ID FK | | Unit ID PK | |
 | User ID PK | Source Type ID FK| | | | |
 
-[1] Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user. 
+[1] Unit Type indicates whether a unit was created automatically by the system (default) or manually by the user.
 
 [2] These fields were removed at the field specifications stage as they proved of no real value to the app or the user.
 
-[3] Unlike the fields above, Source Creation Date retains real value — a student may want to know when they started studying a specific source, such as a book or course. This is not the case for Source Type timestamps or Unit Creation Date.  
+[3] Unlike the fields above, Source Creation Date retains real value — a student may want to know when they started studying a specific source, such as a book or course. This is not the case for Source Type timestamps or Unit Creation Date.
 
-[4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.  
+[4] Reasoning on the value of Unit Last Modified Date field, it emerged that the only cases when this would be important, just like Source Last Modified Date field, are the edge cases where a user creates a source with no subsequent units, or a unit with no subsequent notes, leaving those activities for later. These edge cases were significant enough to deserve attention and a new "last activity" feature, with a real user need articulated in a user story. The decision was therefore to keep Source and Unit Last Modified Date.
 
 [5] These fields were removed during implementation phase because Django's built in User model with allauth is used.
 
@@ -281,23 +281,23 @@ During this step, two revisions were made to the subject list identified in Step
 |-----|------|-----|-----|
 | Unit ID FK | Ref Active Status | Ref ID FK | Answered Status |
 | Note Title | Ref ID PK| Own-Words ID PK | Marked Status |
-| Note Content | Note ID FK| Note ID FK| Ref ID FK | 
-| Note Creation Date | | | Question ID PK | 
-| Note Last Modified Date | | | Note ID FK| 
+| Note Content | Note ID FK| Note ID FK| Ref ID FK |
+| Note Creation Date | | | Question ID PK |
+| Note Last Modified Date | | | Note ID FK|
 | Note ID PK| | | Own-Words ID FK|
 
 
-4. **Keys**  
+4. **Keys**
 
 I initially skipped this step, knowing Django would handle primary keys automatically. However, when I reached the next step — Field Specifications — the absence of explicitly defined primary keys introduced a number of inaccuracies, forcing me to go back and complete it properly.
 
-5. **Field Specifications**  
+5. **Field Specifications**
 
-Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).  
+Field specifications were completed using a custom tool built by Claude AI [Field Specifications Tool](docs/field-specifications-tool.html) and can be found in [Field Specifications](docs/field-specifications.md).
 
-6. **Table Relationships**  
+6. **Table Relationships**
 
-**Identifying existing relationships**  
+**Identifying existing relationships**
 
 
 | | User | Source | Source Type | Unit | Tag | Note Tags | Note | Reference | Own-Words | Question |
@@ -313,14 +313,14 @@ Field specifications were completed using a custom tool built by Claude AI [Fiel
 | **Own-Words** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~ | — | ~~1:1~~ |
 | **Question** | — | — | — | — | — | — | ~~1:1~~ | ~~1:1~~| ~~1:1~~ | — |
 
-[Table Relationships Diagram](docs/research-assets/database/table-relationships.png)  
+[Table Relationships Diagram](docs/research-assets/database/table-relationships.png)
 
-**Incorporating Foreign Keys**: [One to One](docs/research-assets/database/one-to-one.png), [One to Many](docs/research-assets/database/one-to-many.png), [Many to Many](docs/research-assets/database/many-to-many.png)  
+**Incorporating Foreign Keys**: [One to One](docs/research-assets/database/one-to-one.png), [One to Many](docs/research-assets/database/one-to-many.png), [Many to Many](docs/research-assets/database/many-to-many.png)
 
 
-Notes: 
+Notes:
 [1] Initially I imagined Source type being created by the User, but this feature would have added extra complexity in development and extra friction for the user. So I decided to use instead a list of predefined Source Types with Uncategorized and Other included. The One to Many diagram still shows the initial User - Source Type relationship for documenting purposes, while relevent tables and field specifications document have been updated.
-[2] The One to Many diagrams has one more error, namely the relationship between Own-Words and Question should be reversed; a Question resolves into a Own-Words note, not the other way around.  
+[2] The One to Many diagrams has one more error, namely the relationship between Own-Words and Question should be reversed; a Question resolves into a Own-Words note, not the other way around.
 
 
 7. **Business Rules**:
@@ -363,16 +363,19 @@ Notes:
 - https://docs.dbdiagram.io/
 
 
-### Bash 
+### Bash
 - https://linuxcommand.org/
 
 ### Django:
-- Django allauth official documentation: https://docs.allauth.org/ 
+- Django allauth official documentation: https://docs.allauth.org/
 
 ### Automated testing
 - python unittest: https://docs.python.org/3/library/unittest.html#
 - Python testing on Real Ptthon: https://realpython.com/python-testing/
 - Testing in Django by Net Ninja: https://www.youtube.com/playlist?list=PL4cUxeGkcC9ic9O6xDW2d1qMp3rMOb0Nu
+
+### Pagination:
+- Pagination on MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Pagination
 
 
 ## Design
@@ -386,7 +389,7 @@ How I found the name for the app? My conversation with Claude AI: https://claude
 - to remember,
 - to organize their thoughts,
 
-Needs: 
+Needs:
 - a system to keep track of the ever-increasing pool of information,
 - how to deal with complexity,
 

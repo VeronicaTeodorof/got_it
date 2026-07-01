@@ -188,30 +188,34 @@ span.motto {
   border: 1px solid #085041;
   color: #085041;
 }
-/* .badge-website {
-  background: #E1F5EE;
-  color: #085041;
-}
-
-.badge-video {
-  background: #FAECE7;
-  color: #4A1B0C;
-}
-
-.badge-course {
-  background: #FAEEDA;
-  color: #412402;
-}
-
-.badge-other {
-  background: #F1EFE8;
-  color: #444441;
-} */
 
 .source-date {
   font-size: 12px;
   color: #6B6A63;
   white-space: nowrap;
+}
+
+/* || Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.pagination a {
+  color: #1B3B2D;
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+.pagination .current {
+  color: #555;
 }
 
 /* || LAYOUT */

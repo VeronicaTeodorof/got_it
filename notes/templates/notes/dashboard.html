@@ -62,7 +62,7 @@
         <section>
           <h2 class="your-sources-heading">My Sources</h2>
           <ul class="your-sources-list">
-            {% for source in sources %}
+            {% for source in page_obj %}
               <li class="custom-list-item">
                 <a href="{% url 'source-detail' source.pk %}">
                   <span class="source-name">{{ source.source_name}}</span>
@@ -79,6 +79,23 @@
                 A source is the book, course, or podcast you're learning from. Add one to start organizing your notes.</li>
             {% endfor %}
           </ul>
+
+          <!-- Paginator -->
+          <nav class="pagination" aria-label="Source list pagination">
+            {% if page_obj.has_other_pages %}
+              {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" rel="prev">&laquo; Previous</a>
+              {% endif %}
+
+              <span class="current d-none d-md-inline">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+              </span>
+
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" rel="next">Next &raquo;</a>
+              {% endif %}
+            {% endif %}
+          </nav>
         </section>
       {% endblock %}
     </div>
