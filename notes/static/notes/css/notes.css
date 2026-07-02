@@ -2,11 +2,15 @@
 :root {
   /* Fallback value overwritten by JavaScript at runtime with the navbar's actual rendered height */
   --navbar-height: 56px;
+  --coral: #f9f9f9;
 }
 
 main {
   flex-grow: 1;
-  background-color: #f9f9f9;
+}
+
+.coral {
+  background-color: var(--coral);
 }
 
 /* || UTILITIES */
@@ -239,6 +243,16 @@ span.motto {
   font-weight: bolder;
 }
 
+/* || Source detail page */
+.container-fluid.coral {
+  flex: 1;
+}
+
+.source-heading {
+  padding: 1.3rem 1rem;
+  font-size: 1.1rem;
+  text-align:start;
+}
 /* || LAYOUT */
 
 /* Sidebar: offset from top and reduced height to sit below the navbar */
@@ -253,7 +267,6 @@ span.motto {
 }
 
 /* || ACTIONS DROPDOWN */
-
 .dropdown-menu {
     --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
 }
@@ -282,7 +295,7 @@ span.motto {
       width: 80%;
     }
     /* || Dashboard */
-    .dashboard-margin-line {
+    .margin-line {
       background-image:
       linear-gradient(to right, transparent, transparent 125px, #f4b8b8 126px, transparent 127px);
     }

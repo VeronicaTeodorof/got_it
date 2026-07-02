@@ -109,42 +109,42 @@ def source_detail(request, source_pk):
     Retrieve and display a single source belonging to the current user
     and a list of its units.
     """
-    current_source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    units = Unit.objects.filter(source=current_source).order_by(
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    units = Unit.objects.filter(source=source).order_by(
         'unit_last_modified_date'
     )
     if request.method == 'POST':
         # a bound copy of the form is created with
         # request.POST being passed to this copy
-        form = UnitForm(request.POST, source=current_source)
+        form = UnitForm(request.POST, source=source)
         # is_valid() triggers field-level then form-level cleaning.
         if form.is_valid():
             unit = form.save(commit=False)
-            unit.source = current_source
+            unit.source = source
             unit.save()
             return redirect('unit-detail',
-                            source_pk=current_source.pk,
+                            source_pk=source.pk,
                             unit_pk=unit.pk
                             )
         else:
             return render(request,
                           "notes/source_detail.html",
-                          {"current_source": current_source,
+                          {"source": source,
                            "units": units,
                            "form": form,
                            })
     # unbound form, passed as form in context for create unit form
-    form = UnitForm(source=current_source)
+    form = UnitForm(source=source)
     # creates a list of prepopulated edit forms, one for each unit, but not yet
     # paired with its respective unit
-    forms = [UnitForm(instance=unit, source=current_source) for unit in units]
+    forms = [UnitForm(instance=unit, source=source) for unit in units]
     # pairs each unit with its corresponding form;
     # prepopulated forms are always present on the page
     # passed in context as unit_forms
     unit_forms = list(zip(units, forms))
     return render(request,
                   "notes/source_detail.html",
-                  {"current_source": current_source,
+                  {"source": source,
                    "unit_forms": unit_forms,
                    "units": units,
                    "form": form

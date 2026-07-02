@@ -37,11 +37,6 @@
 | SNAV-MT-02 | Tapping icon or 'Change or add source' link | Navigates to dashboard | As expected | Pass | |
 
 
-
-
-
-
-
 ### Authentication
 
 
@@ -83,16 +78,11 @@
 | AUTH-MT-34 | Logged out success message | Message does not appear after successful log out | As expected | Pass | |
 
 
-### Navigation
+### Actions Menu
 
-
-| Test ID | Test | Expected | Actual |Local | Deployment |
+| Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| HP-MT-01 | Logged-out user visits home page | Sign In and Sign Up links visible in navbar, no Dashboard link or Logout button | As expected | Pass | |
-| HP-MT-02 | Sign Up link navigates to signup page | Sign Up form loads | As expected | Pass | Pass |
-| HP-MT-03 | Sign In link navigates to signin page | Sign In form loads | As expected | Pass | Pass |
-| HP-MT-04 | Logged-in user visits home page | Dashboard link and Logout button visible in navbar, no Sign In and Sign Up links| As expected | Pass | Pass |
-
+| AM-MT-01 | Click dropdown button | Expands dropdown menu | As expected | Pass | 
 
 ### Home Page
 
@@ -205,7 +195,7 @@
 | SDP-MT-02 | Page unavailable to unauthenticated users; redirects to login page | User not logged in trying to access a source_detail page by writing the url in the browser is redirected to login page | As expected | Pass |
 | SDP-MT-03 | Page only accessible to the source owner — another logged-in user gets a 404 | User with no sources created visits /sources/10/ gets 404 page | As expected | Pass | |
 | SDP-MT-04 | If source does not exist, return 404  | User with ten sources created visits /sources/11/ gets 404 | As expected | Pass | |
-| SDP-MT-05 | Source name and author displayed | Source name and author displayed | As expected | Pass | |
+| SDP-MT-05 | Source name, author and type displayed | Source name and author displayed | As expected | Pass | |
 | SDP-MT-06 | Sources link present in sidebar | Sidebar correctly displays sources link | As expected | Pass | |
 | SDP-MT-07 | Empty state | Empty state shown when no unitss exist, encouraging user to create one | As expected | Pass | |
 | SDP-MT-08 | All units of a source displayed in list | All units of a source appear in the list | As expected | Pass | |
