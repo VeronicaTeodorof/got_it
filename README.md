@@ -32,7 +32,17 @@
 - AC5: All navbar links are keyboard-navigable with visible focus indicators
 </details>
 <details>
-<summary>13 As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
+<summary>13 As a user, I want an intuitive way to move between levels of my content, so that I can navigate through it without clutter or confusion.</summary>
+
+**Acceptance Criteria:**
+- AC1: Secondary nav displays a back-link to the level above, with a short label describing the destination - see SNAV-MT-01
+- AC2: All links navigate to the correct page - see SNAV-MT-02
+- AC3: Secondary nav shows a hamburger menu opening an offcanvas nav where there is sufficient content to move more than one level up or down
+- AC4: On desktop, navigation options are shown directly in the sidebar
+- AC5: Sidebar and offcanvas share identical navigation content, switching presentation at the large breakpoint
+</details>
+<details>
+<summary>14 As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
 
 Acceptance Criteria:
 - AC1: Home page displays the app's value proposition (tagline/headline) - see  HP-MT-01
@@ -42,7 +52,7 @@ Acceptance Criteria:
 - AC5: Home page footer displays attribution and relevant links - see HP-MT-05, HP-MT-06 and HP-MT-07
 </details>
 <details>
-<summary>14. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
+<summary>15. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
 
 Acceptance Criteria:
 - AC1: Page only accessible to logged-in users — unauthenticated users redirected to login -see DP-AT-01 and DP-AT-02;
@@ -50,11 +60,11 @@ Acceptance Criteria:
 
 </details>
 
-15. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
-16. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
-17. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
+16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
+17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
+18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
 <details>
-<summary>18. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
+<summary>19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
 
 Acceptance Criteria:
 **Home Page**:
@@ -70,13 +80,13 @@ Acceptance Criteria:
 - Sidebar sits below the navbar on all screen sizes → RES-MT-07
 - No horizontal scrolling on any screen size → RES-MT-01
 </details>
-19. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
+20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
 
 - **CRUD Functionality Theme**
 
 - **Sources**
 <details>
-<summary>20. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
+<summary>21. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
 
 Acceptance Criteria:
 
@@ -87,7 +97,7 @@ Acceptance Criteria:
 - AC5: Empty state shown when no sources exist, encouraging user to create one - see DP-MT-06
 </details>
 <details>
-<summary>21. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<summary>22. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
 </summary>
 Acceptance Criteria:
 
@@ -99,9 +109,9 @@ Acceptance Criteria:
 - AC6: A user cannot create two sources with the same name, an error is shown if they try - see DP-MT-12 and DP-AT-06
 </details>
 
-22. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
+23. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
 <details>
-<summary>23. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+<summary>24. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
 
 Acceptance Criteria:
 
@@ -113,7 +123,7 @@ Acceptance Criteria:
 - AC6: One type choice has to be selected - error shown if no choice is selected - see DP-MT-19
 </details>
 <details>
-<summary>24. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
+<summary>25. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
 - AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page - see DP-MT-26, DP-MT-27, DP-AT-09
 - AC2: Only accessible to the source owner — another logged-in user gets a 404 see DP-MT-25 and DP-MT-26
@@ -128,7 +138,7 @@ Acceptance Criteria:
  - **Units**
 
 <details>
-<summary>25. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
+<summary>26. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
 
 Acceptance Criteria:
 
@@ -147,7 +157,7 @@ Acceptance Criteria:
 
 </details>
 <details>
-<summary>26. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
+<summary>27. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
 
 Acceptance Criteria:
 
@@ -163,7 +173,7 @@ Acceptance Criteria:
 - AC10: When there are errors on the form, page loads with expanded form so feedback is immediately visible - see SDP-MT-19
 </details>
 <details>
-<summary>27. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
+<summary>28. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
 
 Acceptance Criteria:
 - AC1: Edit button present in list element dropdown - see SDP-MT-20
@@ -178,7 +188,7 @@ Acceptance Criteria:
 - AC10: Submitting the form with duplicate name rerenders the form with error - see SDP-MT-29
 </details>
 <details>
-<summary>28. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
+<summary>29. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
 
 Acceptance Criteria:
 - AC1: Delete button present on inline dropdown - see SDP-MT-30
@@ -194,7 +204,7 @@ Acceptance Criteria:
 
 - **Notes**
 <details>
-<summary>29. As a student I want to be able to see a list of all my notes in a specific unit, organized by type, so that I have an ensemble view of what's done and what's left and easily access the ones I need.</summary>
+<summary>30. As a student I want to be able to see a list of all my notes in a specific unit, organized by type, so that I have an ensemble view of what's done and what's left and easily access the ones I need.</summary>
 
 Acceptance Criteria:
 
@@ -209,7 +219,7 @@ Acceptance Criteria:
 
 **Reference Notes**
 <details>
-<summary>30. As a user, I want to view the full content of a reference note, see its location, add linked notes, and view any notes already linked to it, so that I can engage with the material and build on my understanding.</summary>
+<summary>31. As a user, I want to view the full content of a reference note, see its location, add linked notes, and view any notes already linked to it, so that I can engage with the material and build on my understanding.</summary>
 
 Acceptance Criteria:
 
@@ -223,7 +233,7 @@ Acceptance Criteria:
 - AC8: Empty state message is shown when no links exist and 'got it?' logo appears above the add button
 </details>
 <details>
-<summary>31. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.</summary>
+<summary>32. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.</summary>
 
 Acceptance Criteria:
 
@@ -239,7 +249,7 @@ Acceptance Criteria:
 
 </details>
 <details>
-<summary>32. As a student I can edit a reference note, so that I can keep my source information accurate</summary>
+<summary>33. As a student I can edit a reference note, so that I can keep my source information accurate</summary>
 
 Acceptance Criteria:
 
@@ -256,18 +266,18 @@ Acceptance Criteria:
 - AC11: Clicking cancel button loads reference detail page - see ERP-MT-02
 </details>
 
-33. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
-34. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
+34. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
+35. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
 
 - **Tags**
-35. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
-36. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
-37. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-38. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.
+36. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
+37. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
+38. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
+39. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.
 
 - **Authentication Theme**
 <details>
-<summary>39. As a new user I want to be able to create a new account, to start using the app.</summary>
+<summary>40. As a new user I want to be able to create a new account, to start using the app.</summary>
 Acceptance criteria:
 
 - AC1: User can access the signup page - see AUTH-MT-01
@@ -281,7 +291,7 @@ Acceptance criteria:
 - AC5: Password must meet minimum security requirements (length, complexity) - see  AUTH-MT-10 to AUTH-MT-13
 </details>
 <details>
-<summary>40. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
+<summary>41. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
 Acceptance criteria:
 
 - AC1: User can access the signin page - see AUTH-MT-02
@@ -299,7 +309,7 @@ Acceptance criteria:
 - AC7: User remains on signin page if login fails - see AUTH-MT-17 to AUTH-MT-20
 </details>
 <details>
-<summary>41. As a user, I want to log out of my account so that I can securely end my session.</summary>
+<summary>42. As a user, I want to log out of my account so that I can securely end my session.</summary>
 Acceptance criteria:
 
 - AC1: User can see a logout link on the dashboard - see DP-MT-01
@@ -310,9 +320,9 @@ Acceptance criteria:
 
 - AC4: User cannot access the dashboard after logging out - see AUTH-MT-22 and AUTH-MT-32
 </details>
-42. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
+43. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
 <details>
-<summary>43. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
+<summary>44. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
 Acceptance criteria:
 
 - AC 1: User sees a "Remember Me" checkbox on sign in page - see AUTH-MT-23
@@ -325,8 +335,8 @@ Acceptance criteria:
 
 - AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me" - see AUTH-MT-28
 </details>
-44. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
-45. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+45. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
+46. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
 
 ## ERD

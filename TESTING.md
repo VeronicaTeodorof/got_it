@@ -28,6 +28,18 @@
 | MNAV-MT-12 | Clicking "Sign Up" link navigates to sign up page | Sign up page loads | As expected | Pass | |
 
 
+#### Secondary/Content Navigation
+
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SNAV-MT-01 | Back link displays with icon and 'Change or add source' on source detail page | Back link appears with icon and appropriate descriptive text | As expected | Pass | |
+| SNAV-MT-02 | Tapping icon or 'Change or add source' link | Navigates to dashboard | As expected | Pass | |
+
+
+
+
+
 
 
 ### Authentication
