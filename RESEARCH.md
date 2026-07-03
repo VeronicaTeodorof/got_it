@@ -377,6 +377,9 @@ Notes:
 ### Pagination:
 - Pagination on MDN: https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Pagination
 
+### Inline Edit:
+- Atlassian Design: https://atlassian.design/components/inline-edit/usage
+
 
 ## Design
 ### App Name:

@@ -63,8 +63,13 @@ class SourceForm(forms.ModelForm):
         """
         cleaned_data = super().clean()
         source_name = cleaned_data.get('source_name')
-        if Source.objects.filter(user=self.user,
-                                 source_name=source_name).exists():
+        queryset = Source.objects.filter(user=self.user,
+                                         source_name=source_name)
+        # Excludes cases where user wants to edit the same name again,
+        #  without this condition raises error
+        if self.instance.pk:
+            queryset = queryset.exclude(pk=self.instance.pk)
+        if queryset.exists():
             raise forms.ValidationError({
                 'source_name': "You already have a source with this name."
             })

@@ -405,6 +405,32 @@ Show exactly what's reachable from the current page, once. A menu (offcanvas or 
 Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.
 
 
+## Source Detail: Inline Edit — Design Decisions
+
+**Architecture: single form, not per-field inline-edit** Source name/author/type are edited together via one Django `<form>` and one POST, not as independent fields with their own save actions (as seen in tools like Jira/GitHub). This is a deliberate simplification: per-field
+editing would require JSON endpoints, manual CSRF handling, and JS-driven partial saves — a much larger scope than this page needs right now.Documented tradeoff: this diverges from Atlassian's inline-edit guidance (don't nest inline-edit inside a `<form>`), accepted knowingly.
+
+**Edit mode: server-rendered, not JS-toggled**
+Readonly state renders plain text (`<span>`); edit state renders real form controls (`<input>`, `<select>`). Because these are different elements chosen via `{% if edit_mode %}`, entering/leaving edit mode requires a real request — done via a `?edit=1` query param on GET, followed by Edit/Cancel as plain `<a>` links rather than JS-toggled attributes. Chosen to preserve a boxless, text-like readonly look (no border/underline at rest) that a pure attribute-toggle approach couldn't achieve.
+
+**Input styling: underline, not bordered box**
+Matches the existing convention from Add Source and auth pages (underline-only inputs, no boxed card). Considered a bordered-box style
+(GitHub-style) after feedback that inputs need a clearer edit affordance, but chose to strengthen the underline instead (thicker on focus) to keep one consistent input language across the app, rather than introducing a second visual style for form fields.
+
+**Save/Cancel: icon-only, not text buttons**
+Kept as compact check/x icons rather than matching Add Source's full green Save/Cancel buttons. Reasoning: Source Detail's edit row is a
+small in-place action within a larger page, not a standalone form — full buttons would compete visually with page content and risk breaking
+the single-row layout. Consistency is preserved through color (icons recolored to the same dark green, `#085041`) rather than shape.
+
+**Empty author displays as blank, not "None"**
+`source_author` can be stored as `None`/empty. Templates must guard with `|default:''` wherever it's rendered directly, since `{{ value }}`
+would otherwise print the literal string "None". Bug caught during manual testing (2026-07-03) on source_detail specifically — dashboard
+already had this guard via a truthiness check.
+
+**Long source names: accepted to clip/scroll, not wrap**
+`.inline-field` capped at `max-width: 100%` so a very long title can't overflow the viewport. Text scrolls within the input rather than the
+box growing or the row wrapping. Considered a tradeoff worth accepting given how rare genuinely long titles are expected to be.
+
 ### Notes Display
 
 - Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab

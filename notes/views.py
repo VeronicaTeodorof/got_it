@@ -106,8 +106,8 @@ def delete_source(request, source_pk):
 @login_required
 def source_detail(request, source_pk):
     """
-    Retrieve and display a single source belonging to the current user
-    and a list of its units.
+    Retrieve, display, and edit a single source belonging to the current user
+    list its units.
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     units = Unit.objects.filter(source=source).order_by(
@@ -116,39 +116,20 @@ def source_detail(request, source_pk):
     if request.method == 'POST':
         # a bound copy of the form is created with
         # request.POST being passed to this copy
-        form = UnitForm(request.POST, source=source)
+        form = SourceForm(request.POST, instance=source, user=request.user)
         # is_valid() triggers field-level then form-level cleaning.
         if form.is_valid():
-            unit = form.save(commit=False)
-            unit.source = source
-            unit.save()
-            return redirect('unit-detail',
+            form.save()
+            return redirect('source-detail',
                             source_pk=source.pk,
-                            unit_pk=unit.pk
                             )
-        else:
-            return render(request,
-                          "notes/source_detail.html",
-                          {"source": source,
-                           "units": units,
-                           "form": form,
-                           })
-    # unbound form, passed as form in context for create unit form
-    form = UnitForm(source=source)
-    # creates a list of prepopulated edit forms, one for each unit, but not yet
-    # paired with its respective unit
-    forms = [UnitForm(instance=unit, source=source) for unit in units]
-    # pairs each unit with its corresponding form;
-    # prepopulated forms are always present on the page
-    # passed in context as unit_forms
-    unit_forms = list(zip(units, forms))
-    return render(request,
-                  "notes/source_detail.html",
-                  {"source": source,
-                   "unit_forms": unit_forms,
-                   "units": units,
-                   "form": form
-                   })
+        edit_mode = True
+    else:
+        form = SourceForm(instance=source, user=request.user)
+        edit_mode = request.GET.get('edit') == '1'
+    return render(request, 'notes/source_detail.html', {
+        'source': source, 'units': units, 'form': form, 'edit_mode': edit_mode,
+    })
 
 
 # while source_detail view can handle displaying both create and edit forms
