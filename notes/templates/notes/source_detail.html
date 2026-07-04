@@ -23,7 +23,10 @@
       </nav>
       <!-- Main -->
       <main class="col-12 col-lg-9">
-         <!-- Delete Modal -->
+        <!-- Messages -->
+        {% include 'notes/partials/messages.html' %}
+        
+        <!-- Delete Modal -->
         <div class="modal fade" id="deleteSourceModal-{{source.pk}}" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
