@@ -90,6 +90,10 @@ class UnitForm(forms.ModelForm):
         labels = {
             'unit_name': 'Unit name'
         }
+        widgets = {
+            'unit_name': forms.TextInput(attrs={'class': 'form-input',
+                                                'placeholder': 'name'})
+        }
 
     def clean(self):
         """
@@ -98,8 +102,10 @@ class UnitForm(forms.ModelForm):
         """
         cleaned_data = super().clean()
         unit_name = cleaned_data.get('unit_name')
-        if Unit.objects.filter(source=self.source,
-                               unit_name=unit_name).exists():
+        queryset = Unit.objects.filter(source=self.source, unit_name=unit_name)
+        if self.instance.pk:
+            queryset = queryset.exclude(pk=self.instance.pk)
+        if queryset.exists():
             raise forms.ValidationError({
                 'unit_name': "You already have a unit with this name."
             })

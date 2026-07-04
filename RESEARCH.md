@@ -380,6 +380,9 @@ Notes:
 ### Inline Edit:
 - Atlassian Design: https://atlassian.design/components/inline-edit/usage
 
+### Debugging
+- Diffchecker: https://www.diffchecker.com/
+
 
 ## Design
 ### App Name:

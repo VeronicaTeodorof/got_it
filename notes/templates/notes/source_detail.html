@@ -46,124 +46,173 @@
           </div>
         </div>
 
-        <!-- Source Details Read/Edit -->
-        <form method="post" action="{% url 'source-detail' source.pk %}">
-          {% csrf_token %}
-          <h1 class="visually-hidden">{{ source.source_name }}</h1>
+        <section id="source-actions">
+          <!-- Source Details Read/Edit -->
+            <form method="post" action="{% url 'source-detail' source.pk %}">
+              {% csrf_token %}
+              <h1 class="visually-hidden">{{ source.source_name }}</h1>
+              <input type="hidden" name="form_type" value="edit_source">
 
-          <div class="source-heading d-flex align-items-center gap-2">
+              <div class="source-heading d-flex align-items-baseline gap-2">
 
-            <!-- Source name -->
-            <span class="field-group">
-              {% if edit_mode %}
-                <label for="id_source_name" class="visually-hidden">Source name</label>
-                <input type="text" id="id_source_name" name="source_name"
-                       value="{{ form.source_name.value }}"
-                       size="{{ form.source_name.value|length|add:2 }}"
-                       class="inline-field inline-field--title">
-                {% if form.source_name.errors %}
-                  <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
+                <!-- Source name -->
+                <span class="field-group">
+                  {% if edit_mode %}
+                    <label for="id_source_name" class="visually-hidden">Source name</label>
+                    <input type="text" id="id_source_name" name="source_name"
+                          value="{{ form.source_name.value }}"
+                          placeholder="source name required"
+                          size="{{ form.source_name.value|length|add:2 }}"
+                          class="inline-field inline-field--title">
+                    {% if form.source_name.errors %}
+                      <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
+                    {% endif %}
+                  {% else %}
+                    <span id="id_source_name" class="inline-field inline-field--title">{{ source.source_name }}</span>
+                  {% endif %}
+                </span>
+
+                {% if source.source_author and not edit_mode %}
+                  <span class="text-muted">by</span>
                 {% endif %}
-              {% else %}
-                <span id="id_source_name" class="inline-field inline-field--title">{{ source.source_name }}</span>
-              {% endif %}
-            </span>
 
-            {% if source.source_author %}
-              <span class="text-muted">by</span>
-            {% endif %}
+                <!-- Source author -->
+                <span class="field-group">
+                  {% if edit_mode %}
+                    <label for="id_source_author" class="visually-hidden">Source author</label>
+                    <input type="text" id="id_source_author" name="source_author"
+                          value="{{ form.source_author.value|default:'' }}"
+                          placeholder="add author"
+                          size="{{ form.source_author.value|default:''|length|add:2 }}"
+                          class="inline-field inline-field--author">
+                    {% if form.source_author.errors %}
+                      <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
+                    {% endif %}
+                  {% else %}
+                    <span id="id_source_author" class="inline-field inline-field--author">{{ source.source_author|default:"" }}</span>
+                  {% endif %}
+                </span>
 
-            <!-- Source author -->
-            <span class="field-group">
-              {% if edit_mode %}
-                <label for="id_source_author" class="visually-hidden">Source author</label>
-                <input type="text" id="id_source_author" name="source_author"
-                       value="{{ form.source_author.value|default:'' }}"
-                       size="{{ form.source_author.value|default:''|length|add:2 }}"
-                       class="inline-field inline-field--author">
-                {% if form.source_author.errors %}
-                  <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
-                {% endif %}
-              {% else %}
-                <span id="id_source_author" class="inline-field inline-field--author">{{ source.source_author|default:"" }}</span>
-              {% endif %}
-            </span>
+                <span class="span-wrapper">
+                  <!-- Source type -->
+                  <span class="field-group">
+                    {% if edit_mode %}
+                      <label for="id_source_type" class="visually-hidden">Source type</label>
+                      <select id="id_source_type" name="source_type" class="inline-badge">
+                        {% for value, label in form.source_type.field.choices %}
+                          <option value="{{ value }}" {% if value == source.source_type %}selected{% endif %}>{{ label }}</option>
+                        {% endfor %}
+                      </select>
+                      {% if form.source_type.errors %}
+                        <span class="field-error" role="alert">{{ form.source_type.errors.0 }}</span>
+                      {% endif %}
+                    {% else %}
+                      <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
+                    {% endif %}
+                  </span>
 
-            <!-- Source type -->
-            <span class="field-group">
-              {% if edit_mode %}
-                <label for="id_source_type" class="visually-hidden">Source type</label>
-                <select id="id_source_type" name="source_type" class="inline-badge">
-                  {% for value, label in form.source_type.field.choices %}
-                    <option value="{{ value }}" {% if value == source.source_type %}selected{% endif %}>{{ label }}</option>
-                  {% endfor %}
-                </select>
-                {% if form.source_type.errors %}
-                  <span class="field-error" role="alert">{{ form.source_type.errors.0 }}</span>
-                {% endif %}
-              {% else %}
-                <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
-              {% endif %}
-            </span>
+                  <!-- Actions Menu -->
+                  <span class="dropdown {% if edit_mode %}d-none{% endif %}" id="source-menu">
+                    <button class="btn btn-link text-secondary"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      aria-label="Source actions">
+                      <!-- Bootstrap Three Dots Vertical Icon -->
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                      </svg>
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <!-- Edit -->
+                        <a href="{% url 'source-detail' source.pk %}?edit=1"
+                          class="dropdown-item btn btn-primary text-secondary align-items-center"
+                          id="edit-toggle">
+                          <!-- Bootstrap Pencil Icon -->
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                          <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                          </svg>
+                          Edit
+                        </a>
 
-            <!-- Actions Menu -->
-            <span class="dropdown {% if edit_mode %}d-none{% endif %}" id="source-menu">
-              <button class="btn btn-link text-secondary"
-                type="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-label="Source actions">
-                <!-- Bootstrap Three Dots Vertical Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
-                  <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
-                </svg>
-              </button>
-              <ul class="dropdown-menu">
-                <li>
-                  <!-- Edit -->
-                  <a href="{% url 'source-detail' source.pk %}?edit=1"
-                     class="dropdown-item btn btn-primary text-secondary align-items-center"
-                     id="edit-toggle">
-                    <!-- Bootstrap Pencil Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
-                     <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                        <!-- Delete button -->
+                        <button
+                          type="button"
+                          class="dropdown-item btn btn-primary text-danger"
+                          data-bs-toggle="modal"
+                          data-bs-target="#deleteSourceModal-{{source.pk}}"
+                        >
+                          <!-- Bootstrap Trash Icon -->
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                          </svg>
+                        Delete
+                        </button>
+                      </li>
+                    </ul>
+                  </span>
+
+
+                  <!-- Save / Cancel, edit mode only -->
+                  <button type="submit" id="save-btn" class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Save">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--navtext)" class="bi bi-check-lg" viewBox="0 0 16 16">
+                      <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
                     </svg>
-                    Edit
-                  </a>
-
-                  <!-- Delete button -->
-                  <button
-                    type="button"
-                    class="dropdown-item btn btn-primary text-danger"
-                    data-bs-toggle="modal"
-                    data-bs-target="#deleteSourceModal-{{source.pk}}"
-                  >
-                    <!-- Bootstrap Trash Icon -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
-                      <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
-                    </svg>
-                  Delete
                   </button>
-                </li>
-              </ul>
-            </span>
+                  <a href="{% url 'source-detail' source.pk %}" id="cancel-btn"
+                    class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Cancel">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#bb6f6f" class="bi bi-x-lg" viewBox="0 0 16 16">
+                      <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414"/>
+                    </svg>
+                  </a>
+                </span>
+              </div>
+            </form>
+        </section>
 
-            <!-- Save / Cancel, edit mode only -->
-            <button type="submit" id="save-btn" class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Save">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--navtext)" class="bi bi-check-lg" viewBox="0 0 16 16">
-                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-              </svg>
+        <!-- Create Unit -->
+        <section id="create-unit-section">
+          <h2 class="visually-hidden">Add Unit</h2>
+          <div class="m-4 mt-5">
+            <button class="btn-form btn-form--unit dark-btn"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#create-unit-form"
+              aria-expanded="false"
+              aria-controls="create-unit-form">
+              Add unit
             </button>
-            <a href="{% url 'source-detail' source.pk %}" id="cancel-btn"
-               class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Cancel">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#bb6f6f" class="bi bi-x-lg" viewBox="0 0 16 16">
-                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414"/>
-              </svg>
-            </a>
 
+            <div class="me-4 collapse expand-on-error {% if unit_form.errors %}show{% endif %}" id="create-unit-form">
+              <!-- Add Unit form -->
+              <form method="post" action="{% url 'source-detail' source.pk %}" novalidate>
+                {% csrf_token %}
+                <input type="hidden" name="form_type" value="add_unit">
+                <div class="form-field mt-4">
+                  <label for="{{ unit_form.unit_name.id_for_label }}" class="visually-hidden">name</label>
+                  {{ unit_form.unit_name }}
+                  {{ unit_form.unit_name.errors }}
+                </div>
+                <button type="submit" class="btn btn-form btn-form--unit m-1">Save</button>
+                <button class="btn btn-form btn-form--unit btn-form--cancel"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#create-unit-form"
+                  data-action="cancel-form"
+                  aria-expanded="false"
+                  aria-controls="create-unit-form">
+                Cancel
+              </button>
+              </form>
+            </div>
           </div>
-        </form>
+        </section>
       </main>
     </div>
   </div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'notes/js/notes.js' %}"></script>
 {% endblock %}

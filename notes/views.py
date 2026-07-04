@@ -50,44 +50,11 @@ def dashboard(request):
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     # Creates a list of prepopulated forms, one per source
-    forms = [SourceForm(instance=source) for source in sources]
-    # Creates a list of source, form tuples
-    # pairing each source with its corresponding prepopulated form
-    # to be passed to the context
-    source_forms = list(zip(sources, forms))
     return render(
         request,
         'notes/dashboard.html',
-        {'form': form, 'sources': sources, 'source_forms': source_forms,
+        {'form': form, 'sources': sources,
          "page_obj": page_obj}
-        )
-
-
-@login_required
-def edit_source(request, source_pk):
-    """ View for the edit source form"""
-    # Retrieve the specific record from the database using the pk
-    source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    if request.method == 'POST':
-        # Bind the submitted data to the form in the POST block
-        form = SourceForm(request.POST, instance=source)
-        if form.is_valid():
-            form.save()
-            return redirect('dashboard')
-
-        return render(
-            request,
-            'notes/dashboard.html',
-            {'form': form, 'source': source}
-            )
-    # GET fallback in this view is never actually reached,
-    # handled by dashboard view
-    # left for readability and eventual UI changes
-    form = SourceForm(instance=source)
-    return render(
-        request,
-        'notes/dashboard.html',
-        {'form': form, 'source': source}
         )
 
 
@@ -98,7 +65,7 @@ def delete_source(request, source_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     if request.method == 'POST':
         source.delete()
-        messages.success(request, "Source deleted successfully!")
+        messages.success(request, "Source deleted successfully.")
     return redirect('dashboard')
 
 
@@ -106,29 +73,52 @@ def delete_source(request, source_pk):
 @login_required
 def source_detail(request, source_pk):
     """
-    Retrieve, display, and edit a single source belonging to the current user
-    list its units.
+    Retrieve, display, and edit a single source belonging to the current user,
+    list its units, and handle both the source-edit form and the add-unit
+    form, distinguished via the 'form_type' hidden field.
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     units = Unit.objects.filter(source=source).order_by(
         'unit_last_modified_date'
     )
+
+    edit_mode = False
+
     if request.method == 'POST':
-        # a bound copy of the form is created with
-        # request.POST being passed to this copy
-        form = SourceForm(request.POST, instance=source, user=request.user)
-        # is_valid() triggers field-level then form-level cleaning.
-        if form.is_valid():
-            form.save()
-            return redirect('source-detail',
-                            source_pk=source.pk,
-                            )
-        edit_mode = True
+        form_type = request.POST.get('form_type')
+
+        if form_type == 'edit_source':
+            form = SourceForm(request.POST, instance=source, user=request.user)
+            unit_form = UnitForm(source=source)
+            if form.is_valid():
+                form.save()
+                return redirect('source-detail', source_pk=source.pk)
+            edit_mode = True
+
+        elif form_type == 'add_unit':
+            form = SourceForm(instance=source, user=request.user)
+            unit_form = UnitForm(request.POST, source=source)
+            if unit_form.is_valid():
+                unit = unit_form.save(commit=False)
+                unit.source = source
+                unit.save()
+                return redirect('source-detail', source_pk=source.pk)
+
+        else:
+            form = SourceForm(instance=source, user=request.user)
+            unit_form = UnitForm(source=source)
+
     else:
         form = SourceForm(instance=source, user=request.user)
+        unit_form = UnitForm(source=source)
         edit_mode = request.GET.get('edit') == '1'
+
     return render(request, 'notes/source_detail.html', {
-        'source': source, 'units': units, 'form': form, 'edit_mode': edit_mode,
+        'source': source,
+        'units': units,
+        'form': form,
+        'unit_form': unit_form,
+        'edit_mode': edit_mode,
     })
 
 
