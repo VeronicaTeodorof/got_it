@@ -208,6 +208,38 @@
             </div>
           </div>
         </section>
+
+        <!-- Units List -->
+        <section id="units-list">
+          <h2 class="visually-hidden">Units List</h2>
+          <ul class="units-list">
+            {% for unit in page_obj %}
+              <li class="custom-list-item">
+                <a href="{% url 'unit-detail' source.pk unit.pk %}">{{unit}}</a>
+              </li>
+            {% empty %}
+              <li class="empty text-start">No units yet.<br>
+                A unit is the chapter, module, section you're currently studying. Add one to better organize your notes and get started.</li>
+            {% endfor %}
+          </ul>
+
+          <!-- Paginator -->
+          <nav class="pagination" aria-label="Unit list pagination">
+            {% if page_obj.has_other_pages %}
+              {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" rel="prev">&laquo; Previous</a>
+              {% endif %}
+
+              <span class="current d-none d-md-inline">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+              </span>
+
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" rel="next">Next &raquo;</a>
+              {% endif %}
+            {% endif %}
+          </nav>
+        </section>
       </main>
     </div>
   </div>

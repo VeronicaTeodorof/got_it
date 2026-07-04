@@ -36,7 +36,7 @@ def dashboard(request):
             source = form.save(commit=False)
             source.user = request.user
             source.save()
-            messages.success(request, "Source added successfully.")
+            messages.success(request, "Source added.")
             return redirect('dashboard')
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -49,7 +49,6 @@ def dashboard(request):
     paginator = Paginator(sources, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    # Creates a list of prepopulated forms, one per source
     return render(
         request,
         'notes/dashboard.html',
@@ -65,7 +64,7 @@ def delete_source(request, source_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     if request.method == 'POST':
         source.delete()
-        messages.success(request, "Source deleted successfully.")
+        messages.success(request, "Source deleted.")
     return redirect('dashboard')
 
 
@@ -81,6 +80,9 @@ def source_detail(request, source_pk):
     units = Unit.objects.filter(source=source).order_by(
         'unit_last_modified_date'
     )
+    paginator = Paginator(units, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     edit_mode = False
 
@@ -102,6 +104,7 @@ def source_detail(request, source_pk):
                 unit = unit_form.save(commit=False)
                 unit.source = source
                 unit.save()
+                messages.success(request, "Unit added.")
                 return redirect('source-detail', source_pk=source.pk)
 
         else:
@@ -119,6 +122,7 @@ def source_detail(request, source_pk):
         'form': form,
         'unit_form': unit_form,
         'edit_mode': edit_mode,
+        'page_obj': page_obj
     })
 
 
