@@ -13,6 +13,9 @@ main {
   background-color: var(--coral);
 }
 
+.container-fluid.coral {
+  flex: 1;
+}
 /* || UTILITIES */
 
 /* || Feedback messages */
@@ -120,6 +123,11 @@ main {
   font-size: 1.05rem;
   line-height: 2;
   text-align: center;
+}
+
+#units-list .empty {
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* || Lists */
@@ -419,6 +427,15 @@ input.inline-field:focus {
   .how-to {
     font-size: 1.1rem;
   }
+
+  /* Edit forms */
+  input.inline-field {
+    font-size: 1.1rem;
+  }
+
+  .inline-badge {
+    font-size: 0.9rem;
+  }
 }
   /* for large screens 1024px and larger*/
   @media screen and (min-width: 1024px) {
@@ -429,6 +446,6 @@ input.inline-field:focus {
     /* || Dashboard */
     .margin-line {
       background-image:
-      linear-gradient(to right, transparent, transparent 125px, #f4b8b8 126px, transparent 127px);
+      linear-gradient(to right, #f5f5f5, #f5f5f5 160px, #f4b8b8 161px, transparent 162px);
     }
   }

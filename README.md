@@ -400,6 +400,41 @@ Desktop: the second nav bar and offcanvas are replaced by a permanent sidebar, o
 **Rule of thumb**
 Show exactly what's reachable from the current page, once. A menu (offcanvas or sidebar) is only introduced where a page needs more than one add-action or a jump of more than one level; everything else stays inline.
 
+**Semantic structure**
+Decision: the back-link, the burger, and the sidebar link list are all the same category of thing — navigation — just different affordances for it at different screen sizes (a single "up one level" link vs. a menu of destinations). They all live inside one <nav> landmark.
+
+**Page-by-page behavior matrix**
+
+| Page | Back-link (mobile/tablet) | Burger + offcanvas (mobile/tablet) | Sidebar frame (desktop, lg+) |
+|------|---------------------------|------------------------------------|------------------------------|
+| dashboard | - | - | Always present |
+| source_detail | present -> dashboard | - | Always present |
+| unit_detail | present -> source_detail | Present | Always present |
+| note pages (reference/words/question) | present -> unit_detail | Present | Always present |
+
+Key principle: the sidebar frame itself is unconditional from dashboard upwards — it always renders on desktop, whether or not the current page has populated it with links. This is what makes the coral divider line read as a deliberate, permanent part of the app's chrome rather than something that flickers in and out per page.
+
+The back-link and burger are the only genuinely conditional pieces, and they're controlled entirely by which Django template blocks a page chooses to override
+
+**Template hierarchy**
+Two separate layout lineages, split by whether a page needs the app frame (sidebar + secondary nav) or not.
+
+- base.html — head, main nav, footer (unchanged)
+
+  - index.html — home, stays on base.html directly, no sidebar
+  - account/login.html
+  - account/signup.html
+  - app_base.html (NEW — adds secondary nav + sidebar shell)
+
+    - dashboard.html
+    - source_detail.html
+    - unit_detail.html
+    - note_base.html (EXISTING — extends app_base.html, not base.html)
+
+      - create_reference.html
+      - edit_reference.html
+      - reference_detail.html
+
 **Open item**
 
 Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.

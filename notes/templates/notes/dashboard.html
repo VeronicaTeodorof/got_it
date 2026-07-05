@@ -13,7 +13,7 @@
       <!-- Messages -->
       {% include 'notes/partials/messages.html' %}
       <h1 class="visually-hidden">Sources</h1>
-      
+
       <!-- Create Source -->
       <section>
         <h2 class="visually-hidden">Add Source</h2>
@@ -26,7 +26,7 @@
             aria-controls="create-source-form">
             Add source
           </button>
-        <div class="me-4 collapse expand-on-error" id="create-source-form">
+          <div class="me-4 collapse expand-on-error" id="create-source-form">
             <!-- Add Source form -->
             <form method="post" novalidate>
               {% csrf_token %}
