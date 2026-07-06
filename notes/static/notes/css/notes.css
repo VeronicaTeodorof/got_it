@@ -12,10 +12,12 @@ APP SHELL (sidebar + secondary nav)
 
 .app-layout {
   display: flex;
-  align-items: stretch;
-  /* stretch is flexbox's default; here it is written explicitly so it's clear this is deliberate:
+  /* mobile/tablet: stack the bar above content */
+  flex-direction: column;
+   /* stretch is flexbox's default; here it is written explicitly so it's clear this is deliberate:
   sidebar and app-content must match height so the divider line runs unbroken to the bottom,
   not just whichever default happened to apply */
+  align-items: stretch;
   min-height: calc(100vh - var(--navbar-height));
 }
 
@@ -36,8 +38,14 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
   align-items: center;
   justify-content: space-between;
   padding: .75rem 0;
-  border-bottom: 1px solid var(--divider);
+  /* border-bottom: 1px solid var(--divider); */
   background: var(--chrome);
+  /* opt out of .app-layout's stretch
+  - this row should size to its own content,
+  not match the sidebar/content column height */
+  align-self: flex-start;
+  width:100%;
+  padding: .75rem 1rem;
 }
 
 /* collapses to nothing when neither block is filled (dashboard) */
@@ -51,6 +59,25 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
 .sidebar {
   background-color: var(--chrome);
 }
+
+/* nav links inside the sidebar */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem .1rem;
+  color: #3a3a35;
+  text-decoration: none;
+  font-size: .93rem;
+}
+
+.sidebar-link i {
+  font-size: 1rem;
+  color: var(--coral, #c17a63);
+  width: 1.1rem;
+  text-align: center;
+}
+
 
 
 /* ---- main content ---- */
@@ -496,6 +523,10 @@ input.inline-field:focus {
   .inline-badge {
     font-size: 0.9rem;
   }
+
+  .field-error {
+    font-size: 0.8rem;
+  }
 }
 /* for large screens 1024px and larger*/
 @media screen and (min-width: 1024px) {
@@ -508,27 +539,39 @@ input.inline-field:focus {
     background-image:
     linear-gradient(to right, var(--chrome), var(--chrome) 160px, var(--divider) 161px, transparent 162px);
   }
+}
 
 /* lg and up: offcanvas becomes the static column, full height, with divider */
 @media (min-width: 992px) {
   .sidebar.offcanvas-lg {
       background: var(--chrome) !important;
       border-right: 1px solid var(--divider) !important;
-      flex: 0 0 var(--sidebar-width);
-      width: var(--sidebar-width);
-      position: sticky;
-      top: var(--navbar-height);
-      height: calc(100vh - var(--navbar-height));
+      flex: 0 0 var(--sidebar-width) !important;
+      /* flex-direction: column !important; */
+      width: var(--sidebar-width) !important;
+      position: sticky !important;
+      top: var(--navbar-height) !important;
+      height: calc(100vh - var(--navbar-height)) !important;
   }
 
   /* only needed for the mobile and tablet drawer's close button */
   .sidebar .offcanvas-header {
       display: none; /* only needed for the mobile drawer's close button */
   }
-}
+  .sidebar .offcanvas-body {
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+  }
   .secondary-nav-bar {
     padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--divider);
     }
+  .app-layout {
+    display: flex;
+    /* desktop: sidebar beside content */
+    flex-direction: row;
+
+  }
   .app-content {
     border-top: 1px solid var(--navtext);
   }
