@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
+{% endblock %}
+
+
+{% block content %}
+<div class="app-layout">
+  <nav class="secondary-nav" aria-label="Content navigation">
+    <div class="secondary-nav-bar d-lg-none">
+      {% block back_link %}{% endblock %}
+      {% block offcanvas_trigger %}{% endblock %}
+    </div>
+
+    <div class="sidebar offcanvas-lg offcanvas-start" tabindex="-1" id="appSidebar">
+      <div class="offcanvas-header d-lg-none">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+          data-bs-target="#appSidebar" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        {% block sidebar %}{% endblock %}
+      </div>
+    </div>
+  </nav>
+
+  <main class="app-content">
+    {% block app_content %}{% endblock %}
+  </main>
+
+</div>
+{% endblock %}

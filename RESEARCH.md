@@ -383,6 +383,9 @@ Notes:
 ### Debugging
 - Diffchecker: https://www.diffchecker.com/
 
+### Layout:
+- clamp() for main content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp
+
 
 ## Design
 ### App Name:

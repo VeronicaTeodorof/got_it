@@ -1,92 +1,83 @@
-{% extends "base.html" %}
-
+{% extends "notes/app_base.html" %}
 {% load static %}
-{% block extra_css %}
-  <link rel="stylesheet" href="{% static 'notes/css/notes.css' %}">
-{% endblock %}
 
-{% block content %}
-  <!-- Main -->
-  <main class="margin-line coral">
-    <div class="container-fluid container-md">
+{% block app_content %}
+  <!-- Messages -->
+  {% include 'notes/partials/messages.html' %}
+  <h1 class="visually-hidden">Sources</h1>
 
-      <!-- Messages -->
-      {% include 'notes/partials/messages.html' %}
-      <h1 class="visually-hidden">Sources</h1>
+  <!-- Create Source -->
+    <section>
+      <h2 class="visually-hidden">Add Source</h2>
+      <div class="m-4 mt-5">
+        <button class="btn-form dark-btn"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#create-source-form"
+          aria-expanded="false"
+          aria-controls="create-source-form">
+          Add source
+        </button>
 
-      <!-- Create Source -->
-      <section>
-        <h2 class="visually-hidden">Add Source</h2>
-        <div class="m-4 mt-5">
-          <button class="btn-form dark-btn"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#create-source-form"
-            aria-expanded="false"
-            aria-controls="create-source-form">
-            Add source
-          </button>
-          <div class="me-4 collapse expand-on-error" id="create-source-form">
-            <!-- Add Source form -->
-            <form method="post" novalidate>
-              {% csrf_token %}
-              <div class="form-field">
-                <label for="{{ form.source_name.id_for_label }}" class="visually-hidden">name</label>
-                {{ form.source_name }}
-                {{ form.source_name.errors }}
-              </div>
-              <div class="form-field">
-                <label for="{{ form.source_author.id_for_label }}" class="visually-hidden">author</label>
-                {{ form.source_author }}
-                {{ form.source_author.errors }}
-              </div>
-              <div class="form-field">
-                <label for="{{ form.source_type.id_for_label }}" class="visually-hidden">type</label>
-                {{ form.source_type }}
-                {{ form.source_type.errors }}
-              </div>
-              <button type="submit" class="btn dark-btn m-2">Save</button>
-              <button class="btn btn-form btn-form--cancel"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#create-source-form"
-                data-action="cancel-form"
-                aria-expanded="false"
-                aria-controls="create-source-form">
-                Cancel
-              </button>
-            </form>
-          </div>
+        <!-- Add Source form -->
+        <div class="me-4 collapse expand-on-error" id="create-source-form">
+          <form method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-field">
+              <label for="{{ form.source_name.id_for_label }}" class="visually-hidden">name</label>
+              {{ form.source_name }}
+              {{ form.source_name.errors }}
+            </div>
+            <div class="form-field">
+              <label for="{{ form.source_author.id_for_label }}" class="visually-hidden">author</label>
+              {{ form.source_author }}
+              {{ form.source_author.errors }}
+            </div>
+            <div class="form-field">
+              <label for="{{ form.source_type.id_for_label }}" class="visually-hidden">type</label>
+              {{ form.source_type }}
+              {{ form.source_type.errors }}
+            </div>
+            <button type="submit" class="btn dark-btn m-2">Save</button>
+            <button class="btn btn-form btn-form--cancel"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#create-source-form"
+              data-action="cancel-form"
+              aria-expanded="false"
+              aria-controls="create-source-form">
+              Cancel
+            </button>
+          </form>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Sources List -->
-      <section>
-        <h2 class="your-sources-heading">My Sources</h2>
-        <ul class="sources-list">
-          {% for source in page_obj %}
-            <li class="custom-list-item">
-              <a href="{% url 'source-detail' source.pk %}">
-                <span class="source-name">{{ source.source_name}}</span>
-                {% if source.source_author %}
-                  <span>by {{source.source_author}}</span>
-                {% endif %}
-                <span class="ms-lg-3 badge"> {{ source.get_source_type_display }}</span>
-                <span class="d-none d-md-inline ms-3 source-date"> {{ source.source_creation_date|date:"d M Y" }}
-                </span>
-              </a>
-            </li>
-          {% empty %}
-            <li class="empty">No sources yet.<br>
-              A source is the book, course, or podcast you're learning from. Add one to start organizing your notes.</li>
-          {% endfor %}
-        </ul>
+    <!-- Sources List -->
+    <section>
+      <h2 class="your-sources-heading">My Sources</h2>
+      <ul class="sources-list">
+        {% for source in page_obj %}
+          <li class="custom-list-item">
+            <a href="{% url 'source-detail' source.pk %}">
+              <span class="source-name">{{ source.source_name}}</span>
+              {% if source.source_author %}
+                <span>by {{source.source_author}}</span>
+              {% endif %}
+              <span class="ms-lg-3 badge"> {{ source.get_source_type_display }}</span>
+              <span class="d-none d-md-inline ms-3 source-date"> {{ source.source_creation_date|date:"d M Y" }}
+              </span>
+            </a>
+          </li>
+        {% empty %}
+          <li class="empty">No sources yet.<br>
+            A source is the book, course, or podcast you're learning from. Add one to start organizing your notes.</li>
+        {% endfor %}
+      </ul>
 
-        <!-- Paginator -->
-        {% include 'notes/partials/pagination.html' with aria_label="Source list pagination" %}
-      </section>
-    </div>
-  </main>
+      <!-- Paginator -->
+      {% include 'notes/partials/pagination.html' with aria_label="Source list pagination" %}
+    </section>
 {% endblock %}
 
 {% block extra_js %}

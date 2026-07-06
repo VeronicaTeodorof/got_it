@@ -3,6 +3,66 @@
   /* Fallback value overwritten by JavaScript at runtime with the navbar's actual rendered height */
   --navbar-height: 56px;
   --coral: #f9f9f9;
+  --sidebar-width: 141px;
+}
+
+/* ============================
+APP SHELL (sidebar + secondary nav)
+============================ */
+
+.app-layout {
+  display: flex;
+  align-items: stretch;
+  /* stretch is flexbox's default; here it is written explicitly so it's clear this is deliberate:
+  sidebar and app-content must match height so the divider line runs unbroken to the bottom,
+  not just whichever default happened to apply */
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+/* the nav landmark wraps both the mobile bar and the sidebar/offcanvas -
+display: contents removes the <nav>'s own box from layout so its children
+(.secondary-nav-bar and .sidebar) become direct flex items of .app-layout,
+sitting side-by-side with .app-content, while staying nested inside one
+real <nav> in the DOM for accessibility.
+Since the <nav> itself has no box, styles applied directly to.secondary-nav won't render -
+ style the children instead. */
+.secondary-nav {
+    display: contents;
+}
+
+/* mobile/tablet row: back-link + burger */
+.secondary-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--divider);
+  background: var(--chrome);
+}
+
+/* collapses to nothing when neither block is filled (dashboard) */
+.secondary-nav-bar:empty {
+  display: none;
+}
+
+
+/* ---- sidebar / offcanvas ---- */
+
+.sidebar {
+  background-color: var(--chrome);
+}
+
+
+/* ---- main content ---- */
+
+.app-content {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* `clamp()` used so that horizontal padding scales with viewport width instead of jumping at a breakpoint:
+  never below 1rem (mobile stays readable against the edge),
+  never above 3rem (large screens don't get excessive dead space),
+  4vw in between so it grows/shrinks smoothly with the window */
+  padding: 2rem clamp(1rem, 4vw, 3rem);
 }
 
 main {
@@ -157,7 +217,7 @@ main {
 .notebook-bg {
   background-image:
     repeating-linear-gradient(to bottom, transparent, transparent 31px, #d6d6d6 32px),
-    linear-gradient(to right, transparent, transparent 39px, #f4b8b8 40px, transparent 41px);
+    linear-gradient(to right, transparent, transparent 39px, var(--divider) 40px, transparent 41px);
 }
 .tagline {
   padding: 2.5rem 0.5rem;
@@ -193,7 +253,7 @@ span.motto {
   width: auto;
 }
 .footer-wrapper {
-  background-color: #f5f5f5;
+  background-color: var(--chrome);
   height: 4rem;
 }
 .footer {
@@ -259,7 +319,7 @@ span.motto {
 /* || Secondary navigation */
 .back-nav {
   padding: 0.75rem 1rem;
-  background-color: #f5f5f5;
+  background-color: var(--chrome);
 }
 
 .back-link {
@@ -437,15 +497,39 @@ input.inline-field:focus {
     font-size: 0.9rem;
   }
 }
-  /* for large screens 1024px and larger*/
-  @media screen and (min-width: 1024px) {
-    /* || Forms */
-    .form-input {
-      width: 80%;
-    }
-    /* || Dashboard */
-    .margin-line {
-      background-image:
-      linear-gradient(to right, #f5f5f5, #f5f5f5 160px, #f4b8b8 161px, transparent 162px);
-    }
+/* for large screens 1024px and larger*/
+@media screen and (min-width: 1024px) {
+  /* || Forms */
+  .form-input {
+    width: 80%;
   }
+  /* || Dashboard */
+  .margin-line {
+    background-image:
+    linear-gradient(to right, var(--chrome), var(--chrome) 160px, var(--divider) 161px, transparent 162px);
+  }
+
+/* lg and up: offcanvas becomes the static column, full height, with divider */
+@media (min-width: 992px) {
+  .sidebar.offcanvas-lg {
+      background: var(--chrome) !important;
+      border-right: 1px solid var(--divider) !important;
+      flex: 0 0 var(--sidebar-width);
+      width: var(--sidebar-width);
+      position: sticky;
+      top: var(--navbar-height);
+      height: calc(100vh - var(--navbar-height));
+  }
+
+  /* only needed for the mobile and tablet drawer's close button */
+  .sidebar .offcanvas-header {
+      display: none; /* only needed for the mobile drawer's close button */
+  }
+}
+  .secondary-nav-bar {
+    padding: 0.75rem 1rem;
+    }
+  .app-content {
+    border-top: 1px solid var(--navtext);
+  }
+}
