@@ -78,7 +78,28 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
   text-align: center;
 }
 
+.sidebar-link:hover {
+    text-decoration: underline;
+}
+.sidebar-link.active {
+    color: var(--navtext);
+    font-weight: 600;
+}
+.sidebar-link.active i {
+    color: var(--navtext);
+}
 
+.burger-btn {
+    background: transparent;
+    border: none;
+    color: var(--navtext);
+    font-size: 1.4rem;
+    line-height: 1;
+    padding: .25rem .5rem;
+}
+.burger-btn:hover {
+    color: var(--coral);
+}
 
 /* ---- main content ---- */
 
@@ -319,7 +340,14 @@ span.motto {
   color: #6B6A63;
   white-space: nowrap;
 }
-
+/* || Unit detail page */
+.unit-name {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  text-decoration: underline;
+  text-decoration-color: #bb6f6f;
+  text-underline-offset: 0.6rem;
+}
 /* || Pagination */
 .pagination {
   display: flex;
@@ -498,6 +526,16 @@ input.inline-field:focus {
     --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
 }
 
+/* || Links */
+.breadcrumb a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  color: var(--navtext);
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
 
 /* || MEDIA QUERIES */
 /* for medium and large screens 768px  and larger*/
