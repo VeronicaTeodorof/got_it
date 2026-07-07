@@ -18,7 +18,6 @@ urlpatterns = [
         views.unit_detail,
         name='unit-detail'
     ),
-    
     path(
         'sources/<int:source_pk>/units/<int:unit_pk>/delete/',
         views.delete_unit,

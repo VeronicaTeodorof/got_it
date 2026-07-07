@@ -349,6 +349,17 @@ span.motto {
   text-decoration-color: #bb6f6f;
   text-underline-offset: 0.6rem;
 }
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-link:hover {
+  color: var(--navtext);
+  background-color: transparent;
+}
+
+.nav-tabs .nav-link.active {
+  border-color: var(--navtext);
+}
+
 /* || Pagination */
 .pagination {
   display: flex;
@@ -613,5 +624,10 @@ input.inline-field:focus {
   }
   .app-content {
     border-top: 1px solid var(--navtext);
+  }
+
+  /* || Unit detail page */
+  .nav-tabs .nav-link.active {
+    border-bottom: 2px solid var(--coral);
   }
 }
