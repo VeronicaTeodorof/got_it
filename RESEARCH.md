@@ -367,6 +367,9 @@ Notes:
 - https://linuxcommand.org/
 
 ### Django:
+- https://docs.djangoproject.com/en/6.0/
+
+### Django allauth:
 - Django allauth official documentation: https://docs.allauth.org/
 
 ### Automated testing

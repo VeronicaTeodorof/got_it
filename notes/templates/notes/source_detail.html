@@ -121,21 +121,13 @@
               {% endif %}
             </span>
 
-            <!-- Actions Menu -->
-            {% include 'notes/partials/actions_menu.html' with edit_mode=edit_mode %}
-
-            <!-- Save / Cancel, edit mode only -->
-            <button type="submit" id="save-btn" class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Save">
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="var(--navtext)" class="bi bi-check-lg" viewBox="0 0 16 16">
-                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-              </svg>
-            </button>
-            <a href="{% url 'source-detail' source.pk %}" id="cancel-btn"
-              class="btn-icon {% if not edit_mode %}d-none{% endif %}" aria-label="Cancel">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="#bb6f6f" class="bi bi-x-lg" viewBox="0 0 16 16">
-                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414"/>
-              </svg>
-            </a>
+            <!-- Actions Menu Read and Edit modes -->
+            <!-- include's `with` clause only accepts simple variables, not nested tags like url directly.
+            So the pattern is always two steps:
+            1. compute the tricky value first, storing it with `as varname`
+            2. pass that finished variable into the include's `with` clause -->
+            {% url 'source-detail' source.pk as cancel_url %}
+            {% include 'notes/partials/actions_menu.html' with cancel_url=cancel_url edit_mode=edit_mode %}
           </span>
         </div>
       </form>
