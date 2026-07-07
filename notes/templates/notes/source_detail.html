@@ -42,7 +42,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p>Deleting <strong>"{{source.source_name}}"</strong> will also delete all units and notes associated with it.</p>
+          <p>Deleting <strong>{{source.source_name}}</strong> will also delete all units and notes associated with it.</p>
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
@@ -58,79 +58,78 @@
 
   <section id="source-actions">
     <!-- Source Details Read/Edit -->
-      <form method="post" action="{% url 'source-detail' source.pk %}">
-        {% csrf_token %}
-        <h1 class="visually-hidden">{{ source.source_name }}</h1>
-        <input type="hidden" name="form_type" value="edit_source">
+    <form method="post" action="{% url 'source-detail' source.pk %}">
+      {% csrf_token %}
+      <h1 class="visually-hidden">{{ source.source_name }}</h1>
+      <input type="hidden" name="form_type" value="edit_source">
 
-        <div class="source-heading d-flex align-items-baseline gap-2">
-
-          <!-- Source name -->
-          <span class="field-group">
-            {% if edit_mode %}
-              <label for="id_source_name" class="visually-hidden">Source name</label>
-              <input type="text" id="id_source_name" name="source_name"
-                    value="{{ form.source_name.value }}"
-                    placeholder="source name required"
-                    size="{{ form.source_name.value|length|add:2 }}"
-                    class="inline-field inline-field--title">
-              {% if form.source_name.errors %}
-                <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
-              {% endif %}
-            {% else %}
-              <span id="id_source_name" class="inline-field inline-field--title">{{ source.source_name }}</span>
+      <div class="source-heading d-flex align-items-baseline gap-2">
+        <!-- Source name -->
+        <span class="field-group">
+          {% if edit_mode %}
+            <label for="id_source_name" class="visually-hidden">Source name</label>
+            <input type="text" id="id_source_name" name="source_name"
+                  value="{{ form.source_name.value }}"
+                  placeholder="source name required"
+                  size="{{ form.source_name.value|length|add:2 }}"
+                  class="inline-field inline-field--title">
+            {% if form.source_name.errors %}
+              <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
             {% endif %}
-          </span>
-
-          {% if source.source_author and not edit_mode %}
-            <span class="text-muted">by</span>
+          {% else %}
+            <span id="id_source_name" class="inline-field inline-field--title">{{ source.source_name }}</span>
           {% endif %}
+        </span>
 
-          <!-- Source author -->
+        {% if source.source_author and not edit_mode %}
+          <span class="text-muted">by</span>
+        {% endif %}
+
+        <!-- Source author -->
+        <span class="field-group">
+          {% if edit_mode %}
+            <label for="id_source_author" class="visually-hidden">Source author</label>
+            <input type="text" id="id_source_author" name="source_author"
+                  value="{{ form.source_author.value|default:'' }}"
+                  placeholder="add author"
+                  size="{{ form.source_author.value|default:''|length|add:2 }}"
+                  class="inline-field inline-field--author">
+            {% if form.source_author.errors %}
+              <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
+            {% endif %}
+          {% else %}
+            <span id="id_source_author" class="inline-field inline-field--author">{{ source.source_author|default:"" }}</span>
+          {% endif %}
+        </span>
+
+        <span class="span-wrapper">
+          <!-- Source type -->
           <span class="field-group">
             {% if edit_mode %}
-              <label for="id_source_author" class="visually-hidden">Source author</label>
-              <input type="text" id="id_source_author" name="source_author"
-                    value="{{ form.source_author.value|default:'' }}"
-                    placeholder="add author"
-                    size="{{ form.source_author.value|default:''|length|add:2 }}"
-                    class="inline-field inline-field--author">
-              {% if form.source_author.errors %}
-                <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
+              <label for="id_source_type" class="visually-hidden">Source type</label>
+              <select id="id_source_type" name="source_type" class="inline-badge">
+                {% for value, label in form.source_type.field.choices %}
+                  <option value="{{ value }}" {% if value == source.source_type %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+              </select>
+              {% if form.source_type.errors %}
+                <span class="field-error" role="alert">{{ form.source_type.errors.0 }}</span>
               {% endif %}
             {% else %}
-              <span id="id_source_author" class="inline-field inline-field--author">{{ source.source_author|default:"" }}</span>
+              <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
             {% endif %}
           </span>
 
-          <span class="span-wrapper">
-            <!-- Source type -->
-            <span class="field-group">
-              {% if edit_mode %}
-                <label for="id_source_type" class="visually-hidden">Source type</label>
-                <select id="id_source_type" name="source_type" class="inline-badge">
-                  {% for value, label in form.source_type.field.choices %}
-                    <option value="{{ value }}" {% if value == source.source_type %}selected{% endif %}>{{ label }}</option>
-                  {% endfor %}
-                </select>
-                {% if form.source_type.errors %}
-                  <span class="field-error" role="alert">{{ form.source_type.errors.0 }}</span>
-                {% endif %}
-              {% else %}
-                <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
-              {% endif %}
-            </span>
-
-            <!-- Actions Menu Read and Edit modes -->
-            <!-- include's `with` clause only accepts simple variables, not nested tags like url directly.
-            So the pattern is always two steps:
-            1. compute the tricky value first, storing it with `as varname`
-            2. pass that finished variable into the include's `with` clause -->
-            {% url 'source-detail' source.pk as cancel_url %}
-            {% include 'notes/partials/actions_menu.html' with cancel_url=cancel_url edit_mode=edit_mode %}
-          </span>
-        </div>
-      </form>
+          <!-- Actions Menu Read and Edit modes -->
+          <!-- include's `with` clause only accepts simple variables, not nested tags like url directly.
+          So the pattern is always two steps:
+          1. compute the tricky value first, storing it with `as varname`
+          2. pass that finished variable into the include's `with` clause -->
+          {% url 'source-detail' source.pk as cancel_url %}
+          {% include 'notes/partials/actions_menu.html' with cancel_url=cancel_url edit_mode=edit_mode %}
+        </span>
+      </div>
+    </form>
   </section>
 
   <!-- Create Unit -->

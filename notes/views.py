@@ -126,74 +126,6 @@ def source_detail(request, source_pk):
     })
 
 
-# while source_detail view can handle displaying both create and edit forms
-# it needs to distinguish between POST requests for create and POST requests
-# for edit
-# the solution here was to create a separate view to handle POST requests for
-# edit unit form, leaving source_detail view to handle only the POST requests
-# for create unit form
-@login_required
-def edit_unit(request, source_pk, unit_pk):
-    """
-    View for the POST branch of the edit unit form
-    """
-    # the view has to first run its security checks and fetch the required
-    # objects to bind to the new form if they exists
-    # takes source_pk argument and has to see whether it exists or not
-    # goes to Source table, checks the indicated pk exists, checks the user
-    # is the one that made the request
-    # fetches object if it passes security checks
-    # returns 404 otherwise
-    current_source = get_object_or_404(
-        Source, pk=source_pk, user=request.user
-        )
-    # now takes unit_pk argument and checks whether it exists or not
-    # goes to Unit table, checks the indicated pk exists, checks it
-    # belongs to the source indicated in current_source
-    # fetches or returns 404
-    unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
-    # now you want the view to make a copy or the UnitForm and attach
-    # to it data received in request.POST
-    # you take a copy of the UnitForm and with instance=unit you tell
-    # Django that in the previously fetched unit record you want the
-    # data from request.POST, not the old data
-    if request.method == 'POST':
-        form = UnitForm(request.POST, instance=unit, source=current_source)
-        if form.is_valid():
-            form.save()
-            return redirect('source-detail', source_pk=current_source.pk)
-        units = Unit.objects.filter(source=current_source).order_by(
-            'unit_last_modified_date')
-        # for each unit in the list, if the pk matches the one that just
-        # failed, respective form is brought back with errors intace,
-        # all other ones are given fresh prepopulated forms as normal
-        forms = [
-            form if u.pk == unit.pk
-            else UnitForm(instance=u, source=current_source)
-            for u in units
-        ]
-        unit_forms = list(zip(units, forms))
-        return render(request,
-                      'notes/source_detail.html',
-                      {"current_source": current_source,
-                       "unit_forms": unit_forms,
-                       "units": units,
-                       "form": UnitForm(source=current_source),
-                       'failed_unit_pk': unit_pk})
-
-    # GET fallback - never actually reached,
-    # edit forms are pre-rendered in source_detail view
-    # left for readability and eventual UI changes
-    form = UnitForm(instance=unit, source=current_source)
-    return render(request,
-                  'notes/source_detail.html',
-                  {"current_source": current_source,
-                   "units": Unit.objects.filter(
-                       source=current_source).order_by(
-                       'unit_last_modified_date'),
-                   "form": UnitForm(source=current_source)})
-
-
 @login_required
 def delete_unit(request, source_pk, unit_pk):
     """View for deleting units"""
@@ -208,21 +140,43 @@ def delete_unit(request, source_pk, unit_pk):
 # --- Unit detail/Notes ---
 @login_required
 def unit_detail(request, source_pk, unit_pk):
-    """Retrieve and display a single unit belonging to a source
-    and a list of all related notes
+    """Retrieve and display a single unit belonging to a source,
+    handle inline editing of the unit's own fields, and display
+    related notes.
     """
     unit = get_object_or_404(Unit,
                              pk=unit_pk,
                              source__pk=source_pk,
-                             source__user=request.user
-                             )
+                             source__user=request.user)
     source = unit.source
     references = unit.reference_notes.all().order_by('-last_modified_date')
+
+    if request.method == 'POST':
+        form = UnitForm(request.POST, instance=unit, source=source)
+        if form.is_valid():
+            form.save()
+            # PRG pattern: redirect back to this same page after success
+            return redirect('unit-detail',
+                            source_pk=source.pk,
+                            unit_pk=unit.pk)
+        # invalid: re-render with errors, still in edit mode
+        return render(request,
+                      'notes/unit_detail.html',
+                      {'source': source,
+                       'unit': unit,
+                       'references': references,
+                       'form': form,
+                       'edit_mode': True})
+
+    edit_mode = request.GET.get('edit') == '1'
+    form = UnitForm(instance=unit, source=source) if edit_mode else None
     return render(request,
                   'notes/unit_detail.html',
                   {'source': source,
                    'unit': unit,
-                   'references': references})
+                   'references': references,
+                   'form': form,
+                   'edit_mode': edit_mode})
 
 
 # --- Reference Notes ---
