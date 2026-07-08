@@ -466,6 +466,28 @@ already had this guard via a truthiness check.
 `.inline-field` capped at `max-width: 100%` so a very long title can't overflow the viewport. Text scrolls within the input rather than the
 box growing or the row wrapping. Considered a tradeoff worth accepting given how rare genuinely long titles are expected to be.
 
+
+### Visual Hierarchy: Headings, Accents, and Action Color
+
+**Three-tier hierarchy, app-wide**
+Every page follows the same visual order:
+- muted grey for context (breadcrumbs), matching the introductory part of the tagline in home page,
+- dark green + terracota accent for the page heading (most important content),
+- solid terracotta for the single primary action on the entire site,
+- dark green for all other primaty action buttons.
+
+**Heading accent: fixed-width underline, not full-width**
+A short (48px), thick, terracotta bar sits below each page heading, offset by a few pixels rather than hugging the text baseline. Considered a   `full-width `text-decoration: underline` first, but rejected: an underline scaling with text length reads as a link affordance, and grows awkwardly under long titles (e.g. unit or source names). A fixed-width accent, decoupled from text length, keeps the decorative intent unambiguous regardless of heading length, and never suggests the heading itself is clickable.
+
+**Heading font: sans, not italic serif, for in-app pages**
+Page headings use the same sans-serif as body text, distinguished by size and weight rather than a decorative typeface. Italic serif was trialled first (echoing the logo's handwritten style) but rejected for in-app headings that wrap user-generated content — italics degrade in legibility as line length grows, and several in-app headings (unit titles, source titles) can't be guaranteed to stay short. The italic serif treatment is reserved for the home page hero section (tagline), where the heading is fixed copy the developer wrote, not user data.
+
+**Terracotta reserved for exactly one action per site**
+Actionwise, terracotta (`#bb6f6f`) is used only for the home page's "Get started" CTA — the single most important action across the entire app. Sign in/sign up submit buttons and every create/save action inside the app (Add source, Add unit, Save note, etc.) use dark green instead. Considered scoping terracota to "primary CTA per page" first, but rejected for accessibility reasons.
+
+**Breadcrumbs: muted, not heading-adjacent styling**
+Breadcrumb trail (e.g. "Source name > Unit name") uses the same muted grey as the home page's supporting copy, sitting above the heading with tighter spacing to the heading than the heading has to the content below — grouping breadcrumb-and-heading visually as "where am I, then what am I looking at."
+
 ### Notes Display
 
 - Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab
