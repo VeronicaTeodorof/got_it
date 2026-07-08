@@ -116,10 +116,6 @@ class ReferenceForm(forms.ModelForm):
     """
     A form for creating and editing reference notes
     """
-    def __init__(self, *args, **kwargs):
-        self.unit = kwargs.pop('unit', None)
-        super().__init__(*args, **kwargs)
-
     class Meta:
         model = Reference
         fields = ['title', 'content', 'location']

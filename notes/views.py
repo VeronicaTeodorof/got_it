@@ -201,6 +201,7 @@ def create_reference(request, source_pk, unit_pk):
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+
     if request.method == 'POST':
         form = ReferenceForm(request.POST)
         if form.is_valid():
@@ -208,14 +209,13 @@ def create_reference(request, source_pk, unit_pk):
             reference.unit = unit
             reference.save()
             messages.success(request, "Reference note saved.")
-            return redirect('unit-detail', source_pk, unit_pk)
-        return render(request,
-                      'notes/create_reference.html',
-                      {'source': source,
-                       'unit': unit,
-                       'form': form}
-                      )
-    form = ReferenceForm()
+            return redirect('reference-detail',
+                            source_pk,
+                            unit_pk,
+                            reference.pk)
+    else:
+        form = ReferenceForm()
+
     return render(request,
                   'notes/create_reference.html',
                   {'source': source,
