@@ -16,6 +16,7 @@
       Change or add source
     </a>
   {% endblock %}
+   {% block offcanvas_trigger %}{% endblock %}
 
   <!-- Sidebar -->
   {% block sidebar %}
@@ -30,8 +31,6 @@
   {% endblock %}
 
 {% block app_content %}
-  <!-- Messages -->
-  {% include 'notes/partials/messages.html' %}
 
   <!-- Delete Modal -->
   <div class="modal fade" id="delete-modal" tabindex="-1">
