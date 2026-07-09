@@ -439,6 +439,49 @@ Two separate layout lineages, split by whether a page needs the app frame (sideb
 
 Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.
 
+### Sidebar Navigation: Nested Expandable Tree
+
+**Origin**
+
+The nested expandable sidebar concept was proposed by my tutor as an enhancement to site navigation, allowing users to browse their Source → Unit hierarchy without leaving the current page. My tutor's main justification was that users are already familiar with this pattern from file explorer systems. The interaction design, state management approach, and information architecture below were worked out building on my tutor's initial idea and visual example.
+
+**Architecture**
+
+**Structure**
+
+- **Upper section**: expandable tree — Sources → Units (two levels, hard stop)
+- **Lower section** present on note-detail/note-create pages: fixed panel — note-type summary (Reference, My Words, Questions), always visible on individual note pages regardless of sidebar width
+
+**Expand/collapse behavior**
+
+- Sidebar defaults to collapsed (narrow) on every page load — no persisted state, no localStorage
+- A single master toggler controls width; expanding any row widens the whole sidebar (one shared width state, not per-level)
+- Collapsing (via master toggler or an explicit close) resets all nested expansion — the sidebar always returns to a single known state rather than accumulating stale expand state across navigations
+- Each row's name/label navigates; a separate toggler (where present) expands — click targets are never shared between the two actions, to avoid ambiguous clicks
+
+**Why a single "expanded path" instead of per-row booleans**
+
+Only one branch of the tree can be open at a time (e.g. one Source's Units), so state is modeled as a single current path (e.g. `{ sourceId }`) rather than independent flags per row. This means expanding a new Source implicitly closes whatever was previously open, and collapsing is a single reset rather than walking every row.
+
+**Why the tree stops at two levels**
+
+Units don't expand further into individual notes. Instead of a third nesting level, each Unit row surfaces the information that would motivate drilling in: total note count, unlinked Reference count, and unanswered Question count. This gives an at-a-glance view of where attention is needed across *all* Units without requiring navigation into each one — directly supporting the app's active-recall goal (spotting gaps, not just inventory).
+
+**Why the lower panel is separate and non-expanding**
+
+The lower panel shows the same category of information (counts, gap-metrics, create actions) but scoped to the *current* Unit rather than across all Units. Keeping it structurally separate from the tree — and always visible rather than behind a toggle — avoids showing the same fact twice in two places: the tree answers "which Unit needs attention," the panel answers "what's the state of the Unit I'm in now."
+
+**Consistency principle**
+
+Every destination is shown exactly once, in exactly one place. Where duplication risk was identified during design (e.g. note-type counts appearing both in an expanded tree and in the lower panel), the information was deliberately scoped differently (cross-Unit vs current-Unit) rather than shown twice at the same specificity.
+
+**Implementation Phases**
+
+1. **Master toggler** — CSS transition + JS class toggle on sidebar container, `aria-expanded` wiring
+2. **Sources section** — add-source link (rendered first) + queryset with annotated Unit counts, per-row toggler
+3. **Units section** — add-unit link (rendered first) + queryset with annotated total/unlinked-reference/unanswered-question counts, no further expansion
+4. **Lower panel** — note-type counts + gap-metrics + create links, richer detail on note-detail pages, always visible independent of sidebar width
+
 
 ## Source Detail: Inline Edit — Design Decisions
 
