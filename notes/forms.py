@@ -122,8 +122,11 @@ class ReferenceForm(forms.ModelForm):
         widgets = {
             'content': forms.Textarea(attrs={'rows': 5})
         }
-        labels = {
-            'title': 'Title',
-            'content': 'Note',
-            'location': 'Location'
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input',
+                                            'placeholder': 'title'}),
+            'content': forms.Textarea(attrs={'class': 'form-input',
+                                             'placeholder': 'content'}),
+            'location': forms.TextInput(attrs={'class': 'form-input',
+                                               'placeholder': 'location'}),
         }

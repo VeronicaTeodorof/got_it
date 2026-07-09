@@ -1,11 +1,19 @@
-/* || VARIABLES */
+/* ============================
+     VARIABLES
+============================ */
 
 :root {
 --primary-font: 'Inter', 'Arial', sans-serif;
 --handwriting: "Architects Daughter", cursive;
---navtext: #10341f;
 --chrome: #f5f5f5;
+--nav-green: #10341f;
+--hover-green: rgb(71, 163, 71);
+--form-green: #1B3B2D;
+--muted-green: #5C7568;
+--rich-green: #20543d;
 --divider: #f4b8b8;
+--terracotta: #bb6f6f;
+--terracotta-hover: #e49999;
 
 }
 
@@ -16,16 +24,9 @@ body {
   min-height: 100vh;
 }
 
-/* .lines {
-  border-left: 1px solid #ffaa9f;
-  border-right: 1px solid #ffaa9f;
-  width: 2px;
-  float: left;
-  height: 495px;
-  margin-left: 40px;
-}​ */
-
-/* || NAVBAR */
+/* ============================
+     MAIN NAVIGATION
+============================ */
 .navbar {
   background-color: var(--chrome);
 }
@@ -35,25 +36,24 @@ body {
 
 .nav-link {
   padding: 0.3rem;
-  color: var(--navtext);
+  color: var(--nav-green);
   font-size: 0.8rem;
   font-weight: bold;
-  font-family: var(--primary-font);
 }
 
 .nav-link:hover {
-  background-color: var(--navtext);
+  background-color: var(--nav-green);
   color:var(--chrome);
   border-radius: 6px;
 }
 
 .sign-up {
-  background-color: var(--navtext);
+  background-color: var(--nav-green);
   color: var(--chrome);
   border-radius: 6px;
 }
 .sign-up:hover {
-  background-color: rgb(71, 163, 71);
+  background-color: var(--hover-green);
   color: var(--chrome);
 }
 
@@ -65,6 +65,9 @@ body {
   border-radius: 50%;
 }
 
+/* ============================
+    BACKGROUND
+============================ */
 /* Notebook ruled-paper background, designed with Claude (Anthropic) */
 .notebook-bg {
   background-image:
@@ -76,7 +79,9 @@ main.notebook-bg {
   flex: 1;
 }
 
-/* || Authentication*/
+/* ============================
+     AUTHENTICATION
+============================ */
 .auth-card {
   background-color: transparent;
   margin: 3rem 1rem 2rem 3rem;
@@ -95,7 +100,7 @@ main.notebook-bg {
 .auth-input {
     width: 100%;
     border: none;
-    border-bottom: 1.5px solid #1B3B2D;
+    border-bottom: 1.5px solid var(--form-green);
     border-radius: 0;
     background: transparent;
     padding: 4px 4px;
@@ -107,7 +112,7 @@ main.notebook-bg {
 }
 .btn-auth {
   width: 100%;
-  background: #1B3B2D;
+  background: var(--form-green);
   color: #fff;
   border: none;
   padding: 11px;
@@ -118,7 +123,7 @@ main.notebook-bg {
 }
 
 .btn-auth:hover {
-  background:rgb(71, 163, 71);
+  background:var(--hover-green);
   color: white;
 }
 
@@ -132,21 +137,76 @@ main.notebook-bg {
 }
 .auth-link {
     font-size: 1rem;
-    color: #5C7568;
+    color: var(--muted-green);
     margin-top: 2rem;
 }
 
 .auth-link a {
-    color: #20543d;
+    color: var(--rich-green);
     font-weight: 500;
 }
 
-/* || SIGN UP PAGE */
-.log {
+/* .log {
   background-color: var(--chrome);
-}
+} */
 #sign-in {
   margin-top: 6rem;
+}
+
+/* || HOME PAGE */
+.notebook-bg {
+  background-image:
+    repeating-linear-gradient(to bottom, transparent, transparent 31px, #d6d6d6 32px),
+    linear-gradient(to right, transparent, transparent 39px, var(--divider) 40px, transparent 41px);
+}
+.tagline {
+  padding: 2.5rem 0.5rem;
+  font-family: var(--primary-font);
+  font-weight:400;
+  color: rgb(156, 172, 156);
+  line-height: 1.3;
+}
+span.motto {
+  font-family: var(--handwriting);
+  font-weight: bold;
+  color: var(--nav-green);
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 2.5rem;
+  line-height: 1.1;
+  text-decoration: underline ;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--terracotta);
+}
+.cta {
+  background-color: var(--terracotta);
+  color:white;
+  font-size: 1.5rem;
+}
+.cta:hover {
+  background-color: var(--terracotta-hover);
+  color:white;
+}
+.workflow {
+  height: 250px;
+  width: auto;
+}
+.footer-wrapper {
+  background-color: var(--chrome);
+  height: 4rem;
+}
+.footer {
+  text-align: center;
+  color:var(--nav-green);
+}
+.footer a {
+  text-decoration: none;
+  color:var(--nav-green);
+}
+.name {
+  font-family: var(--handwriting);
+  font-style: italic;
 }
 
 /* || MEDIA QUERIES */
@@ -170,5 +230,20 @@ main.notebook-bg {
   }
   .auth-input {
     width: 480px;
+  }
+}
+/* for medium and large screens 768px  and larger*/
+@media screen and (min-width: 768px) {
+  .workflow {
+  height: 300px;
+  }
+  span.motto {
+    font-size: 3.7rem;
+  }
+  .tagline {
+    font-size: 2rem;
+  }
+  .how-to {
+    font-size: 1.1rem;
   }
 }

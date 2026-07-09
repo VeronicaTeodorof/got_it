@@ -33,10 +33,10 @@
   </nav>
 
   <main class="app-content">
+    {% block messages %}
+      {% include "notes/partials/messages.html" %}
+    {% endblock %}
     {% block app_content %}
-      {% block messages %}
-        {% include "partials/messages.html" %}
-      {% endblock %}
     {% endblock %}
   </main>
 

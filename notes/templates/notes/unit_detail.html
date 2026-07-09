@@ -54,9 +54,9 @@
       </div>
     </div>
   </div>
-
-  <p class="mt-4 ms-4 mb-1 breadcrumb">
-    <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+  <!-- Breadcrumbs -->
+  <p class="mb-3 breadcrumb">
+    <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }} ></a>
   </p>
 
   <section id="unit-actions">
@@ -77,7 +77,7 @@
             <span class="field-error" role="alert">{{ form.unit_name.errors.0 }}</span>
           {% endif %}
         {% else %}
-          <h1 id="id_unit_name" class="inline-field inline-field--title">{{ unit.unit_name }}</h1>
+          <h1 id="id_unit_name" class="heading">{{ unit.unit_name }}</h1>
         {% endif %}
         </span>
 
@@ -89,7 +89,7 @@
   </section>
 
   <!-- Navigation tabs for note types -->
-  <ul class="nav nav-tabs flex-column flex-lg-row ms-4 gap-lg-5">
+  <ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-5 gap-lg-5">
     <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
       <a class="nav-link" href="#reference" data-bs-toggle="tab">Reference</a>
       <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}"

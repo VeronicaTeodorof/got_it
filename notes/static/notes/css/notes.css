@@ -1,35 +1,38 @@
-/* || CSS VARIABLES */
+/* ============================
+   VARIABLES
+============================ */
 :root {
   /* Fallback value overwritten by JavaScript at runtime with the navbar's actual rendered height */
   --navbar-height: 56px;
   --coral: #f9f9f9;
-  --sidebar-width: 141px;
+  --sidebar-width: 131px;
+  --sidebar-links: #3a3a35;
 }
 
 /* ============================
-APP SHELL (sidebar + secondary nav)
+   APP SHELL (sidebar + secondary nav)
 ============================ */
 
 .app-layout {
   display: flex;
   /* mobile/tablet: stack the bar above content */
   flex-direction: column;
-   /* stretch is flexbox's default; here it is written explicitly so it's clear this is deliberate:
+  /* stretch is flexbox's default; here it is written explicitly so it's clear this is deliberate:
   sidebar and app-content must match height so the divider line runs unbroken to the bottom,
   not just whichever default happened to apply */
   align-items: stretch;
   min-height: calc(100vh - var(--navbar-height));
 }
 
-/* the nav landmark wraps both the mobile bar and the sidebar/offcanvas -
-display: contents removes the <nav>'s own box from layout so its children
-(.secondary-nav-bar and .sidebar) become direct flex items of .app-layout,
-sitting side-by-side with .app-content, while staying nested inside one
-real <nav> in the DOM for accessibility.
-Since the <nav> itself has no box, styles applied directly to.secondary-nav won't render -
- style the children instead. */
+/* The nav landmark wraps both the mobile bar and the sidebar/offcanvas.
+   display: contents removes the <nav>'s own box from layout so its children
+   (.secondary-nav-bar and .sidebar) become direct flex items of .app-layout,
+   sitting side-by-side with .app-content, while staying nested inside one
+   real <nav> in the DOM for accessibility.
+   Since the <nav> itself has no box, styles applied directly to .secondary-nav
+   won't render — style the children instead. */
 .secondary-nav {
-    display: contents;
+  display: contents;
 }
 
 /* mobile/tablet row: back-link + burger */
@@ -37,14 +40,11 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: .75rem 0;
-  /* border-bottom: 1px solid var(--divider); */
   background: var(--chrome);
-  /* opt out of .app-layout's stretch
-  - this row should size to its own content,
-  not match the sidebar/content column height */
+  /* opt out of .app-layout's stretch — this row should size to its own
+  content, not match the sidebar/content column height */
   align-self: flex-start;
-  width:100%;
+  width: 100%;
   padding: .75rem 1rem;
 }
 
@@ -52,7 +52,6 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
 .secondary-nav-bar:empty {
   display: none;
 }
-
 
 /* ---- sidebar / offcanvas ---- */
 
@@ -66,84 +65,76 @@ Since the <nav> itself has no box, styles applied directly to.secondary-nav won'
   align-items: center;
   gap: .6rem;
   padding: .45rem .1rem;
-  color: #3a3a35;
+  color: var(--sidebar-links);
   text-decoration: none;
   font-size: .93rem;
 }
 
 .sidebar-link i {
   font-size: 1rem;
-  color: var(--coral, #c17a63);
   width: 1.1rem;
   text-align: center;
 }
 
 .sidebar-link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
+
 .sidebar-link.active {
-    color: var(--navtext);
-    font-weight: 600;
-}
-.sidebar-link.active i {
-    color: var(--navtext);
+  color: var(--nav-green);
+  font-weight: 600;
 }
 
 .burger-btn {
-    background: transparent;
-    border: none;
-    color: var(--navtext);
-    font-size: 1.4rem;
-    line-height: 1;
-    padding: .25rem .5rem;
-}
-.burger-btn:hover {
-    color: var(--coral);
+  background: transparent;
+  border: none;
+  color: var(--nav-green);
+  font-size: 1.4rem;
+  line-height: 1;
+  padding: .25rem .5rem;
 }
 
 /* ---- main content ---- */
 
 .app-content {
   flex: 1 1 auto;
+  box-sizing: border-box;
   min-width: 0;
-  /* `clamp()` used so that horizontal padding scales with viewport width instead of jumping at a breakpoint:
-  never below 1rem (mobile stays readable against the edge),
-  never above 3rem (large screens don't get excessive dead space),
-  4vw in between so it grows/shrinks smoothly with the window */
-  padding: 2rem clamp(1rem, 4vw, 3rem);
+  /* clamp() used so horizontal padding scales with viewport width instead of
+  jumping at a breakpoint: never below 1rem (mobile stays readable against
+  the edge), never above 6rem (large screens don't get excessive dead
+  space), 10vw in between so it grows/shrinks smoothly with the window */
+  padding: 2rem clamp(1rem, 10vw, 6rem);
+  border-top: 1px solid var(--nav-green);
 }
 
 main {
   flex-grow: 1;
 }
 
-.coral {
-  background-color: var(--coral);
-}
-
-.container-fluid.coral {
-  flex: 1;
-}
-/* || UTILITIES */
-
-/* || Feedback messages */
+/* ============================
+   FEEDBACK MESSAGES
+============================ */
 .messages {
   list-style: none;
   margin: 0;
-  padding-top:3rem;
+  padding-top: 3rem;
   text-align: center;
   background-color: inherit;
   color: green;
 }
 
-/* || Forms */
+/* ============================
+   FORMS
+============================ */
 .form-field {
   margin-bottom: 1.5rem;
 }
+
 .form-input {
   width: 100%;
   border: none;
-  border-bottom: 1.5px solid #1B3B2D;
+  border-bottom: 1.5px solid var(--form-green);
   border-radius: 0;
   background: transparent;
   padding: 4px 4px;
@@ -160,13 +151,11 @@ main {
   border-bottom-width: 2px;
 }
 
-#create-source-form form {
-  margin-top: 2rem;
-}
-
-/* || Buttons */
+/* ============================
+   BUTTONS
+============================ */
 .btn-form {
-  background-color: var(--navtext);
+  background-color: var(--form-green);
   color: white;
   padding: 7px 12px;
   border: none;
@@ -187,48 +176,37 @@ main {
 
 .btn-form--cancel {
   background-color: transparent;
-  color: #1B3B2D;
-  border: 1px solid #1B3B2D;
+  color: var(--form-green);
+  border: 1px solid var(--form-green);
 }
 
 .btn-form--cancel:hover {
-  color: #1B3B2D;
+  color: var(--form-green);
   background-color: #f3f3f3;
-  border: 1px solid #1B3B2D;
-
+  border: 1px solid var(--form-green);
 }
 
 /* btn class removed to fix a click flash caused by Bootstrap's default
- :active/:focus states. This also removed Bootstrap's built-in focus
- ring, so :focus-visible restores a visible focus indicator for keyboard
- navigation (WCAG 2.4.7) without reintroducing the mouse-click flash.
- https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
+:active/:focus states. This also removed Bootstrap's built-in focus ring,
+so :focus-visible restores a visible focus indicator for keyboard
+navigation (WCAG 2.4.7) without reintroducing the mouse-click flash.
+https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 .btn-create:active,
 .btn-create:focus-visible {
-  background-color: #1B3B2D;
+  background-color: var(--form-green);
   color: #fff;
-  border-color: #1B3B2D;
-  outline: 2px solid #1B3B2D;
+  outline: 2px solid var(--form-green);
   outline-offset: 2px;
 }
-.dark-btn {
-  background-color: var(--navtext);
-  color: white;
-  border-radius: 6px;
-  border: none;
-}
-.dark-btn:hover {
-  background-color: rgb(71, 163, 71);
-  color: white;
-}
 
-/* || Empty state */
+/* ============================
+   EMPTY STATE
+============================ */
 .empty {
   color: #5C7568;
   list-style: none;
   max-width: 480px;
-  margin: 0 auto;
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   font-size: 1.05rem;
   line-height: 2;
   text-align: center;
@@ -239,10 +217,22 @@ main {
   margin-right: 0;
 }
 
-/* || Lists */
+/* ============================
+   LISTS
+============================ */
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.source-detail-page .list {
+  font-weight: 600;
+}
+
 .custom-list-item {
   list-style: none;
-  border-bottom: 1.5px solid #1B3B2D;
+  border-bottom: 1.5px solid var(--form-green);
   max-width: 80%;
 }
 
@@ -251,7 +241,7 @@ main {
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  padding: 0.8rem 0 0.1rem 0.5rem;
+  padding: 0.8rem 0 0.1rem;
   text-decoration: none;
   color: inherit;
   gap: 0.4rem;
@@ -262,72 +252,39 @@ main {
   border-radius: 5px;
 }
 
-/* || HOME PAGE */
-.notebook-bg {
-  background-image:
-    repeating-linear-gradient(to bottom, transparent, transparent 31px, #d6d6d6 32px),
-    linear-gradient(to right, transparent, transparent 39px, var(--divider) 40px, transparent 41px);
-}
-.tagline {
-  padding: 2.5rem 0.5rem;
-  font-family: var(--primary-font);
-  font-weight:400;
-  color: rgb(156, 172, 156);
-  line-height: 1.3;
-}
-span.motto {
-  font-family: var(--handwriting);
-  font-weight: bold;
-  color: var(--navtext);
-  display: block;
-  margin-top: 0.8rem;
-  font-size: 2.5rem;
-  line-height: 1.1;
-  text-decoration: underline ;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-  text-decoration-color: #bb6f6f
-}
-.cta {
-  background-color: #bb6f6f;
-  color:white;
-  font-size: 1.5rem;
-}
-.cta:hover {
-  background-color: #e49999;
-  color:white;
-}
-.workflow {
-  height: 250px;
-  width: auto;
-}
-.footer-wrapper {
-  background-color: var(--chrome);
-  height: 4rem;
-}
-.footer {
-  text-align: center;
-  color:var(--navtext);
-}
-.footer a {
-  text-decoration: none;
-  color:var(--navtext);
-}
-.name {
-  font-family: var(--handwriting);
-  font-style: italic;
+/* ============================
+   HEADINGS (shared decoration)
+============================ */
+.heading {
+  text-align: left;
+  color: var(--nav-green);
+  font-size: 1.7rem;
+  position: relative;
+  display: inline-block;
 }
 
-/* || DASHBOARD */
-.your-sources-heading {
-  text-align:left;
-  color:#bb6f6f;
-  margin-top: 1rem;
-  padding-left: 1.7rem
+.heading::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 48px;
+  height: 4px;
+  background-color: var(--terracotta);
 }
 
-/* || Source display */
-.source-name{
+.heading--editing::after {
+  content: none;
+}
+
+.heading h1 {
+  font-size: 1.7rem;
+}
+
+/* ============================
+   DASHBOARD PAGE
+============================ */
+.source-name {
   font-weight: bolder;
 }
 
@@ -341,15 +298,10 @@ span.motto {
   color: #6B6A63;
   white-space: nowrap;
 }
-/* || Unit detail page */
-.unit-name {
-  font-weight: bolder;
-  font-size: 1.5rem;
-  text-decoration: underline;
-  text-decoration-color: #bb6f6f;
-  text-underline-offset: 0.6rem;
-}
 
+/* ============================
+   UNIT DETAIL PAGE
+============================ */
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link:hover {
   color: var(--navtext);
@@ -360,7 +312,9 @@ span.motto {
   border-color: var(--navtext);
 }
 
-/* || Pagination */
+/* ============================
+   PAGINATION
+============================ */
 .pagination {
   display: flex;
   justify-content: center;
@@ -383,7 +337,9 @@ span.motto {
   color: #555;
 }
 
-/* || Secondary navigation */
+/* ============================
+   SECONDARY NAVIGATION
+============================ */
 .back-nav {
   padding: 0.75rem 1rem;
   background-color: var(--chrome);
@@ -404,26 +360,37 @@ span.motto {
   font-weight: bolder;
 }
 
-/* || Source detail page */
-.container-fluid.coral {
-  flex: 1;
-}
-
+/* ============================
+   SOURCE DETAIL PAGE
+============================ */
 .source-heading {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  padding: 2rem 1.5rem 0 1.5rem;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 
 .source-heading .field-group {
   min-width: 0;
 }
 
+.field-group {
+  position: relative;
+}
+
+.field-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  font-size: 0.5rem;
+  color: #b3261e;
+  white-space: nowrap;
+  margin-top: 0.15rem;
+}
+
 input.inline-field {
   outline: none;
-  min-width: 2ch;
+  min-width: 20ch;
   max-width: 100%;
   box-sizing: content-box;
   border: none;
@@ -431,7 +398,6 @@ input.inline-field {
   border-radius: 0;
   padding: 0.15rem 0.1rem;
   height: 1.4rem;
-  min-width: 20ch;
   font-size: 0.9rem;
 }
 
@@ -439,6 +405,7 @@ input.inline-field:focus {
   border-bottom-width: 2px;
   border-bottom-color: green;
 }
+
 .inline-field {
   font-family: inherit;
   font-size: inherit;
@@ -450,6 +417,7 @@ input.inline-field:focus {
   padding: 0;
   margin: 0;
 }
+
 .inline-field--title {
   font-weight: bolder;
   font-size: 1.4rem;
@@ -471,7 +439,6 @@ input.inline-field:focus {
 .inline-field--title::placeholder,
 .inline-field--author::placeholder {
   font-weight: normal;
-
 }
 
 .inline-badge {
@@ -487,20 +454,6 @@ input.inline-field:focus {
   font-weight: bold;
 }
 
-
-.field-group {
-  position: relative;
-}
-
-.field-error {
- position: absolute;
-  top: 100%;
-  left: 0;
-  font-size: 0.5rem;
-  color: #b3261e;
-  white-space: nowrap;
-  margin-top: 0.15rem;
-}
 #source-menu {
   flex-shrink: 0;
 }
@@ -515,8 +468,9 @@ input.inline-field:focus {
   flex-shrink: 0;
 }
 
-/* || LAYOUT */
-
+/* ============================
+   LAYOUT HELPERS
+============================ */
 .span-wrapper {
   white-space: nowrap;
   display: inline-block;
@@ -530,42 +484,37 @@ input.inline-field:focus {
   border-right: 2px solid black;
   border-top: 2px solid black;
   border-top-right-radius: 5px;
-
 }
 
-/* || ACTIONS DROPDOWN */
+/* ============================
+   ACTIONS DROPDOWN
+============================ */
 .dropdown-menu {
-    --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
+  --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
 }
 
-/* || Links */
+/* ============================
+   LINKS
+============================ */
 .breadcrumb a {
   text-decoration: none;
-  font-size: 1.2rem;
-  color: var(--navtext);
+  font-size: 1.1rem;
+  color: var(--muted);
+  padding-right: .5rem;
+  opacity: 0.8;
 }
 
 .breadcrumb a:hover {
-  text-decoration: underline;
+  background-color: #f0f0f0;
+  border-radius: 5px;
 }
 
-/* || MEDIA QUERIES */
-/* for medium and large screens 768px  and larger*/
-@media screen and (min-width: 768px) {
-  .workflow {
-  height: 300px;
-  }
-  span.motto {
-    font-size: 3.7rem;
-  }
-  .tagline {
-    font-size: 2rem;
-  }
-  .how-to {
-    font-size: 1.1rem;
-  }
+/* ============================
+   MEDIA QUERIES (mobile-first)
+============================ */
 
-  /* Edit forms */
+/* md and up: 768px */
+@media (min-width: 768px) {
   input.inline-field {
     font-size: 1.1rem;
   }
@@ -578,56 +527,68 @@ input.inline-field:focus {
     font-size: 0.8rem;
   }
 }
-/* for large screens 1024px and larger*/
-@media screen and (min-width: 1024px) {
-  /* || Forms */
-  .form-input {
-    width: 80%;
-  }
-  /* || Dashboard */
-  .margin-line {
-    background-image:
-    linear-gradient(to right, var(--chrome), var(--chrome) 160px, var(--divider) 161px, transparent 162px);
-  }
-}
 
-/* lg and up: offcanvas becomes the static column, full height, with divider */
+/* lg and up: 992px — offcanvas becomes the static sidebar column */
 @media (min-width: 992px) {
   .sidebar.offcanvas-lg {
-      background: var(--chrome) !important;
-      border-right: 1px solid var(--divider) !important;
-      flex: 0 0 var(--sidebar-width) !important;
-      /* flex-direction: column !important; */
-      width: var(--sidebar-width) !important;
-      position: sticky !important;
-      top: var(--navbar-height) !important;
-      height: calc(100vh - var(--navbar-height)) !important;
+    background: var(--chrome) !important;
+    border-right: 1px solid var(--divider) !important;
+    flex: 0 0 var(--sidebar-width) !important;
+    width: var(--sidebar-width) !important;
+    position: sticky !important;
+    top: var(--navbar-height) !important;
+    height: calc(100vh - var(--navbar-height)) !important;
   }
 
   /* only needed for the mobile and tablet drawer's close button */
   .sidebar .offcanvas-header {
-      display: none; /* only needed for the mobile drawer's close button */
+    display: none;
   }
+
   .sidebar .offcanvas-body {
     flex-direction: column;
     padding: 1.5rem 1.25rem;
   }
+
   .secondary-nav-bar {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--divider);
-    }
+  }
+
   .app-layout {
-    display: flex;
-    /* desktop: sidebar beside content */
     flex-direction: row;
-
   }
+
   .app-content {
-    border-top: 1px solid var(--navtext);
+    border-top: 1px solid var(--nav-green);
+    padding-top: 3.5rem;
   }
 
-  /* || Unit detail page */
+  /* Source detail page */
+  .source-detail-page .heading::after {
+    bottom: -4px;
+  }
+
+  /* Unit detail page */
   .nav-tabs .nav-link.active {
     border-bottom: 2px solid var(--coral);
+  }
+}
+
+/* xl and up: 1024px */
+@media (min-width: 1024px) {
+  .form-input {
+    width: 80%;
+  }
+
+  /* Dashboard */
+  .margin-line {
+    background-image: linear-gradient(
+      to right,
+      var(--chrome),
+      var(--chrome) 160px,
+      var(--divider) 161px,
+      transparent 162px
+    );
   }
 }

@@ -31,6 +31,7 @@
   {% endblock %}
 
 {% block app_content %}
+<div class="source-detail-page">
 
   <!-- Delete Modal -->
   <div class="modal fade" id="delete-modal" tabindex="-1">
@@ -59,10 +60,9 @@
     <!-- Source Details Read/Edit -->
     <form method="post" action="{% url 'source-detail' source.pk %}">
       {% csrf_token %}
-      <h1 class="visually-hidden">{{ source.source_name }}</h1>
       <input type="hidden" name="form_type" value="edit_source">
 
-      <div class="source-heading d-flex align-items-baseline gap-2">
+      <div class="source-heading heading {% if edit_mode %} heading--editing{% endif %} d-flex align-items-baseline gap-2">
         <!-- Source name -->
         <span class="field-group">
           {% if edit_mode %}
@@ -76,7 +76,7 @@
               <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
             {% endif %}
           {% else %}
-            <span id="id_source_name" class="inline-field inline-field--title">{{ source.source_name }}</span>
+            <h1 id="id_source_name">{{ source.source_name }}</h1>
           {% endif %}
         </span>
 
@@ -97,7 +97,7 @@
               <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
             {% endif %}
           {% else %}
-            <span id="id_source_author" class="inline-field inline-field--author">{{ source.source_author|default:"" }}</span>
+            <span id="id_source_author">{{ source.source_author|default:"" }}</span>
           {% endif %}
         </span>
 
@@ -134,7 +134,7 @@
   <!-- Create Unit -->
   <section id="create-unit-section">
     <h2 class="visually-hidden">Add Unit</h2>
-    <div class="m-4 mt-5">
+    <div class="mt-5">
       <button class="btn-form btn-form--unit dark-btn"
         type="button"
         data-bs-toggle="collapse"
@@ -154,7 +154,7 @@
             {{ unit_form.unit_name }}
             {{ unit_form.unit_name.errors }}
           </div>
-          <button type="submit" class="btn btn-form btn-form--unit m-1">Save</button>
+          <button type="submit" class="btn btn-form btn-form--unit me-2">Save</button>
           <button class="btn btn-form btn-form--unit btn-form--cancel"
             type="button"
             data-bs-toggle="collapse"
@@ -172,7 +172,7 @@
   <!-- Units List -->
   <section id="units-list">
     <h2 class="visually-hidden">Units List</h2>
-    <ul class="units-list">
+    <ul class="units-list list mt-3">
       {% for unit in page_obj %}
         <li class="custom-list-item">
           <a href="{% url 'unit-detail' source.pk unit.pk %}">{{unit}}</a>
@@ -186,6 +186,7 @@
     <!-- Paginator -->
     {% include 'notes/partials/pagination.html' with aria_label="Unit list pagination" %}
   </section>
+</div>
 {% endblock %}
 
 {% block extra_js %}

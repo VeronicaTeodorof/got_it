@@ -13,34 +13,33 @@
 {% block app_content %}
   <!-- Breadcrumbs -->
   <section id="breadcrumbs">
-    <p class="mt-4 ms-4 mb-1 breadcrumb">
+    <p class="mb-3 breadcrumb">
         <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
-    </p>
-    <p class="mt-2 ms-4 mb-1 breadcrumb">
-        <a href="{% url 'unit-detail' source.pk unit.pk %}">{{ unit }}</a>
+        >&nbsp;
+        <a href="{% url 'unit-detail' source.pk unit.pk %}"> {{ unit }}</a>
     </p>
   </section>
 
   <section id="create-reference">
-    <h1 class="mt-3 ms-4">New reference note</h1>
+    <h1 class="heading">New reference note</h1>
 
-    <div class="mx-4" id="create-reference-form">
+    <div class="mt-3" id="create-reference-form">
       <form method="post" novalidate>
         {% csrf_token %}
-        <div class="form-field">
-            <label for="{{ form.content.id_for_label }}" class="visually-hidden">title</label>
-            {{ form.title }}
-            {{ form.title.errors }}
+       <div class="form-field">
+          <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
+          {{ form.title }}
+          {{ form.title.errors }}
         </div>
         <div class="form-field">
-            <label for="{{ form.title.id_for_label }}" class="visually-hidden">content</label>
-            {{ form.content }}
-            {{ form.content.errors }}
+          <label for="{{ form.content.id_for_label }}" class="visually-hidden">content</label>
+          {{ form.content }}
+          {{ form.content.errors }}
         </div>
         <div class="form-field">
-            <label for="{{ form.location.id_for_label }}" class="visually-hidden">location</label>
-            {{ form.location  }}
-            {{ form.location.errors }}
+          <label for="{{ form.location.id_for_label }}" class="visually-hidden">location</label>
+          {{ form.location }}
+          {{ form.location.errors }}
         </div>
         <button type="submit" class="btn dark-btn m-2">Save</button>
         <button class="btn btn-form btn-form--cancel" type="button">Cancel</button>

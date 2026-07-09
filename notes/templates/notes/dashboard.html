@@ -4,13 +4,13 @@
 {% block offcanvas_trigger %}{% endblock %}
 
 {% block app_content %}
-  <h1 class="visually-hidden">Sources</h1>
+  <h1 class="heading">My Sources</h1>
 
   <!-- Create Source -->
     <section>
       <h2 class="visually-hidden">Add Source</h2>
-      <div class="m-4 mt-5">
-        <button class="btn-form dark-btn"
+      <div class="mt-5">
+        <button class="btn-form"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#create-source-form"
@@ -20,7 +20,7 @@
         </button>
 
         <!-- Add Source form -->
-        <div class="me-4 collapse expand-on-error" id="create-source-form">
+        <div class="collapse expand-on-error" id="create-source-form">
           <form method="post" novalidate>
             {% csrf_token %}
             <div class="form-field">
@@ -38,7 +38,7 @@
               {{ form.source_type }}
               {{ form.source_type.errors }}
             </div>
-            <button type="submit" class="btn dark-btn m-2">Save</button>
+            <button type="submit" class="btn btn-form me-2">Save</button>
             <button class="btn btn-form btn-form--cancel"
               type="button"
               data-bs-toggle="collapse"
@@ -55,8 +55,8 @@
 
     <!-- Sources List -->
     <section>
-      <h2 class="your-sources-heading">My Sources</h2>
-      <ul class="sources-list">
+      <h2 class="visually-hidden">Sources List</h2>
+      <ul class="list mt-3">
         {% for source in page_obj %}
           <li class="custom-list-item">
             <a href="{% url 'source-detail' source.pk %}">
