@@ -20,7 +20,7 @@
         </button>
 
         <!-- Add Source form -->
-        <div class="collapse expand-on-error" id="create-source-form">
+        <div class="collapse expand-on-error {% if add_source_open %}show{% endif %}" id="create-source-form">
           <form method="post" novalidate>
             {% csrf_token %}
             <div class="form-field">

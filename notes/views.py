@@ -41,6 +41,9 @@ def dashboard(request):
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SourceForm(user=request.user)
+    # True when navigating here from the sidebar's "Add source" link,
+    # so the create-source form renders already expanded (?add_source=open
+    add_source_open = request.GET.get('add_source') == 'open'
     # Filter by user first, then order —
     # chained to avoid overwriting the user filter
     sources = Source.objects.filter(user=request.user).order_by(
@@ -53,7 +56,8 @@ def dashboard(request):
         request,
         'notes/dashboard.html',
         {'form': form, 'sources': sources,
-         "page_obj": page_obj}
+         "page_obj": page_obj,
+         "add_source_open": add_source_open}
         )
 
 
