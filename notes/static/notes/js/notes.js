@@ -3,7 +3,7 @@
 const navbar = document.querySelector('.navbar');
 document.documentElement.style.setProperty('--navbar-height', navbar.offsetHeight + 'px');
 
-// ===== Buttons =====
+// ===== Event Listeners =====
 // Add event listeners to 'cancel-form' buttons to reset forms without page reload
 const cancelButton = document.querySelectorAll('[data-action="cancel-form"]')
 cancelButton.forEach(button => {
@@ -26,6 +26,32 @@ cancelButton.forEach(button => {
         form.querySelectorAll('.errorlist').forEach(el => el.remove());
     });
 })
+
+// Toggle chevron icons animation (right for default collapsed, down for expanded)
+const chevrons = document.querySelectorAll('.bi-chevron-right');
+
+chevrons.forEach(chevron => {
+    chevron.addEventListener('click', () => {
+        chevron.classList.toggle('is-expanded');
+    });
+});
+
+// Toggle sidebar width
+const masterToggle = document.querySelector('.sidebar-master-toggle');
+const sidebar = document.getElementById('appSidebar');
+
+masterToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('expanded-sidebar');
+});
+
+// Close sidebar
+const closeBtn = document.querySelector('.sidebar-close');
+
+closeBtn.addEventListener('click', () => {
+  sidebar.classList.remove('expanded-sidebar');
+  document.querySelector('.sidebar-master-toggle').classList.remove('is-expanded');
+});
+
 
 // ===== Forms =====
 // Show forms expanded when they contain errors

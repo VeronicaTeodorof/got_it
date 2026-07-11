@@ -22,17 +22,26 @@
   {% block sidebar %}
     <!-- 'div #sidebarTree necessary for common expand behaviour if its children'-->
     <div class="sidebar-tree" id="sidebarTree">
+      <div class="sidebar-close-row">
+        <button type="button" class="sidebar-close" aria-label="Collapse sidebar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+          </svg>
+        </button>
+      </div>
       <div class="sources-div">
         <!-- ?add_source=open tells the dashboard view to render the
         create-source form already expanded on load -->
         <a href="{% url 'dashboard' %}?add_source=open" class="sidebar-link" data-target="#addSourceForm">Add source</a>
-        <a href="{% url 'dashboard' %}" class="sidebar-link active">
-          Sources
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
-            <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.6.6 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.6.6 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.6.6 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535z"/>
-            <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.6.6 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0z"/>
+        <div class="d-flex align-items-center  gap-2 w-100 sources-wrapper">
+          <!-- Bootstrap chevron-right icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right sidebar-master-toggle" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
           </svg>
-        </a>
+          <a href="{% url 'dashboard' %}" class="sidebar-link">
+          Sources
+          </a>
+        </div>
       </div>
       <div class="notes-div"></div>
     </div>

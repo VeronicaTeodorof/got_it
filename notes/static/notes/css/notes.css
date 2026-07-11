@@ -6,6 +6,7 @@
   --navbar-height: 56px;
   --coral: #f9f9f9;
   --sidebar-width: 131px;
+  --sidebar-width-expanded: 260px;
   --sidebar-links: #3a3a35;
 }
 
@@ -70,19 +71,8 @@
   font-size: .93rem;
 }
 
-.sidebar-link i {
-  font-size: 1rem;
-  width: 1.1rem;
-  text-align: center;
-}
-
 .sidebar-link:hover {
   text-decoration: underline;
-}
-
-.sidebar-link.active {
-  color: var(--nav-green);
-  font-weight: 600;
 }
 
 .burger-btn {
@@ -92,6 +82,35 @@
   font-size: 1.4rem;
   line-height: 1;
   padding: .25rem .5rem;
+}
+
+.sources-wrapper {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .45rem .1rem;
+}
+
+.sources-wrapper .sidebar-link {
+  padding: 0;
+  gap: 0;
+}
+.bi-chevron-right {
+  transition: transform 0.2s ease;
+  /* CRITICAL FOR SVGs:
+  Forces the rotation to happen around the exact center of the arrow */
+  transform-origin: center;
+}
+
+.bi-chevron-right:hover {
+  background-color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0.05rem;
+}
+/* Rotate when the parent row is clicked and JS adds this class */
+.bi-chevron-right.is-expanded {
+  transform: rotate(90deg);
 }
 
 /* ---- main content ---- */
@@ -538,7 +557,39 @@ input.inline-field:focus {
     position: sticky !important;
     top: var(--navbar-height) !important;
     height: calc(100vh - var(--navbar-height)) !important;
+    transition: width 0.2s ease, flex-basis 0.2s ease;
   }
+
+  .sidebar.offcanvas-lg.expanded-sidebar {
+    flex: 0 0 var(--sidebar-width-expanded) !important;
+    width: var(--sidebar-width-expanded) !important;
+  }
+
+  .sidebar-close {
+    display: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--nav-green);
+  }
+
+  .sidebar.expanded-sidebar .sidebar-close {
+    display: flex;
+  }
+
+  .sidebar-close:hover {
+    background-color: white;
+  }
+
 
   /* only needed for the mobile and tablet drawer's close button */
   .sidebar .offcanvas-header {
