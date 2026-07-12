@@ -439,13 +439,58 @@ Two separate layout lineages, split by whether a page needs the app frame (sideb
 
 Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.
 
-### Sidebar Navigation: Nested Expandable Tree
+### Nested Tree Content Navigation
 
 **Origin**
 
-The nested expandable sidebar concept was proposed by my tutor as an enhancement to site navigation, allowing users to browse their Source → Unit hierarchy without leaving the current page. My tutor's main justification was that users are already familiar with this pattern from file explorer systems. The interaction design, state management approach, and information architecture below were worked out building on my tutor's initial idea and visual example.
+The nested tree content navigation was proposed by my tutor as an enhancement to site navigation, allowing users to browse their Source → Unit hierarchy without leaving the current page. My tutor's main justification was that users are already familiar with this pattern from file explorer systems. The interaction design, state management approach, and information architecture below were worked out building on my tutor's initial idea and visual example.
 
 **Architecture**
+
+**Implementation across breakpoints**
+
+- For **small** and **medium** screens, an offcanvas for content navigation was already in place; the nested tree would be housed here.
+- For **large** screens, horizontal space has to be taken advantage of, so there's no reason the nested tree and main content should be mutually exclusive, which the offcanvas enforces via its backdrop — the two need to live side by side and be accessible at any point. A narrow sidebar for content navigation was already in place for this reason, also carrying the homepage's notebook aesthetic into content pages via its vertical divider. But this was too narrow to house a nested tree, while a permanent wider one would have no justification eating up content space. So the solution was a sliding sidebar: narrow in its default state when navigation content is collapsed, and wider when the tree is expanded.
+
+**Conclusion:** The nested tree navigation needed to be handled on two dimensions:
+- **Vertical** — expanding/collapsing the tree content itself.
+- **Horizontal** — expanding/collapsing the navigation container: a sliding drawer on sm/md screens, and an expandable sidebar on lg.
+
+**Controlling the two dimensions:**
+
+**Vertical** — Controlling the vertical dimension is handled primarily by the `sidebar-node-toggle` class, attached to a button with an animated right-to-down chevron — a standard, recognizable UX pattern. At the first level it expands Sources; at the second level it expands a Source into its Units. For logical simplicity, and for a default-collapsed consistency site-wide, it was decided that the first-level (master) chevron button would also reset the state of any nested ones beneath it.
+
+**Horizontal** — Controlling the horizontal dimension is handled differently across breakpoints. A default X button closes the offcanvas drawer on small and medium screens. On large screens, the Sources chevron button also toggles the horizontal dimension, since expanding horizontally is only ever justified by expanding vertically as well. However, with a wider sidebar, users may also look for an X button to collapse it back to default, rather than assuming the chevron handles both jobs. So a second X button was added on lg, initially given only its primary task — collapsing horizontally. This created an async between the two dimensions: the possibility of expanded navigation content partially showing inside a sidebar that had returned to its default width. So the X needed to synchronize with the vertical dimension too, and therefore needed to reset it as well.
+
+**Conclusion:** On all breakpoints, animated chevron icon buttons toggle the vertical dimension, with the master Sources toggle also resetting nested ones. On sm/md breakpoints, container dimensions are controlled by the burger menu and offcanvas X button; on lg screens, both the chevron master toggle and a dedicated X button control both dimensions.
+
+**Question:** Should the offcanvas X button also reset the tree?
+
+The answer was yes — both for symmetry with the lg X button, and for consistency with the site-wide default-collapsed policy.
+
+**Result:** There are now two X buttons for the nested tree sidebar, each with separate jobs and code for controlling the horizontal dimension, but sharing common functionality — and duplicate code — for controlling the vertical dimension.
+
+**Question:** To merge or not to merge the two buttons?
+
+**Pros and cons**
+
+*One shared button:*
+- **Pro:** the vertical-reset logic (find every open node, close it) is written once and used on every breakpoint, rather than duplicated across two buttons — removing the exact risk that caused the original bug, where one X reset state and the other didn't.
+- **Pro:** one element to maintain and test instead of two; a future change to reset behaviour only needs to happen in one place.
+- **Pro:** more accurately models the underlying intent — conceptually there is one job ("close/reset whatever is open"), even though the mechanism differs by breakpoint.
+- **Con:** the single element now carries logic for two distinct concerns (drawer-dismiss, width-reset) that never fire together, which is less immediately legible from the markup alone than one button per job.
+- **Con:** visibility depends on two independent conditions (`.offcanvas.show` OR `.sidebar-expanded`) rather than one, adding a small amount of surface area for a visibility bug if either class falls out of sync with the actual UI state (e.g. resizing across the breakpoint mid-interaction).
+
+*Two separate buttons:*
+- **Pro:** each button has exactly one job, which is easier to reason about in isolation and requires no cross-breakpoint visibility logic.
+- **Pro:** matches Bootstrap's own default offcanvas structure without needing to repurpose it.
+- **Con:** the shared vertical-reset logic still has to live somewhere reachable by both — either duplicated in two listeners, or extracted into one shared function called by two separate buttons. The latter keeps the logic unified but still carries two DOM elements for no functional gain, since the actual fix (unifying the reset logic) has already happened in the JS layer regardless.
+- **Con:** duplication (or near-duplication) of listener setup is exactly the category of drift that produced the original bug.
+
+**Result:** One shared button was chosen. Since the vertical-reset requirement is genuinely shared across both breakpoints, and a real bug had already demonstrated what happens when that logic isn't unified, merging was the stronger engineering choice rather than a stylistic preference. A single `.sidebar-close` button carries `data-bs-dismiss="offcanvas"` (Bootstrap's own dismiss hook, functionally relevant only on sm/md) alongside a custom click listener that resets any open `.collapse` elements (functionally relevant on every breakpoint). Visibility is handled entirely in CSS and scoped per context, so the two states never overlap.
+
+X's visibility rule mirrors its reset job symmetrically at each breakpoint: it only ever appears when there is something active for it to close — never as a permanent fixture. On sm/md it appears only while the drawer is open; on lg it appears only while the sidebar is expanded. Had the two breakpoints shared no functionality at all, merging would have been arbitrary consolidation rather than a justified design choice — the shared vertical dimension is what makes one button the right call here.
+
 
 **Structure**
 
@@ -482,6 +527,16 @@ Every destination is shown exactly once, in exactly one place. Where duplication
 3. **Units section** — add-unit link (rendered first) + queryset with annotated total/unlinked-reference/unanswered-question counts, no further expansion
 4. **Lower panel** — note-type counts + gap-metrics + create links, richer detail on note-detail pages, always visible independent of sidebar width
 
+
+**Sidebar visible on Dashboard**
+Dashboard will render the same Sources sidebar as other authenticated pages, rather than excluding it.
+Rationale: Sidebar and Dashboard's Source list serve different purposes, not duplicate ones.
+
+Dashboard Source list — record/detail view: full name, author, type, date created, pagination, add-form. Answers "what is this source, and what do I need to manage?"
+Sidebar Sources tree — navigation view: condensed, drill-down into Units/Notes. Answers "where do I want to go?"
+
+New users with zero Sources get a distinct empty-state partial (sidebar-empty.html) instead of an empty tree, so first-run dashboard doesn't show two dead panels.
+Guardrail: if Dashboard's list ever grows inline expand-into-Units behavior, it starts encroaching on the sidebar's job — at that point re-evaluate
 
 ## Source Detail: Inline Edit — Design Decisions
 
@@ -619,4 +674,4 @@ a visible focus indicator.
 
 
 ## Technologies Used
-- SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependency.
+- SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependen
