@@ -27,15 +27,6 @@ cancelButton.forEach(button => {
     });
 })
 
-// Toggle chevron icons animation (right for default collapsed, down for expanded)
-const chevrons = document.querySelectorAll('.bi-chevron-right');
-
-chevrons.forEach(chevron => {
-    chevron.addEventListener('click', () => {
-        chevron.classList.toggle('is-expanded');
-    });
-});
-
 // Toggle sidebar width
 const masterToggle = document.querySelector('.sidebar-master-toggle');
 const sidebar = document.getElementById('appSidebar');
@@ -51,7 +42,14 @@ closeBtn.addEventListener('click', () => {
   sidebar.classList.remove('expanded-sidebar');
   document.querySelector('.sidebar-master-toggle').classList.remove('is-expanded');
 });
-
+document.querySelector('.sidebar-close').addEventListener('click', () => {
+    document.querySelectorAll('.sidebar .collapse.show').forEach(el => {
+        // `getOrCreateInstance`safely fetches whatever instance
+        // Bootstrap already made for that element
+        // and only creates a fresh one as a fallback if somehow none exists yet
+        bootstrap.Collapse.getOrCreateInstance(el).hide();
+    });
+});
 
 // ===== Forms =====
 // Show forms expanded when they contain errors

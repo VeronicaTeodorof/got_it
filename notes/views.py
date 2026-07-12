@@ -81,6 +81,7 @@ def source_detail(request, source_pk):
     form, distinguished via the 'form_type' hidden field.
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    sources = Source.objects.filter(user=request.user)
     units = Unit.objects.filter(source=source).order_by(
         'unit_last_modified_date'
     )
@@ -122,6 +123,7 @@ def source_detail(request, source_pk):
 
     return render(request, 'notes/source_detail.html', {
         'source': source,
+        'sources': sources,
         'units': units,
         'form': form,
         'unit_form': unit_form,

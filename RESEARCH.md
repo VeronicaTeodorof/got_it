@@ -389,6 +389,9 @@ Notes:
 ### Layout:
 - clamp() for main content: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp
 
+### Bootstrap:
+- bootstrap.Collapse.getOrCreateInstance(el): https://getbootstrap.com/docs/5.3/components/collapse/
+
 
 ## Design
 ### App Name:

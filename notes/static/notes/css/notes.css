@@ -95,22 +95,45 @@
   padding: 0;
   gap: 0;
 }
-.bi-chevron-right {
-  transition: transform 0.2s ease;
+
+.sidebar-node-toggle {
+  border: none;
+  background: none;
+  line-height: 0; /* prevents extra height from button's default line-height */
+  padding:0;
+  margin: 0;
+}
+
+.sidebar-node-toggle .bi-chevron-right {
+  transition: transform 0.2s ease-in;
   /* CRITICAL FOR SVGs:
   Forces the rotation to happen around the exact center of the arrow */
   transform-origin: center;
 }
 
-.bi-chevron-right:hover {
+.sidebar-node-toggle[aria-expanded="true"] .bi-chevron-right {
+  transform: rotate(90deg);
+}
+
+.sidebar-node-toggle .bi-chevron-right:hover {
   background-color: white;
   border-radius: 50%;
   cursor: pointer;
   padding: 0.05rem;
 }
-/* Rotate when the parent row is clicked and JS adds this class */
-.bi-chevron-right.is-expanded {
-  transform: rotate(90deg);
+
+.sidebar-sources-scroll {
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+#sources-node .sidebar-link {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;   /* required inside a flex row, or ellipsis never kicks in */
+  flex: 1;        /* let it take remaining space next to the chevron, rather than a fixed max-width */
 }
 
 /* ---- main content ---- */

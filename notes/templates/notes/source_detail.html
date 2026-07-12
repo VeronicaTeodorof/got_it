@@ -35,12 +35,39 @@
         <a href="{% url 'dashboard' %}?add_source=open" class="sidebar-link" data-target="#addSourceForm">Add source</a>
         <div class="d-flex align-items-center  gap-2 w-100 sources-wrapper">
           <!-- Bootstrap chevron-right icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right sidebar-master-toggle" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
-          </svg>
+          <button type="button"
+              class="sidebar-master-toggle sidebar-node-toggle"
+              aria-expanded="false"
+              aria-controls="sources-node"
+              aria-label="Toggle Sources list"
+              data-bs-toggle="collapse"
+              data-bs-target="#sources-node">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+            </svg>
+          </button>
           <a href="{% url 'dashboard' %}" class="sidebar-link">
           Sources
           </a>
+        </div>
+        <div id="sources-node" class="collapse">
+          <!-- ps-3 added for nesting/identation -->
+          <div class="sidebar-sources-scroll">
+            <ul class="list-unstyled ps-3">
+              {% for source in sources %}
+              <li class="d-flex align-items-center gap-2">
+                <button type="button" class="sidebar-node-toggle">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </button>
+                <a href="{% url 'source-detail' source.id %}" class="sidebar-link">
+                  {{ source.source_name }}
+                </a>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
       <div class="notes-div"></div>

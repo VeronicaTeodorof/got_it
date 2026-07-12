@@ -479,7 +479,7 @@ The answer was yes — both for symmetry with the lg X button, and for consisten
 - **Pro:** one element to maintain and test instead of two; a future change to reset behaviour only needs to happen in one place.
 - **Pro:** more accurately models the underlying intent — conceptually there is one job ("close/reset whatever is open"), even though the mechanism differs by breakpoint.
 - **Con:** the single element now carries logic for two distinct concerns (drawer-dismiss, width-reset) that never fire together, which is less immediately legible from the markup alone than one button per job.
-- **Con:** visibility depends on two independent conditions (`.offcanvas.show` OR `.sidebar-expanded`) rather than one, adding a small amount of surface area for a visibility bug if either class falls out of sync with the actual UI state (e.g. resizing across the breakpoint mid-interaction).
+- **Con:** visibility depends on two independent conditions (`.offcanvas.show` OR `.expanded-sidebar`) rather than one, adding a small amount of surface area for a visibility bug if either class falls out of sync with the actual UI state (e.g. resizing across the breakpoint mid-interaction).
 
 *Two separate buttons:*
 - **Pro:** each button has exactly one job, which is easier to reason about in isolation and requires no cross-breakpoint visibility logic.
