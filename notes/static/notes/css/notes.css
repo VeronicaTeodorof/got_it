@@ -75,6 +75,14 @@
   text-decoration: underline;
 }
 
+.sidebar-link--source {
+  font-size: 0.88rem;
+}
+
+.sidebar-link--unit {
+  font-size: 0.8rem;
+}
+
 .burger-btn {
   background: transparent;
   border: none;
@@ -122,9 +130,37 @@
   padding: 0.05rem;
 }
 
+.source-count,
+.unit-count {
+  color: var(--text-muted, #6c757d);
+  font-size: 0.75rem;
+  position: relative;
+}
+
+.source-count::after,
+.unit-count::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background-color: var(--muted-green);
+}
 .sidebar-sources-scroll {
   overflow-y: auto;
   max-height: 60vh;
+}
+
+.sidebar-sources-scroll::-webkit-scrollbar {
+  width: 3px;
+}
+.sidebar-sources-scroll::-webkit-scrollbar-thumb {
+  background: var(--divider);
+  border-radius: 3px;
+}
+.sidebar-sources-scroll::-webkit-scrollbar-track {
+  background: var(--divider);
 }
 
 #sources-node .sidebar-link {
@@ -134,6 +170,15 @@
   text-overflow: ellipsis;
   min-width: 0;   /* required inside a flex row, or ellipsis never kicks in */
   flex: 1;        /* let it take remaining space next to the chevron, rather than a fixed max-width */
+}
+
+.units-node .sidebar-link {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
 }
 
 /* ---- main content ---- */
@@ -551,6 +596,13 @@ input.inline-field:focus {
   border-radius: 5px;
 }
 
+/* ============================
+        UTILITIES
+============================ */
+.text-muted {
+  color:var(--muted);
+  opacity: 0.8;
+}
 /* ============================
    MEDIA QUERIES (mobile-first)
 ============================ */
