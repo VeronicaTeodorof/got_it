@@ -538,7 +538,15 @@ Sidebar Sources tree — navigation view: condensed, drill-down into Units/Notes
 New users with zero Sources get a distinct empty-state partial (sidebar-empty.html) instead of an empty tree, so first-run dashboard doesn't show two dead panels.
 Guardrail: if Dashboard's list ever grows inline expand-into-Units behavior, it starts encroaching on the sidebar's job — at that point re-evaluate
 
-## Source Detail: Inline Edit — Design Decisions
+### Naming: Dashboard vs. Sources
+
+The same page is labelled "Dashboard" in the main nav and "Sources" in the sidebar. This is intentional, not inconsistent — the main nav names the page's role relative to the whole site (entry point/overview), while the sidebar names its content relative to the Source→Unit hierarchy (top-level list of sources). Breadcrumbs start at Source level and don't reference this page, so no further reconciliation is needed there.
+
+### Breadcrumbs
+
+ Breadcrumbs omit Dashboard/Sources because the sidebar already provides persistent Source→Unit navigation and orientation across all authenticated views. Including them in the breadcrumb would duplicate that information; the breadcrumb instead acts as a local context label (Source > Unit) rather than a full site trail. 
+
+### Source Detail: Inline Edit — Design Decisions
 
 **Architecture: single form, not per-field inline-edit** Source name/author/type are edited together via one Django `<form>` and one POST, not as independent fields with their own save actions (as seen in tools like Jira/GitHub). This is a deliberate simplification: per-field
 editing would require JSON endpoints, manual CSRF handling, and JS-driven partial saves — a much larger scope than this page needs right now.Documented tradeoff: this diverges from Atlassian's inline-edit guidance (don't nest inline-edit inside a `<form>`), accepted knowingly.

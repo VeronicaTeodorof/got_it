@@ -35,9 +35,13 @@
     </div>
   </div>
   <!-- Breadcrumbs -->
-  <p class="mb-3 breadcrumb">
-    <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }} ></a>
-  </p>
+  <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
+    <ol class="breadcrumb-list">
+      <li>
+        <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+      </li>
+    </ol>
+  </nav>
 
   <section id="unit-actions">
     <!-- Unit Details Read/Edit -->
@@ -69,9 +73,9 @@
   </section>
 
   <!-- Navigation tabs for note types -->
-  <ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-5 gap-lg-5">
+  <ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-3 gap-lg-5">
     <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
-      <a class="nav-link" href="#reference" data-bs-toggle="tab">Reference</a>
+      <a class="nav-link active" href="#reference" data-bs-toggle="tab">Reference</a>
       <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}"
         data-bs-toggle="tooltip"
         title="Add reference note"
@@ -96,7 +100,7 @@
   <!-- Panels for note types -->
   <div class="tab-content">
     <!-- Reference Notes Grid -->
-    <div class="tab-pane m-3" id="reference">
+    <div class="tab-pane fade show active m-3" id="reference">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
         {% for reference in references %}
           <div class="col">
