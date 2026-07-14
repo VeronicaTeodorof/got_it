@@ -368,6 +368,7 @@ Notes:
 
 ### Django:
 - https://docs.djangoproject.com/en/6.0/
+- for context processors - an introductory article on Medium: https://medium.com/dajngo/context-processor-in-django-62818f14d88f
 
 ### Django allauth:
 - Django allauth official documentation: https://docs.allauth.org/
