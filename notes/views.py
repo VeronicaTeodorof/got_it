@@ -80,6 +80,7 @@ def source_detail(request, source_pk):
     list its units, and handle both the source-edit form and the add-unit
     form, distinguished via the 'form_type' hidden field.
     """
+    add_unit_open = request.GET.get('add_unit') == 'open'
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     sources = Source.objects.filter(user=request.user)
     units = Unit.objects.filter(source=source).order_by(
@@ -128,7 +129,8 @@ def source_detail(request, source_pk):
         'form': form,
         'unit_form': unit_form,
         'edit_mode': edit_mode,
-        'page_obj': page_obj
+        'page_obj': page_obj,
+        'add_unit_open': add_unit_open,
     })
 
 

@@ -58,7 +58,16 @@
           </div>
 
           <div id="units-node-{{ source.id }}" class="collapse units-node">
-            <p class="unit-count text-muted small mb-2 ps-4">({{ source.units.all.count }} unit{{ source.units.all.count|pluralize }})</p>
+           <div class="d-flex justify content between align-items-baseline gap-2 ps-4 mb-2">
+            <p class="unit-count text-muted small mb-0">({{ source.units.all.count }} unit{{ source.units.all.count|pluralize }})</p>
+            <a href="{% url 'source-detail' source.id %}?add_unit=open"
+                class="sidebar-add"
+                title="Add unit"
+                data-bs-toggle="tooltip"
+                data-target="#create-unit-form">
+                +
+            </a>
+          </div>
             <ul class= "list-unstyled ps-5">
             {% for unit in source.units.all %}
               <li>

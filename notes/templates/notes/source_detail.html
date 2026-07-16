@@ -132,7 +132,7 @@
         Add unit
       </button>
 
-      <div class="me-4 collapse expand-on-error {% if unit_form.errors %}show{% endif %}" id="create-unit-form">
+      <div class="me-4 collapse expand-on-error {% if unit_form.errors or add_unit_open %}show{% endif %}" id="create-unit-form">
         <!-- Add Unit form -->
         <form method="post" action="{% url 'source-detail' source.pk %}" novalidate>
           {% csrf_token %}
@@ -150,8 +150,8 @@
             data-action="cancel-form"
             aria-expanded="false"
             aria-controls="create-unit-form">
-          Cancel
-        </button>
+            Cancel
+          </button>
         </form>
       </div>
     </div>
