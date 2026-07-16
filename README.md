@@ -364,6 +364,13 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 
 ## Design Decisions
 
+### Onboarding through empty states
+
+Empty states are treated as onboarding moments rather than placeholders — each one teaches the user what to do next and why, instead of just indicating that content is missing, reinforcing the app's structure and pedagogy at the exact moment it's relevant.
+
+- **Sidebar reflects data existence** — the sidebar stays empty on first interaction, since the dashboard's primary call-to-action is the sole entry point for a new user; showing sidebar content with nothing to navigate would compete with that and add confusion rather than help.
+
+
 ### Navigation Architecture
 **Problem**
 The original mobile layout used a single unlabeled forward arrow to open the offcanvas navigation. This created a real usability gap: nothing on the page told users how to get back to the sources list. The arrow itself pointed forward, so even users who tried it for that purpose were working against its visual meaning, and there was no separate, correctly-oriented control for returning to a previous page at all. Users had no reliable way to navigate back.
@@ -544,7 +551,7 @@ The same page is labelled "Dashboard" in the main nav and "Sources" in the sideb
 
 ### Breadcrumbs
 
- Breadcrumbs omit Dashboard/Sources because the sidebar already provides persistent Source→Unit navigation and orientation across all authenticated views. Including them in the breadcrumb would duplicate that information; the breadcrumb instead acts as a local context label (Source > Unit) rather than a full site trail. 
+ Breadcrumbs omit Dashboard/Sources because the sidebar already provides persistent Source→Unit navigation and orientation across all authenticated views. Including them in the breadcrumb would duplicate that information; the breadcrumb instead acts as a local context label (Source > Unit) rather than a full site trail.
 
 ### Source Detail: Inline Edit — Design Decisions
 

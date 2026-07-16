@@ -23,7 +23,7 @@
         <div class="collapse expand-on-error {% if add_source_open %}show{% endif %}" id="create-source-form">
           <form method="post" novalidate>
             {% csrf_token %}
-            <div class="form-field">
+            <div class="form-field mt-4">
               <label for="{{ form.source_name.id_for_label }}" class="visually-hidden">name</label>
               {{ form.source_name }}
               {{ form.source_name.errors }}

@@ -23,7 +23,9 @@
 
     <div class="sidebar offcanvas-lg offcanvas-end" tabindex="-1" id="appSidebar">
       <div class="offcanvas-body">
-        {% include "notes/partials/sidebar.html" %}
+        {% if sidebar_sources %}
+          {% include "notes/partials/sidebar.html" %}
+        {% endif %}
       </div>
     </div>
   </nav>

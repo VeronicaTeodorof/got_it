@@ -160,7 +160,7 @@
   <!-- Units List -->
   <section id="units-list">
     <h2 class="visually-hidden">Units List</h2>
-    <ul class="units-list list mt-3">
+    <ul class="list mt-3">
       {% for unit in page_obj %}
         <li class="custom-list-item">
           <a href="{% url 'unit-detail' source.pk unit.pk %}">{{unit}}</a>
