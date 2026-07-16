@@ -115,3 +115,34 @@ class Reference(Note):
         help_text='stores location on source material: page, timestamp, url',
         blank=True
         )
+
+
+class Question(Note):
+    """
+    A note capturing a gap in understanding ideas captured in reference notes,
+    or adding own questions derived or related to the studied material
+    """
+
+    reference = models.ForeignKey(Reference,
+                                  on_delete=models.SET_NULL,
+                                  related_name='%(class)s_notes',
+                                  null=True,
+                                  blank=True)
+
+
+class MyWords(Note):
+    """
+    A note explaining in own words ideas captured in reference notes,
+    or adding own ideas related to the studied material
+    """
+    reference = models.ForeignKey(Reference,
+                                  on_delete=models.SET_NULL,
+                                  related_name='%(class)s_notes',
+                                  null=True,
+                                  blank=True)
+
+    question = models.ForeignKey(Question,
+                                 on_delete=models.SET_NULL,
+                                 related_name='%(class)s_notes',
+                                 null=True,
+                                 blank=True)

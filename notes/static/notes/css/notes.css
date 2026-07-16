@@ -144,8 +144,7 @@
   transform: rotate(90deg);
 }
 
-.sidebar-node-toggle .bi-chevron-right:hover,
-.sidebar-add:hover {
+.sidebar-node-toggle .bi-chevron-right:hover {
   background-color: white;
   border-radius: 50%;
   cursor: pointer;
@@ -164,7 +163,17 @@
   color: var(--nav-green);
   text-decoration: none;
   opacity: 0.9;
+  padding: 0 0.2rem;
 }
+
+.sidebar-add:hover {
+  background-color: white;
+  border-radius: 20%;
+  cursor: pointer;
+   padding:0 0.2rem;
+}
+
+
 .source-count::after,
 .unit-count::after {
   content: '';
