@@ -29,20 +29,22 @@
     <div class="mt-5" id="create-reference-form">
       <form method="post" novalidate>
         {% csrf_token %}
-       <div class="form-field">
-          <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
-          {{ form.title }}
-          {{ form.title.errors }}
+        <div class="d-flex flex-column flex-lg-row gap-2">
+          <div class="form-field fraction-grow">
+            <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+          </div>
+          <div class="form-field">
+            <label for="{{ form.location.id_for_label }}" class="visually-hidden">location</label>
+            {{ form.location }}
+            {{ form.location.errors }}
+          </div>
         </div>
         <div class="form-field">
           <label for="{{ form.content.id_for_label }}" class="visually-hidden">content</label>
           {{ form.content }}
           {{ form.content.errors }}
-        </div>
-        <div class="form-field">
-          <label for="{{ form.location.id_for_label }}" class="visually-hidden">location</label>
-          {{ form.location }}
-          {{ form.location.errors }}
         </div>
         <button type="submit" class="btn btn-form m-2">Save</button>
         <button class="btn btn-form btn-form--cancel" type="button">Cancel</button>

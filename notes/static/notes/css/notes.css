@@ -765,6 +765,11 @@ input.inline-field:focus {
   .nav-tabs .nav-link.active {
     border-bottom: 2px solid var(--coral);
   }
+
+  /* Create Reference Page */
+  .fraction-grow {
+    flex-grow: 0.73;
+  }
 }
 
 /* xl and up: 1024px */
