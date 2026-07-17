@@ -72,75 +72,95 @@
     </form>
   </section>
 
-  <!-- Navigation tabs for note types -->
-  <ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-3 gap-lg-5">
-    <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
-      <a class="nav-link active" href="#reference" data-bs-toggle="tab">Reference</a>
-      <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}"
-        data-bs-toggle="tooltip"
-        title="Add reference note"
-        aria-label="Add reference note">+</a>
-    </li>
-    <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
-      <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>
-      <a class="nav-link" href="#"
-        data-bs-toggle="tooltip"
-        title="Add my words note"
-        aria-label="Add reference note">+</a>
-    </li>
-    <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
-      <a class="nav-link" href="#questions" data-bs-toggle="tab">Questions</a>
-      <a class="nav-link" href="#"
-        data-bs-toggle="tooltip"
-        title="Add reference note"
-        aria-label="Add question note">+</a>
-    </li>
-  </ul>
+ <!-- Navigation tabs for note types -->
+<ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-3 gap-lg-5">
+  <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
+    <a class="nav-link active" href="#reference" data-bs-toggle="tab">Reference</a>
+    <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}"
+      data-bs-toggle="tooltip"
+      title="Add reference note"
+      aria-label="Add reference note">+</a>
+  </li>
+  <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
+    <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>
+    <a class="nav-link" href="{% url 'create-mywords' source.pk unit.pk %}"
+      data-bs-toggle="tooltip"
+      title="Add standalone my words note"
+      aria-label="Add my words note">+</a>
+  </li>
+  <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
+    <a class="nav-link" href="#questions" data-bs-toggle="tab">Questions</a>
+    <a class="nav-link" href="{% url 'create-question' source.pk unit.pk %}"
+      data-bs-toggle="tooltip"
+      title="Add standalone question note"
+      aria-label="Add question note">+</a>
+  </li>
+</ul>
 
-  <!-- Panels for note types -->
-  <div class="tab-content">
-    <!-- Reference Notes List -->
-    <div class="tab-pane fade show active m-3" id="reference">
-      <ul class="list mt-3">
-        {% for reference in references %}
-          <li class="custom-list-item">
-            <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
-              <span class="reference-content">
-                {% if reference.title %}{{ reference.title }}{% else %}{{ reference.content|truncatewords:8 }}{% endif %}
-              </span>
-              <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
-            </a>
-          </li>
-        {% empty %}
-          <li class="empty empty--reference">No reference notes yet.<br>
-            A reference note is where you capture material from the source —
-            a quote, a definition, a key passage — before you work with it in your own words.
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <!-- My Words Notes List -->
-    <div class="tab-pane fade show active m-3" id="reference">
-      <ul class="list mt-3">
-        {% for reference in references %}
-          <li class="custom-list-item">
-            <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
-              <span class="reference-content">
-                {% if reference.title %}{{ reference.title }}{% else %}{{ reference.content|truncatewords:8 }}{% endif %}
-              </span>
-              <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
-            </a>
-          </li>
-        {% empty %}
-          <li class="empty empty--reference">No reference notes yet.<br>
-            A reference note is where you capture material from the source —
-            a quote, a definition, a key passage — before you work with it in your own words.
-          </li>
-        {% endfor %}
-      </ul>
-    </div>
+<!-- Panels for note types -->
+<div class="tab-content">
+  <!-- Reference Notes List -->
+  <div class="tab-pane fade show active m-3" id="reference">
+    <ul class="list mt-3">
+      {% for reference in references %}
+        <li class="custom-list-item">
+          <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
+            <span class="reference-content">
+              {% if reference.title %}{{ reference.title }}{% else %}{{ reference.content|truncatewords:8 }}{% endif %}
+            </span>
+            <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
+          </a>
+        </li>
+      {% empty %}
+        <li class="empty">No reference notes yet.<br>
+          A reference note is where you capture material from the source —
+          a quote, a definition, a key passage — before you work with it in your own words.
+        </li>
+      {% endfor %}
+    </ul>
   </div>
+
+  <!-- My Words Notes List -->
+  <div class="tab-pane fade m-3" id="my-words">
+    <ul class="list mt-3">
+      {% for myword in mywords %}
+        <li class="custom-list-item">
+          <a href="{% url 'mywords-detail' source.pk unit.pk myword.pk %}">
+            <span class="reference-content">
+              {% if myword.title %}{{ myword.title }}{% else %}{{ myword.content|truncatewords:8 }}{% endif %}
+            </span>
+            <span class="d-none d-md-inline ms-3 source-date">{{ myword.last_modified_date|date:"d M Y" }}</span>
+          </a>
+        </li>
+      {% empty %}
+        <li class="empty">No My Words notes yet.<br>
+          Rephrase a reference note in your own words to test your understanding,
+          or capture a standalone idea related to what you're studying.
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Question Notes List -->
+  <div class="tab-pane fade m-3" id="questions">
+    <ul class="list mt-3">
+      {% for question in questions %}
+        <li class="custom-list-item">
+          <a href="{% url 'question-detail' source.pk unit.pk question.pk %}">
+            <span class="reference-content">
+              {% if question.title %}{{ question.title }}{% else %}{{ question.content|truncatewords:8 }}{% endif %}
+            </span>
+            <span class="d-none d-md-inline ms-3 source-date">{{ question.last_modified_date|date:"d M Y" }}</span>
+          </a>
+        </li>
+      {% empty %}
+        <li class="empty">No questions yet.<br>
+          Capture a gap in your understanding, or a question that stemmed from what you've read.
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
 {% endblock %}
 
 {% block extra_js %}

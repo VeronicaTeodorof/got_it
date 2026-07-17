@@ -336,12 +336,6 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
   text-align:center;
 }
 
-.empty--reference {
-  text-align: left;
-  margin: 3rem 0 0.2rem;
-}
-
-
 /* ============================
    LISTS
 ============================ */
@@ -427,6 +421,11 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 /* ============================
    UNIT DETAIL PAGE
 ============================ */
+.nav-tabs .nav-link {
+  font-weight: 400;
+  color: var(--muted-green);
+}
+
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-link:hover {
   color: var(--navtext);
@@ -435,6 +434,8 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 
 .nav-tabs .nav-link.active {
   border-color: var(--navtext);
+  font-weight: 600;
+  color: inherit;
 }
 
 /* ============================
