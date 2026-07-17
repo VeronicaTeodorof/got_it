@@ -82,7 +82,7 @@
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| AM-MT-01 | Click dropdown button | Expands dropdown menu | As expected | Pass | 
+| AM-MT-01 | Click dropdown button | Expands dropdown menu | As expected | Pass |
 
 ### Home Page
 
@@ -479,18 +479,17 @@ When a user submits the login form with an incorrect username/password combinati
 - Browser extensions — still fails in Incognito with extensions disabled
 - Bootstrap CDN loading correctly (200 status, not a stale/cached version)
 - Zoom level (confirmed 100%)
+- Isolated minimal reproduction (bare Bootstrap navbar, zero project CSS) —
+  still fails, ruling out project code entirely
+- Firefox — still fails, ruling out Chrome/Edge-specific rendering
+- Hardware acceleration toggle — still fails
 
-**To investigate further:**
-- Test on an actual physical phone (not devtools mobile emulation) — this is the
-  highest-priority next step, since it would confirm whether this is a real bug
-  or a devtools-emulation-specific artifact
-- Build a minimal reproduction: bare navbar + long content, Bootstrap CSS only,
-  no custom style.css — isolate whether it's a Bootstrap version issue or
-  something project-specific
-- Try a completely different browser (Firefox/Safari) to see if it's
-  Chrome/Edge-specific rendering behavior
-- Check for async layout shift (e.g. Google Fonts loading late) affecting sticky's
-  initial containing-block calculation
+**Further complication with scroll behaviour**
+
+On create_reference.html specifically, triggering a scroll (by increasing the content textarea beyond 5 rows) caused the fixed navbar and sidebar to briefly visually separate — a gap opening between them for the duration of the scroll. Reducing the textarea back to 5 rows keeps the page short enough that no scroll ever occurs, avoiding the issue entirely rather than resolving its underlying cause.
+
+By contrast, create_question.html and create_mywords.html scroll regardless of how many textarea rows are set — even at 5 rows or fewer, the page still triggers a scrollbar. On these two pages, however, the navbar and sidebar scroll away together, moving as a consistent unit rather than separating from each other, so no gap appears. Since the specific issue being guarded against (a visible gap between navbar and sidebar) doesn't occur here, no row-count workaround was applied to these two pages, and their scrolling behavior was left as-is.
+
 
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
