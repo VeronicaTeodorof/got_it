@@ -124,7 +124,7 @@ class ReferenceForm(forms.ModelForm):
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
                                              'placeholder': 'content',
-                                             'rows': 5}),
+                                             'rows': 10}),
             'location': forms.TextInput(attrs={'class': 'form-input',
                                                'placeholder': 'location',
                                                }),
@@ -143,7 +143,7 @@ class QuestionForm(forms.ModelForm):
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
                                              'placeholder': 'content',
-                                             'rows': 5}),
+                                             'rows': 10}),
         }
 
 
@@ -159,5 +159,5 @@ class MyWordsForm(forms.ModelForm):
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
                                              'placeholder': 'content',
-                                             'rows': 5}),
+                                             'rows': 10}),
         }

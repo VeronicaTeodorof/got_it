@@ -101,7 +101,7 @@
 <div class="tab-content">
   <!-- Reference Notes List -->
   <div class="tab-pane fade show active m-3" id="reference">
-    <ul class="list mt-3">
+    <ul class="list mt-5">
       {% for reference in references %}
         <li class="custom-list-item">
           <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
@@ -122,7 +122,7 @@
 
   <!-- My Words Notes List -->
   <div class="tab-pane fade m-3" id="my-words">
-    <ul class="list mt-3">
+    <ul class="list mt-5">
       {% for myword in mywords %}
         <li class="custom-list-item">
           <a href="{% url 'mywords-detail' source.pk unit.pk myword.pk %}">
@@ -143,7 +143,7 @@
 
   <!-- Question Notes List -->
   <div class="tab-pane fade m-3" id="questions">
-    <ul class="list mt-3">
+    <ul class="list mt-5">
       {% for question in questions %}
         <li class="custom-list-item">
           <a href="{% url 'question-detail' source.pk unit.pk question.pk %}">
