@@ -3,8 +3,9 @@ from django.views.decorators.cache import never_cache
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib import messages
 from django.core.paginator import Paginator
-from .models import Source, Unit, Reference
-from .forms import SourceForm, UnitForm, ReferenceForm
+from .models import Source, Unit, Reference, MyWords, Question
+from .forms import SourceForm, UnitForm, ReferenceForm, MyWordsForm
+from .forms import QuestionForm
 
 
 # Create your views here.
@@ -158,6 +159,8 @@ def unit_detail(request, source_pk, unit_pk):
                              source__user=request.user)
     source = unit.source
     references = unit.reference_notes.all().order_by('-last_modified_date')
+    mywords = unit.mywords_notes.all().order_by('-last_modified_date')
+    questions = unit.question_notes.all().order_by('-last_modified_date')
 
     if request.method == 'POST':
         form = UnitForm(request.POST, instance=unit, source=source)
@@ -183,6 +186,8 @@ def unit_detail(request, source_pk, unit_pk):
                   {'source': source,
                    'unit': unit,
                    'references': references,
+                   'mywords': mywords,
+                   'questions': questions,
                    'form': form,
                    'edit_mode': edit_mode})
 
@@ -259,3 +264,85 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
                    'unit': unit,
                    'reference': reference,
                    'form': form})
+
+
+# --- Question Notes ---
+@login_required
+def question_detail(request, source_pk, unit_pk, question_pk):
+    """Retrieve and display a single Question note"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    question = get_object_or_404(Question, pk=question_pk, unit=unit)
+    return render(request,
+                  'notes/question_detail.html',
+                  {'source': source,
+                   'unit': unit,
+                   'question': question}
+                  )
+
+
+@login_required
+def create_question(request, source_pk, unit_pk):
+    """
+    Create a standalone Question note
+    """
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+
+    if request.method == 'POST':
+        form = QuestionForm(request.POST)
+        if form.is_valid():
+            question = form.save(commit=False)
+            question.unit = unit
+            question.save()
+            messages.success(request, "Question note saved.")
+            return redirect('question-detail', source_pk, unit_pk, question.pk)
+    else:
+        form = QuestionForm()
+
+    return render(request, 'notes/create_question.html', {
+        'source': source,
+        'unit': unit,
+        'form': form,
+    })
+
+
+# --- MyWords Notes ---
+@login_required
+def mywords_detail(request, source_pk, unit_pk, mywords_pk):
+    """Retrieve and display a single My Words note"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
+    return render(request,
+                  'notes/mywords_detail.html',
+                  {'source': source,
+                   'unit': unit,
+                   'mywords': mywords}
+                  )
+
+
+@login_required
+def create_mywords(request, source_pk, unit_pk):
+    """
+    Create a standalone My Words note
+    """
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+
+    if request.method == 'POST':
+        form = MyWordsForm(request.POST)
+        if form.is_valid():
+            mywords = form.save(commit=False)
+            mywords.unit = unit
+            mywords.save()
+            messages.success(request, "My Words note saved.")
+            return redirect('mywords-detail', source_pk, unit_pk, mywords.pk)
+    else:
+        form = MyWordsForm()
+
+    return render(request, 'notes/create_mywords.html', {
+        'source': source,
+        'unit': unit,
+        'form': form,
+    })

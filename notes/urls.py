@@ -39,5 +39,27 @@ urlpatterns = [
         '<int:reference_pk>/edit/',
         views.edit_reference,
         name='edit-reference'
-    )
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/'
+        'mywords/<int:mywords_pk>/',
+        views.mywords_detail,
+        name='mywords-detail'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/mywords/create/',
+        views.create_mywords,
+        name='create-mywords'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/'
+        'question/<int:question_pk>/',
+        views.question_detail,
+        name='question-detail'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/question/create/',
+        views.create_question,
+        name='create-question'
+    ),
 ]

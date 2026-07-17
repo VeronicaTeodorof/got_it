@@ -119,6 +119,27 @@
         {% endfor %}
       </ul>
     </div>
+
+    <!-- My Words Notes List -->
+    <div class="tab-pane fade show active m-3" id="reference">
+      <ul class="list mt-3">
+        {% for reference in references %}
+          <li class="custom-list-item">
+            <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
+              <span class="reference-content">
+                {% if reference.title %}{{ reference.title }}{% else %}{{ reference.content|truncatewords:8 }}{% endif %}
+              </span>
+              <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
+            </a>
+          </li>
+        {% empty %}
+          <li class="empty empty--reference">No reference notes yet.<br>
+            A reference note is where you capture material from the source —
+            a quote, a definition, a key passage — before you work with it in your own words.
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endblock %}
 

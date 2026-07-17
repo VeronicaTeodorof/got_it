@@ -1,5 +1,5 @@
 from django import forms
-from .models import Source, Unit, Reference
+from .models import Source, Unit, Reference, MyWords, Question
 
 
 class SourceForm(forms.ModelForm):
@@ -120,13 +120,44 @@ class ReferenceForm(forms.ModelForm):
         model = Reference
         fields = ['title', 'content', 'location']
         widgets = {
-            'content': forms.Textarea(attrs={'rows': 5})
+            'title': forms.TextInput(attrs={'class': 'form-input',
+                                            'placeholder': 'title'}),
+            'content': forms.Textarea(attrs={'class': 'form-input',
+                                             'placeholder': 'content',
+                                             'rows': 5}),
+            'location': forms.TextInput(attrs={'class': 'form-input',
+                                               'placeholder': 'location',
+                                               }),
         }
+
+
+class QuestionForm(forms.ModelForm):
+    """
+    A form for creating and editing question notes
+    """
+    class Meta:
+        model = Question
+        fields = ['title', 'content']
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-input',
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
-                                             'placeholder': 'content'}),
-            'location': forms.TextInput(attrs={'class': 'form-input',
-                                               'placeholder': 'location'}),
+                                             'placeholder': 'content',
+                                             'rows': 5}),
+        }
+
+
+class MyWordsForm(forms.ModelForm):
+    """
+    A form for creating and editing My Words notes
+    """
+    class Meta:
+        model = MyWords
+        fields = ['title', 'content']
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-input',
+                                            'placeholder': 'title'}),
+            'content': forms.Textarea(attrs={'class': 'form-input',
+                                             'placeholder': 'content',
+                                             'rows': 5}),
         }
