@@ -58,6 +58,27 @@ if (closeBtn) {
   });
 }
 
+// Add tab parameters to URL in two steps
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Tab click → update URL hash
+  document.querySelectorAll('#noteTabs a[data-bs-toggle="tab"]').forEach(tabLink => {
+    tabLink.addEventListener('shown.bs.tab', event => {
+      const targetId = event.target.getAttribute('href');
+      history.replaceState(null, null, targetId);
+    });
+  });
+
+  // 2. Page load → check hash, activate matching tab
+  const hash = window.location.hash;
+  if (hash) {
+    const tabToShow = document.querySelector(`#noteTabs a[href="${hash}"][data-bs-toggle="tab"]`);
+    if (tabToShow) {
+      const tab = new bootstrap.Tab(triggerEl);
+      tab.show();
+    }
+  }
+});
+
 // ===== Forms =====
 // Show forms expanded when they contain errors
 const expandForms = document.querySelectorAll('.expand-on-error')

@@ -393,6 +393,9 @@ Notes:
 ### Bootstrap:
 - bootstrap.Collapse.getOrCreateInstance(el): https://getbootstrap.com/docs/5.3/components/collapse/
 
+### Adding Tab Paramenters to URL
+- MDN: Working with the History API: https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API
+
 
 ## Design
 ### App Name:
