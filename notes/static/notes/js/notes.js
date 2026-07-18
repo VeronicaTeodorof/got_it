@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hash) {
     const tabToShow = document.querySelector(`#noteTabs a[href="${hash}"][data-bs-toggle="tab"]`);
     if (tabToShow) {
-      const tab = new bootstrap.Tab(triggerEl);
+      const tab = new bootstrap.Tab(tabToShow);
       tab.show();
     }
   }

@@ -203,7 +203,8 @@ def reference_detail(request, source_pk, unit_pk, reference_pk):
                   'notes/reference_detail.html',
                   {'source': source,
                    'unit': unit,
-                   'reference': reference}
+                   'reference': reference,
+                   'in_note_view': True}
                   )
 
 
@@ -225,7 +226,8 @@ def create_reference(request, source_pk, unit_pk):
             return redirect('reference-detail',
                             source_pk,
                             unit_pk,
-                            reference.pk)
+                            reference.pk
+                            )
     else:
         form = ReferenceForm()
 
@@ -233,7 +235,8 @@ def create_reference(request, source_pk, unit_pk):
                   'notes/create_reference.html',
                   {'source': source,
                    'unit': unit,
-                   'form': form}
+                   'form': form,
+                   'in_note_view': True}
                   )
 
 
@@ -255,7 +258,8 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
                       {'source': source,
                        'unit': unit,
                        'reference': reference,
-                       'form': form
+                       'form': form,
+                       'in_note_view': True
                        })
     form = ReferenceForm(instance=reference, unit=unit)
     return render(request,
@@ -263,7 +267,8 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
                   {'source': source,
                    'unit': unit,
                    'reference': reference,
-                   'form': form})
+                   'form': form,
+                   'in_note_view': True})
 
 
 # --- Question Notes ---
@@ -277,7 +282,8 @@ def question_detail(request, source_pk, unit_pk, question_pk):
                   'notes/question_detail.html',
                   {'source': source,
                    'unit': unit,
-                   'question': question}
+                   'question': question,
+                   'in_note_view': True}
                   )
 
 
@@ -304,6 +310,7 @@ def create_question(request, source_pk, unit_pk):
         'source': source,
         'unit': unit,
         'form': form,
+        'in_note_view': True
     })
 
 
@@ -318,7 +325,8 @@ def mywords_detail(request, source_pk, unit_pk, mywords_pk):
                   'notes/mywords_detail.html',
                   {'source': source,
                    'unit': unit,
-                   'mywords': mywords}
+                   'mywords': mywords,
+                   'in_note_view': True}
                   )
 
 
@@ -345,4 +353,5 @@ def create_mywords(request, source_pk, unit_pk):
         'source': source,
         'unit': unit,
         'form': form,
+        'in_note_view': True,
     })
