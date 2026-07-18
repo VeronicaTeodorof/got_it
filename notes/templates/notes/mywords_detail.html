@@ -2,3 +2,36 @@
 {% load static %}
 
 {% block title %}got it? | My Words{% endblock %}
+
+{% block back_link %}
+  <a href="{% url 'unit-detail' source.pk unit.pk%}#my-words" class="back-link">
+    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+    </svg>
+    Back to my words notes
+  </a>
+{% endblock %}
+
+{% block app_content %}
+
+<!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
+    <ol class="breadcrumb-list">
+      <li>
+        <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+      </li>
+       <li>
+        <a href="{% url 'unit-detail' source.pk unit.pk %}#my-words"> {{ unit }} # My Words </a>
+      </li>
+    </ol>
+  </nav>
+
+  <section id="reference-detail">
+    <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
+    <p class="mt-4 mt-lg-5">{{ mywords.content }}</p>
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'notes/js/notes.js' %}"></script>
+{% endblock %}

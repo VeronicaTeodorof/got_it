@@ -105,8 +105,8 @@
       {% for reference in references %}
         <li class="custom-list-item">
           <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
-            <span class="reference-content">
-              {% if reference.title %}{{ reference.title }}{% else %}{{ reference.content|truncatewords:8 }}{% endif %}
+            <span class="source-name">{{ reference.title|default:'Untitled' }}</span>
+            <span class="text-muted">{{ reference.content|truncatewords:8 }}</span>
             </span>
             <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
           </a>

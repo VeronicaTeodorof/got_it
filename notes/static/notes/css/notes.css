@@ -439,6 +439,19 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 }
 
 /* ============================
+   NOTE DETAIL PAGE
+============================ */
+.location {
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8rem;
+  max-width: 275px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ============================
    PAGINATION
 ============================ */
 .pagination {
@@ -769,6 +782,13 @@ input.inline-field:focus {
   /* Create Reference Page */
   .fraction-grow {
     flex-grow: 0.73;
+  }
+
+   /* Reference-detail page */
+  .location {
+    align-self: center;
+    position: relative;
+    top: -0.2rem;
   }
 }
 
