@@ -215,6 +215,7 @@ def create_reference(request, source_pk, unit_pk):
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    next_url = request.GET.get('next')
 
     if request.method == 'POST':
         form = ReferenceForm(request.POST)
@@ -236,7 +237,8 @@ def create_reference(request, source_pk, unit_pk):
                   {'source': source,
                    'unit': unit,
                    'form': form,
-                   'in_note_view': True}
+                   'in_note_view': True,
+                   'next_url': next_url}
                   )
 
 

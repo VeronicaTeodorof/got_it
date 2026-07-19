@@ -76,21 +76,22 @@
 <ul class="nav nav-tabs flex-column flex-lg-row mt-3 mt-lg-3 gap-lg-5" id="noteTabs">
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link active" href="#reference" data-bs-toggle="tab">Reference</a>
-    <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}"
+    <!-- `?next={{request.path}}` passes the current page's URL to the URL of the link that takes you to the create page-->
+    <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add reference note"
       aria-label="Add reference note">+</a>
   </li>
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>
-    <a class="nav-link" href="{% url 'create-mywords' source.pk unit.pk %}"
+    <a class="nav-link" href="{% url 'create-mywords' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add standalone my words note"
       aria-label="Add my words note">+</a>
   </li>
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link" href="#questions" data-bs-toggle="tab">Questions</a>
-    <a class="nav-link" href="{% url 'create-question' source.pk unit.pk %}"
+    <a class="nav-link" href="{% url 'create-question' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add standalone question note"
       aria-label="Add question note">+</a>
