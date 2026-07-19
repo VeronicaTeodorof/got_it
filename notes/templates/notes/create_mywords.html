@@ -29,7 +29,8 @@
     <div class="mt-5" id="create-mywords-form">
       <form method="post" novalidate>
         {% csrf_token %}
-       <div class="form-field">
+        <input type="hidden" name="next" value="{{next_url|default_if_none:''}}">
+        <div class="form-field">
           <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
           {{ form.title }}
           {{ form.title.errors }}
@@ -40,8 +41,16 @@
           {{ form.content.errors }}
         </div>
         <button type="submit" class="btn btn-form m-2">Save</button>
-        <button class="btn btn-form btn-form--cancel" type="button">Cancel</button>
+        {%if next_url %}
+          <a href="{{next_url}}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        {% else %}
+          <a href="{% url 'unit-detail' source.pk unit.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        {% endif %}
       </form>
     </div>
   </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'notes/js/notes.js' %}"></script>
 {% endblock %}

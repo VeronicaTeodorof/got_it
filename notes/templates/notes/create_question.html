@@ -40,7 +40,11 @@
           {{ form.content.errors }}
         </div>
         <button type="submit" class="btn btn-form m-2">Save</button>
-        <button class="btn btn-form btn-form--cancel" type="button">Cancel</button>
+        {%if next_url %}
+          <a href="{{next_url}}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        {% else %}
+          <a href="{% url 'unit-detail' source.pk unit.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        {% endif %}
       </form>
     </div>
   </section>
