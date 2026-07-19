@@ -215,7 +215,9 @@ def create_reference(request, source_pk, unit_pk):
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
-    next_url = request.GET.get('next')
+    # needs to check first GET branch and if that returns None
+    # checks POST branch, necessary for cancel clicked after invalid submission
+    next_url = request.GET.get('next') or request.POST.get('next')
 
     if request.method == 'POST':
         form = ReferenceForm(request.POST)
