@@ -487,6 +487,7 @@ When a user submits the login form with an incorrect username/password combinati
 **Further complication with scroll behaviour**
 
 On create_reference.html specifically, triggering a scroll (by increasing the content textarea beyond 5 rows) caused the fixed navbar and sidebar to briefly visually separate — a gap opening between them for the duration of the scroll. Reducing the textarea back to 5 rows keeps the page short enough that no scroll ever occurs, avoiding the issue entirely rather than resolving its underlying cause.
+Later on the same bug was seen in dashboard when source form was expanded. I devised a wordaround solution by givine the sidebar a height of 120vh and a z-index of 98, while for nav a z-index of 99. Now the two at least scroll together as below, avoiding the awkward white gap. Since sidebar only appears on desktop, this device cannot affect mobile or tablet views.
 
 By contrast, create_question.html and create_mywords.html scroll regardless of how many textarea rows are set — even at 5 rows or fewer, the page still triggers a scrollbar. On these two pages, however, the navbar and sidebar scroll away together, moving as a consistent unit rather than separating from each other, so no gap appears. Since the specific issue being guarded against (a visible gap between navbar and sidebar) doesn't occur here, no row-count workaround was applied to these two pages, and their scrolling behavior was left as-is.
 
