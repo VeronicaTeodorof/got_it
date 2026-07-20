@@ -52,6 +52,12 @@ urlpatterns = [
         name='create-mywords'
     ),
     path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/mywords/'
+        '<int:mywords_pk>/edit/',
+        views.edit_mywords,
+        name='edit-mywords'
+    ),
+    path(
         'sources/<int:source_pk>/units/<int:unit_pk>/'
         'question/<int:question_pk>/',
         views.question_detail,
@@ -61,5 +67,11 @@ urlpatterns = [
         'sources/<int:source_pk>/units/<int:unit_pk>/question/create/',
         views.create_question,
         name='create-question'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/question/'
+        '<int:question_pk>/edit/',
+        views.edit_question,
+        name='edit-question'
     ),
 ]

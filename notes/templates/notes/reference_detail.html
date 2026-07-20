@@ -27,14 +27,12 @@
 </nav>
 
 <section id="reference-detail">
-  <div class="d-flex gap-2">
-    <div class="span-wrapper d-flex align-items-top">
+    <div class="span-wrapper d-flex align-items-top gap-2">
       <h1 class="heading">{{ reference.title|default:"Untitled" }}</h1>
       {% url 'edit-reference' source.pk unit.pk reference.pk as edit_url %}
-      {% url 'note-detail' source.pk unit.pk as cancel_url %}
+      {% url 'reference-detail' source.pk unit.pk reference.pk as cancel_url %}
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
     </div>
-  </div>
   {% if reference.location|slice:":4" == "http" %}
     <a href="{{ reference.location }}" class="badge location mt-4"
         target="_blank" rel="noopener noreferrer">

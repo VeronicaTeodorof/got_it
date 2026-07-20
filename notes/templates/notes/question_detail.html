@@ -4,7 +4,7 @@
 {% block title %}got it? | Question{% endblock %}
 
 {% block back_link %}
-  <a href="{% url 'unit-detail' source.pk unit.pk%}#question" class="back-link">
+  <a href="{% url 'unit-detail' source.pk unit.pk%}#questions" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
@@ -26,8 +26,13 @@
     </ol>
   </nav>
 
-  <section id="reference-detail">
-    <h1 class="heading">{{ question.title|default:"Untitled" }}</h1>
+  <section id="question-detail">
+    <div class="span-wrapper d-flex gap-2">
+      <h1 class="heading">{{ question.title|default:"Untitled" }}</h1>
+      {% url 'edit-question' source.pk unit.pk question.pk as edit_url %}
+      {% url 'question-detail' source.pk unit.pk question.pk as cancel_url %}
+      {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
+    </div>
     <p class="mt-4 mt-lg-5">{{ question.content }}</p>
   </section>
 {% endblock %}

@@ -320,6 +320,68 @@ def create_question(request, source_pk, unit_pk):
     })
 
 
+@login_required
+def edit_question(request, source_pk, unit_pk, question_pk):
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    question = get_object_or_404(Question, pk=question_pk, unit=unit)
+    if request.method == 'POST':
+        form = QuestionForm(
+            request.POST, instance=question)
+        if form.is_valid():
+            question = form.save()
+            return redirect(
+                'question-detail', source_pk, unit_pk, question_pk
+                )
+        return render(request,
+                      'notes/edit_question.html',
+                      {'source': source,
+                       'unit': unit,
+                       'question': question,
+                       'form': form,
+                       'in_note_view': True
+                       })
+    form = QuestionForm(instance=question)
+    return render(request,
+                  'notes/edit_question.html',
+                  {'source': source,
+                   'unit': unit,
+                   'question': question,
+                   'form': form,
+                   'in_note_view': True})
+
+
+@login_required
+def edit_mywords(request, source_pk, unit_pk, mywords_pk):
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
+    if request.method == 'POST':
+        form = MyWordsForm(
+            request.POST, instance=mywords)
+        if form.is_valid():
+            mywords = form.save()
+            return redirect(
+                'mywords-detail', source_pk, unit_pk, mywords_pk
+                )
+        return render(request,
+                      'notes/edit_mywords.html',
+                      {'source': source,
+                       'unit': unit,
+                       'mywords': mywords,
+                       'form': form,
+                       'in_note_view': True
+                       })
+    form = MyWordsForm(instance=mywords)
+    return render(request,
+                  'notes/edit_mywords.html',
+                  {'source': source,
+                   'unit': unit,
+                   'mywords': mywords,
+                   'form': form,
+                   'in_note_view': True})
+
+
 # --- MyWords Notes ---
 @login_required
 def mywords_detail(request, source_pk, unit_pk, mywords_pk):

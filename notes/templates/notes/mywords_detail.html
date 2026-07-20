@@ -26,8 +26,13 @@
     </ol>
   </nav>
 
-  <section id="reference-detail">
-    <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
+  <section id="mywords-detail">
+    <div class="span-wrapper d-flex gap-2">
+      <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
+      {% url 'edit-mywords' source.pk unit.pk mywords.pk as edit_url %}
+      {% url 'mywords-detail' source.pk unit.pk nywords.pk as cancel_url %}
+      {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
+    </div>
     <p class="mt-4 mt-lg-5">{{ mywords.content }}</p>
   </section>
 {% endblock %}
