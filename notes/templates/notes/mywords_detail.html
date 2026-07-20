@@ -13,6 +13,29 @@
 {% endblock %}
 
 {% block app_content %}
+ <!-- Delete Modal -->
+  <div class="modal fade" id="delete-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Delete reference note?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <p>This action will permanently delete {% if mywords.title %}
+            <strong>{{mywords.title}}</strong>{% else %} this my words note {% endif %} of {{unit.unit_name}}.</p>
+          <p>Are you sure you want to continue?</p>
+        </div>
+        <div class="modal-footer">
+          <form method="POST" action="{% url 'delete-mywords' source.pk unit.pk mywords.pk %}">
+            {% csrf_token %}
+            <button type="button" class="btn btn-md btn-form" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-md btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Breadcrumbs -->
   <nav aria-label="breadcrumb" class="mb-2 breadcrumb">

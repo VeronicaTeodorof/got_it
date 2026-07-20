@@ -41,6 +41,12 @@ urlpatterns = [
         name='edit-reference'
     ),
     path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/delete/reference/'
+        '<int:reference_pk>/',
+        views.delete_reference,
+        name='delete-reference'
+    ),
+    path(
         'sources/<int:source_pk>/units/<int:unit_pk>/'
         'mywords/<int:mywords_pk>/',
         views.mywords_detail,
@@ -58,6 +64,12 @@ urlpatterns = [
         name='edit-mywords'
     ),
     path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/delete/mywords/'
+        '<int:mywords_pk>/',
+        views.delete_mywords,
+        name='delete-mywords'
+    ),
+    path(
         'sources/<int:source_pk>/units/<int:unit_pk>/'
         'question/<int:question_pk>/',
         views.question_detail,
@@ -73,5 +85,11 @@ urlpatterns = [
         '<int:question_pk>/edit/',
         views.edit_question,
         name='edit-question'
+    ),
+    path(
+        'sources/<int:source_pk>/units/<int:unit_pk>/delete/question/'
+        '<int:question_pk>/',
+        views.delete_question,
+        name='delete-question'
     ),
 ]

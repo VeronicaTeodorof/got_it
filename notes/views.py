@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from .models import Source, Unit, Reference, MyWords, Question
 from .forms import SourceForm, UnitForm, ReferenceForm, MyWordsForm
 from .forms import QuestionForm
+from django.urls import reverse
 
 
 # Create your views here.
@@ -275,6 +276,18 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
                    'in_note_view': True})
 
 
+@login_required
+def delete_reference(request, source_pk, unit_pk, reference_pk):
+    """View for deleting units"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+    if request.method == 'POST':
+        reference.delete()
+        messages.success(request, "Reference note deleted successfully!")
+    return redirect('unit-detail', source_pk=source_pk, unit_pk=unit_pk)
+
+
 # --- Question Notes ---
 @login_required
 def question_detail(request, source_pk, unit_pk, question_pk):
@@ -352,6 +365,20 @@ def edit_question(request, source_pk, unit_pk, question_pk):
 
 
 @login_required
+def delete_question(request, source_pk, unit_pk, question_pk):
+    """View for deleting units"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    question = get_object_or_404(Question, pk=question_pk, unit=unit)
+    url = reverse('unit-detail', kwargs={'source_pk': source_pk,
+                                         'unit_pk': unit_pk})
+    if request.method == 'POST':
+        question.delete()
+        messages.success(request, "Question note deleted successfully!")
+    return redirect(f'{url}#questions')
+
+
+@login_required
 def edit_mywords(request, source_pk, unit_pk, mywords_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
@@ -425,3 +452,18 @@ def create_mywords(request, source_pk, unit_pk):
         'in_note_view': True,
         'next_url': next_url
     })
+
+
+@login_required
+def delete_mywords(request, source_pk, unit_pk, mywords_pk):
+    """View for deleting units"""
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
+    mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
+    url = reverse('unit-detail', kwargs={'source_pk': source_pk,
+                                         'unit_pk': unit_pk})
+
+    if request.method == 'POST':
+        mywords.delete()
+        messages.success(request, "My words note deleted successfully!")
+    return redirect(f'{url}#my-words')

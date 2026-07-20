@@ -718,11 +718,11 @@ input.inline-field:focus {
     width: var(--sidebar-width) !important;
     position: sticky !important;
     top: var(--navbar-height) !important;
-    /* height: calc(100vh - var(--navbar-height)) !important; */
+    height: calc(100vh - var(--navbar-height)) !important;
     transition: width 0.2s ease, flex-basis 0.2s ease;
     /* workaround for sticky nav/sidebar gap */
-    height: 120vh;
-    z-index: 98;
+    /* height: 120vh;
+    z-index: 98; */
   }
 
   .sidebar.offcanvas-lg.expanded-sidebar {
