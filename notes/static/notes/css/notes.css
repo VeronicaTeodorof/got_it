@@ -610,6 +610,7 @@ input.inline-field:focus {
 /* ============================
    LAYOUT HELPERS
 ============================ */
+/* Prevents the wrapper's inline content from wrapping onto multiple lines */
 .span-wrapper {
   white-space: nowrap;
   display: inline-block;
@@ -786,7 +787,7 @@ input.inline-field:focus {
 
    /* Reference-detail page */
   .location {
-    align-self: center;
+    align-self:baseline;
     position: relative;
     top: -0.2rem;
   }

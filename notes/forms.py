@@ -126,7 +126,9 @@ class ReferenceForm(forms.ModelForm):
                                              'placeholder': 'content',
                                              'rows': 10}),
             'location': forms.TextInput(attrs={'class': 'form-input',
-                                               'placeholder': 'location',
+                                               'placeholder':
+                                               'location: page/ '
+                                               'timestamp/ url',
                                                }),
         }
 

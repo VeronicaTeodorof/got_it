@@ -481,7 +481,7 @@ The answer was yes — both for symmetry with the lg X button, and for consisten
 
 **Pros and cons**
 
-*One shared button:*
+**One shared button:**
 - **Pro:** the vertical-reset logic (find every open node, close it) is written once and used on every breakpoint, rather than duplicated across two buttons — removing the exact risk that caused the original bug, where one X reset state and the other didn't.
 - **Pro:** one element to maintain and test instead of two; a future change to reset behaviour only needs to happen in one place.
 - **Pro:** more accurately models the underlying intent — conceptually there is one job ("close/reset whatever is open"), even though the mechanism differs by breakpoint.
@@ -553,7 +553,7 @@ The same page is labelled "Dashboard" in the main nav and "Sources" in the sideb
 
  Breadcrumbs omit Dashboard/Sources because the sidebar already provides persistent Source→Unit navigation and orientation across all authenticated views. Including them in the breadcrumb would duplicate that information; the breadcrumb instead acts as a local context label (Source > Unit) rather than a full site trail.
 
-### Source Detail: Inline Edit — Design Decisions
+### Edit: inline vs dedicated page
 
 **Architecture: single form, not per-field inline-edit** Source name/author/type are edited together via one Django `<form>` and one POST, not as independent fields with their own save actions (as seen in tools like Jira/GitHub). This is a deliberate simplification: per-field
 editing would require JSON endpoints, manual CSRF handling, and JS-driven partial saves — a much larger scope than this page needs right now.Documented tradeoff: this diverges from Atlassian's inline-edit guidance (don't nest inline-edit inside a `<form>`), accepted knowingly.
@@ -578,6 +578,10 @@ already had this guard via a truthiness check.
 **Long source names: accepted to clip/scroll, not wrap**
 `.inline-field` capped at `max-width: 100%` so a very long title can't overflow the viewport. Text scrolls within the input rather than the
 box growing or the row wrapping. Considered a tradeoff worth accepting given how rare genuinely long titles are expected to be.
+
+**Notes edit**
+
+Notes (Reference, My Words, Question) use a separate dedicated edit page, mirroring the layout of their corresponding create page. Notes carry more content — a multi-line body plus metadata like location — and forcing that into the same compact layout as read mode led to cramped, hard-to-scan forms. Reusing the create-page layout for editing means one consistent, spacious design for both creating and editing a note, rather than fighting to keep edit mode visually identical to read mode.
 
 
 ### Visual Hierarchy: Headings, Accents, and Action Color

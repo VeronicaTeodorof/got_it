@@ -251,7 +251,7 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
     reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
     if request.method == 'POST':
         form = ReferenceForm(
-            request.POST, instance=reference, unit=unit)
+            request.POST, instance=reference)
         if form.is_valid():
             reference = form.save()
             return redirect(
@@ -265,7 +265,7 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
                        'form': form,
                        'in_note_view': True
                        })
-    form = ReferenceForm(instance=reference, unit=unit)
+    form = ReferenceForm(instance=reference)
     return render(request,
                   'notes/edit_reference.html',
                   {'source': source,

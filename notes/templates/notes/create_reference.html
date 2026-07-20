@@ -26,7 +26,7 @@
   <section id="create-reference">
     <h1 class="heading">New reference note</h1>
 
-    <div class="mt-5" id="create-reference-form">
+    <div class="mt-4" id="create-reference-form">
       <form method="post" novalidate>
         {% csrf_token %}
         <!-- carries the next_url parameter to the POST branch of the view,
@@ -36,8 +36,8 @@
         produce an invalid Cancel URL (.../create/None) -->
         <input type="hidden" name="next" value="{{next_url|default_if_none:''}}">
 
-        <div class="d-flex flex-column flex-lg-row gap-2">
-          <div class="form-field fraction-grow">
+        <!-- <div class="d-flex flex-column flex-lg-row gap-2"> -->
+          <div class="form-field">
             <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
             {{ form.title }}
             {{ form.title.errors }}
@@ -47,7 +47,7 @@
             {{ form.location }}
             {{ form.location.errors }}
           </div>
-        </div>
+        <!-- </div> -->
         <div class="form-field">
           <label for="{{ form.content.id_for_label }}" class="visually-hidden">content</label>
           {{ form.content }}
