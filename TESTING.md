@@ -491,6 +491,9 @@ Later on the same bug was seen in dashboard when source form was expanded. I dev
 
 By contrast, create_question.html and create_mywords.html scroll regardless of how many textarea rows are set — even at 5 rows or fewer, the page still triggers a scrollbar. On these two pages, however, the navbar and sidebar scroll away together, moving as a consistent unit rather than separating from each other, so no gap appears. Since the specific issue being guarded against (a visible gap between navbar and sidebar) doesn't occur here, no row-count workaround was applied to these two pages, and their scrolling behavior was left as-is.
 
+**Fix: always remember your tutor's fixes**
+Finally, after going through all that trouble, both on my own and with Claude AI, I remembered I had a similar problem in my first project, and the fix was given by my tutor: put sticky on parent element. I put class 'sticky-top' on header instead of nav, and it works! It seems the olden days remedies still work in the age of AI. Thank you, Kevin!
+
 
 ### Edit cancel button preserves state in DOM
 **Description** After editing a source and then clicking cancel button, form state is preserved in the DOM, and a new click on edit brings the form as last edited, not with the initial prepopulated data. This is a known limitation of the button collapse approach.
