@@ -305,7 +305,7 @@ def question_detail(request, source_pk, unit_pk, question_pk):
 
 
 @login_required
-def create_question(request, source_pk, unit_pk):
+def create_question(request, source_pk, unit_pk, reference_pk=None):
     """
     Create a standalone Question note
     """
@@ -313,11 +313,16 @@ def create_question(request, source_pk, unit_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     next_url = request.GET.get('next') or request.POST.get('next')
 
+    reference = None
+    if reference_pk:
+        reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+
     if request.method == 'POST':
         form = QuestionForm(request.POST)
         if form.is_valid():
             question = form.save(commit=False)
             question.unit = unit
+            question.reference = reference
             question.save()
             messages.success(request, "Question note saved.")
             return redirect('question-detail', source_pk, unit_pk, question.pk)
@@ -329,7 +334,8 @@ def create_question(request, source_pk, unit_pk):
         'unit': unit,
         'form': form,
         'in_note_view': True,
-        'next_url': next_url
+        'next_url': next_url,
+        'reference': reference
     })
 
 
@@ -426,19 +432,25 @@ def mywords_detail(request, source_pk, unit_pk, mywords_pk):
 
 
 @login_required
-def create_mywords(request, source_pk, unit_pk):
+def create_mywords(request, source_pk, unit_pk,
+                   reference_pk=None):
     """
-    Create a standalone My Words note
+    Create a My Words note, optionally linked to a Reference
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     next_url = request.GET.get('next') or request.POST.get('next')
+
+    reference = None
+    if reference_pk:
+        reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
 
     if request.method == 'POST':
         form = MyWordsForm(request.POST)
         if form.is_valid():
             mywords = form.save(commit=False)
             mywords.unit = unit
+            mywords.reference = reference
             mywords.save()
             messages.success(request, "My Words note saved.")
             return redirect('mywords-detail', source_pk, unit_pk, mywords.pk)
@@ -449,6 +461,7 @@ def create_mywords(request, source_pk, unit_pk):
         'source': source,
         'unit': unit,
         'form': form,
+        'reference': reference,
         'in_note_view': True,
         'next_url': next_url
     })

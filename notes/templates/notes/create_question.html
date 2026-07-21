@@ -20,6 +20,11 @@
       <li>
         <a href="{% url 'unit-detail' source.pk unit.pk %}"> {{ unit }}</a>
       </li>
+      {% if reference %}
+      <li>
+        <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">{{ reference.title|default:"Untitled" }}</a>
+      </li>
+      {% endif %}
     </ol>
   </nav>
 
