@@ -61,6 +61,10 @@ urlpatterns = [
          '/from-reference/<int:reference_pk>/',
          views.create_mywords,
          name='create-mywords-from-reference'),
+    path('sources/<int:source_pk>/units/<int:unit_pk>/mywords/create'
+         '/from-question/<int:question_pk>/',
+         views.create_mywords,
+         name='create-mywords-from-question'),
     path(
         'sources/<int:source_pk>/units/<int:unit_pk>/mywords/'
         '<int:mywords_pk>/edit/',

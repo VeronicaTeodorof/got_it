@@ -433,17 +433,21 @@ def mywords_detail(request, source_pk, unit_pk, mywords_pk):
 
 @login_required
 def create_mywords(request, source_pk, unit_pk,
-                   reference_pk=None):
+                   reference_pk=None, question_pk=None):
     """
-    Create a My Words note, optionally linked to a Reference
+    Create a My Words note, optionally linked to a Reference or Question
     """
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     next_url = request.GET.get('next') or request.POST.get('next')
 
     reference = None
+    question = None
     if reference_pk:
         reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+    elif question_pk:
+        question = get_object_or_404(Question, pk=question_pk, unit=unit)
+        reference = question.reference
 
     if request.method == 'POST':
         form = MyWordsForm(request.POST)
@@ -451,6 +455,7 @@ def create_mywords(request, source_pk, unit_pk,
             mywords = form.save(commit=False)
             mywords.unit = unit
             mywords.reference = reference
+            mywords.question = question
             mywords.save()
             messages.success(request, "My Words note saved.")
             return redirect('mywords-detail', source_pk, unit_pk, mywords.pk)
@@ -462,6 +467,7 @@ def create_mywords(request, source_pk, unit_pk,
         'unit': unit,
         'form': form,
         'reference': reference,
+        'question': question,
         'in_note_view': True,
         'next_url': next_url
     })

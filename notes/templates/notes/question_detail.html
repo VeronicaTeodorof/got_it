@@ -50,11 +50,17 @@
   </nav>
 
   <section id="question-detail">
-    <div class="span-wrapper d-flex gap-2">
+    <div class="d-flex gap-2">
       <h1 class="heading">{{ question.title|default:"Untitled" }}</h1>
       {% url 'edit-question' source.pk unit.pk question.pk as edit_url %}
       {% url 'question-detail' source.pk unit.pk question.pk as cancel_url %}
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
+    </div>
+    <div mt-3>
+      <a href="{% url 'create-mywords-from-question' source.pk unit.pk question.pk %}?next={{request.path}}"
+      class="btn btn-form mt-4 mt-lg-5">
+      Answer in My Words
+    </a>
     </div>
     <p class="mt-4 mt-lg-5">{{ question.content }}</p>
   </section>

@@ -24,6 +24,11 @@
         <li>
           <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">{{ reference.title|default:"Untitled" }}</a>
         </li>
+        {% if question %}
+        <li>
+          <a href="{% url 'question-detail' source.pk unit.pk question.pk}">{{question.title|default:"Untitled" }}</a>
+        </li>
+        {% endif %}
       {% endif %}
     </ol>
   </nav>
