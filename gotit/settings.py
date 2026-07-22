@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    "pages",
     'notes',
     'crispy_forms',
     'crispy_bootstrap5',

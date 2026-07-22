@@ -41,11 +41,11 @@
         <nav class="navbar">
             <div class="container-fluid" aria-label="Main navigation">
                 <!-- Logo on the left -->
-                <a  class="navbar-brand me-auto" href="{% url 'home' %}">
+                <a  class="navbar-brand me-auto" href="{% url 'pages:home' %}">
                     <img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo">
                 </a>
                 <ul class="navbar-nav d-flex flex-row">
-                    <li class="nav-item"><a class="nav-link mx-lg-2" href="{% url 'home'%}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link mx-lg-2" href="{% url 'pages:home'%}">Home</a></li>
                     {% if request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link ms-lg-2" href="{% url 'dashboard' %}">Dashboard</a></li>
                         <li>
