@@ -47,9 +47,8 @@
         <ul class="navbar-nav d-flex flex-row">
           <li class="nav-item">
             <a class="nav-link mx-lg-2" href="{% url 'pages:home'%}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-house-fill d-lg-none" aria-label="home" viewBox="0 0 16 16">
-                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
-                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="var(--nav-green)" class="bi bi-house d-lg-none" aria-label="home" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
               </svg>
               <span class="d-none d-lg-inline">Home</span>
             </a>
@@ -63,13 +62,36 @@
               <span class="d-none d-lg-inline">How it works</span>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-chat-square-text d-lg-none" aria-label="give feedback" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
+              </svg>
+              <span class="d-none d-lg-inline">Give feedback</span>
+            </a>
+          </li>
             {% if request.user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link ms-lg-2" href="{% url 'notes:dashboard' %}">Dashboard</a></li>
-                <li>
-                    <form method="POST" action="{% url 'account_logout' %}">
-                        {% csrf_token %}
-                        <button class="btn btn-link nav-link px-2 mx-lg-3" type="submit">Log out</button>
-                        </form>
+                <li class="nav-item">
+                  <a class="nav-link ms-lg-2" href="{% url 'notes:dashboard' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-grid d-lg-none" aria-label="dashboard" viewBox="0 0 16 16">
+                      <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5z"/>
+                    </svg>
+                    <span class="d-none d-lg-inline">
+                    Dashboard
+                    </span>
+                  </a>
+                </li>
+                  <form method="POST" action="{% url 'account_logout' %}">
+                    {% csrf_token %}
+                      <button class="btn btn-link nav-link px-2 mx-lg-3" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-box-arrow-left d-lg-none" aria-label="log out" viewBox="0 0 16 16">
+                          <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"/>
+                          <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"/>
+                        </svg>
+                     <span class="d-none d-lg-inline">Log out</span>
+                    </button>
+                  </form>
                 </li>
             {% else %}
                 <li class="nav-item"><a class="nav-link sign-in mx-1 mx-lg-2" href="{% url 'account_login'%}">Sign In</a></li>

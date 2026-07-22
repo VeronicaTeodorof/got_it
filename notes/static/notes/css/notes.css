@@ -425,9 +425,9 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 .nav-tabs .nav-link {
   font-weight: 400;
   color: var(--muted-green);
+  -webkit-tap-highlight-color: transparent;
 }
 
-.nav-tabs .nav-link.active,
 .nav-tabs .nav-link:hover {
   color: var(--navtext);
   background-color: transparent;
