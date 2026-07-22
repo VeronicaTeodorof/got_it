@@ -3,64 +3,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="got it? - a note-taking app for active learning: capture a source,
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="got it? - a note-taking app for active learning: capture a source,
                                       restate it in your own words, or turn it into a question to sit with.">
-    <title>{% block head_title %}got it?{% endblock %}</title>
+  <title>{% block head_title %}got it?{% endblock %}</title>
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
-    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon.svg' %}">
+  <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.ico' %}">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+  <!-- Bootstrap css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    {% block extra_css %}{% endblock %}
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Understanding request.user.is_authenticated, given to me by Claude AI:-->
-    <!-- request is an instance of the HttpRequest class, an object that Django creates every time a page is requested -->
-    <!-- user is a property of the HttpRequest object, set by Django's authentication middleware:
-        django.contrib.auth.middleware.AuthenticationMiddleware
-        It returns the current User instance if logged in, or an AnonymousUser instance if not -->
-    <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean
-    request.user translates into:  the particular user that made that particulat request
-    request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? -->
+  <!-- Understanding request.user.is_authenticated, given to me by Claude AI:-->
+  <!-- request is an instance of the HttpRequest class, an object that Django creates every time a page is requested -->
+  <!-- user is a property of the HttpRequest object, set by Django's authentication middleware:
+      django.contrib.auth.middleware.AuthenticationMiddleware
+      It returns the current User instance if logged in, or an AnonymousUser instance if not -->
+  <!-- is_authenticated is a property of the AbstractBaseUser, inherited by the User model, and returns a boolean
+  request.user translates into:  the particular user that made that particulat request
+  request.user.is_authenticated translates into: is the particular user who made this particular request authenticated? -->
 
-    <!-- Header -->
-    <header class="sticky-top">
-        <!-- Navigation -->
-        <nav class="navbar">
-            <div class="container-fluid" aria-label="Main navigation">
-                <!-- Logo on the left -->
-                <a  class="navbar-brand me-auto" href="{% url 'pages:home' %}">
-                    <img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo">
-                </a>
-                <ul class="navbar-nav d-flex flex-row">
-                    <li class="nav-item"><a class="nav-link mx-lg-2" href="{% url 'pages:home'%}">Home</a></li>
-                    {% if request.user.is_authenticated %}
-                        <li class="nav-item"><a class="nav-link ms-lg-2" href="{% url 'dashboard' %}">Dashboard</a></li>
-                        <li>
-                            <form method="POST" action="{% url 'account_logout' %}">
-                                {% csrf_token %}
-                                <button class="btn btn-link nav-link px-2 mx-lg-3" type="submit">Log out</button>
-                                </form>
-                        </li>
-                    {% else %}
-                        <li class="nav-item"><a class="nav-link sign-in mx-1 mx-lg-2" href="{% url 'account_login'%}">Sign In</a></li>
-                        <li class="nav-item"><a class="nav-link sign-up ms-lg-2 me-lg-5" href="{% url 'account_signup' %}">Sign Up</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </nav>
+  <!-- Header -->
+  <header class="sticky-top">
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container-fluid" aria-label="Main navigation">
+        <!-- Logo on the left -->
+        <a  class="navbar-brand me-auto" href="{% url 'pages:home' %}">
+          <img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo">
+        </a>
+        <ul class="navbar-nav d-flex flex-row">
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="{% url 'pages:home'%}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-house-fill d-lg-none" aria-label="home" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/>
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/>
+              </svg>
+              <span class="d-none d-lg-inline">Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link mx-lg-2" href="{% url 'pages:help' %}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" class="bi bi-question-circle d-lg-none"  aria-label="how-it -works" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                </svg>
+              <span class="d-none d-lg-inline">How it works</span>
+            </a>
+          </li>
+            {% if request.user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link ms-lg-2" href="{% url 'notes:dashboard' %}">Dashboard</a></li>
+                <li>
+                    <form method="POST" action="{% url 'account_logout' %}">
+                        {% csrf_token %}
+                        <button class="btn btn-link nav-link px-2 mx-lg-3" type="submit">Log out</button>
+                        </form>
+                </li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link sign-in mx-1 mx-lg-2" href="{% url 'account_login'%}">Sign In</a></li>
+                <li class="nav-item"><a class="nav-link sign-up ms-lg-2 me-lg-5" href="{% url 'account_signup' %}">Sign Up</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
     </header>
 
 

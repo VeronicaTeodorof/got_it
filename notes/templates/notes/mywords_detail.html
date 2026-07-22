@@ -4,7 +4,7 @@
 {% block title %}got it? | My Words{% endblock %}
 
 {% block back_link %}
-  <a href="{% url 'unit-detail' source.pk unit.pk%}#my-words" class="back-link">
+  <a href="{% url 'notes:unit-detail' source.pk unit.pk%}#my-words" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
@@ -27,7 +27,7 @@
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
-          <form method="POST" action="{% url 'delete-mywords' source.pk unit.pk mywords.pk %}">
+          <form method="POST" action="{% url 'notes:delete-mywords' source.pk unit.pk mywords.pk %}">
             {% csrf_token %}
             <button type="button" class="btn btn-md btn-form" data-bs-dismiss="modal">Cancel</button>
             <button type="submit" class="btn btn-md btn-danger">Delete</button>
@@ -41,10 +41,10 @@
   <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
     <ol class="breadcrumb-list">
       <li>
-        <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+        <a href="{% url 'notes:source-detail' source.pk %}">{{ source.source_name }}</a>
       </li>
        <li>
-        <a href="{% url 'unit-detail' source.pk unit.pk %}#my-words"> {{ unit }} # My Words </a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#my-words"> {{ unit }} # My Words </a>
       </li>
     </ol>
   </nav>
@@ -52,10 +52,50 @@
   <section id="mywords-detail">
     <div class="span-wrapper d-flex gap-2">
       <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
-      {% url 'edit-mywords' source.pk unit.pk mywords.pk as edit_url %}
-      {% url 'mywords-detail' source.pk unit.pk nywords.pk as cancel_url %}
+      {% url 'notes:edit-mywords' source.pk unit.pk mywords.pk as edit_url %}
+      {% url 'notes:mywords-detail' source.pk unit.pk nywords.pk as cancel_url %}
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
     </div>
+
+      {% if reference %}
+    <!-- Reference collapsed -->
+      <div class="mb-3 mt-lg-5 mt-5">
+          <button class="btn btn-form d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#reference-context"
+                  aria-expanded="false"
+                  aria-controls="reference-context">
+              Reference
+          </button>
+          <div class="collapse" id="reference-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ reference.title|default:"Untitled reference" }}</p>
+                  <p class="mb-0">{{ reference.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
+      {% if question %}
+      <!-- Question collapsed-->
+       <div class="mb-3 mt-lg-2 mt-2">
+          <button class="btn btn-form d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-context"
+                  aria-expanded="false"
+                  aria-controls="question-context">
+              Question
+          </button>
+          <div class="collapse" id="question-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ question.title|default:"Untitled question" }}</p>
+                  <p class="mb-0">{{ question.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
     <p class="mt-4 mt-lg-5">{{ mywords.content }}</p>
   </section>
 {% endblock %}

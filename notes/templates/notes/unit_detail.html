@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block back_link %}
-  <a href="{% url 'source-detail' source.pk %}" class="back-link">
+  <a href="{% url 'notes:source-detail' source.pk %}" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
       <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
@@ -25,7 +25,7 @@
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
-          <form method="POST" action="{% url 'delete-unit' source.pk unit.pk %}">
+          <form method="POST" action="{% url 'notes:delete-unit' source.pk unit.pk %}">
             {% csrf_token %}
             <button type="button" class="btn btn-md btn-form" data-bs-dismiss="modal">Cancel</button>
             <button type="submit"class="btn btn-md btn-danger">Delete</button>
@@ -38,14 +38,14 @@
   <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
     <ol class="breadcrumb-list">
       <li>
-        <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+        <a href="{% url 'notes:source-detail' source.pk %}">{{ source.source_name }}</a>
       </li>
     </ol>
   </nav>
 
   <section id="unit-actions">
     <!-- Unit Details Read/Edit -->
-    <form method="post" action="{% url 'unit-detail' source.pk unit.pk %}">
+    <form method="post" action="{% url 'notes:unit-detail' source.pk unit.pk %}">
       {% csrf_token %}
       <div class="source-heading d-flex align-items-baseline gap-2 mb-4 pt-2">
         <!-- Unit name -->
@@ -66,7 +66,7 @@
         </span>
 
         <!-- Actions Menu Read and Edit modes -->
-        {% url 'unit-detail' source.pk unit.pk as cancel_url %}
+        {% url 'notes:unit-detail' source.pk unit.pk as cancel_url %}
         {% include 'notes/partials/actions_menu.html' with cancel_url=cancel_url edit_mode=edit_mode %}
       </div>
     </form>
@@ -77,21 +77,21 @@
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link active" href="#reference" data-bs-toggle="tab">Reference</a>
     <!-- `?next={{request.path}}` passes the current page's URL to the URL of the link that takes you to the create page-->
-    <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}?next={{request.path}}"
+    <a class="nav-link" href="{% url 'notes:create-reference' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add reference note"
       aria-label="Add reference note">+</a>
   </li>
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link" href="#my-words" data-bs-toggle="tab">My Words</a>
-    <a class="nav-link" href="{% url 'create-mywords' source.pk unit.pk %}?next={{request.path}}"
+    <a class="nav-link" href="{% url 'notes:create-mywords' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add standalone my words note"
       aria-label="Add my words note">+</a>
   </li>
   <li class="nav-item d-flex align-items-center gap-3 gap-lg-2">
     <a class="nav-link" href="#questions" data-bs-toggle="tab">Questions</a>
-    <a class="nav-link" href="{% url 'create-question' source.pk unit.pk %}?next={{request.path}}"
+    <a class="nav-link" href="{% url 'notes:create-question' source.pk unit.pk %}?next={{request.path}}"
       data-bs-toggle="tooltip"
       title="Add standalone question note"
       aria-label="Add question note">+</a>
@@ -105,7 +105,7 @@
     <ul class="list mt-5">
       {% for reference in references %}
         <li class="custom-list-item">
-          <a href="{% url 'reference-detail' source.pk unit.pk reference.pk %}">
+          <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}">
             <span class="source-name">{{ reference.title|default:'Untitled' }}</span>
             <span class="text-muted">{{ reference.content|truncatewords:8 }}</span>
             </span>
@@ -126,7 +126,7 @@
     <ul class="list mt-5">
       {% for myword in mywords %}
         <li class="custom-list-item">
-          <a href="{% url 'mywords-detail' source.pk unit.pk myword.pk %}">
+          <a href="{% url 'notes:mywords-detail' source.pk unit.pk myword.pk %}">
             <span class="reference-content">
               {% if myword.title %}{{ myword.title }}{% else %}{{ myword.content|truncatewords:8 }}{% endif %}
             </span>
@@ -147,7 +147,7 @@
     <ul class="list mt-5">
       {% for question in questions %}
         <li class="custom-list-item">
-          <a href="{% url 'question-detail' source.pk unit.pk question.pk %}">
+          <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}">
             <span class="reference-content">
               {% if question.title %}{{ question.title }}{% else %}{{ question.content|truncatewords:8 }}{% endif %}
             </span>

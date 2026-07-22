@@ -4,15 +4,15 @@
 <!-- Sidebar specific content -->
 {% block sidebar_note_links %}
     <li class="nav-item d-flex">
-        <a class="nav-link" href="{% url 'unit-detail' source.pk unit.pk %}">Reference</a>
-        <a class="nav-link" href="{% url 'create-reference' source.pk unit.pk %}" title="Add reference">+</a>
+        <a class="nav-link" href="{% url 'notes:unit-detail' source.pk unit.pk %}">Reference</a>
+        <a class="nav-link" href="{% url 'notes:create-reference' source.pk unit.pk %}" title="Add reference">+</a>
     </li>
     <li class="nav-item d-flex">
-        <a class="nav-link" href="{% url 'unit-detail' source.pk unit.pk %}">My Words</a>
+        <a class="nav-link" href="{% url 'notes:unit-detail' source.pk unit.pk %}">My Words</a>
         <a class="nav-link" href="#">+</a>
     </li>
     <li class="nav-item d-flex">
-        <a class="nav-link" href="{% url 'unit-detail' source.pk unit.pk %}">Questions</a>
+        <a class="nav-link" href="{% url 'notes:unit-detail' source.pk unit.pk %}">Questions</a>
         <a class="nav-link" href="#">+</a>
     </li>
 {% endblock %}

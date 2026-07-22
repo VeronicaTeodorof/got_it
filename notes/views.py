@@ -39,7 +39,7 @@ def dashboard(request):
             source.user = request.user
             source.save()
             messages.success(request, "Source added.")
-            return redirect('dashboard')
+            return redirect('notes:dashboard')
     # if a GET (or any other method) we'll create a blank form
     else:
         form = SourceForm(user=request.user)
@@ -71,7 +71,7 @@ def delete_source(request, source_pk):
     if request.method == 'POST':
         source.delete()
         messages.success(request, "Source deleted.")
-    return redirect('dashboard')
+    return redirect('notes:dashboard')
 
 
 # --- Source detail/Units ---
@@ -102,7 +102,7 @@ def source_detail(request, source_pk):
             unit_form = UnitForm(source=source)
             if form.is_valid():
                 form.save()
-                return redirect('source-detail', source_pk=source.pk)
+                return redirect('notes:source-detail', source_pk=source.pk)
             edit_mode = True
 
         elif form_type == 'add_unit':
@@ -113,7 +113,7 @@ def source_detail(request, source_pk):
                 unit.source = source
                 unit.save()
                 messages.success(request, "Unit added.")
-                return redirect('source-detail', source_pk=source.pk)
+                return redirect('notes:source-detail', source_pk=source.pk)
 
         else:
             form = SourceForm(instance=source, user=request.user)
@@ -144,7 +144,7 @@ def delete_unit(request, source_pk, unit_pk):
     if request.method == 'POST':
         unit.delete()
         messages.success(request, "Unit deleted successfully!")
-    return redirect('source-detail', source_pk=source_pk)
+    return redirect('notes:source-detail', source_pk=source_pk)
 
 
 # --- Unit detail/Notes ---
@@ -168,7 +168,7 @@ def unit_detail(request, source_pk, unit_pk):
         if form.is_valid():
             form.save()
             # PRG pattern: redirect back to this same page after success
-            return redirect('unit-detail',
+            return redirect('notes:unit-detail',
                             source_pk=source.pk,
                             unit_pk=unit.pk)
         # invalid: re-render with errors, still in edit mode
@@ -227,7 +227,7 @@ def create_reference(request, source_pk, unit_pk):
             reference.unit = unit
             reference.save()
             messages.success(request, "Reference note saved.")
-            return redirect('reference-detail',
+            return redirect('notes:reference-detail',
                             source_pk,
                             unit_pk,
                             reference.pk
@@ -256,7 +256,7 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
         if form.is_valid():
             reference = form.save()
             return redirect(
-                'reference-detail', source_pk, unit_pk, reference_pk
+                'notes:reference-detail', source_pk, unit_pk, reference_pk
                 )
         return render(request,
                       'notes/edit_reference.html',
@@ -285,7 +285,7 @@ def delete_reference(request, source_pk, unit_pk, reference_pk):
     if request.method == 'POST':
         reference.delete()
         messages.success(request, "Reference note deleted successfully!")
-    return redirect('unit-detail', source_pk=source_pk, unit_pk=unit_pk)
+    return redirect('notes:unit-detail', source_pk=source_pk, unit_pk=unit_pk)
 
 
 # --- Question Notes ---
@@ -325,7 +325,7 @@ def create_question(request, source_pk, unit_pk, reference_pk=None):
             question.reference = reference
             question.save()
             messages.success(request, "Question note saved.")
-            return redirect('question-detail', source_pk, unit_pk, question.pk)
+            return redirect('notes:question-detail', source_pk, unit_pk, question.pk)
     else:
         form = QuestionForm()
 
@@ -350,7 +350,7 @@ def edit_question(request, source_pk, unit_pk, question_pk):
         if form.is_valid():
             question = form.save()
             return redirect(
-                'question-detail', source_pk, unit_pk, question_pk
+                'notes:question-detail', source_pk, unit_pk, question_pk
                 )
         return render(request,
                       'notes/edit_question.html',
@@ -376,7 +376,7 @@ def delete_question(request, source_pk, unit_pk, question_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
-    url = reverse('unit-detail', kwargs={'source_pk': source_pk,
+    url = reverse('notes:unit-detail', kwargs={'source_pk': source_pk,
                                          'unit_pk': unit_pk})
     if request.method == 'POST':
         question.delete()
@@ -395,7 +395,7 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
         if form.is_valid():
             mywords = form.save()
             return redirect(
-                'mywords-detail', source_pk, unit_pk, mywords_pk
+                'notes:mywords-detail', source_pk, unit_pk, mywords_pk
                 )
         return render(request,
                       'notes/edit_mywords.html',
@@ -458,7 +458,7 @@ def create_mywords(request, source_pk, unit_pk,
             mywords.question = question
             mywords.save()
             messages.success(request, "My Words note saved.")
-            return redirect('mywords-detail', source_pk, unit_pk, mywords.pk)
+            return redirect('notes:mywords-detail', source_pk, unit_pk, mywords.pk)
     else:
         form = MyWordsForm()
 
@@ -479,7 +479,7 @@ def delete_mywords(request, source_pk, unit_pk, mywords_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
-    url = reverse('unit-detail', kwargs={'source_pk': source_pk,
+    url = reverse('notes:unit-detail', kwargs={'source_pk': source_pk,
                                          'unit_pk': unit_pk})
 
     if request.method == 'POST':

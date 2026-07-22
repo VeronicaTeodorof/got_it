@@ -15,7 +15,7 @@
   <div class="sources-div">
     <!-- ?add_source=open tells the dashboard view to render the
     create-source form already expanded on load -->
-    <a href="{% url 'dashboard' %}?add_source=open" class="sidebar-link" data-target="#addSourceForm">Add source</a>
+    <a href="{% url 'notes:dashboard' %}?add_source=open" class="sidebar-link" data-target="#addSourceForm">Add source</a>
     <div class="d-flex align-items-center  gap-2 w-100 sources-wrapper">
       <!-- Bootstrap chevron-right icon -->
       <button type="button"
@@ -29,7 +29,7 @@
           <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
           </svg>
       </button>
-      <a href="{% url 'dashboard' %}" class="sidebar-link">
+      <a href="{% url 'notes:dashboard' %}" class="sidebar-link">
       Sources
       </a>
     </div>
@@ -52,7 +52,7 @@
                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
               </svg>
             </button>
-            <a href="{% url 'source-detail' source.id %}" class="sidebar-link sidebar-link--source" title="{{ source.source_name }}">
+            <a href="{% url 'notes:source-detail' source.id %}" class="sidebar-link sidebar-link--source" title="{{ source.source_name }}">
             {{ source.source_name }}
             </a>
           </div>
@@ -60,7 +60,7 @@
           <div id="units-node-{{ source.id }}" class="collapse units-node">
            <div class="d-flex justify content between align-items-baseline gap-2 ps-4 mb-2">
             <p class="unit-count text-muted small mb-0">({{ source.units.all.count }} unit{{ source.units.all.count|pluralize }})</p>
-            <a href="{% url 'source-detail' source.pk %}?add_unit=open"
+            <a href="{% url 'notes:source-detail' source.pk %}?add_unit=open"
                 class="sidebar-add"
                 title="Add unit"
                 data-bs-toggle="tooltip"
@@ -71,7 +71,7 @@
             <ul class= "list-unstyled ps-5">
             {% for unit in source.units.all %}
               <li>
-              <a href="{% url 'unit-detail' source.pk unit.pk %}" class="sidebar-link sidebar-link--unit" title="{{unit.unit_name}}">
+              <a href="{% url 'notes:unit-detail' source.pk unit.pk %}" class="sidebar-link sidebar-link--unit" title="{{unit.unit_name}}">
                 {{ unit.unit_name }}
               </a>
               </li>
@@ -89,16 +89,16 @@
       <hr>
      <ul class="list-unstyled">
       <li class="d-flex align-items-baseline justify-content-between">
-        <a href="{% url 'unit-detail' source.pk unit.pk %}#reference" class="sidebar-link">Reference</a>
-        <a href="{% url 'create-reference' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add reference note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#reference" class="sidebar-link">Reference</a>
+        <a href="{% url 'notes:create-reference' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add reference note" data-bs-toggle="tooltip">+</a>
       </li>
       <li class="d-flex align-items-center justify-content-between">
-        <a href="{% url 'unit-detail' source.pk unit.pk %}#my-words" class="sidebar-link">My words</a>
-        <a href="{% url 'create-mywords' source.id unit.id %}?next={{request.path}}" class="sidebar-add" title="Add standalone words note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#my-words" class="sidebar-link">My words</a>
+        <a href="{% url 'notes:create-mywords' source.id unit.id %}?next={{request.path}}" class="sidebar-add" title="Add standalone words note" data-bs-toggle="tooltip">+</a>
       </li>
       <li class="d-flex align-items-baseline justify-content-between">
-        <a href="{% url 'unit-detail' source.pk unit.pk %}#questions" class="sidebar-link">Questions</a>
-        <a href="{% url 'create-question' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add standalone question note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions" class="sidebar-link">Questions</a>
+        <a href="{% url 'notes:create-question' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add standalone question note" data-bs-toggle="tooltip">+</a>
       </li>
     </ul>
     {% endif %}

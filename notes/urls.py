@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path
 
+app_name = 'notes'
 
 urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),

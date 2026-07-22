@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block back_link %}
-  <a href="{% url 'question-detail' source.pk unit.pk question.pk %}" class="back-link">
+  <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
@@ -15,13 +15,13 @@
   <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
     <ol class="breadcrumb-list">
       <li>
-        <a href="{% url 'source-detail' source.pk %}">{{ source.source_name }}</a>
+        <a href="{% url 'notes:source-detail' source.pk %}">{{ source.source_name }}</a>
       </li>
       <li>
-        <a href="{% url 'unit-detail' source.pk unit.pk %}#questions"> {{ unit }} # Questions</a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions"> {{ unit }} # Questions</a>
       </li>
       <li>
-        <a href="{% url 'question-detail' source.pk unit.pk question.pk %}">{{ question.title|default:"Untitled" }}</a>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}">{{ question.title|default:"Untitled" }}</a>
       </li>
     </ol>
   </nav>
@@ -45,7 +45,7 @@
         </div>
 
         <button type="submit" class="btn btn-form m-2">Save</button>
-        <a href="{% url 'question-detail' source.pk unit.pk question.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
       </form>
     </div>
   </section>

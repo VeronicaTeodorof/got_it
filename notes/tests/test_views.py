@@ -129,7 +129,7 @@ class DashboardViewTest(TestCase):
             )
         source = Source.objects.get(source_name='Name')
         self.assertRedirects(
-            response, reverse('source-detail', kwargs={'source_pk': source.pk})
+            response, reverse('notes:source-detail', kwargs={'source_pk': source.pk})
             )
 
     def test_source_forms_is_passed_in_context(self):
@@ -173,7 +173,7 @@ class SourceDetailViewTest(TestCase):
 
     def test_unauthenticated_user_is_redirected(self):
         """SDP-AT-01: Unauthenticated user is redirected to the login page."""
-        url = reverse('source-detail', args=[self.source.pk])
+        url = reverse('notes:source-detail', args=[self.source.pk])
         response = self.client.get(url)
         self.assertRedirects(response, f'/accounts/login/?next={url}')
 
@@ -182,7 +182,7 @@ class SourceDetailViewTest(TestCase):
         with the right template and right context"""
         self.client.login(username='user', password='test')
         response = self.client.get(
-            reverse('source-detail', args=[self.source.pk])
+            reverse('notes:source-detail', args=[self.source.pk])
             )
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'notes/source_detail.html')
@@ -191,7 +191,7 @@ class SourceDetailViewTest(TestCase):
     def test_nonexistent_source_returns_404(self):
         """SDP-AT-03: 404 is returned for inexistent source"""
         self.client.login(username='user', password='test')
-        response = self.client.get(reverse('source-detail', args=[1234]))
+        response = self.client.get(reverse('notes:source-detail', args=[1234]))
         self.assertEqual(response.status_code, 404)
 
     def test_user_cannot_access_other_users_source(self):
