@@ -673,6 +673,12 @@ input.inline-field:focus {
 }
 
 /* ============================
+        LINKED NOTES PAGES
+============================ */
+.linked-notes {
+  border: 1px solid var(--muted-green);
+}
+/* ============================
         UTILITIES
 ============================ */
 .text-muted {

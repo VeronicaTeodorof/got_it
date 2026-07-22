@@ -36,6 +36,46 @@
   <section id="create-mywords">
     <h1 class="heading">New my words note</h1>
 
+    {% if reference %}
+    <!-- Reference collapsed -->
+      <div class="mb-3 mt-lg-5 mt-5">
+          <button class="btn btn-form d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#reference-context"
+                  aria-expanded="false"
+                  aria-controls="reference-context">
+              Reference
+          </button>
+          <div class="collapse" id="reference-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ reference.title|default:"Untitled reference" }}</p>
+                  <p class="mb-0">{{ reference.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
+      {% if question %}
+      <!-- Question collapsed-->
+       <div class="mb-3 mt-lg-2 mt-2">
+          <button class="btn btn-form d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-context"
+                  aria-expanded="false"
+                  aria-controls="question-context">
+              Question
+          </button>
+          <div class="collapse" id="question-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ question.title|default:"Untitled question" }}</p>
+                  <p class="mb-0">{{ question.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
     <div class="mt-5" id="create-mywords-form">
       <form method="post" novalidate>
         {% csrf_token %}

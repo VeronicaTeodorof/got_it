@@ -29,7 +29,6 @@ body {
 ============================ */
 .navbar {
   background-color: var(--chrome);
-  z-index: 99;
 }
 .navbar-brand {
   text-decoration: none;

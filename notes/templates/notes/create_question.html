@@ -31,6 +31,26 @@
   <section id="create-question">
     <h1 class="heading">New question note</h1>
 
+    <!-- Reference collapsed -->
+    {% if reference %}
+      <div class="mb-3 mt-lg-5 mt-5">
+          <button class="btn btn-form d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#reference-context"
+                  aria-expanded="false"
+                  aria-controls="reference-context">
+              Reference
+          </button>
+          <div class="collapse" id="reference-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ reference.title|default:"Untitled reference" }}</p>
+                  <p class="mb-0">{{ reference.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
     <div class="mt-5" id="create-question-form">
       <form method="post" novalidate>
         {% csrf_token %}
