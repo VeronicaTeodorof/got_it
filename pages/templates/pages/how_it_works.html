@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}got it? | How it works {% endblock %}
+
+{% block content %}
+<!-- Main -->
+<main class="notebook-bg">
+  <div class="walkthrough-card pt-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h1 class="walkthrough-title mt-4 text-center">How it works</h1>
+        </div>
+        <div class="col-12">
+          <p class="walkthrough-text mt-2">
+            <span class="handwriting">Def :  </span><span class="circle-text"><strong>"got it?"</strong></span> is a note-taking and learning companion
+            <span class="text-decoration-underline">prototype app</span>, built <span class="text-decoration-underline">to test</span>
+            whether a specific, not imposed workflow resonates with users — whether people
+            actually find it useful and helpful in the way they learn.
+          </p>
+        </div>
+      <section id="motto-explanation">
+        <div class="col-12 mt-4">
+          <h2 class="fs-4"><span class="handwriting">Why??</span><span class="highlight"> question your understanding</span></h2>
+        </div>
+        <div class="col-12">
+          <p class="mt-2">
+            <span class="handwriting">Explanation: </span>
+            This workflow is derived from the Feynman Technique, which is a simple way of testing whether you actually understand something:
+            <span class="highlight">if you can explain it in your own words</span> — no jargon, no repeating the original phrasing —
+            as if to someone who's never come across it, <span class="highlight">you understand it. If you can't, you don't.</span>
+            The idea maps directly onto two distinct note types in this app, while a third note type is an original extension:
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-6 mt-md-4">
+            <ol>
+              <li class="m-1 m-md-3">
+                <strong>Reference</strong> notes capture the raw idea or the original wording,
+                kept as a bibliographic anchor;
+              </li>
+              <li class="m-1 m-md-3">
+                <strong>My Words</strong> notes — your attempt at the explanation itself:
+                the same idea, rebuilt in your own plain language.
+              </li>
+              <li class="m-1 m-md-3">
+                <strong class="text-decoration-underline">Question</strong> notes — a third note type meant to capture and make you aware of your gaps in understanding,
+                which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure
+                it doesn't quitely disappear.
+              </li>
+            </ol>
+          </div>
+          <div class="col-12 col-md-6 d-flex align-items-center">
+            <figure class="workflow-figure text-center mb-0">
+              <img src="{% static 'images/hero-image-clean.svg' %}" class="workflow-diagram-img mx-auto" alt="app workflow">
+              <figcaption class="workflow-caption">Fig. 1 — Workflow: Reference either becomes an explanation straight away in My Words,
+                or surfaces a gap in Question. When you find the answer, your question turns into a My Words note and the gap closes.
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <hr class="mt-5  mb-4 horizontal-divider">
+      <section id="flexible-workflow">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="walkthrough-title subtitle text-center">
+              Flexible workflow
+            </h2>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12">
+             <p> While the workflow above is the main idea being tested in this prototype, the
+                app does not enforce it. It recognizes that different users, different sources,
+                and even different ideas need different capturing tools.
+              </p>
+            </div>
+            <div class="col-12 col-md-8">
+              <ul>
+                <li class="m-1 m-lg-3">
+                  A <strong>Reference</strong> can stay exactly as it is, or become a <strong>My Words</strong> explanation,
+                  or become a <strong>Question</strong>.
+                </li>
+                <li class="m-1 m-lg-3">
+                  <strong>My Words</strong> and <strong> Questions</strong> can be created not only from a <strong>Reference</strong>, but also
+                  as standalone notes, reflecting your thoughts related to current learning, or connections with prior learning.
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 col-md-4 tips">
+              <h3 class="fs-5">Tips</h3>
+              <ul>
+                <li>
+                  Keep your notes atomic - one idea per note.
+                </li>
+                <li>
+                  Don't delete your questions after answering them - a question may have more than one answer.
+                </li>
+                <li>
+                  Take your unanswered questions with you for your next class, course session or tutor meeting.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr class="mt-5  mb-4 horizontal-divider">
+       <section id="rigid-structure">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="walkthrough-title subtitle text-center">
+              Rigid structure
+            </h2>
+          </div>
+          <div class="col-12">
+            <p class="mt-3">
+              Since this is built more as a study companion than as a general note-taking app, organization matters.
+              It's presumed that learning comes from a <strong class="circle-text p-1">source</strong> — this becomes the top-level container.
+              A source is then split into <strong class="circle-text p-1">units</strong>, a lower-level container that mirrors what chapters, modules, or episodes are within a source.
+            </p>
+          </div>
+          <div class="sticky-note text-start col-12 col-md-6">
+            <p>
+              <strong>Important:</strong> this organization is imposed — units can't
+              be accessed without a source, and notes can't be accessed without a unit.
+              This prevents orphaned notes.
+            </p>
+          </div>
+          <div class="col-12 col-md-6 mt-5 ms-lg-5">
+            <figure class="workflow-figure workflow-figure--structure text-center mb-0">
+              <img src="{% static 'images/structure-diagram.svg' %}"
+                  alt="Diagram: a Source contains Units, each Unit contains notes"
+                  class="workflow-diagram-img structure">
+              <figcaption class="workflow-caption">Fig. 2 — Structure: source -> unit -> notes</figcaption>
+            </figure>
+          </div>
+       </div>
+  </div>
+</main>
+{% endblock %}

@@ -325,7 +325,8 @@ def create_question(request, source_pk, unit_pk, reference_pk=None):
             question.reference = reference
             question.save()
             messages.success(request, "Question note saved.")
-            return redirect('notes:question-detail', source_pk, unit_pk, question.pk)
+            return redirect('notes:question-detail', source_pk, unit_pk,
+                            question.pk)
     else:
         form = QuestionForm()
 
@@ -377,7 +378,7 @@ def delete_question(request, source_pk, unit_pk, question_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
     url = reverse('notes:unit-detail', kwargs={'source_pk': source_pk,
-                                         'unit_pk': unit_pk})
+                                               'unit_pk': unit_pk})
     if request.method == 'POST':
         question.delete()
         messages.success(request, "Question note deleted successfully!")
@@ -458,7 +459,8 @@ def create_mywords(request, source_pk, unit_pk,
             mywords.question = question
             mywords.save()
             messages.success(request, "My Words note saved.")
-            return redirect('notes:mywords-detail', source_pk, unit_pk, mywords.pk)
+            return redirect('notes:mywords-detail', source_pk, unit_pk,
+                            mywords.pk)
     else:
         form = MyWordsForm()
 
@@ -480,7 +482,7 @@ def delete_mywords(request, source_pk, unit_pk, mywords_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
     url = reverse('notes:unit-detail', kwargs={'source_pk': source_pk,
-                                         'unit_pk': unit_pk})
+                                               'unit_pk': unit_pk})
 
     if request.method == 'POST':
         mywords.delete()
