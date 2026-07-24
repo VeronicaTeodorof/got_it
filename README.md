@@ -649,6 +649,8 @@ While overriding allauth templates, I came across the i18n library and had to de
 - Foreground/background colour pairings were verified using Lighthouse's accessibility audit, with one issue found and fixed (muted text opacity was silently reducing contrast below threshold on note content preview).
 - All meaningful images (e.g. the app workflow diagram, logo) include descriptive alt text
 - Inline SVG icons in the navigation include role="img" and aria-label attributes so screen readers announce their meaning correctly
+- Form labels are present for all inputs and linked via for/id; where visual design doesn't call for a visible label, Bootstrap's visually-hidden class keeps the label available to screen readers rather than removing it from the accessibility tree.
+- Confirmation messages: save/delete use `aria-live="polite"` so screen reader users are notified of status changes that would otherwise only be visible to sighted users.
 
 
 ### Pagination

@@ -18,7 +18,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Delete reference note?</h5>
+          <h5 class="modal-title">Delete my words note?</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
@@ -53,7 +53,7 @@
     <div class="span-wrapper d-flex gap-2">
       <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
       {% url 'notes:edit-mywords' source.pk unit.pk mywords.pk as edit_url %}
-      {% url 'notes:mywords-detail' source.pk unit.pk nywords.pk as cancel_url %}
+      {% url 'notes:mywords-detail' source.pk unit.pk mywords.pk as cancel_url %}
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
     </div>
 

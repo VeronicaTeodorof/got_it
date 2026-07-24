@@ -63,6 +63,7 @@
             <a href="{% url 'notes:source-detail' source.pk %}?add_unit=open"
                 class="sidebar-add"
                 title="Add unit"
+                aria-label="Add unit to {{ source.source_name }}"
                 data-bs-toggle="tooltip"
                 data-target="#create-unit-form">
                 +
@@ -90,15 +91,18 @@
      <ul class="list-unstyled">
       <li class="d-flex align-items-baseline justify-content-between">
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#reference" class="sidebar-link">Reference</a>
-        <a href="{% url 'notes:create-reference' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add reference note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:create-reference' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add"
+           title="Add reference note" data-bs-toggle="tooltip"  aria-label="Add Reference note">+</a>
       </li>
       <li class="d-flex align-items-center justify-content-between">
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#my-words" class="sidebar-link">My words</a>
-        <a href="{% url 'notes:create-mywords' source.id unit.id %}?next={{request.path}}" class="sidebar-add" title="Add standalone words note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:create-mywords' source.id unit.id %}?next={{request.path}}" class="sidebar-add"
+           title="Add standalone words note" data-bs-toggle="tooltip"  aria-label="Add My Words note">+</a>
       </li>
       <li class="d-flex align-items-baseline justify-content-between">
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions" class="sidebar-link">Questions</a>
-        <a href="{% url 'notes:create-question' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add" title="Add standalone question note" data-bs-toggle="tooltip">+</a>
+        <a href="{% url 'notes:create-question' source.pk unit.pk %}?next={{request.path}}" class="sidebar-add"
+        title="Add standalone question note"  aria-label="Add Question note" data-bs-toggle="tooltip">+</a>
       </li>
     </ul>
     {% endif %}
