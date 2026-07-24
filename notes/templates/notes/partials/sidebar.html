@@ -7,7 +7,7 @@
         data-bs-dismiss="offcanvas"
         data-bs-target="#appSidebar"
         aria-label="Collapse sidebar">
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" role="img" aria-label="Collapse sidebar" class="bi bi-x" viewBox="0 0 16 16">
         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
       </svg>
     </button>
@@ -25,7 +25,7 @@
           aria-label="Toggle Sources list"
           data-bs-toggle="collapse"
           data-bs-target="#sources-node">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--form-green)" class="bi bi-chevron-right" viewBox="0 0 16 16">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--form-green)" role="img" aria-label="Expand sources" class="bi bi-chevron-right" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
           </svg>
       </button>
@@ -48,7 +48,7 @@
                 aria-label="Toggle units for {{ source.source_name }}"
                 data-bs-toggle="collapse"
                 data-bs-target="#units-node-{{ source.pk }}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--form-green)" class="bi bi-chevron-right" viewBox="0 0 16 16">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="var(--form-green)" role="img" aria-label="Expand units" class="bi bi-chevron-right" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
               </svg>
             </button>

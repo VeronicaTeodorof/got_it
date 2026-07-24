@@ -646,6 +646,9 @@ While overriding allauth templates, I came across the i18n library and had to de
 ## Accessibility
 - The offcanvas sidebar includes a visually hidden heading so screen readers can identify the region when it opens.
 - The sidebar's top offset and height are calculated at runtime via JavaScript rather than hardcoded, so the layout remains correct if a user increases their font size or zoom level.
+- Foreground/background colour pairings were verified using Lighthouse's accessibility audit, with one issue found and fixed (muted text opacity was silently reducing contrast below threshold on note content preview).
+- All meaningful images (e.g. the app workflow diagram, logo) include descriptive alt text
+- Inline SVG icons in the navigation include role="img" and aria-label attributes so screen readers announce their meaning correctly
 
 
 ### Pagination
