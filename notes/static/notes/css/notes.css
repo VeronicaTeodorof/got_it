@@ -640,7 +640,7 @@ input.inline-field:focus {
 .breadcrumb li a {
   text-decoration: none;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--text-muted);
   padding-right: .5rem;
   opacity: 0.8;
 }
@@ -664,7 +664,7 @@ input.inline-field:focus {
 
 .breadcrumb-list li + li::before {
   content: "›";
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .breadcrumb a:hover {
@@ -682,8 +682,7 @@ input.inline-field:focus {
         UTILITIES
 ============================ */
 .text-muted {
-  color:var(--muted);
-  opacity: 0.8;
+  color:#5a6268 !important;
 }
 /* ============================
    MEDIA QUERIES (mobile-first)
