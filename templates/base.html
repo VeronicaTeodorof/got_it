@@ -38,8 +38,8 @@
   <!-- Header -->
   <header class="sticky-top">
     <!-- Navigation -->
-    <nav class="navbar">
-      <div class="container-fluid" aria-label="Main navigation">
+    <nav class="navbar" aria-label="Main navigation">
+      <div class="container-fluid">
         <!-- Logo on the left -->
         <a  class="navbar-brand me-auto" href="{% url 'pages:home' %}">
           <img src="{% static 'images/got-it-logo2.svg' %}" alt="got it? logo" class="logo">
@@ -63,7 +63,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mx-lg-2" href="">
+            <a class="nav-link mx-lg-2" href="https://docs.google.com/forms/d/e/1FAIpQLSfNb7p6TfoGHnDMKE8IZ60myNeepzWPK1S0EqPeJ7gcUwym3A/viewform?usp=publish-editor" target="_blank" rel="noopener">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="var(--nav-green)" role="img" class="bi bi-chat-square-text d-lg-none" aria-label="Give feedback" viewBox="0 0 16 16">
                 <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
                 <path d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6m0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5"/>
@@ -82,6 +82,7 @@
                     </span>
                   </a>
                 </li>
+                <li>
                   <form method="POST" action="{% url 'account_logout' %}">
                     {% csrf_token %}
                       <button class="btn btn-link nav-link px-2 mx-lg-3" type="submit">
