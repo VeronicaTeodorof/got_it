@@ -207,11 +207,17 @@ def reference_detail(request, source_pk, unit_pk, reference_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
+    linked_mywords = reference.mywords_notes.all().order_by(
+        '-last_modified_date')
+    linked_questions = reference.question_notes.all().order_by(
+        '-last_modified_date')
     return render(request,
                   'notes/reference_detail.html',
                   {'source': source,
                    'unit': unit,
                    'reference': reference,
+                   'linked_mywords': linked_mywords,
+                   'linked_questions': linked_questions,
                    'in_note_view': True}
                   )
 
