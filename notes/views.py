@@ -10,7 +10,7 @@ from django.urls import reverse
 
 
 # Create your views here.
-
+# --- TO DO  - REMOVE BEFORE SUBMISSION ---
 # --- Home ---
 def home(request):
     return render(request, 'notes/index.html')
@@ -163,6 +163,25 @@ def unit_detail(request, source_pk, unit_pk):
     mywords = unit.mywords_notes.all().order_by('-last_modified_date')
     questions = unit.question_notes.all().order_by('-last_modified_date')
 
+    reference_paginator = Paginator(references, 8)
+    mywords_paginator = Paginator(mywords, 8)
+    question_paginator = Paginator(questions, 8)
+
+    reference_page = reference_paginator.get_page(
+        request.GET.get('reference_page'))
+    mywords_page = mywords_paginator.get_page(
+        request.GET.get('mywords_page'))
+    question_page = question_paginator.get_page(
+        request.GET.get('question_page'))
+
+    context = {
+        'source': source,
+        'unit': unit,
+        'reference_page': reference_page,
+        'mywords_page': mywords_page,
+        'question_page': question_page,
+    }
+
     if request.method == 'POST':
         form = UnitForm(request.POST, instance=unit, source=source)
         if form.is_valid():
@@ -172,25 +191,13 @@ def unit_detail(request, source_pk, unit_pk):
                             source_pk=source.pk,
                             unit_pk=unit.pk)
         # invalid: re-render with errors, still in edit mode
-        return render(request,
-                      'notes/unit_detail.html',
-                      {'source': source,
-                       'unit': unit,
-                       'references': references,
-                       'form': form,
-                       'edit_mode': True})
+        context.update({'form': form, 'edit_mode': True})
+        return render(request, 'notes/unit_detail.html', context)
 
     edit_mode = request.GET.get('edit') == '1'
     form = UnitForm(instance=unit, source=source) if edit_mode else None
-    return render(request,
-                  'notes/unit_detail.html',
-                  {'source': source,
-                   'unit': unit,
-                   'references': references,
-                   'mywords': mywords,
-                   'questions': questions,
-                   'form': form,
-                   'edit_mode': edit_mode})
+    context.update({'form': form, 'edit_mode': edit_mode})
+    return render(request, 'notes/unit_detail.html', context)
 
 
 # --- Reference Notes ---

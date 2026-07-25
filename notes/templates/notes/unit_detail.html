@@ -103,7 +103,7 @@
   <!-- Reference Notes List -->
   <div class="tab-pane fade show active m-3" id="reference">
     <ul class="list mt-5">
-      {% for reference in references %}
+      {% for reference in reference_page %}
         <li class="custom-list-item">
           <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}">
             <span class="source-name">{{ reference.title|default:'Untitled' }}</span>
@@ -118,12 +118,13 @@
         </li>
       {% endfor %}
     </ul>
+    {% include 'notes/partials/pagination.html' with page_obj=reference_page param_name='reference_page' aria_label="Reference list pagination" tab_anchor='reference' %}
   </div>
 
   <!-- My Words Notes List -->
   <div class="tab-pane fade m-3" id="my-words">
     <ul class="list mt-5">
-      {% for myword in mywords %}
+      {% for myword in mywords_page %}
         <li class="custom-list-item">
           <a href="{% url 'notes:mywords-detail' source.pk unit.pk myword.pk %}">
             <span class="reference-content">
@@ -139,12 +140,13 @@
         </li>
       {% endfor %}
     </ul>
+    {% include 'notes/partials/pagination.html' with page_obj=mywords_page param_name='mywords_page' aria_label="My Words list pagination" tab_anchor='my-words' %}
   </div>
 
   <!-- Question Notes List -->
   <div class="tab-pane fade m-3" id="questions">
     <ul class="list mt-5">
-      {% for question in questions %}
+      {% for question in question_page %}
         <li class="custom-list-item">
           <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}">
             <span class="reference-content">
@@ -159,6 +161,10 @@
         </li>
       {% endfor %}
     </ul>
+    <!-- param_name tells the partial which GET parameter to write into the Next/Previous links -->
+    <!-- tab_anchor tells the partial which tab hash to append, so that after the page reload pagination causes,
+    JS knows to reactivate the same tab instead of defaulting to Reference. -->
+    {% include 'notes/partials/pagination.html' with page_obj=question_page param_name='question_page' aria_label="Question list pagination" tab_anchor='questions' %}
   </div>
 </div>
 {% endblock %}

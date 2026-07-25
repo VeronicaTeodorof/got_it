@@ -1,7 +1,7 @@
 <nav class="pagination" aria-label="{{ aria_label }}">
   {% if page_obj.has_other_pages %}
     {% if page_obj.has_previous %}
-      <a href="?page={{ page_obj.previous_page_number }}" rel="prev">&laquo; Previous</a>
+      <a href="?{{ param_name }}={{ page_obj.previous_page_number }}#{{ tab_anchor }}" rel="prev">&laquo; Previous</a>
     {% endif %}
 
     <span class="current d-none d-md-inline">
@@ -9,7 +9,7 @@
     </span>
 
     {% if page_obj.has_next %}
-      <a href="?page={{ page_obj.next_page_number }}" rel="next">Next &raquo;</a>
+      <a href="?{{ param_name }}={{ page_obj.next_page_number }}#{{ tab_anchor }}" rel="next">Next &raquo;</a>
     {% endif %}
   {% endif %}
 </nav>
