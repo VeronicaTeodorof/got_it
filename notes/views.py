@@ -309,12 +309,15 @@ def question_detail(request, source_pk, unit_pk, question_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
     reference = question.reference
+    linked_mywords = question.mywords_notes.all().order_by(
+            '-last_modified_date')
     return render(request,
                   'notes/question_detail.html',
                   {'source': source,
                    'unit': unit,
                    'question': question,
                    'reference': reference,
+                   'linked_mywords': linked_mywords,
                    'in_note_view': True}
                   )
 

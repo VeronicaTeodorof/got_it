@@ -67,10 +67,10 @@
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
     </div>
 
-      {% if reference %}
+    {% if reference %}
     <!-- Reference collapsed -->
       <div class="mb-3 mt-lg-5 mt-5">
-          <button class="btn btn-form d-flex align-items-center gap-1"
+          <button class="btn btn-links d-flex align-items-center gap-1"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#reference-context"
@@ -90,7 +90,7 @@
       {% if question %}
       <!-- Question collapsed-->
        <div class="mb-3 mt-lg-2 mt-2">
-          <button class="btn btn-form d-flex align-items-center gap-1"
+          <button class="btn btn-links d-flex align-items-center gap-1"
                   type="button"
                   data-bs-toggle="collapse"
                   data-bs-target="#question-context"

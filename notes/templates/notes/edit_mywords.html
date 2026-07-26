@@ -6,7 +6,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
         <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
     </svg>
-    Back to <strong>{{ mywords.title|default:"Untitled"|truncatechars:30 }}</strong>
+    Back to <strong>{{ mywords.title|default:"Untitled"|truncatechars:15 }}</strong>
   </a>
 {% endblock %}
 
@@ -38,6 +38,47 @@
 
   <section id="edit-mywords">
     <h1 class="heading">Edit my words note</h1>
+
+    <!-- Relational linking -->
+    {% if reference %}
+    <!-- Reference collapsed -->
+      <div class="mb-3 mt-lg-5 mt-5">
+          <button class="btn btn-links d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#reference-context"
+                  aria-expanded="false"
+                  aria-controls="reference-context">
+              Reference
+          </button>
+          <div class="collapse" id="reference-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ reference.title|default:"Untitled reference" }}</p>
+                  <p class="mb-0">{{ reference.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
+
+      {% if question %}
+      <!-- Question collapsed-->
+       <div class="mb-3 mt-lg-2 mt-2">
+          <button class="btn btn-links d-flex align-items-center gap-1"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#question-context"
+                  aria-expanded="false"
+                  aria-controls="question-context">
+              Question
+          </button>
+          <div class="collapse" id="question-context">
+              <div class="mt-2 p-3 linked-notes">
+                  <p class="fw-bold mb-1">{{ question.title|default:"Untitled question" }}</p>
+                  <p class="mb-0">{{ question.content }}</p>
+              </div>
+          </div>
+      </div>
+      {% endif %}
 
     <div class="mt-4" id="edit-mywords-form">
       <form method="post" novalidate>
