@@ -46,11 +46,21 @@
        <li>
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#my-words"> {{ unit }} # My Words </a>
       </li>
+      {% if reference %}
+      <li>
+        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}"> {{ reference.title }}</a>
+      </li>
+      {% endif %}
+      {% if question %}
+      <li>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk}"> {{ question.title }}</a>
+      </li>
+      {% endif %}
     </ol>
   </nav>
 
   <section id="mywords-detail">
-    <div class="span-wrapper d-flex gap-2">
+    <div class="d-flex gap-2">
       <h1 class="heading">{{ mywords.title|default:"Untitled" }}</h1>
       {% url 'notes:edit-mywords' source.pk unit.pk mywords.pk as edit_url %}
       {% url 'notes:mywords-detail' source.pk unit.pk mywords.pk as cancel_url %}

@@ -20,6 +20,16 @@
       <li>
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}"> {{ unit }}</a>
       </li>
+      {% if reference %}
+      <li>
+        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}"> {{ reference.title }}</a>
+      </li>
+      {% endif %}
+      {% if question %}
+      <li>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}"> {{ question.title }}</a>
+      </li>
+      {% endif %}
       <li>
         <a href="{% url 'notes:mywords-detail' source.pk unit.pk mywords.pk %}">{{mywords.title|default:"Untitled" }}</a>
       </li>

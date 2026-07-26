@@ -362,6 +362,17 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 13. Move issue to done on project board;
 14. Commit;
 
+## Features
+### Navigation
+Navigation is split into seven layers, each addressing a different need:
+
+- Main nav — global, app-level actions (home, feedback, dashboard, log out)
+- Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen
+- Sidebar / offcanvas — the Source→Unit content structure, always reachable without losing your place
+- Breadcrumbs — orientation: shows exactly where you are and the path you took to get there
+- Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab
+- Pagination - sequential navigation within long lists
+- Relational linking - 
 ## Design Decisions
 
 ### Onboarding through empty states

@@ -308,11 +308,13 @@ def question_detail(request, source_pk, unit_pk, question_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
+    reference = question.reference
     return render(request,
                   'notes/question_detail.html',
                   {'source': source,
                    'unit': unit,
                    'question': question,
+                   'reference': reference,
                    'in_note_view': True}
                   )
 
@@ -358,6 +360,7 @@ def edit_question(request, source_pk, unit_pk, question_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
+    reference = question.reference
     if request.method == 'POST':
         form = QuestionForm(
             request.POST, instance=question)
@@ -371,6 +374,7 @@ def edit_question(request, source_pk, unit_pk, question_pk):
                       {'source': source,
                        'unit': unit,
                        'question': question,
+                       'reference': reference,
                        'form': form,
                        'in_note_view': True
                        })
@@ -380,6 +384,7 @@ def edit_question(request, source_pk, unit_pk, question_pk):
                   {'source': source,
                    'unit': unit,
                    'question': question,
+                   'reference': reference,
                    'form': form,
                    'in_note_view': True})
 
@@ -403,6 +408,8 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
+    reference = mywords.reference
+    question = mywords.question
     if request.method == 'POST':
         form = MyWordsForm(
             request.POST, instance=mywords)
@@ -416,6 +423,8 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
                       {'source': source,
                        'unit': unit,
                        'mywords': mywords,
+                       'reference': reference,
+                       'question': question,
                        'form': form,
                        'in_note_view': True
                        })
@@ -425,6 +434,8 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
                   {'source': source,
                    'unit': unit,
                    'mywords': mywords,
+                   'reference': reference,
+                   'question': question,
                    'form': form,
                    'in_note_view': True})
 
@@ -436,11 +447,15 @@ def mywords_detail(request, source_pk, unit_pk, mywords_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
+    reference = mywords.reference
+    question = mywords.question
     return render(request,
                   'notes/mywords_detail.html',
                   {'source': source,
                    'unit': unit,
                    'mywords': mywords,
+                   'reference': reference,
+                   'question': question,
                    'in_note_view': True}
                   )
 

@@ -46,6 +46,11 @@
        <li>
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions"> {{ unit }} # Questions </a>
       </li>
+      {% if reference %}
+      <li>
+        <a href="{% url 'notes:reference-detail source.pk unit.pk reference.pk'}"> {{ reference.title }}</a>
+      </li>
+      {% endif %}
     </ol>
   </nav>
 
