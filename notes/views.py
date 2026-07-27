@@ -171,9 +171,23 @@ def unit_detail(request, source_pk, unit_pk):
         has_question=Exists(Question.objects.filter(reference=OuterRef('pk')))
     ).order_by('-last_modified_date')
     mywords = unit.mywords_notes.all().order_by('-last_modified_date')
+
+    for note in mywords:
+        if note.question is not None:
+            note.origin = 'From Question'
+        elif note.reference is not None:
+            note.origin = 'From Reference'
+        else:
+            note.origin = 'Standalone'
     questions = unit.question_notes.annotate(
         has_answer=Exists(MyWords.objects.filter(question=OuterRef('pk')))
     ).order_by('-last_modified_date')
+
+    for note in questions:
+        if note.reference is not None:
+            note.origin = 'From Reference'
+        else:
+            note.origin = 'Standalone'
 
     reference_paginator = Paginator(references, 8)
     mywords_paginator = Paginator(mywords, 8)

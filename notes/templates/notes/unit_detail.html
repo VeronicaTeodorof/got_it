@@ -132,10 +132,10 @@
       {% for myword in mywords_page %}
         <li class="custom-list-item">
           <a href="{% url 'notes:mywords-detail' source.pk unit.pk myword.pk %}">
-            <span class="reference-content">
-              {% if myword.title %}{{ myword.title }}{% else %}{{ myword.content|truncatewords:8 }}{% endif %}
-            </span>
-            <span class="d-none d-md-inline ms-3 source-date">{{ myword.last_modified_date|date:"d M Y" }}</span>
+            <span class="source-name">{{ myword.title|default:'Untitled' }}</span>
+            <span class="text-muted">{{ myword.content|truncatewords:8 }}</span>
+            <span class="badge me-md-5 ms-md-auto">{{ myword.origin }}</span>
+            <!-- <span class="d-none d-md-inline ms-3 source-date">{{ myword.last_modified_date|date:"d M Y" }}</span> -->
           </a>
         </li>
       {% empty %}
@@ -154,10 +154,15 @@
       {% for question in question_page %}
         <li class="custom-list-item">
           <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}">
-            <span class="reference-content">
-              {% if question.title %}{{ question.title }}{% else %}{{ question.content|truncatewords:8 }}{% endif %}
-            </span>
-            <span class="d-none d-md-inline ms-3 source-date">{{ question.last_modified_date|date:"d M Y" }}</span>
+            <span class="source-name">{{ question.title|default:'Untitled' }}</span>
+            <span class="text-muted">{{ question.content|truncatewords:8 }}</span>
+            <span class="badge ms-md-auto">{{ question.origin }}</span>
+            {% if question.has_answer %}
+              <span class="badge badge-linked ms-lg-2 me-md-3">Answered</span>
+            {% else %}
+              <span class="badge badge-unlinked ms-lg-2 me-md-3">Unanswered</span>
+            {% endif %}
+            <!-- <span class="d-none d-md-inline ms-3 source-date">{{ question.last_modified_date|date:"d M Y" }}</span> -->
           </a>
         </li>
       {% empty %}
