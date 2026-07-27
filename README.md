@@ -372,7 +372,8 @@ Navigation is split into seven layers, each addressing a different need:
 - Breadcrumbs — orientation: shows exactly where you are and the path you took to get there
 - Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab
 - Pagination - sequential navigation within long lists
-- Relational linking - 
+- Relational linking — lets a user jump directly between related notes (e.g. from a reference to its linked My Words or Questions) rather than following the strict Source → Unit → note-type path, so related ideas stay reachable regardless of where the user currently is in the hierarchy
+
 ## Design Decisions
 
 ### Onboarding through empty states
@@ -710,3 +711,8 @@ a visible focus indicator.
 
 ## Technologies Used
 - SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependen
+
+## AI use
+**Example 1**: annotate/Exists/OuterRef pattern (Reference and Question linked-status badges)
+
+Claude first suggested the annotate() + Exists() + OuterRef() pattern for checking whether a Reference has linked MyWords/Question notes. I asked for a full explanation of each part of the syntax individually, then of the pattern as a whole. Claude then quizzed me on my understanding (e.g. what would happen without OuterRef, why Exists() is preferable to Count() here, how - affects sorting on a boolean field). Once I could answer these correctly, I wrote the Reference-notes and then the Question-notes version (has_answer) independently, from memory and understanding, including my own explanatory comment — this was checked, not dictated.

@@ -108,7 +108,12 @@
           <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}">
             <span class="source-name">{{ reference.title|default:'Untitled' }}</span>
             <span class="text-muted">{{ reference.content|truncatewords:8 }}</span>
-            <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span>
+            {% if reference.has_mywords or reference.has_question %}
+              <span class="badge badge-linked me-md-5 ms-md-auto">Linked</span>
+            {% else %}
+              <span class="badge badge-unlinked me-md-5 ms-md-auto">Unlinked</span>
+            {% endif %}
+            <!-- <span class="d-none d-md-inline ms-3 source-date">{{ reference.last_modified_date|date:"d M Y" }}</span> -->
           </a>
         </li>
       {% empty %}

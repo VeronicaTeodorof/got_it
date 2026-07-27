@@ -7,6 +7,7 @@ from .models import Source, Unit, Reference, MyWords, Question
 from .forms import SourceForm, UnitForm, ReferenceForm, MyWordsForm
 from .forms import QuestionForm
 from django.urls import reverse
+from django.db.models import OuterRef, Exists
 
 
 # Create your views here.
@@ -159,9 +160,20 @@ def unit_detail(request, source_pk, unit_pk):
                              source__pk=source_pk,
                              source__user=request.user)
     source = unit.source
-    references = unit.reference_notes.all().order_by('-last_modified_date')
+    # annotate gives extra fields to each row
+    references = unit.reference_notes.annotate(
+        # for each row in Reference table go with the pk of that row
+        # (thanks to OuterRef which updates dynamically) to the MyWords
+        # model and check in the reference field if you find a matching
+        # fk; when you find the first one stop and return True, else
+        # return False
+        has_mywords=Exists(MyWords.objects.filter(reference=OuterRef('pk'))),
+        has_question=Exists(Question.objects.filter(reference=OuterRef('pk')))
+    ).order_by('-last_modified_date')
     mywords = unit.mywords_notes.all().order_by('-last_modified_date')
-    questions = unit.question_notes.all().order_by('-last_modified_date')
+    questions = unit.question_notes.annotate(
+        has_answer=Exists(MyWords.objects.filter(question=OuterRef('pk')))
+    ).order_by('-last_modified_date')
 
     reference_paginator = Paginator(references, 8)
     mywords_paginator = Paginator(mywords, 8)

@@ -700,6 +700,22 @@ input.inline-field:focus {
 .text-muted {
   color:#5a6268 !important;
 }
+
+/* ============================
+        Linked Status
+============================ */
+
+.badge-linked {
+  background-color: var(--form-green);
+  color: white;
+}
+
+.badge-unlinked {
+  background-color: transparent;
+  color: var(--muted-green);
+  border: 1px solid green;
+}
+
 /* ============================
    MEDIA QUERIES (mobile-first)
 ============================ */
