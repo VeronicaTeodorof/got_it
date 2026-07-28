@@ -87,12 +87,12 @@
         <div class="form-field">
           <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
           {{ form.title }}
-          {{ form.title.errors }}
+          <div aria-live="polite">{{ form.title.errors }}</div>
         </div>
         <div class="form-field">
           <label for="{{ form.content.id_for_label }}" class="visually-hidden">content</label>
           {{ form.content }}
-          {{ form.content.errors }}
+          <div aria-live="polite">{{ form.content.errors }}</div>
         </div>
 
         <button type="submit" class="btn btn-form m-2">Save</button>

@@ -40,7 +40,8 @@ class SourceForm(forms.ModelForm):
             'source_author': forms.TextInput(attrs={'class': 'form-input',
                                                     'placeholder': 'author'}),
             'source_type': forms.Select(attrs={'class': 'form-input',
-                                               'placeholder': 'type required'}),
+                                               'placeholder':
+                                               'type required'}),
         }
 
     def clean_source_author(self):
@@ -93,7 +94,8 @@ class UnitForm(forms.ModelForm):
         }
         widgets = {
             'unit_name': forms.TextInput(attrs={'class': 'form-input',
-                                                'placeholder': 'name required'})
+                                                'placeholder':
+                                                'name required'})
         }
 
     def clean(self):

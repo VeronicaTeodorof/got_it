@@ -24,17 +24,17 @@
             <div class="form-field mt-4">
               <label for="{{ form.source_name.id_for_label }}" class="visually-hidden">name</label>
               {{ form.source_name }}
-              {{ form.source_name.errors }}
+              <div aria-live="polite">{{ form.source_name.errors }}</div>
             </div>
             <div class="form-field">
               <label for="{{ form.source_author.id_for_label }}" class="visually-hidden">author</label>
               {{ form.source_author }}
-              {{ form.source_author.errors }}
+              <div aria-live="polite">{{ form.source_author.errors }}</div>
             </div>
             <div class="form-field">
               <label for="{{ form.source_type.id_for_label }}" class="visually-hidden">type</label>
               {{ form.source_type }}
-              {{ form.source_type.errors }}
+              <div aria-live="polite">{{ form.source_type.errors }}</div>
             </div>
             <button type="submit" class="btn btn-form me-2">Save</button>
             <button class="btn btn-form btn-form--cancel"

@@ -1,7 +1,7 @@
 {% if messages %}
-  <!-- aria-live announces messages to screen  reader users, best practice for cases wheres
-   these appear dynamically without a page reload -->
-  <ul class="messages" role="alert" aria-live="polite">
+  <!-- role="status" announces messages to screen reader users without interrupting, best practice for cases where
+  these appear dynamically without a page reload, but are not urgent -->
+  <ul class="messages" role="status">
     {% for message in messages %}
       <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}

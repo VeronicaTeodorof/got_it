@@ -47,6 +47,7 @@ Several issues were flagged by Lighthouse and corrected during this test cycle: 
 
 **ACC-03 - Every input has a <label for="id"** Checked all custom forms in notes app. All inputs in all forms have labels using bootstrap "visually-hidden" class so that they conform with accessibility criteria while remaining alinged with app's esthetics. Result: Pass.
 **ACC-04 - Required fields marked with required attribute and indicated visually** All forms checked. While required attribute is passed down from model to form to template and reliably announced by screen readers, sighted users had no way of knowing which fields were required. I added 'required' to placeholders for required inputs, which gives parity with visually impaired users: when field has content, required is not announced as condition is satisfied; when field is empty, required is announced for both types of users. Final result after changes: Pass.
+**ACC-05 - Feedback messages made available to screen readers via `role="status"` for CRUD operations and via `aria-live="polite"` for form errors. Added everywhere relevant. Result: Pass.
 
 <a href='#contents'>Back to Table of Contents</a>
 

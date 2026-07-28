@@ -58,7 +58,7 @@
                 size="{{ form.unit_name.value|length|add:2 }}"
                 class="inline-field inline-field--title">
           {% if form.unit_name.errors %}
-            <span class="field-error" role="alert">{{ form.unit_name.errors.0 }}</span>
+            <div aria-live="polite">{{ form.unit_name.errors.0 }}</div>
           {% endif %}
         {% else %}
           <h1 id="id_unit_name" class="heading">{{ unit.unit_name }}</h1>

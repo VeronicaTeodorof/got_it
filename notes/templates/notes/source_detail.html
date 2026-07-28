@@ -81,7 +81,7 @@
                   size="{{ form.source_author.value|default:''|length|add:2 }}"
                   class="inline-field inline-field--author">
             {% if form.source_author.errors %}
-              <span class="field-error" role="alert">{{ form.source_author.errors.0 }}</span>
+              <div aria-live="polite">{{ form.source_author.errors.0 }}</div>
             {% endif %}
           {% else %}
             <span id="id_source_author">{{ source.source_author|default:"" }}</span>
@@ -99,7 +99,7 @@
                 {% endfor %}
               </select>
               {% if form.source_type.errors %}
-                <span class="field-error" role="alert">{{ form.source_type.errors.0 }}</span>
+                <div aria-live="polite">{{ form.source_type.errors.0 }}</div>
               {% endif %}
             {% else %}
               <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
@@ -139,7 +139,7 @@
           <div class="form-field mt-4">
             <label for="{{ unit_form.unit_name.id_for_label }}" class="visually-hidden">name</label>
             {{ unit_form.unit_name }}
-            {{ unit_form.unit_name.errors }}
+            <div aria-live="polite">{{ unit_form.unit_name.errors }}</div>
           </div>
           <button type="submit" class="btn btn-form btn-form--unit me-2">Save</button>
           <button class="btn btn-form btn-form--unit btn-form--cancel"

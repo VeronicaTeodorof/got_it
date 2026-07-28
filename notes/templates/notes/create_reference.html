@@ -40,18 +40,18 @@
           <div class="form-field">
             <label for="{{ form.title.id_for_label }}" class="visually-hidden">title</label>
             {{ form.title }}
-            {{ form.title.errors }}
+            <div aria-live="polite">{{ form.title.errors }}</div>
           </div>
           <div class="form-field">
             <label for="{{ form.location.id_for_label }}" class="visually-hidden">location</label>
             {{ form.location }}
-            {{ form.location.errors }}
+            <div aria-live="polite">{{ form.location.errors }}</div>
           </div>
         <!-- </div> -->
         <div class="form-field">
           <label for="{{ form.content.id_for_label }}" class="visually-hidden">content</label>
           {{ form.content }}
-          {{ form.content.errors }}
+          <div aria-live="polite">{{ form.content.errors }}</div>
         </div>
         <button type="submit" class="btn btn-form m-2">Save</button>
         <!-- give fallback for edge cases where create reference url is typed directly into address bar -->
