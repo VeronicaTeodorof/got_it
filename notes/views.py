@@ -103,6 +103,7 @@ def source_detail(request, source_pk):
             unit_form = UnitForm(source=source)
             if form.is_valid():
                 form.save()
+                messages.success(request, "Edit saved.")
                 return redirect('notes:source-detail', source_pk=source.pk)
             edit_mode = True
 
@@ -144,7 +145,7 @@ def delete_unit(request, source_pk, unit_pk):
     unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
     if request.method == 'POST':
         unit.delete()
-        messages.success(request, "Unit deleted successfully!")
+        messages.success(request, "Unit deleted.")
     return redirect('notes:source-detail', source_pk=source_pk)
 
 
@@ -173,9 +174,12 @@ def unit_detail(request, source_pk, unit_pk):
     mywords = unit.mywords_notes.all().order_by('-last_modified_date')
 
     for note in mywords:
-        if note.question is not None:
+        # note.question_id and note.reference_id respectively only check if
+        # the fK field is not null as opposed to note.question and
+        # note.reference fetching the full row to check the same
+        if note.question_id is not None:
             note.origin = 'From Question'
-        elif note.reference is not None:
+        elif note.reference_id is not None:
             note.origin = 'From Reference'
         else:
             note.origin = 'Standalone'
@@ -184,7 +188,7 @@ def unit_detail(request, source_pk, unit_pk):
     ).order_by('-last_modified_date')
 
     for note in questions:
-        if note.reference is not None:
+        if note.reference_id is not None:
             note.origin = 'From Reference'
         else:
             note.origin = 'Standalone'
@@ -212,6 +216,7 @@ def unit_detail(request, source_pk, unit_pk):
         form = UnitForm(request.POST, instance=unit, source=source)
         if form.is_valid():
             form.save()
+            messages.success(request, "Edit saved.")
             # PRG pattern: redirect back to this same page after success
             return redirect('notes:unit-detail',
                             source_pk=source.pk,
@@ -294,6 +299,7 @@ def edit_reference(request, source_pk, unit_pk, reference_pk):
             request.POST, instance=reference)
         if form.is_valid():
             reference = form.save()
+            messages.success(request, "Edit saved.")
             return redirect(
                 'notes:reference-detail', source_pk, unit_pk, reference_pk
                 )
@@ -323,7 +329,7 @@ def delete_reference(request, source_pk, unit_pk, reference_pk):
     reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
     if request.method == 'POST':
         reference.delete()
-        messages.success(request, "Reference note deleted successfully!")
+        messages.success(request, "Reference note deleted")
     return redirect('notes:unit-detail', source_pk=source_pk, unit_pk=unit_pk)
 
 
@@ -395,6 +401,7 @@ def edit_question(request, source_pk, unit_pk, question_pk):
             request.POST, instance=question)
         if form.is_valid():
             question = form.save()
+            messages.success(request, "Edit saved.")
             return redirect(
                 'notes:question-detail', source_pk, unit_pk, question_pk
                 )
@@ -428,7 +435,7 @@ def delete_question(request, source_pk, unit_pk, question_pk):
                                                'unit_pk': unit_pk})
     if request.method == 'POST':
         question.delete()
-        messages.success(request, "Question note deleted successfully!")
+        messages.success(request, "Question note deleted")
     return redirect(f'{url}#questions')
 
 
@@ -444,6 +451,7 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
             request.POST, instance=mywords)
         if form.is_valid():
             mywords = form.save()
+            messages.success(request, "Edit saved.")
             return redirect(
                 'notes:mywords-detail', source_pk, unit_pk, mywords_pk
                 )
@@ -543,5 +551,5 @@ def delete_mywords(request, source_pk, unit_pk, mywords_pk):
 
     if request.method == 'POST':
         mywords.delete()
-        messages.success(request, "My words note deleted successfully!")
+        messages.success(request, "My words note deleted.")
     return redirect(f'{url}#my-words')
