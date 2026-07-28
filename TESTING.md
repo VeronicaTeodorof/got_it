@@ -1,3 +1,80 @@
+## <h2 id="contents">Table of Contents</h2>
+1. <a href="#accessibility">Accessibility</a>
+- <a href="#automated-accessibility"> Automated testing with Lighthouse</a>
+- <a href="#manual-accessibility">Manual Accessibility Review</a>
+
+<a href="crud">CRUD</a>
+- <a href="#crud-messages">CRUD messages</a>
+
+
+## <h2 id="accessibility">1. Accessibility</h2>
+
+### <h3 id="automated-accessibility">Automated testing with Lighthouse</a>
+Tests run per page, both mobile and desktop viewport, in Chrome DevTools. Covers: colour contrast, alt text, some accessible-name checks, list
+structure validity, heading order, basic form - label association.
+
+| Page | Desktop score | Mobile score | Notes |
+|------|---------------|--------------|-------|
+| Home | 100 | 100 | |
+| How it works | 100 | 100 | |
+| Sign In | 100 | 100 | |
+| Sign Up | 100 | 100 | |
+| Dashboard | 100 | 100 | |
+| Source detail| 100 | 100 | |
+| Unit detail | 100 | 100 | |
+| Create reference | 100 | 100 | |
+| Reference detail | 100 | 100 | |
+| Edit reference | 100 | 100 | |
+| Create My Words | 100 | 100 | |
+| My Words Detail | 100 | 100 | |
+| Edit My Words | 100 | 100 | |
+| Create Question | 100 | 100 | |
+| Question Detail | 100 | 100 | |
+| Edit Question | 100 | 100 | |
+
+Several issues were flagged by Lighthouse and corrected during this test cycle: some contrast failures, invalid list markup.
+
+<a href='#contents'>Back to Table of Contents</a>
+
+
+### <h3 id="manual-accessibility">Manual Accessibility Review</h3>
+**Semantic HTML and structure**
+
+**ACC-01 - Use real `<button>`, `<nav>`, `<main`>, `<header>`, `<footer>` instead of styled `<div>`s.** Checked all .html files. Result: Pass.
+**Acc-02 - One `<h1>` per page; headings nest in order (no skipping h2 → h4)** Checked all .html files. Result: Pass.
+
+**Forms**
+
+**ACC-03 - Every input has a <label for="id"** Checked all custom forms in notes app. All inputs in all forms have labels using bootstrap "visually-hidden" class so that they conform with accessibility criteria while remaining alinged with app's esthetics. Result: Pass.
+**ACC-04 - Required fields marked with required attribute and indicated visually** All forms checked. While required attribute is passed down from model to form to template and reliably announced by screen readers, sighted users had no way of knowing which fields were required. I added 'required' to placeholders for required inputs, which gives parity with visually impaired users: when field has content, required is not announced as condition is satisfied; when field is empty, required is announced for both types of users. Final result after changes: Pass.
+
+<a href='#contents'>Back to Table of Contents</a>
+
+
+## <h2 id="crud">CRUD</h2>
+
+### <h3 id="crud-messages">CRUD messages</h3>
+
+| Test ID | Test | Expected | Actual |Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| CRUD-01 | Feedback after creating a source | 'Source added.' message appears on dashboard after save | As expected | Pass | |
+| CRUD-02 | Feedback after editing a source | 'Edit saved.' message appears on source detail page after successful edit | As expected | Pass | |
+| CRUD-03 | Feedback after deleting a source | 'Source deleted.' message appears on dashboard after deletion | As expected | Pass | |
+| CRUD-04 | Feedback after creating a unit | 'Unit added.' message appears on source detail page after sucessful save | As expected | Pass | |
+| CRUD-05 | Feedback after editing a unit | 'Edit saved.' message appears on unit detail page after successful save | As expected | Pass | |
+| CRUD-06 | Feedback after deleting a unit | 'Unit deleted.' message appears after successful deletion | As expected | Pass | |
+| CRUD-07 | Feedback after creating reference note | 'Reference note added.' message appears on reference detail page | As expected | Pass | |
+| CRUD-08 | Feedback after editing a reference note | 'Edit saved.' message appears on reference detail  page | As expected | Pass | |
+| CRUD-09 | Feedback after deleting a reference note | 'Reference note deleted.' message appears on unit detail page | As expected | Pass | |
+| CRUD-10 | Feedback after creating my words note | 'My Words note created.' message appears on my words detail page | As expected | Pass | |
+| CRUD-11 | Feedback after edititng a my words note | 'Edit saved' message appears on my words detail page | As expected | Pass | |
+| CRUD-12 | Feedback after deleting a my words  note | 'My Words note deleted ' message appears on unit detail page | As expected | Pass | |
+| CRUD-13 | Feedback after creating a question note | 'Question note added' message appears on question detail page | As expected | Pass | |
+| CRUD-14 | Feedback after editing a question note | 'Edit saved.' message appears on question detail page | As expected | Pass | |
+| CRUD-15 | Feedback after deleting a question note | 'Question note deleted.' message appears on unit detail page . | As expected | Pass | |
+
+<a href='#contents'>Back to Table of Contents</a>
+
 ## Manual Testing (MT)
 
 ### Base
