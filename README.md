@@ -676,7 +676,7 @@ a visible focus indicator.
 ## Features
 ### Security and Data Protection Features:
 - Rate limiting (control of how many requests a user/IP can make to an app within a certain time period) provided by Django allauth;
-- Account enumeration prevention (stops attackers from figuring out which email addresses/usernames are registered in an app by giving intentionally vague error messages) provided by Django allauth;
+- Account enumeration prevention (stops attackers from figuring out which email addresses/usernames are registered in an app by giving intentionally vague error messages) provided by Django allauth. This feature was silently breaking when overriding default login form for styling purposes: no error message was shown after trying to login with invalid credentials. The fix was to add ` {{ form.non_field_errors }}` to form.
 
 
 ### Future features

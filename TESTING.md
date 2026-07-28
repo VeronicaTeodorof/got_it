@@ -593,6 +593,10 @@ Add return for GET requests. Both manual and automated tests now passing.
 
 **Commit:** `1b4bcdd`
 
+### Error not shown after login attempt with incorrect credentials
+
+After removing crispy forms from sign in template and adding custom form for styling purposes, error message would not show on login attempt with invalid credentials. Fixed with Claude AI by adding `{{form.non_field_errors}}` to form.
+
 
 ## Biases in Testing
 

@@ -24,6 +24,9 @@
                         {{form.password}}
                         {{form.password.errors}}
                     </div>
+                    <div class="text-center mb-4">
+                        {{ form.non_field_errors }}
+                    </div>
                     <div class="auth-field">
                         {{form.remember}}
                         <label for="{{form.remember.id_for_label}}">remember me</label>
