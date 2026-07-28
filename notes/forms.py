@@ -35,11 +35,12 @@ class SourceForm(forms.ModelForm):
         }
         widgets = {
             'source_name': forms.TextInput(attrs={'class': 'form-input',
-                                                  'placeholder': 'name'}),
+                                                  'placeholder': ''
+                                                  'name required'}),
             'source_author': forms.TextInput(attrs={'class': 'form-input',
                                                     'placeholder': 'author'}),
             'source_type': forms.Select(attrs={'class': 'form-input',
-                                               'placeholder': 'type'}),
+                                               'placeholder': 'type required'}),
         }
 
     def clean_source_author(self):
@@ -92,7 +93,7 @@ class UnitForm(forms.ModelForm):
         }
         widgets = {
             'unit_name': forms.TextInput(attrs={'class': 'form-input',
-                                                'placeholder': 'name'})
+                                                'placeholder': 'name required'})
         }
 
     def clean(self):
@@ -123,7 +124,7 @@ class ReferenceForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-input',
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
-                                             'placeholder': 'content',
+                                             'placeholder': 'content required',
                                              'rows': 10}),
             'location': forms.TextInput(attrs={'class': 'form-input',
                                                'placeholder':
@@ -144,7 +145,7 @@ class QuestionForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-input',
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
-                                             'placeholder': 'content',
+                                             'placeholder': 'content required',
                                              'rows': 10}),
         }
 
@@ -160,6 +161,6 @@ class MyWordsForm(forms.ModelForm):
             'title': forms.TextInput(attrs={'class': 'form-input',
                                             'placeholder': 'title'}),
             'content': forms.Textarea(attrs={'class': 'form-input',
-                                             'placeholder': 'content',
+                                             'placeholder': 'content required',
                                              'rows': 10}),
         }
