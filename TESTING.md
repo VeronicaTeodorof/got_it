@@ -15,6 +15,9 @@ Note: The two-pass testing methodology (code-to-UI audit, then user-perspective 
 ## Contents
 
 1. [Pass 1 — Code Audit](#pass-1--code-audit)
+      - [Automated tests](#automated-tests)
+          - [notes app](#notes-app)
+              - [models.py](models.py)
 2. [Pass 2 — User-Perspective Testing](#pass-2--user-perspective-testing)
 3. [Solved Bugs](#solved-bugs)
 4. [Known Bugs / Limitations](#known-bugs--limitations)
@@ -27,6 +30,15 @@ Note: The two-pass testing methodology (code-to-UI audit, then user-perspective 
 
 #### notes app
 ##### models.py
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANM-01 | test_duplicate_source_name_per_user_raises_error | A user cannot have two sources with identical names, error is raised | Pass |
+| ANM-02 | test_duplicate_source_name_enforced_per_user_not_globally | Two different users can have identical named sources, uniqueness enforced per user | Pass |
+| ANM-03 | test_valid_source_type_saves_without_errors | A source can be saved with no problems given it has a valid type | Pass |
+| ANM-04 | test_invalid_source_type_raises_error | Trying to save a source with an invalid type raises error | Pass |
+
+
 ##### forms.py
 ##### views.py
 ##### urls.py
