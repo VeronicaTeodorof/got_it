@@ -162,7 +162,7 @@
     <ul class="list mt-3">
       {% for unit in page_obj %}
         <li class="custom-list-item">
-          <a href="{% url 'notes:unit-detail' source.pk unit.pk %}">{{unit}}</a>
+          <a href="{% url 'notes:unit-detail' source.pk unit.pk %}" class="word-break">{{unit}}</a>
         </li>
       {% empty %}
         <li class="empty text-start">No units yet.<br>

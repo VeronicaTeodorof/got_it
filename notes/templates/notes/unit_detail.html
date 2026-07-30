@@ -21,7 +21,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p>Deleting <strong>{{unit.unit_name}}</strong> of <strong>{{source.source_name}}</strong> will also delete all notes associated with it.</p>
+          <p>Deleting <strong class="word-break">{{unit.unit_name}}</strong> of <strong class="word-break">{{source.source_name}}</strong> will also delete all notes associated with it.</p>
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
@@ -61,7 +61,7 @@
             <div aria-live="polite">{{ form.unit_name.errors.0 }}</div>
           {% endif %}
         {% else %}
-          <h1 id="id_unit_name" class="heading">{{ unit.unit_name }}</h1>
+          <h1 id="id_unit_name" class="heading word-break">{{ unit.unit_name }}</h1>
         {% endif %}
         </span>
 

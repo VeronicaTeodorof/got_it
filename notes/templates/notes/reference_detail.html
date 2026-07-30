@@ -23,7 +23,7 @@
         </div>
         <div class="modal-body">
           <p>This action will permanently delete {% if reference.title %}
-            <strong>{{reference.title}}</strong>{% else %} this reference note {% endif %} of {{unit.unit_name}}.</p>
+            <strong class="word-break">{{reference.title}}</strong>{% else %} this reference note {% endif %} of {{unit.unit_name}}.</p>
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
@@ -44,14 +44,14 @@
       <a href="{% url 'notes:source-detail' source.pk %}" class="truncate">{{ source.source_name }}</a>
     </li>
     <li>
-      <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#reference"> {{ unit }} # Reference </a>
+      <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#reference" class="truncate"> {{ unit }} # Reference </a>
     </li>
   </ol>
 </nav>
 
 <section id="reference-detail">
   <div class="d-flex align-items-top gap-2">
-    <h1 class="heading">{{ reference.title|default:"Untitled" }}</h1>
+    <h1 class="heading word-break">{{ reference.title|default:"Untitled" }}</h1>
     {% url 'notes:edit-reference' source.pk unit.pk reference.pk as edit_url %}
     {% url 'notes:reference-detail' source.pk unit.pk reference.pk as cancel_url %}
     {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}

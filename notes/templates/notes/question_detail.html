@@ -23,7 +23,7 @@
         </div>
         <div class="modal-body">
           <p>This action will permanently delete {% if question.title %}
-            <strong>{{question.title}}</strong>{% else %} this question note {% endif %} of {{unit.unit_name}}.</p>
+            <strong class="word-break">{{question.title}}</strong>{% else %} this question note {% endif %} of {{unit.unit_name}}.</p>
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
@@ -44,11 +44,11 @@
         <a href="{% url 'notes:source-detail' source.pk %}" class="truncate">{{ source.source_name }}</a>
       </li>
        <li>
-        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions"> {{ unit }} # Questions </a>
+        <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#questions" class="truncate"> {{ unit }} # Questions </a>
       </li>
       {% if reference %}
       <li>
-        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}"> {{ reference.title }}</a>
+        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}" class="truncate"> {{ reference.title }}</a>
       </li>
       {% endif %}
     </ol>
@@ -56,7 +56,7 @@
 
   <section id="question-detail">
     <div class="d-flex gap-2">
-      <h1 class="heading">{{ question.title|default:"Untitled" }}</h1>
+      <h1 class="heading" class="word-break">{{ question.title|default:"Untitled" }}</h1>
       {% url 'notes:edit-question' source.pk unit.pk question.pk as edit_url %}
       {% url 'notes:question-detail' source.pk unit.pk question.pk as cancel_url %}
       {% include 'notes/partials/actions_menu.html' with edit_url=edit_url cancel_url=cancel_url %}
@@ -81,14 +81,14 @@
           </button>
           <div class="collapse" id="reference-context">
               <div class="mt-2 p-3 linked-notes">
-                  <p class="fw-bold mb-1">{{ reference.title|default:"Untitled reference" }}</p>
-                  <p class="mb-0">{{ reference.content }}</p>
+                  <p class="fw-bold mb-1" class="word-break">{{ reference.title|default:"Untitled reference" }}</p>
+                  <p class="mb-0">{{ reference.content|linebreaks }}</p>
               </div>
           </div>
       </div>
     {% endif %}
 
-    <p class="mt-4 mt-lg-5">{{ question.content }}</p>
+    <p class="mt-4 mt-lg-5">{{ question.content|linebreaks }}</p>
   </section>
 
   <section id="links">
