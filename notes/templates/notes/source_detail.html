@@ -60,10 +60,10 @@
                   size="{{ form.source_name.value|length|add:2 }}"
                   class="inline-field inline-field--title">
             {% if form.source_name.errors %}
-              <span class="field-error" role="alert">{{ form.source_name.errors.0 }}</span>
+              <span class="field-error" aria-live="polite">{{ form.source_name.errors.0 }}</span>
             {% endif %}
           {% else %}
-            <h1 id="id_source_name">{{ source.source_name }}</h1>
+            <h1 id="id_source_name" class="word-break">{{ source.source_name }}</h1>
           {% endif %}
         </span>
 
@@ -84,7 +84,7 @@
               <div aria-live="polite">{{ form.source_author.errors.0 }}</div>
             {% endif %}
           {% else %}
-            <span id="id_source_author">{{ source.source_author|default:"" }}</span>
+            <span id="id_source_author" class="word-break">{{ source.source_author|default:"" }}</span>
           {% endif %}
         </span>
 

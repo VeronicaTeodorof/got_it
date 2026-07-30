@@ -60,7 +60,7 @@
             <a href="{% url 'notes:source-detail' source.pk %}">
               <span class="source-name">{{ source.source_name}}</span>
               {% if source.source_author %}
-                <span>by {{source.source_author}}</span>
+                <span class="word-break">by {{source.source_author}}</span>
               {% endif %}
               <span class="ms-lg-3 badge"> {{ source.get_source_type_display }}</span>
               <span class="d-none d-md-inline ms-3 source-date"> {{ source.source_creation_date|date:"d M Y" }}

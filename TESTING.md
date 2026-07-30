@@ -16,8 +16,7 @@ Note: The two-pass testing methodology (code-to-UI audit, then user-perspective 
 
 1. [Pass 1 — Code Audit](#pass-1--code-audit)
       - [Automated tests](#automated-tests)
-          - [notes app](#notes-app)
-              - [models.py](models.py)
+      - [Manual tests - code reflection in UI](#manual-tests--code-reflection-in-ui)
 2. [Pass 2 — User-Perspective Testing](#pass-2--user-perspective-testing)
 3. [Solved Bugs](#solved-bugs)
 4. [Known Bugs / Limitations](#known-bugs--limitations)
@@ -55,6 +54,15 @@ Note: The two-pass testing methodology (code-to-UI audit, then user-perspective 
 
 #### notes app
 ##### models.py
+Tests how code written at model level reflects in UI
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNM-01 | Source type choices display correctly | Confirms all 8 SourceType values render as selectable options in the create-source form | Pass |
+| MNM-02 | Add source form does not submit without a source type selected | source_type's blank=False default correctly enforced — form rejects submission with no type chosen | Pass |
+| MNM-03 | Add source form does not submit without a source name filled in | souce_name's blank=False default correctly enforced -form rejects submission with blank field | Pass |
+| MNM-04* | Source name cannot has a character limit imposed | source_name's max_length=255 correctly enforced - input stops accepting characters once the limit is reached | Pass |
+* Note: while testing MNM-04 at the max-length boundary, found that unbroken long strings (e.g. URLs) in source_name cause horizontal scroll rather than wrapping. Logged as a bug — see Solved Bugs.
 ##### forms.py
 ##### views.py
 ##### urls.py
@@ -107,6 +115,15 @@ Each tested against:
 ## Solved Bugs
 
 *Flat list — bug, cause, fix.*
+**Bug: Long source_name without white spaces causes horizontal scroll / layout break**
+Found via: Pass 1 model-to-UI audit — specifically while testing source_name at its model-defined max_length=255 boundary (MNM-04).
+What happens: A long, unbroken string (no spaces) in source_name doesn't wrap — it pushes the container wider, forcing horizontal scroll instead of wrapping to a new line.
+Severity/threshold: Worse than initially assumed to be an "edge case" —
+
+- Breaks around ~117 characters on desktop
+- Breaks around ~27 characters on the smallest mobile breakpoint
+This is a realistic scenario, not just an edge case: source_type includes WEBSITE as one of its 8 choices, and a natural way to name a website source is to paste its URL directly into source_name — which is exactly the kind of unbroken string that triggers this bug.
+Fix: add word-break: break-word to source-name class.
 
 ## Known Bugs / Limitations
 

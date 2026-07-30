@@ -41,7 +41,7 @@
   <nav aria-label="breadcrumb" class="mb-2 breadcrumb">
     <ol class="breadcrumb-list">
       <li>
-        <a href="{% url 'notes:source-detail' source.pk %}">{{ source.source_name }}</a>
+        <a href="{% url 'notes:source-detail' source.pk %}" class="truncate">{{ source.source_name }}</a>
       </li>
        <li>
         <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#my-words"> {{ unit }} # My Words </a>
