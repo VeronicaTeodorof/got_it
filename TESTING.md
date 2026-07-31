@@ -47,7 +47,21 @@ null on linked mywords | Pass |
 | ANM-11 | deleting_question_does_not_delete_linked_mywords | Tests that deleting the question note set as foreign key on a mywords note does not delete mywords note as well | Pass |
 | ANM-12| test_deleting_question_sets_mywords_reference_to_null | Tests that deleting a question note sets question field to
 null on linked mywords | Pass |
+
+
 ##### forms.py
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANF-01 | test_empty_source_author_saved_as_none | Empty source_author saved as None, not empty string | Pass |
+| ANF-02 | test_white_spaces_only_for_author_saved_as_none | Whitespace-only source_author saved as None | Pass |
+| ANF-03 | test_author_field_value_is_returned_correctly | Valid source_author value passes through unchanged | Pass |
+| ANF-04 | test_duplicate_source_name_same_user_raises_error | Same user creating a duplicate name source raises error | Pass |
+| ANF-05 | test_other_user_same_source_name_submits_without_error | Source name uniqueness is enforced per user, not globally | Pass |
+| ANF-06 | test_editing_source_with_same_name_submits_correctly | Editing a source with unchanged name doesn't raise error | Pass |
+| ANF-07 | test_duplicate_unit_name_same_source_raises_error | Creating a duplicate name unit within the same source raises error | Pass |
+| ANF-08 | test_same_unit_name_different_source_is_valid | Unit name uniqueness is enforced per source, not globally | Pass |
+| ANF-09 | test_editing_unit_with_unchanged_name_is_valid | Editing a unit with its own unchanged name is valid | Pass |
+
 ##### views.py
 ##### urls.py
 
@@ -78,7 +92,16 @@ Tests how code written at model level reflects in UI
 | MNM-09 | All types of notes titles have a character limit imposed | title max_length=100 correctly enforced - input stops accepting characters once limit is reached | Pass |
 | MNM-10 | Reference notes submit correctly without location | location's blank=True enforced - form submits with blank location field without error | Pass |
 * Note: while testing MNM-04 at the max-length boundary, found that unbroken long strings (e.g. URLs) in source_name cause horizontal scroll rather than wrapping. Logged as a bug — see Solved Bugs.
+
 ##### forms.py
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNF-01 | Test 'type' and not '----' is displayed first in source type choices | for loop in SourceForm correctly reaches UI | Pass |
+| MNF-02 | Test error message for duplicate source name | Error message for duplicate source name correctly displays in UI | Pass |
+| MNF-03 | Test in edit mode rewriting the same source name doesn't raise error | Submits with name unchanged or cleared and typed again | Pass |
+| MNF-04 | Test error message for duplicate unit name | Error message for duplicate unit name within a source correctly displays in UI | Pass |
+| MNF-05 | Test in edit mode rerwiting the same unit name doesn't raise error | Submits with name unchanged or cleared and typed again | Pass |
 ##### views.py
 ##### urls.py
 ##### templates
@@ -149,7 +172,12 @@ Fix: add word-break: break-word to source-name class.
 - **HTML** — W3C validator
 - **CSS** — Jigsaw validator
 - **JavaScript** — JSLint
-- **Python** — PEP8
+### Python — PEP8
+
+The following pages have been validated with [Code Institute CI Python Linter](https://pep8ci.herokuapp.com/#):
+- [notes/models.py](docs/readme-assets/notes_models_validation.png) - no errors found
+- [notes/tests/test_models.py](docs/readme-assets/notes_test_models_validation.png) - no errors found
+
 - **Lighthouse** — performance, accessibility, best practices, SEO
   (cross-references A11Y and RESPONSIVE categories in Pass 2 — a mechanical
   complement to those manual checks, not a replacement)

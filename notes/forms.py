@@ -17,6 +17,8 @@ class SourceForm(forms.ModelForm):
         # None is the fallback if 'user' is not passed
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs)
+        # displays 'type' as first choice in source type choices,
+        # instead of Django's default '-----'
         new_choices = []
         for choice in self.fields['source_type'].choices:
             if choice[0] == '':
@@ -44,6 +46,9 @@ class SourceForm(forms.ModelForm):
                                                'type required'}),
         }
 
+    # Ensures data consistency: all blank author fields saved as None,
+    # not empty string. Supports future filtering by source_author
+    # (not yet implemented in the UI).
     def clean_source_author(self):
         """
         Ensures absent author is saved as NULL, not an empty string.
@@ -63,6 +68,7 @@ class SourceForm(forms.ModelForm):
         Ensures duplicate source names per user are rejected with an error
         at form validation level
         """
+        # ensures validation logic in parent class is maintained
         cleaned_data = super().clean()
         source_name = cleaned_data.get('source_name')
         queryset = Source.objects.filter(user=self.user,
