@@ -10,13 +10,6 @@ from django.urls import reverse
 from django.db.models import OuterRef, Exists
 
 
-# Create your views here.
-# --- TO DO  - REMOVE BEFORE SUBMISSION ---
-# --- Home ---
-def home(request):
-    return render(request, 'notes/index.html')
-
-
 # --- Dashboard/ Sources ---
 # Prevent browser caching
 # so back button forces a fresh server request after logout
@@ -45,7 +38,7 @@ def dashboard(request):
     else:
         form = SourceForm(user=request.user)
     # True when navigating here from the sidebar's "Add source" link,
-    # so the create-source form renders already expanded (?add_source=open
+    # so the create-source form renders already expanded (?add_source=open)
     add_source_open = request.GET.get('add_source') == 'open'
     # Filter by user first, then order —
     # chained to avoid overwriting the user filter
@@ -76,6 +69,7 @@ def delete_source(request, source_pk):
 
 
 # --- Source detail/Units ---
+@never_cache
 @login_required
 def source_detail(request, source_pk):
     """
@@ -150,6 +144,7 @@ def delete_unit(request, source_pk, unit_pk):
 
 
 # --- Unit detail/Notes ---
+@never_cache
 @login_required
 def unit_detail(request, source_pk, unit_pk):
     """Retrieve and display a single unit belonging to a source,
@@ -232,6 +227,7 @@ def unit_detail(request, source_pk, unit_pk):
 
 
 # --- Reference Notes ---
+@never_cache
 @login_required
 def reference_detail(request, source_pk, unit_pk, reference_pk):
     """Retrieve and display a single reference"""
@@ -249,10 +245,11 @@ def reference_detail(request, source_pk, unit_pk, reference_pk):
                    'reference': reference,
                    'linked_mywords': linked_mywords,
                    'linked_questions': linked_questions,
-                   'in_note_view': True}
-                  )
+                   'in_note_view': True})
 
 
+# --- Create Reference ---
+@never_cache
 @login_required
 def create_reference(request, source_pk, unit_pk):
     """
@@ -289,6 +286,8 @@ def create_reference(request, source_pk, unit_pk):
                   )
 
 
+# --- Edit Reference ---
+@never_cache
 @login_required
 def edit_reference(request, source_pk, unit_pk, reference_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
@@ -334,6 +333,7 @@ def delete_reference(request, source_pk, unit_pk, reference_pk):
 
 
 # --- Question Notes ---
+@never_cache
 @login_required
 def question_detail(request, source_pk, unit_pk, question_pk):
     """Retrieve and display a single Question note"""
@@ -354,6 +354,8 @@ def question_detail(request, source_pk, unit_pk, question_pk):
                   )
 
 
+# --- Create Question ---
+@never_cache
 @login_required
 def create_question(request, source_pk, unit_pk, reference_pk=None):
     """
@@ -390,6 +392,8 @@ def create_question(request, source_pk, unit_pk, reference_pk=None):
     })
 
 
+# Edit Question
+@never_cache
 @login_required
 def edit_question(request, source_pk, unit_pk, question_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
@@ -439,6 +443,8 @@ def delete_question(request, source_pk, unit_pk, question_pk):
     return redirect(f'{url}#questions')
 
 
+# --- Edit MyWords
+@never_cache
 @login_required
 def edit_mywords(request, source_pk, unit_pk, mywords_pk):
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
@@ -478,6 +484,7 @@ def edit_mywords(request, source_pk, unit_pk, mywords_pk):
 
 
 # --- MyWords Notes ---
+@never_cache
 @login_required
 def mywords_detail(request, source_pk, unit_pk, mywords_pk):
     """Retrieve and display a single My Words note"""
@@ -497,6 +504,8 @@ def mywords_detail(request, source_pk, unit_pk, mywords_pk):
                   )
 
 
+# --- Create MyWords ---
+@never_cache
 @login_required
 def create_mywords(request, source_pk, unit_pk,
                    reference_pk=None, question_pk=None):
