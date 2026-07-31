@@ -94,5 +94,13 @@ expandForms.forEach(form => {
 const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 tooltips.forEach(el => new bootstrap.Tooltip(el))
 
+// ===== Security =====
+// protecting authenticated pages from bfcache showing stale content after logout
+// resources: https://dev.to/besworks/buggy-bfcache-behavior-1a6e and Claude AI
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+});
 
 
