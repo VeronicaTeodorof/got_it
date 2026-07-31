@@ -102,10 +102,24 @@ Tests how code written at model level reflects in UI
 | MNF-03 | Test in edit mode rewriting the same source name doesn't raise error | Submits with name unchanged or cleared and typed again | Pass |
 | MNF-04 | Test error message for duplicate unit name | Error message for duplicate unit name within a source correctly displays in UI | Pass |
 | MNF-05 | Test in edit mode rerwiting the same unit name doesn't raise error | Submits with name unchanged or cleared and typed again | Pass |
-##### views.py
-##### urls.py
-##### templates
 
+
+##### views.py
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNV-01 | Log in, view a page in notes, log out, click browser back button; repeat for all pages in notes | @never_cache, pageshow reload, and @login_required together prevent cached authenticated content from being shown after logout, redirecting to Sign In instead | Pass |
+##### urls.py
+
+##### notes.js
+
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNJS-01 | Log in, view a page in notes, log out, click browser back button; repeat for all pages in notes | @never_cache, pageshow reload, and @login_required together prevent cached authenticated content from being shown after logout, redirecting to Sign In instead | Pass |
+
+
+##### templates
 #### pages app
 ##### views.py
 ##### urls.py
@@ -163,6 +177,21 @@ Severity/threshold: Worse than initially assumed to be an "edge case" —
 This is a realistic scenario, not just an edge case: source_type includes WEBSITE as one of its 8 choices, and a natural way to name a website source is to paste its URL directly into source_name — which is exactly the kind of unbroken string that triggers this bug.
 Fix: add word-break: break-word to source-name class.
 
+**Dashboard accessible via browser back button after logout**
+
+Description:After logging out and being redirected to the home page, pressing the browser's back button displays the dashboard as if the user is still logged in. This is caused by the browser serving a cached version of the page without re-validating with the server, bypassing Django's session authentication check.
+Fix: Add cache-control headers to the dashboard view to prevent the browser from caching the page.
+
+Commit: `c9dd47c`
+
+**Follow-up: other authenticated pages had the same issue, plus bfcache bypass**
+
+During final Pass 1 testing I discovered that all pages that require authentication except for Dashboard did not have this security system in place and were accessible to logged out user via browser back button. I added @never_cache to all views in notes, except delete views which only have a POST branch. Still some content was shown after logout via browser back button due to bfcache mechanism.
+
+Fix: add pageshow reload in notes.js  
+Commit: `a61023b`
+
+
 ## Known Bugs / Limitations
 
 *Flat list — bug, and explanation of why it remains unfixed.*
@@ -177,6 +206,8 @@ Fix: add word-break: break-word to source-name class.
 The following pages have been validated with [Code Institute CI Python Linter](https://pep8ci.herokuapp.com/#):
 - [notes/models.py](docs/readme-assets/notes_models_validation.png) - no errors found
 - [notes/tests/test_models.py](docs/readme-assets/notes_test_models_validation.png) - no errors found
+- [notes/forms.py](docs/readme-assets/notes_forms_validation.png) - no errors found
+- [notes/tests/test_forms.py](docs/readme-assets/notes_test_forms_validation.png) - no errors found
 
 - **Lighthouse** — performance, accessibility, best practices, SEO
   (cross-references A11Y and RESPONSIVE categories in Pass 2 — a mechanical
