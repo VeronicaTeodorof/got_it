@@ -63,6 +63,41 @@ null on linked mywords | Pass |
 | ANF-09 | test_editing_unit_with_unchanged_name_is_valid | Editing a unit with its own unchanged name is valid | Pass |
 
 ##### views.py
+
+**Dashboard view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANV-01 | test_authenticated_user_sees_own_sources | User's own sources appear in the context | Pass |
+| ANV-02 | test_authenticated_user_cannot_see_another_user_sources | Authenticated user cannot see another user's sources | Pass |
+| ANV-03 | test_source_saved_with_correct_user | Source is saved with the correct user | Pass |
+| ANV-04 | test_valid_submission_creates_source | Valid submission creates source and redirects to source detail page | Pass |
+| ANV-05 | test_unauthenticated_user_is_redirected | `@login_required` redirects anonymous users to the login page | Pass |
+| ANV-06 | test_authenticated_user_gets_200 | Authenticated user can access the dashboard page | Pass |
+| ANV-07 | test_invalid_submission_rerenders_dashboard | Invalid submission re-renders dashboard instead of redirecting | Pass |
+
+
+**Delete source view**
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANV-08 | test_unauthenticated_user_visits_source_delete_url_redirects | Unauthenticated user requests delete url of an existing source and gets redirected to login page | Pass |
+| ANV-09 | test_authenticated_user_gets_404_for_missing_source | Authenticated user trying to delete a source that doesn't exist gets 404 | Pass |
+| ANV-10 | test_owner_can_delete_own_source | Authenticated user can delete their source and is redirected to dashboard | Pass |
+
+
+**Source detail view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANV-11 | test_all_units_in_source_fetched_in_list | Tests that all units belonging to a source are filtered in the queryset | Pass |
+| ANV-12 | test_units_only_show_on_source_they_belong_to | Tests that units are only displayed in the list of units belonging to their parent source | Pass |
+| ANV-13 | test_edit_mode_false_by_default | Tests that source details are not editable by default | Pass |
+| ANV-14 | test_valid_edit_source_submission_saves_and_redirects |  Tests that valid edit source submission updates the source and redirects to source detail page | Pass |
+| ANV-15 | test_edit_mode_true_on_invalid_edit_source_submission | Tests that invalid submission triggers page rerender in edit mode | Pass |
+| ANV-16 | test_valid_add_unit_submission_creates_unit_and_redirects | Valid add_unit submission creates a unit linked to the source and redirects to source detail page | Pass |
+| ANV-17 | test_invalid_add_unit_submission_does_not_create_unit | Invalid add_unit submission re-renders the page and does not create a unit | Pass |
+
+
 ##### urls.py
 
 #### pages app
@@ -106,9 +141,37 @@ Tests how code written at model level reflects in UI
 
 ##### views.py
 
+**All Views**
+
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | MNV-01 | Log in, view a page in notes, log out, click browser back button; repeat for all pages in notes | @never_cache, pageshow reload, and @login_required together prevent cached authenticated content from being shown after logout, redirecting to Sign In instead | Pass |
+| MNV-02 | Anonymous user typing correctly formated url gets redirected to sign in | Verified all @login_required views redirect anonymous users to login rather than exposing content or returning a 404, confirming no route bypasses authentication | Pass |
+
+**Dashboard view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNV-03 | With more than 8 sources, load Dashboard | Pagination controls appear | Pass |
+| MNV-04 | Count sources on page 1 | Exactly 8 shown | Pass |
+| MNV-05 | Feedback message after successful add source save | 'Source added' message appears in Dashboard | Pass |
+
+**Delete source view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNV-06 | Feedback message after successful delete source action | 'Source deleted' message appears in Dashboard | Pass |
+
+**Source detail view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNV-07 | Feedback message after successful source edit | 'Edit saved' message appears in source detail page | Pass |
+| MNV-08 | Feedback message after successful unit creation | 'Unit added' message appears in source detail page | Pass |
+
+
+
+
 ##### urls.py
 
 ##### notes.js
@@ -188,7 +251,7 @@ Commit: `c9dd47c`
 
 During final Pass 1 testing I discovered that all pages that require authentication except for Dashboard did not have this security system in place and were accessible to logged out user via browser back button. I added @never_cache to all views in notes, except delete views which only have a POST branch. Still some content was shown after logout via browser back button due to bfcache mechanism.
 
-Fix: add pageshow reload in notes.js  
+Fix: add pageshow reload in notes.js
 Commit: `a61023b`
 
 
