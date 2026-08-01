@@ -1,5 +1,123 @@
 # got it?
 
+Live link: https://got-it-296cde7d011a.herokuapp.com/
+
+"got it?" is a note-taking and learning companion prototype app, built to test whether a specific, not imposed workflow resonates with users — whether people actually find it useful and helpful in the way they learn.
+
+This workflow is derived from the Feynman Technique, which is a simple way of testing whether you actually understand something: if you can explain it in your own words — no jargon, no repeating the original phrasing — as if to someone who's never come across it, you understand it. If you can't, you don't. The idea maps directly onto two distinct note types in this app, while a third note type is an original extension:
+
+- Reference notes capture the raw idea or the original wording, kept as a bibliographic anchor;
+- My Words notes — your attempt at the explanation itself: the same idea, rebuilt in your own plain language.
+- Question notes — a third note type meant to capture and make you aware of your gaps in understanding, which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure it doesn't quietly disappear.
+
+The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
+
+## Strategy
+**Origin**  
+The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools. This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced me to the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
+
+The initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. When I discovered it already existed, I thought about simplifying it, as it felt too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
+
+A second observation that reinforced this direction came from my experience as a student in an online, mostly self-guided course. I often find myself reflecting on what I want to ask or what I didn't understand just before the session. One week of self-guided study must generate a lot of questions, but without a routine for capturing them they may go unacknowledged, unformed or unwritten.
+
+This too pointed to the need for a structured way to capture thoughts while learning - with clear decision points that make understanding, or the lack of it, explicit.
+
+**Hypothesis**
+
+This would be the core of my app:
+
+```mermaid
+graph TD
+    A[Capture reference note] --> B{got it?}
+    B -->|Yes| C[My Words note]
+    B -->|No| D[Question note]
+    D --> F{Question answered?}
+    F -->|Yes| C
+    F -->|No| G[Pending]
+    G --> F
+```
+
+**Adopted**
+- The idea of distinguishing between different types of notes, adopted from the Zettelkasten system
+- The principle of imposing a structured workflow on the note-taking process, adopted from Cornell Notes
+
+**Adopted and verified by existing research**
+- Checking understanding by summarising in your own words: if you can explain something simply, you understand it; if you can't, you don't, adopted from the Feynman Technique
+
+**Adapted**
+- Literature notes in Zettelkasten system become two types of notes in my app: reference notes and own words notes.
+
+**Extended - product hypothesis, not yet validated**
+- A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.
+
+While not verified by research, this extension is grounded in my experience as a student in self-guided learning context: I write my questions just before the drop-in sessions and these questions do not reflect everything I haven't understood in the previous study week, but having no routine of acknowledging and recording questions, most of them remain as gaps in understanding. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality and quantity of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
+
+
+**Scoping the Full Application**
+
+The workflow above, combined with authentication, would form the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above (although the workflow is applicable to any independent learner engaging with source material) — and then set out to understand what users actually expect from a note-taking app.
+
+
+**Market Research for Landing and Dashboard/Editor**
+
+I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
+1. OneNote - mainstream app: https://onenote.cloud.microsoft/
+
+Home Page:
+
+<img src="docs/research-assets/market-research/one_note_home.png" style="height: 400px">
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/one_note_dashboard.png" style="height: 400px">
+
+
+2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes
+
+Home Page:
+
+<img src="docs/research-assets/market-research/notion_home.png" style="height: 400px">
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/notion_dashboard.png" style="height: 400px">
+
+
+3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/
+
+Home Page:
+
+<img src="docs/research-assets/market-research/obsidian-home.png" style="height: 400px">
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/obsidian-dashboard.png" style="height: 400px">
+
+
+4. Google Keep - minimal: https://keep.google.com/
+
+Dashboard:
+
+<img src="docs/research-assets/market-research/google-keep-dashboard.png" style="height: 400px">
+
+
+To complement the visual research, I also drew on an the article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview, to further inform my design decisions.
+
+
+**Key Takeaways**
+
+Note-taking app users expect:
+- a minimalist UI,
+- a search feature,
+- organization by course, or subject, or topic,
+- a quick capture mechanism,
+- recent notes visibility.
+
+A fully scoped application would consider implementing all the features above. The MVP, however, is deliberately narrower: it will contain the comprehension workflow itself, the structure and minimalist UI users expect from a note-taking app, and authentication. The remaining features -  search, full quick-capture, tagging — are left for future iterations.
+
+The core hypothesis of this app remains untested. Rather than treat this as a limitation to work around, it defines what this project actually is: not a finished note-taking app, but the vehicle that will be used to test the hypothesis with real users, once it exists.
+
+
 ## Goals
 ### Developer Goals:
 - to apply lessons learned from previous projects: improve commit messages,
@@ -338,9 +456,37 @@ Acceptance criteria:
 45. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
 46. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
 
+## Data Schema
+"got it?" is built around a three-level hierarchy: Source -> Unit -> Note, reflecting how study material is naturally organised - a source (a book, course, or website) is broken into units (chapters, modules), and each unit holds the notes taken while studying it.
+
+**Source**
+The top-level container - the bibliographic reference itself. Each source belongs to a single user and has a source_type (one of eight choices: Course, Book, Website, Video, Podcast, Documentation, Article, Other), a name, and an optional author (some source types, like websites, genuinely have no author - hence null=True and blank=True on source_author field).
+A user cannot have two sources with the same name - this is enforced at the database level, not just through the form, so it holds even if validation is bypassed. Deleting a user deletes all of their sources.
+
+
+**Unit**
+A second-level container living inside a source - typically a chapter, module, or section. A source cannot have two units with the same name, though the same unit name can exist across different sources.
+Deleting a source deletes all of its units (on_delete=CASCADE). This is a deliberate design choice, Unit.source is a required field (null=False) - a unit cannot exist without belonging to a source, since a unit only has meaning as a subdivision of something. If cascade wasn't used here, the only other viable option would be: PROTECT which would block the source from being deleted at all while it still has units, forcing the user to manually delete every unit first. This would add friction to the app resulting in bad user experience.
+
+**Note**
+Notes are the actual content layer, and always belong to a unit. There are three types, built on a shared abstract base with title, content and timestamps. (The idea of building them on an abstrace inheritance model belongs to my tutor.)
+
+- Reference — captures material directly from the source: a quote, a definition, a key passage. Can optionally record a location (page number, timestamp, URL).
+- MyWords — the user's own explanation or restatement of an idea, or relates current with prior study material or reading.
+- Question — captures a gap in understanding, or an original question prompted by the material.
+
+**Note relationships**
+
+MyWords and Question notes can be created from a Reference - capturing an idea in the source material, then explaining it in the user's own words or raising a question about it. MyWords notes can also be created from a Question - an answer written in response to a gap in understanding. Both My Words and Question can also be created as standalone notes - hence model level decision of having the reference FK with null = True and blank = True.
+
+Why ForeignKey, not OneToOne: a single Reference can reasonably need more than one MyWords or Question note - a reference might capture more than one idea (though not recommended), the same idea might be rephrased in several different ways as understanding develops, or it might raise more than one question. Likewise, a single Question can have more than one MyWords answer, since a question might be revisited and answered again as understanding improves. A one-to-one relationship would force exactly one explanation or question per reference, and exactly one answer per question — which doesn't reflect how learning and revisiting material actually works. ForeignKey allows many notes to originate from the same reference or question, which is the more accurate model.
+
+Deleting a Reference or Question does not delete the notes created from it - the link is simply cleared (on_delete=SET_NULL), and the dependent note becomes a standaloe, unlike Source->Unit and Unit->Note above. This is intentional: unlike a unit without a source, a MyWords or Question note is still meaningful content on its own even if the reference or question it originated from is later removed — the user's thinking shouldn't be deleted just because its starting point was.
+
+The above schema was built using the Hernandez methodology (an overkill for a project of this size, but mainly out of the panic of not getting the models wrong and some curiosity as well - not tutor approved). The full process is described in [RESEARCH.md](RESEARCH.md) and [field specifications](docs/field-specifications.md).
 
 ## ERD
-Entity Relationship Diagram showing the core data structure: User, Source, Source Type, Unit, Note, Tags, Note Tags, Reference, Own-Words and Questions.
+Entity Relationship Diagram showing the core data structure: User, Source, Unit, Note, Reference, MyWords and Question.
 
 ![ERD](docs/readme-assets/got_it_erd.png)
 
@@ -362,10 +508,19 @@ Entity Relationship Diagram showing the core data structure: User, Source, Sourc
 13. Move issue to done on project board;
 14. Commit;
 
+## Design
+### Notebook esthetics
+- Early versions used django-crispy-forms; I later switched to custom form templates to match the app's notebook style.
+
+## Implementation details
+
+**Handling two forms in one view**
+source_detail manages both the source-edit form and the add-unit form on a single page. Each POST is distinguished via a hidden form_type field. Whichever form isn't being submitted is reconstructed unbound (using existing instance data where relevant) so both forms render correctly regardless of which one was actually processed (pattern suggested and given by Claude AI),
+
 ## Features
 ### Navigation
-Navigation is split into seven layers, each addressing a different need:
-
+Navigation is split into eight layers, each addressing a different need:
+- Navigation to external pages via footer links and give feedbac link in main navbar
 - Main nav — global, app-level actions (home, feedback, dashboard, log out)
 - Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen
 - Sidebar / offcanvas — the Source→Unit content structure, always reachable without losing your place
@@ -677,7 +832,14 @@ a visible focus indicator.
 ### Security and Data Protection Features:
 - Rate limiting (control of how many requests a user/IP can make to an app within a certain time period) provided by Django allauth;
 - Account enumeration prevention (stops attackers from figuring out which email addresses/usernames are registered in an app by giving intentionally vague error messages) provided by Django allauth. This feature was silently breaking when overriding default login form for styling purposes: no error message was shown after trying to login with invalid credentials. The fix was to add ` {{ form.non_field_errors }}` to form.
+- Cache control on authenticated pages: `@never_cache` is applied to all views except delete, which only have POST branches to prevent the browser from caching authenticated content, so that using the back button after logout doesn't expose a previous user's data on a shared device. Still this can be bypassed by bfcache mechanism, therefore pageshow reload was also used in notes.js.
+- Per-user data isolation on Dashboard: The Dashboard queryset explicitly filters Sources by the logged-in user (Source.objects.filter(user=request.user)), ensuring one user's sources are never visible to another. Covered by automated tests confirming both inclusion of a user's own sources and exclusion of other users' sources.
+- Consistent authentication redirect on protected views: All @login_required views redirect anonymous users to login regardless of whether the requested object exists, preventing anonymous users from distinguishing "object doesn't exist" from "object exists but you're not authenticated" — closing a potential enumeration problem. Verified across all protected views.
+- Nested resource ownership validation: Views handling actions on nested models (e.g. deleting a Unit, which belongs to a Source) explicitly filter by the parent relationship (source=current_source) rather than relying on the child object's primary key alone. This prevents a user from manipulating a URL's parent-resource segment to act on a child object that doesn't actually belong to it — even when both the parent and child objects are owned by the same requesting user.
 
+### Feedback to user actions:
+- CRUD actions
+- form constraints error messages: 'You already have a source with this name', 'You already have a unit with this name'.
 
 ### Future features
 - Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
@@ -708,8 +870,13 @@ a visible focus indicator.
 5. Scroll to the bottom of the page and click Deploy Branch to start a manual deployment of the main branch.
 6. Click on Open App to view your deployed project;
 
+## Resources:
+- automated tests: https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
 
 ## Technologies Used
+- dbdiagram.io: https://dbdiagram.io/home - for creating the ERD,
+- Lighthouse for accessibility testing
+- Code Institute CI Python Linter: https://pep8ci.herokuapp.com/# for validating python files
 - SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependen
 
 ## AI use
