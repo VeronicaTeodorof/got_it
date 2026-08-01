@@ -23,6 +23,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('', include('pages.urls')),
-    path("notes/", include("notes.urls")),
+    path('', include('pages.urls', namespace='pages')),
+    path('notes/', include('notes.urls', namespace='notes')),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

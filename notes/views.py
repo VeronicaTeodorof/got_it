@@ -51,7 +51,8 @@ def dashboard(request):
     return render(
         request,
         'notes/dashboard.html',
-        {'form': form, 'sources': sources,
+        {'form': form,
+         'sources': sources,
          "page_obj": page_obj,
          "add_source_open": add_source_open}
         )
@@ -94,6 +95,8 @@ def source_detail(request, source_pk):
 
         if form_type == 'edit_source':
             form = SourceForm(request.POST, instance=source, user=request.user)
+            # needed because both forms render on this page
+            # regardless of which one was submitted.
             unit_form = UnitForm(source=source)
             if form.is_valid():
                 form.save()
@@ -102,6 +105,8 @@ def source_detail(request, source_pk):
             edit_mode = True
 
         elif form_type == 'add_unit':
+            # needed because both forms render on this page
+            # regardless of which one was submitted.
             form = SourceForm(instance=source, user=request.user)
             unit_form = UnitForm(request.POST, source=source)
             if unit_form.is_valid():
