@@ -4,16 +4,16 @@ Live link: https://got-it-296cde7d011a.herokuapp.com/
 
 "got it?" is a note-taking and learning companion prototype app, built to test whether a specific, not imposed workflow resonates with users — whether people actually find it useful and helpful in the way they learn.
 
-This workflow is derived from the Feynman Technique, which is a simple way of testing whether you actually understand something: if you can explain it in your own words — no jargon, no repeating the original phrasing — as if to someone who's never come across it, you understand it. If you can't, you don't. The idea maps directly onto two distinct note types in this app, while a third note type is an original extension:
+This workflow is derived from the Feynman Technique, which is a simple way of testing whether you actually understand something: if you can explain it in your own words - no jargon, no repeating the original phrasing - as if to someone who's never come across it, you understand it. If you can't, you don't. The idea maps directly onto two distinct note types in this app, while a third note type is an original extension:
 
 - Reference notes capture the raw idea or the original wording, kept as a bibliographic anchor;
-- My Words notes — your attempt at the explanation itself: the same idea, rebuilt in your own plain language.
-- Question notes — a third note type meant to capture and make you aware of your gaps in understanding, which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure it doesn't quietly disappear.
+- My Words notes - your attempt at the explanation itself: the same idea, rebuilt in your own plain language.
+- Question notes - a third note type meant to capture and make you aware of your gaps in understanding, which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure it doesn't quietly disappear.
 
 The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
 
 ## Strategy
-**Origin**  
+**Origin**
 The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools. This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced me to the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
 
 The initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. When I discovered it already existed, I thought about simplifying it, as it felt too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
@@ -50,17 +50,15 @@ graph TD
 **Extended - product hypothesis, not yet validated**
 - A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.
 
-While not verified by research, this extension is grounded in my experience as a student in self-guided learning context: I write my questions just before the drop-in sessions and these questions do not reflect everything I haven't understood in the previous study week, but having no routine of acknowledging and recording questions, most of them remain as gaps in understanding. This routine is exactly what this app strives to offer and it would reasonably be expected to improve the quality and quantity of questions brought to tutorials, drop-in sessions, or classes — and by extension, the quality of feedback received and understanding achieved.
+The core hypothesis of this app remains untested. Rather than treat this as a limitation to work around, it defines what this project actually is: not a finished note-taking app, but the vehicle that will be used to test the hypothesis with real users, once it exists. The main target audience would be secondary school students and above (although the workflow is applicable to any independent learner engaging with source material).
 
 
-**Scoping the Full Application**
 
-The workflow above, combined with authentication, would form the MVP. However, this being a full stack application meant that I had to get the data model right from the start, which in turn meant thinking about the complete app feature set, not just the MVP. As this application is meant to be user-centric, I first identified my main target audience — secondary school students and above (although the workflow is applicable to any independent learner engaging with source material) — and then set out to understand what users actually expect from a note-taking app.
 
 
 **Market Research for Landing and Dashboard/Editor**
 
-I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
+Before scoping the application I did a quick market research to understand what existing products have to offer and what note-taing app users expect from such tools.I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
 1. OneNote - mainstream app: https://onenote.cloud.microsoft/
 
 Home Page:
@@ -113,348 +111,384 @@ Note-taking app users expect:
 - a quick capture mechanism,
 - recent notes visibility.
 
-A fully scoped application would consider implementing all the features above. The MVP, however, is deliberately narrower: it will contain the comprehension workflow itself, the structure and minimalist UI users expect from a note-taking app, and authentication. The remaining features -  search, full quick-capture, tagging — are left for future iterations.
-
-The core hypothesis of this app remains untested. Rather than treat this as a limitation to work around, it defines what this project actually is: not a finished note-taking app, but the vehicle that will be used to test the hypothesis with real users, once it exists.
+A fully scoped application would consider implementing all the features above. The MVP, however, is deliberately narrower: it will contain the comprehension workflow itself, the organization by course/subject wrapped-up in a minimalist UI, and authentication. The remaining features -  search, full quick-capture, tagging — are left for future iterations.
 
 
-## Goals
-### Developer Goals:
-- to apply lessons learned from previous projects: improve commit messages,
-- to develop an application with an intuitive design, never assuming users will know what to do
+## Scope
 
-## User Stories
+### User Stories
 
-- **Workflow Theme**
-1. As a student, I want a reminder to be selective when writing a reference note, so that I can evaluate whether an idea is worth capturing.
-2. As a student I want to be asked whether I understood a reference note after saving it, so that I can immediately link it to an own words note, a question note, or defer the decision for later.
-3. As a student I want the option to defer the comprehension check on a reference note when I'm not ready to evaluate my understanding, so that I can return to it later without pressure.
-4. As a student, I want to link my own-words and question notes to the reference note they stem from, so that I can trace ideas back to their source and evaluate how well I understood them.
-5. As a student, I want to be prompted to explain an idea in simple terms when writing an own-words note, so that I am reminded to avoid jargon and test my real understanding.
-6. As a student, I want to easily notice which question notes are still unanswered, so that I can prioritize them during revision.
-7. As a student I want to be able to check questions as answered after linking them to own words notes, so that I make a conscious decision that the respective idea is understood.
-8. As a student I want to be able to differentiate between linked and unlinked reference notes, so that I make the unlinked ones a priority.
-9. As a student I want to be able to turn my question notes into own words notes when I find the answers, so that I can work through my understanding.
-10. As a student I want to be able to create an own-words note, optionally linked to a reference note, so that I can either process a source or capture my own thinking independently.
-11. As a student, I want to create a question note optionally linked to a reference note or an own-words note, so that I can track gaps in my understanding whether they arise from a source or my own thinking.
+**Authentication Theme**
 
-- **UI/UX Theme**
 <details>
-<summary>12 As a user I want a consistent, responsive navigation bar with links relevant to my authentication state so that I can easily move between key pages and understand at a glance whether I'm signed in.</summary>
+<summary>1. As a new user I want to be able to create a new account, to start using the app.</summary>
+Acceptance criteria:
 
-**Acceptance Criteria:**
-- AC1: Navbar displays the app logo, linking to the home page - see MNAV-MT-01
-- AC2: Navbar shows Home, and either (Dashboard, Logout) or (Sign In, Sign Up) depending on authentication state - see MNAV-MT-02, MNAV-MT-03, MNAV-MT-04, MNAV-MT-06, MNAV-MT-07, MNAV-MT-09, MNAV-MT10
-- AC3: Navbar remains usable and readable across mobile and desktop breakpoints
-- AC4: Navbar container switches between full-width and constrained-width layout at the medium breakpoint - see MNAV-MT-02
-- AC5: All navbar links are keyboard-navigable with visible focus indicators
+- AC1: User can access the signup page
+
+- AC2: User must provide a username, password, email
+
+- AC3: Error messages are shown for invalid or missing fields
+
+- AC4: User is redirected to dashboard page after successful signup
 </details>
 <details>
-<summary>13 As a user, I want an intuitive way to move between levels of my content, so that I can navigate through it without clutter or confusion.</summary>
+<summary>2. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
+Acceptance criteria:
 
-**Acceptance Criteria:**
-- AC1: Secondary nav displays a back-link to the level above, with a short label describing the destination - see SNAV-MT-01
-- AC2: All links navigate to the correct page - see SNAV-MT-02
-- AC3: Secondary nav shows a hamburger menu opening an offcanvas nav where there is sufficient content to move more than one level up or down
-- AC4: On desktop, navigation options are shown directly in the sidebar
-- AC5: Sidebar and offcanvas share identical navigation content, switching presentation at the large breakpoint
+- AC1: User can access the signin page
+
+- AC2: User can sign in with valid credentials
+
+- AC3: Error shown for incorrect password
+
+- AC4: Error shown for unregistered email/username
+
+- AC5: Error shown for missing fields
+
+- AC6: User is redirected to dashboard on successful signin
+
+- AC7: User remains on signin page if login fails
 </details>
 <details>
-<summary>14 As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
+<summary>3. As a user, I want to log out of my account so that I can securely end my session.</summary>
+Acceptance criteria:
 
-Acceptance Criteria:
-- AC1: Home page displays the app's value proposition (tagline/headline) - see  HP-MT-01
-- AC2: Home page displays a "How it works" explanation of the note-taking flow - see HP-MT-02
-- AC3: Home page displays a primary "Get started" CTA - see HP-MT-03
-- AC4: Clicking 'Get started' link navigates to Sign up page - see HP-MT-04
-- AC5: Home page footer displays attribution and relevant links - see HP-MT-05, HP-MT-06 and HP-MT-07
+- AC1: User can see a logout link on the dashboard
+
+- AC2: Clicking logout ends the user's session
+
+- AC3: User is redirected to the home page after logging out
+
+- AC4: User cannot access the dashboard after logging out
 </details>
 <details>
-<summary>15. As a user I want a dashboard so that I have a central place to access and manage my content</summary>
+<summary>4. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
+Acceptance criteria:
 
-Acceptance Criteria:
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login -see DP-AT-01 and DP-AT-02;
-- AC2: Page shows a list of sources belonging to the logged in user - see DP-MT-03;
+- AC1: User sees a "Remember Me" checkbox on sign in page
 
+- AC2: When a user logs in with "Remember me" checked, their session persists after closing and reopening the browser
+
+- AC3: When a user logs in without "Remember me" checked, their session ends when the browser is closed
+
+- AC4: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked
+
+- AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me"
 </details>
+<br>
 
-16. As a student I want a quick capture option for own words and question notes directly from the dashboard, so that I don't lose a thought while navigating the app.
-17. As a student I want to see my most recent activity from the dashboard, so that I can quickly pick up where I left off.
-18. As a new user I want to trigger a walkthrough from the home page so that I can understand how the app works before signing up.
-<details>
-<summary>19. As a user, I want the app to work on mobile, tablet and desktop, so that I can take notes on any device.</summary>
-
-Acceptance Criteria:
-**Home Page**:
-- AC1: Home page content reflows correctly on mobile viewports (single-column stack: headline, CTA, diagram, text, footer all stack vertically) -see RES-MT-08
-- AC2: Home page content displays as a two-column layout on tablet/desktop viewports (≥768px) for the "How it works" diagram and explanation -see RES-MT-09
-- AC3: Navigation bar remains usable and readable at all tested breakpoints (no overlapping or cut-off links) - see RES-MT-10
-- AC4: Footer remains pinned to the bottom of the viewport when content is shorter than the screen, on all tested breakpoints -see RES-MT-11
-- AC5: Images/diagrams scale appropriately without distortion or overflow at each breakpoint - see RES-MT-12
-
-- Sidebar is visible by default on desktop → RES-MT-02
-- Sidebar is hidden by default on mobile and can be opened via the toggler → RES-MT-03, RES-MT-05
-- Toggler is visible on mobile and hidden on desktop → RES-MT-04
-- Sidebar sits below the navbar on all screen sizes → RES-MT-07
-- No horizontal scrolling on any screen size → RES-MT-01
-</details>
-20. As a student with learning difficulties, I want the app to meet accessibility standards, so that I can use it without barriers.
-
-- **CRUD Functionality Theme**
-
+**Structure**
 - **Sources**
 <details>
-<summary>21. As a student, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
+<summary>5. As a learner, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
 
 Acceptance Criteria:
 
-- AC1: Only shows sources belonging to the logged-in user - see DP-AT-03 and DP-AT-04
-- AC2: Sources listed in reverse chronological order — most recent first - see DP-MT-05
-- AC3: Each source shows name,type, author, and date created - see DP-MT-04
+- AC1: Only shows sources belonging to the logged-in user
+- AC2: Sources listed in reverse chronological order — most recent first
+- AC3: Each source shows name,type, author, and date created
 - AC4: Each source links to its unit list page
-- AC5: Empty state shown when no sources exist, encouraging user to create one - see DP-MT-06
+- AC5: Empty state shown when no sources exist, encouraging user to create one
 </details>
 <details>
-<summary>22. As a student I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<summary>6. As a learner I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
 </summary>
 Acceptance Criteria:
 
-- AC1: User can enter a source name and a source author - see DP-MT-07;
-- AC2: User should select a source type from the available options - see DP-MT-08;
-- AC3: Name field cannot be empty — error shown if submitted blank - see DP-MT-09;
-- AC4: Source type has to be selected - error shown if not selected - see DP-MT-10;
-- AC5: On successful creation user is redirected to the new source detail page - see DP-MT-11
-- AC6: A user cannot create two sources with the same name, an error is shown if they try - see DP-MT-12 and DP-AT-06
+- AC1: User can enter a source name and a source author
+- AC2: User should select a source type from the available options
+- AC3: Name field cannot be empty — error shown if submitted blank
+- AC4: Source type has to be selected - error shown if not selected
+- AC5: On successful creation the new sources is appended to the list in dashboard and 'Source added' message shown
+- AC6: A user cannot create two sources with the same name, an error is shown if they try
 </details>
-
-23. As a student, I want to be able to view all my sources filtered by type, so that I can quickly find material of a specific kind such as all my books or all my lectures.
 <details>
-<summary>24. As a student I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+<summary>7. As a learner I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
 
 Acceptance Criteria:
-
-- AC1: Only accessible to logged-in users - see DP-MT-14
-- AC2: Only accessible to the source owner — another logged-in user gets a 404 - see DP-MT-15 and DP-AT-07
-- AC3: User can edit source name, author, and type - see DP-MT-16
-- AC4: Name field cannot be empty — error shown if submitted blank - see DP-MT-17
-- AC5: On successful edit user is redirected back to the dashboard page - see DP-MT-18
-- AC6: One type choice has to be selected - error shown if no choice is selected - see DP-MT-19
+- AC1: User can edit source name, author, and type
+- AC2: Name field cannot be empty — error shown if submitted blank
+- AC3: On successful edit 'Edit saved' message is shown
+- AC4: One type choice has to be selected - error shown if no choice is selected
 </details>
 <details>
-<summary>25. As a student I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
+<summary>8. As a learner I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
-- AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page - see DP-MT-26, DP-MT-27, DP-AT-09
-- AC2: Only accessible to the source owner — another logged-in user gets a 404 see DP-MT-25 and DP-MT-26
-- AC3: Deleting a source removes it from the sources list - see DP-MT-28
-- AC4: User is redirected to the sources page after deletion - see DP-MT-28
-- AC5: A confirmation step is required before deletion - see DP-MT-29
-- AC6: Source name and author appear in confirmation step to avoid confusions - DP-MT-30
-- AC7: A confimation message appears after successful deletion - DP-MT-31
+- AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page
+- AC2: Only accessible to the source owner — another logged-in user gets 404
+- AC3: Deleting a source removes it from the sources list
+- AC4: User is redirected to dashboard after deletion
+- AC5: A confirmation step is required before deletion
+- AC6: Source name and author appear in confirmation step to avoid confusions
+- AC7: A confimation message appears after successful deletion
 - AC8: When a source is deleted, all its units and notes are deleted as well
 </details>
+
 
  - **Units**
 
 <details>
-<summary>26. As a student, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
+<summary> 9. As a learner, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
 
 Acceptance Criteria:
 
 
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see SDP-AT-01, SDP-AT-02, SDP-MT-01, SDP-MT-02
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see SDP-AT-03 and SDP-MT-03
-- AC3: If source does not exist, return 404 - see SDP-AT-04
-- AC4: Source name and author displayed - see SDP-AT-05
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login
+- AC2: Page only accessible to the source owner — another logged-in user gets a 404
+- AC3: If source does not exist, return 404
+- AC4: Source name and author displayed
 - AC5: Units listed in most recent edited order
-- AC6: Each unit shows name and note count
-- AC7: Each unit links to its three-column unit page
-- AC8: Sidebar shows Sources link - see SDP-MT-06
-- AC9: Edit and delete unit actions accessible for each unit on this page
-- AC10: Only and all units belonging to current source are displayed in the list of units - see SDP-AT-05, SDP-AT-06, SDP-MT-08, and SDP-MT-09
-- AC11: Empty state shown when no unitss exist, encouraging user to create one - see SDP-MT-07
+- AC6: Each unit shows name
+- AC7: Each unit links to its three-tabs unit page
+- AC8: Only and all units belonging to current source are displayed in the list of units
+- AC9: Empty state shown when no unitss exist, encouraging user to create one
 
 </details>
 <details>
-<summary>27. As a student I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
+<summary>10. As a learner I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
 
 Acceptance Criteria:
 
-- AC1: Create unit button is present on source detail page - see SDP-MT-10
-- AC2: Clicking create unit button will expand the create unit form - see SDP-MT-11
-- AC3: Save and Cancel buttons are present on create unit form - see SDP-MT-12
-- AC4: Cancel button collapses the form - see SDP-MT-13
-- AC5: Cancel button resets the form - see SDP-MT-14
-- AC6: User can enter a unit name - see SDP-MT-15
-- AC7: Name field cannot be empty — error shown if submitted blank - see SDP-MT-16
-- AC8: On successful creation user is redirected to the new unit detail page
-- AC9: A user cannot create duplicate name units within a source -  an error is shown if they try - see SDP-MT-18 and SDP-AT-07
-- AC10: When there are errors on the form, page loads with expanded form so feedback is immediately visible - see SDP-MT-19
+- AC1: Create unit button is present on source detail page
+- AC2: Clicking create unit button will expand the create unit form
+- AC3: Save and Cancel buttons are present on create unit form
+- AC4: Cancel button collapses and resets the form
+- AC5: User can enter a unit name
+- AC6: Name field cannot be empty — error shown if submitted blank
+- AC7: On successful creation unit is shown in units list and success message appears
+- AC8: A user cannot create duplicate name units within a source -  an error is shown if they try
+- AC9: When there are errors on the form, page loads with expanded form so feedback is immediately visible
 </details>
 <details>
-<summary>28. As a student I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
+<summary>11. As a learner I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
 
 Acceptance Criteria:
-- AC1: Edit button present in list element dropdown - see SDP-MT-20
-- AC2: Clicking Edit button expands inline form - see SDP-MT-21
-- AC3: Edit form is prepopulated with correct data - see SDP-MT-22 and SDP-AT-08
-- AC4: User can edit unit name in form - see SDP-MT-23
-- AC5: Save and Cancel buttons present on the form - see SDP-MT-24
-- AC6: Submitting empty unit name field rerenders the form with errors - see SDP-MT-25
-- AC7: Submitting form with valid data saves the form and reloads source detail page with edited unit - see SDP-MT-26
-- AC8: Cancel button collapses the form - see SDP-MT-27
-- AC9: Cancel button resets the form -see SDP-MT-28
-- AC10: Submitting the form with duplicate name rerenders the form with error - see SDP-MT-29
+- AC1: Edit button present in dropdown
+- AC2: Clicking Edit button loads edit mode
+- AC3: Edit form is prepopulated with correct data
+- AC4: User can edit unit name in form
+- AC5: Save and Cancel icons present on the form
+- AC6: Submitting empty unit name field rerenders the form with errors
+- AC7: Submitting form with valid data saves the form and reloads page non-editable
+- AC8: Submitting the form with duplicate name rerenders the form with error
 </details>
 <details>
-<summary>29. As a student I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
+<summary>12. As a learner I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
 
 Acceptance Criteria:
-- AC1: Delete button present on inline dropdown - see SDP-MT-30
-- AC2: Clicking delete button opens a confirmation modal - see SDP-MT-31
-- AC3: Confirmation modal has source and unit names included along with risks warnings, so that user does not accidentaly delete wrong unit - see SDP-MT-32
-- AC4: Delete and Cancel buttons present on modal - see SDP-MT-33
-- AC5: Delete button deletes unit, closes modal and rerenders page with updated units list - see SDP-MT-34
-- AC6: Cancel button closes modal - see SDP-MT-35
-- AC7: Page accessible to logged in owners, unauthenticated users are redirected to login - see SDP-MT-36 and SDP-MT-38
-- AC8: Trying to access an inexisting unit gives 404 - see SDP-MT-37
+- AC1: Delete button present on inline dropdown
+- AC2: Clicking delete button opens a confirmation modal
+- AC3: Confirmation modal has source and unit names included along with risks warnings, so that user does not accidentaly delete wrong unit
+- AC4: Delete and Cancel buttons present on modal
+- AC5: Delete button deletes unit, closes modal and rerenders page with updated units list
+- AC6: Cancel button closes modal
+- AC7: Page accessible to logged in owners, unauthenticated users are redirected to login
+- AC8: Trying to access an inexisting unit gives 404
 </details>
-
 
 - **Notes**
-<details>
-<summary>30. As a student I want to be able to see a list of all my notes in a specific unit, organized by type, so that I have an ensemble view of what's done and what's left and easily access the ones I need.</summary>
 
-Acceptance Criteria:
-
-
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see UDP-AT-01, UDP-AT-02, UDP-MT-01 and UDP-MT-02
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404 - see UDP-AT-03 and UDP-MT-03
-- AC3: If unit does not exist, return 404 - see UDP-AT-04 and UDP-MT-04
-- AC4: Unit name is displayed - see UDP-AT-05 and UDP-MT-05
-- AC5: Notes are organized by type
-- AC6: Sidebar shows Sources and Units links
-</details>
-
-**Reference Notes**
-<details>
-<summary>31. As a user, I want to view the full content of a reference note, see its location, add linked notes, and view any notes already linked to it, so that I can engage with the material and build on my understanding.</summary>
-
-Acceptance Criteria:
-
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login -see RDP-MT-01, RDP-MT-02 and RDP-AT-01
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404 -see RDP-MT-03
-- AC3: If reference note does not exist, return 404 - see RDP-MT-04
-- AC4: Title, content and location show on the page - see RDP-MT-05
-- AC5: Add dropdown visible on the page
-- AC6: A button to show/hide notes linked to this reference is visible on the page
-- AC7: Clicking the links button expands a list of linked notes
-- AC8: Empty state message is shown when no links exist and 'got it?' logo appears above the add button
-</details>
-<details>
-<summary>32. As a student, I can create a reference note, so that I can track where my information comes from and return to the source when needed.</summary>
-
-Acceptance Criteria:
-
-- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login - see CRP-MT-03 and CRP-MT-06
-- AC2: `New` link visible below Reference tab - see CRP-MT-04
-- AC3: `+` link visible in sidebar near Reference link - see CRP-MT-05
-- AC4: Clicking either create reference buttons links to create_reference.html - see CRP-MT-01, CRP-MT-02
-- AC5: User can enter title, content and location - see CRP-MT-07
-- AC6: Saving note without content prompts error message - see CRP-MT-08
-- AC7: Save button present on the page - see CRP-MT-09
-- AC8: Submitting form with valid data redirects to unit-detail page with new note displaying first in grid see CRP-MT-10
-- AC9: Success message displayed on unit detail page after valid reference note save - see CRP-MT-11
-
-</details>
-<details>
-<summary>33. As a student I can edit a reference note, so that I can keep my source information accurate</summary>
+<details> <summary>13. As a learner, I want to see all my notes within a unit in one view, so that I can review everything I've captured for that topic in one place.</summary>
 
 Acceptance Criteria:
 
 - AC1: Page only accessible to logged-in users — unauthenticated users redirected to login
-- AC2: Page only accessible to the source owner — another logged-in user gets a 404
-- AC3: If reference note does not exist, return 404
-- AC4: Edit icon present on reference note detail page - see RDP-MT-06
-- AC5: Tooltip appears on hover - see RDP-MT-07
-- AC6: Clicking edit icon loads edit reference page - see RDP-MT-08
-- AC7: Form is preloaded with data from requested reference note - see ERP-MT-03
-- AC8: Saving edited note redirects to reference detail page with edited note shown - see ERP-MT-04
-- AC9: Saving note with blank body prompts error - see ERP-MT-05
-- AC10: Cancel button present on edit page - see ERP-MT-01
-- AC11: Clicking cancel button loads reference detail page - see ERP-MT-02
-</details>
-
-34. As a student I want to be able to delete any of my notes with a confirmation step, so that I can declutter my notes without accidentally losing them.
-35. As a student I want to be able to search for a specific note, so that I can easily find one when I need it.
-
-- **Tags**
-36. As a student I want to be able to assign one or more tags to a note, so that I can connect related notes across different sources.
-37. As a student I want to be prompted with a list of already used tags when tagging a note, so that I keep my tags consistent and avoid duplicates.
-38. As a student I want to be able to remove a tag from a note, so that I can correct mistakes or update connections.
-39. As a student I want to be able to see all notes associated with a tag in one view, so that I can explore connections between ideas across sources.
-
-- **Authentication Theme**
-<details>
-<summary>40. As a new user I want to be able to create a new account, to start using the app.</summary>
-Acceptance criteria:
-
-- AC1: User can access the signup page - see AUTH-MT-01
-
-- AC2: User must provide a username and password - see AUTH-MT-03 and AUTH-MT-04
-
-- AC3: Error messages are shown for invalid or missing fields - see AUTH-MT-03 to AUTH-MT-07 and AUTH-MT-09
-
-- AC4: User is redirected to dashboard page after successful signup - see AUTH-MT-30
-
-- AC5: Password must meet minimum security requirements (length, complexity) - see  AUTH-MT-10 to AUTH-MT-13
+- AC2: Page only accessible to the unit's owner — another logged-in user gets a 404
+- AC3: If unit does not exist, return 404
+- AC4: Notes are organised into three tabs — Reference, My Words, Question
+- AC5: Each tab shows only notes of that type belonging to the current unit
+- AC6: Active tab persists via URL hash, so refreshing or sharing the link keeps the same tab open
+- AC7: Notes within each tab are paginated independently of the other tabs
+- AC8: Empty state shown per tab when no notes of that type exist, encouraging user to create one
 </details>
 <details>
-<summary>41. As a user I want to be able to sign into my account, to be able to access my notes and create new ones.</summary>
-Acceptance criteria:
+<summary>14. As a learner, I want to view a note's full detail on its own page, so that I can read or work with it without distraction from other notes.</summary>
 
-- AC1: User can access the signin page - see AUTH-MT-02
+Acceptance Criteria:
 
-- AC2: User can sign in with valid credentials - see AUTH-MT-16
-
-- AC3: Error shown for incorrect password - see AUTH-MT-17
-
-- AC4: Error shown for unregistered email/username - see AUTH-MT-18
-
-- AC5: Error shown for missing fields - see AUTH-MT-19 and AUTH-MT-20
-
-- AC6: User is redirected to dashboard on successful signin - see AUTH-MT-16
-
-- AC7: User remains on signin page if login fails - see AUTH-MT-17 to AUTH-MT-20
+- AC1: Page only accessible to logged-in users — unauthenticated users redirected to login
+- AC2: Page only accessible to the note's owner — another logged-in user gets a 404
+- AC3: If note does not exist, return 404
+- AC4: Note detail page displays all fields relevant to its type
+- AC5: Breadcrumb navigation shows the note's position within its source and unit
 </details>
 <details>
-<summary>42. As a user, I want to log out of my account so that I can securely end my session.</summary>
-Acceptance criteria:
+ <summary>15. As a learner, I want to edit a note, so that I can correct or improve it after creating it.</summary>
 
-- AC1: User can see a logout link on the dashboard - see DP-MT-01
+Acceptance Criteria:
 
-- AC2: Clicking logout ends the user's session - see AUTH-MT-21
-
-- AC3: User is redirected to the home page after logging out - see AUTH-MT-31
-
-- AC4: User cannot access the dashboard after logging out - see AUTH-MT-22 and AUTH-MT-32
+- AC1: Edit option accessible from the note detail page
+- AC2: Edit form is prepopulated with the note's current content
+- AC3: Required fields cannot be submitted empty — error shown if attempted
+- AC4: On successful edit, updated content is displayed and a confirmation message is shown
+- AC5: Only the note's owner can edit it — another logged-in user gets a 404
+- AC6: Cancelling an edit returns the user to the note detail page without saving changes
 </details>
-43. As a user I want to be able to reset my password, so as not to lose access to my account when I forget it.
 <details>
-<summary>44. As a user I want to stay logged in between sessions, so that I don't have to sign in every time.</summary>
-Acceptance criteria:
+<summary>16. As a learner, I want to delete a note with a confirmation step, so that I don't lose it by accident but can remove it when no longer needed.</summary>
 
-- AC 1: User sees a "Remember Me" checkbox on sign in page - see AUTH-MT-23
+Acceptance Criteria:
 
-- AC 2: When a user logs in with "Remember me" checked, their session persists after closing and reopening the browser - see AUTH-MT-24
-
-- AC 3: When a user logs in without "Remember me" checked, their session ends when the browser is closed - see AUTH-MT-26
-
-- AC4: After a defined period of inactivity, the session expires and the user is prompted to log in again, even if "Remember me" was checked - see AUTH-MT-27
-
-- AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me" - see AUTH-MT-28
+- AC1: Delete option accessible from the note detail page
+- AC2: Clicking delete opens a confirmation step
+- AC3: Confirmation step names the note (or shows a preview of its content) to avoid accidental deletion of the wrong note
+- AC4: Confirm and Cancel options are both present
+- AC5: Confirming deletion removes the note and redirects to the unit's note list
+- AC6: A confirmation message is shown after successful deletion
+- AC7: Only the note's owner can delete it — another logged-in user gets a 404
 </details>
-45. As a user I want to be able to delete my account with confirmation step when I consider I don't need it anymore, so that I can be in control of my information.
-46. As a new user I want to verify my email address after registering, so that my account is secure and recoverable.
+<br>
+
+**Workflow Theme**
+<details><summary>
+17. As a learner, I want to create a reference note within a Unit, so that I can capture source material I'm studying before I paraphrase or question it.</summary>
+
+Acceptance Criteria:
+- AC1: User can select "create reference note" from a Unit's detail page or from the sidebar
+- AC2: Form displays with the required content field
+- AC3: Submitting valid content saves the note and loads note's detail page
+- AC4: Newly created note appears in Unit detail page in Reference panel, with "Unlinked" status badge
+- AC5: Submitting empty/invalid content displays a clear error message
+- AC6: Selecting "cancel" returns the user to the previous page without creating a note
+</details>
+<details><summary>
+18. As a learner, I want to create a MyWords note either linked to a reference note, so that I can paraphrase source material in my own words as part of engaging with it actively or standalone to capture links with prior learning or reading.</summary>
+
+Acceptance Criteria:
+- AC1: User can create a linked My Words note from Reference detail view
+- AC2: When creating a linked My Words note, Reference note appears collapsed on create page
+- AC3: User can create a standalone My Words note from unit detail page or from sidebar
+- AC4: Submitting valid form creates and displays note detail page
+- AC5: Newly created note appears in Unit detail page in My Words panel, with origin badge
+- AC6: When new note was created from Reference, the status of the latter updates to linked
+- AC7: Submitting invalid form displays a clear error message
+- AC8: Selecting "cancel" returns the learner to the previous page without creating a note
+</details>
+<details><summary>
+19. As a learner, I want to create a Question note either standalone or linked to a reference note, so that I can capture questions that arise as I engage with source material.</summary>
+
+Acceptance Criteria:
+- AC1: User can create a linked Question note from Reference detail view
+- AC2: When creating a linked Question note, Reference note appears collapsed on create page
+- AC3: User can create a standalone Question note from unit detail page or from sidebar
+- AC4: Submitting valid form creates and displays note detail page
+- AC5: Newly created note appears in Unit detail page in My Words panel, with origin badge
+- AC6: Newly created note appears in Unit detail page in Question panel, with 'Unanswered' status badge
+- AC7: When new note was created from Reference, the status of the latter updates to linked
+- AC8: Submitting invalid form displays a clear error message
+- AC9: Selecting "cancel" returns the learner to the previous page without creating a note
+</details>
+<details><summary>
+20. As a learner, I want to answer a Question note by creating a linked MyWords note, so that I can resolve my questions by working through them in my own words.</summary>
+
+Acceptance Criteria:
+- AC1: User can select Answer in My Words from a Question detail view which leads to creating a new My Words note related to Question
+- AC2: Both the Reference note that spawned the Question and the Question are present collapsed on the My Words create page
+- AC3: Once linked, the Question note's status badge updates from "Unanswered" to "Answered"
+- AC4: Once created, the MyWords note's origin badge displays 'From Question'
+</details>
+<details><summary>
+21. As a learner, I want to view all notes linked from a reference note on its detail page, so that I can see how I've already engaged with that source material.</summary>
+
+Acceptance Criteria:
+- AC1: Reference note detail page displays a list of linked MyWords notes, if any
+- AC2: Reference note detail page displays a list of linked Question notes, if any
+- AC3: Each linked note displays enough info (e.g. snippet, type) to identify it without opening it
+- AC4: Selecting a linked note navigates to its detail page
+</details>
+<details><summary>
+22. As a learner, I want to view the notes linked to a Question note on its detail page, so that I can see how I answered my question.</summary>
+
+Acceptance Criteria:
+- AC1: Question note detail page displays the linked MyWords note(s), if any
+- AC2: Each linked note displays enough info (e.g. snippet) to identify it without opening it
+- AC3: Selecting a linked note navigates to its detail page
+</details>
+<br>
+
+ **UI/UX Theme**
+ <details>
+ <summary>23. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
+
+Acceptance Criteria:
+- AC1: Home page displays the app's value proposition (tagline/headline)
+- AC2: Home page displays a "How it works" explanation of the note-taking flow
+- AC3: Home page displays a primary "Get started" CTA
+- AC4: Clicking 'Get started' link navigates to Sign up page
+- AC5: Home page footer displays attribution and relevant links
+</details>
+<details><summary>
+24. As a learner, I want a walkthrough of the app's structure and workflow, so that I understand how it works before I start creating content.
+</summary>
+
+Acceptance Criteria:
+- AC1: Walkthrough explains the Source → Unit → Note hierarchy
+- AC2: Walkthrough explains the three note types and their purpose
+- AC3: Walkthrough is accessible from main navigation at any time
+- AC4: Empy states support user experience by explaining the role of each piece of structure or workflow
+</details>
+<details><summary>
+25. As a developer, I want to collect user feedback via an external Google Form, so that I can gather insight on usability and prioritize future improvements.</summary>
+
+Acceptance Criteria:
+- AC1: Feedback link/button is visible and accessible from key pages (e.g. footer or nav)
+- AC2: Link opens the Google Form in a new tab, preserving the user's place in the app
+</details>
+<details><summary>
+26. As a learner, I want navigation that reflects the app's structure, so that I always know where I am and how to get back to where I came from.</summary>
+
+Acceptance Criteria:
+- AC1: Main navigation is present and consistent across all pages
+- AC2: External links to open in another tab so I don't navigate away from the app
+- AC3: Breadcrumbs reflect the current Source/Unit context
+- AC4: Sidebar provides persistent access to the learner's structure
+- AC5: Back-navigation is available wherever a user might need to retrace a step
+</details>
+<details><summary>
+27. As a learner, I want the app to be usable with assistive technology, so that I'm not excluded from using it regardless of ability.
+</summary>
+
+Acceptance Criteria:
+- AC1: All pages pass Lighthouse accessibility audit (target: 100)
+- AC2: Interactive elements have appropriate ARIA roles/labels
+- AC3: Live regions announce dynamic content changes
+- AC4: Color contrast meets standard minimum throughout
+</details>
+<details><summary>
+28. As a learner, I want the app to work well on any device, so that I can study on whatever I have to hand.</summary>
+
+Acceptance Criteria:
+- AC1: Layout adapts cleanly across mobile, tablet, and desktop breakpoints
+- AC2: No horizontal scroll caused by content overflow (e.g. long unbroken strings)
+- AC3: Navigation collapses to an appropriate mobile pattern (e.g. offcanvas)
+- AC4: Touch targets are appropriately sized on smaller screens
+</details>
+<details><summary>
+29. As a learner, I want a clean, uncluttered interface, so that I can focus on the content I'm studying without distraction.</summary>
+
+Acceptance Criteria:
+- AC1: Pages avoid unnecessary visual elements that don't support the task at hand
+- AC2: Consistent, restrained color and typography system throughout
+- AC3: Calls-to-action are visually clear without relying on excessive decoration
+</details>
+<hr>
+<br>
+
+### Features
+- Authentication: stories 1–4
+- Structure: stories 5–16 (Sources, Units, Notes CRUD + list views)
+- Comprehension Workflow: stories 17–22 (reference/MyWords/Question creation, answering, viewing links)
+- Home Page: story 23
+- Walkthrough: story 24
+- Feedback Form: story 25
+- Navigation: story 26
+
+**Non-functional requirements**
+
+- Minimalist UI:story 29
+- Responsiveness:story 28
+- Accessibility: story 27
 
 ## Data Schema
 "got it?" is built around a three-level hierarchy: Source -> Unit -> Note, reflecting how study material is naturally organised - a source (a book, course, or website) is broken into units (chapters, modules), and each unit holds the notes taken while studying it.
