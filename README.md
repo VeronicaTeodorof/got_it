@@ -10,7 +10,7 @@ This workflow is derived from the Feynman Technique, which is a simple way of te
 - My Words notes - your attempt at the explanation itself: the same idea, rebuilt in your own plain language.
 - Question notes - a third note type meant to capture and make you aware of your gaps in understanding, which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure it doesn't quietly disappear.
 
-The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
+The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX, with some references to how some planes connects to corresponding backend decisions, rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
 
 ## Strategy
 **Origin**
@@ -51,9 +51,6 @@ graph TD
 - A third note category: **question notes** — an explicit, conscious decision to flag something as not yet understood, rather than leaving gaps implicit.
 
 The core hypothesis of this app remains untested. Rather than treat this as a limitation to work around, it defines what this project actually is: not a finished note-taking app, but the vehicle that will be used to test the hypothesis with real users, once it exists. The main target audience would be secondary school students and above (although the workflow is applicable to any independent learner engaging with source material).
-
-
-
 
 
 **Market Research for Landing and Dashboard/Editor**
@@ -473,7 +470,7 @@ Acceptance Criteria:
 - AC3: Calls-to-action are visually clear without relying on excessive decoration
 </details>
 <hr>
-<br>
+
 
 ### Features
 - Authentication: stories 1–4
@@ -490,20 +487,37 @@ Acceptance Criteria:
 - Responsiveness:story 28
 - Accessibility: story 27
 
-## Data Schema
+
+## Structure
+
+Structure, in this project, covers both the user-facing organization of features and the underlying architecture that supports it - the two are treated together here since app organization mirrors the same grouping logic as the feature themes established in Scope.
+
+### Features -> Apps
+
+- Authentication (stories 1–4) -> project level (django-allauth)
+- Structure + Comprehension Workflow (stories 5–22) -> `notes` app ( these two features map to one codebase app, as they share the same models, so splitting them wouldn't reduce coupling, just add import overhead)
+- Home Page / Walkthrough -> `pages` app
+- Feedback (story 25) -> a link in main navigation (base.html), pointing to an external Google Form — no dedicated view or app
+- Navigation (story 26) -> split into layers, each detailed below, spanning multiple templates and views rather than a single app
+
+
+### Data Schema
 "got it?" is built around a three-level hierarchy: Source -> Unit -> Note, reflecting how study material is naturally organised - a source (a book, course, or website) is broken into units (chapters, modules), and each unit holds the notes taken while studying it.
 
 **Source**
+
 The top-level container - the bibliographic reference itself. Each source belongs to a single user and has a source_type (one of eight choices: Course, Book, Website, Video, Podcast, Documentation, Article, Other), a name, and an optional author (some source types, like websites, genuinely have no author - hence null=True and blank=True on source_author field).
 A user cannot have two sources with the same name - this is enforced at the database level, not just through the form, so it holds even if validation is bypassed. Deleting a user deletes all of their sources.
 
 
 **Unit**
+
 A second-level container living inside a source - typically a chapter, module, or section. A source cannot have two units with the same name, though the same unit name can exist across different sources.
 Deleting a source deletes all of its units (on_delete=CASCADE). This is a deliberate design choice, Unit.source is a required field (null=False) - a unit cannot exist without belonging to a source, since a unit only has meaning as a subdivision of something. If cascade wasn't used here, the only other viable option would be: PROTECT which would block the source from being deleted at all while it still has units, forcing the user to manually delete every unit first. This would add friction to the app resulting in bad user experience.
 
 **Note**
-Notes are the actual content layer, and always belong to a unit. There are three types, built on a shared abstract base with title, content and timestamps. (The idea of building them on an abstrace inheritance model belongs to my tutor.)
+
+Notes are the actual content layer, and always belong to a unit. There are three types, built on a shared abstract base with title, content and timestamps. (The idea of building them on an abstract inheritance model belongs to my tutor.)
 
 - Reference — captures material directly from the source: a quote, a definition, a key passage. Can optionally record a location (page number, timestamp, URL).
 - MyWords — the user's own explanation or restatement of an idea, or relates current with prior study material or reading.
@@ -513,16 +527,28 @@ Notes are the actual content layer, and always belong to a unit. There are three
 
 MyWords and Question notes can be created from a Reference - capturing an idea in the source material, then explaining it in the user's own words or raising a question about it. MyWords notes can also be created from a Question - an answer written in response to a gap in understanding. Both My Words and Question can also be created as standalone notes - hence model level decision of having the reference FK with null = True and blank = True.
 
-Why ForeignKey, not OneToOne: a single Reference can reasonably need more than one MyWords or Question note - a reference might capture more than one idea (though not recommended), the same idea might be rephrased in several different ways as understanding develops, or it might raise more than one question. Likewise, a single Question can have more than one MyWords answer, since a question might be revisited and answered again as understanding improves. A one-to-one relationship would force exactly one explanation or question per reference, and exactly one answer per question — which doesn't reflect how learning and revisiting material actually works. ForeignKey allows many notes to originate from the same reference or question, which is the more accurate model.
+Why ForeignKey, not OneToOne: a single Reference can reasonably need more than one MyWords or Question note - a reference might capture more than one idea (though not recommended), the same idea might be rephrased in several different ways as understanding develops, or it might raise more than one question. Likewise, a single Question can have more than one MyWords answer, since a question might be revisited and answered again as understanding improves. A one-to-one relationship would force exactly one explanation or question per reference, and exactly one answer per question - which doesn't reflect how learning and revisiting material actually works. ForeignKey allows many notes to originate from the same reference or question, which is the more accurate model.
 
-Deleting a Reference or Question does not delete the notes created from it - the link is simply cleared (on_delete=SET_NULL), and the dependent note becomes a standaloe, unlike Source->Unit and Unit->Note above. This is intentional: unlike a unit without a source, a MyWords or Question note is still meaningful content on its own even if the reference or question it originated from is later removed — the user's thinking shouldn't be deleted just because its starting point was.
+Deleting a Reference or Question does not delete the notes created from it - the link is simply cleared (on_delete=SET_NULL), and the dependent note becomes a standalone, unlike Source->Unit and Unit->Note above. This is intentional: unlike a unit without a source, a MyWords or Question note is still meaningful content on its own even if the reference or question it originated from is later removed — the user's thinking shouldn't be deleted just because its starting point was.
 
-The above schema was built using the Hernandez methodology (an overkill for a project of this size, but mainly out of the panic of not getting the models wrong and some curiosity as well - not tutor approved). The full process is described in [RESEARCH.md](RESEARCH.md) and [field specifications](docs/field-specifications.md).
+The above schema was built using the Hernandez methodology, as described in `Database Design for Mere Mortals` by Michael J. Hernandez— likely overkill for a project this size, but chosen out of a combination of wanting to be thorough about getting the models right, and personal curiosity about the methodology itself. This was my own initiative rather than something suggested by my tutor. The full process is described in [RESEARCH.md](RESEARCH.md) and [field specifications](docs/field-specifications.md).
 
-## ERD
+### ERD
 Entity Relationship Diagram showing the core data structure: User, Source, Unit, Note, Reference, MyWords and Question.
 
 ![ERD](docs/readme-assets/got_it_erd.png)
+
+
+### Navigation
+Navigation is split into eight layers, each addressing a different need:
+- Navigation to external pages via footer links and give feedback link in main navbar - base.html (project level)
+- Main nav - global, project-level actions (home, feedback, dashboard, log out) - base.html (project level)
+- Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen - `notes` app templates level
+- Sidebar / offcanvas - the Source->Unit content structure, and in Notes level pages also displaying links to the three note type tabs and standalone creation - reachable without losing your place - `notes` app partial
+- Breadcrumbs — orientation: shows exactly where you are and the path you took to get there - `notes` app template level
+- Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab - `notes` app Unit detail template
+- Pagination - sequential navigation within long lists - `notes` app template level
+- Relational linking — lets a user jump directly between related notes (e.g. from a reference to its linked My Words or Questions) rather than following the strict Source → Unit → note-type path, so related ideas stay reachable regardless of where the user currently is in the hierarchy - `notes` app template level
 
 
 ## Development Process (Agile Workflow)
@@ -551,17 +577,6 @@ Entity Relationship Diagram showing the core data structure: User, Source, Unit,
 **Handling two forms in one view**
 source_detail manages both the source-edit form and the add-unit form on a single page. Each POST is distinguished via a hidden form_type field. Whichever form isn't being submitted is reconstructed unbound (using existing instance data where relevant) so both forms render correctly regardless of which one was actually processed (pattern suggested and given by Claude AI),
 
-## Features
-### Navigation
-Navigation is split into eight layers, each addressing a different need:
-- Navigation to external pages via footer links and give feedbac link in main navbar
-- Main nav — global, app-level actions (home, feedback, dashboard, log out)
-- Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen
-- Sidebar / offcanvas — the Source→Unit content structure, always reachable without losing your place
-- Breadcrumbs — orientation: shows exactly where you are and the path you took to get there
-- Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab
-- Pagination - sequential navigation within long lists
-- Relational linking — lets a user jump directly between related notes (e.g. from a reference to its linked My Words or Questions) rather than following the strict Source → Unit → note-type path, so related ideas stay reachable regardless of where the user currently is in the hierarchy
 
 ## Design Decisions
 
