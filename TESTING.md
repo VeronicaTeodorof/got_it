@@ -97,6 +97,24 @@ null on linked mywords | Pass |
 | ANV-16 | test_valid_add_unit_submission_creates_unit_and_redirects | Valid add_unit submission creates a unit linked to the source and redirects to source detail page | Pass |
 | ANV-17 | test_invalid_add_unit_submission_does_not_create_unit | Invalid add_unit submission re-renders the page and does not create a unit | Pass |
 
+**Delete unit view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANV-18 | test_owner_can_delete_unit | Authenticated user can delete a unit and is redirected to source detail page | Pass |
+| ANV-19 | test_unit_belonging_to_different_source_returns_404 | Unit exists but isn't linked to the given source_pk -  confirms the second get_object_or_404's source filter works | Pass |
+| ANV-20 | test_unauthenticated_user_visits_unit_delete_url_redirects | Unauthenticated user requests delete url of an existing unit and gets redirected | Pass |
+
+**Unit detail view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| ANV-21 | test_authenticated_owner_accessing_unit_detail_page_gets_200 | Authenticated owner gets 200 status code when requesting detail page of a unit | Pass |
+| ANV-22 | test_unauthenticated_user_redirected | Any unauthenticated user is redirected when trying to access a unit detail page | Pass |
+| ANV-23 | test_authenticated_user_gets_404_for_another_user_unit | Authenticated user trying to access another user's unit detail page gets 404 response | Pass |
+| ANV-24 | test_authenticated_user_gets_404_for_inexistent_unit | Authenticated user requesting a unit that doesn't exists gets 404 | Pass |
+
+
 
 ##### urls.py
 
@@ -169,6 +187,12 @@ Tests how code written at model level reflects in UI
 | MNV-07 | Feedback message after successful source edit | 'Edit saved' message appears in source detail page | Pass |
 | MNV-08 | Feedback message after successful unit creation | 'Unit added' message appears in source detail page | Pass |
 
+**Delete unit view**
+
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MNV-09 | Feedback message after successful unit deletion | 'Unit deleted' message appears in source detail page | Pass |
+
 
 
 
@@ -199,11 +223,71 @@ Tests how code written at model level reflects in UI
 
 ### Repeating categories
 
-#### PERM (access control)
-#### AUTH (sign up / log in / log out / session)
-#### NAV-MAIN (navbar)
+#### Authentication: sign up / log in / session (AUTH)
+
+**Sign up page**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| AUTH-01 | Sign up form fields | Sign up form displays all fields correctly | | | |
+| AUTH-02 | Placeholders on sign up form |  All fields display descriptive placeholders instead of raw visible labels to achieve a clean layout | | | |
+| AUTH-03 | Communicating required fields to users on sign up form | Required fields include 'required' in the placeholder. Matching `label` elements are present in the DOM using Bootstrap's `visually-hidden` class to ensure full screen-reader accessibility| | | |
+| AUTH-04 | Submit button | Get started button present | | | |
+| AUTH-05 | Sign in alternative | Sign in alternative present for already registered users | | | |
+| AUTH-06 | Valid submission | Creates account and redirects to dashboard | | | |
+| AUTH-07 | Submission with blank fields | Form rejected errors shown | | | |
+| AUTH-08 | Submission with blank email field | Form rejected, error shown | | | |
+| AUTH-09 | Submission with wrong email format | Form rejected, error shown | | | |
+| AUTH-10 | Submission with already used email | Form rejected, error shown | | | |
+| AUTH-11 | Submission with blank username field | Form rejected, error shown | | | |
+| AUTH-12 | Submission with already used username | Form rejected, error shown | | | |
+| AUTH-13 | Submission with blank password field | Form rejected, error shown | | | |
+| AUTH-14 | Submission with blank password again field | Form rejected, error shown | | | |
+| AUTH-15 | Submission with duplicate password not matching | From rejected, error shown | | | |
+| AUTH-16 | Click sign in link | Navigates to sign in page | | | |
+
+**Sign in page**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| AUTH-17 | Sign in form fields | Sign in form displays all fields correctly | | | |
+| AUTH-18 | Placeholders on sign in form |  All fields display descriptive placeholders instead of raw visible labels to achieve a clean layout | | | |
+| AUTH-19 | Communicating required fields to users on sign in form | Required fields include 'required' in the placeholder. Matching `label` elements are present in the DOM using Bootstrap's `visually-hidden` class to ensure full screen-reader accessibility| | | |
+| AUTH-20 | Sign in button  | Present on page | | | |
+| AUTH-21 | Remember me option | Checkbox and text present on page | | | |
+| AUTH-22 | Sign up alternative | Present for unregistered users | | | |
+| AUTH-23 | Valid credentials submission | User is redirected to dashboard | | | |
+| AUTH-24 | Submission with blank fields | Form rejected, error shown | | | |
+| AUTH-25 | Submission with invalid credentials | Form rejected, error shown | | | |
+| AUTH-26 | Submission with blank email field | Form rejected, error shown | | | |
+| AUTH-27 | Submission with incorrectly formatted email | Form rejected, error shown | | | |
+| AUTH-28 | Submission with invalid password | Form rejected, error shown | | | |
+| AUTH-29 | Remember me unchecked | Upon closing and reopening browser user is not logged in, regardless of whether they actually previously logged out or not | | | |
+| AUTH-30 | Remember me checked, user does not log out at the end of session | Upon closing without logging out and reopening it, user is logged in, unless more than 2 weeks have passed since their last sign in | | | |
+| AUTH-31 | Remember me checked, user logs out at the end of session | Upon reopening browser user is asked to log in to access their account | | | |
+
+
+#### Main Navbar (MNAV)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| MNAV-01 | Anonymous state desktop | Navbar displays: logo, home, how it works, give feedback, sign in, sign up links | | | |
+| MNAV-02 | Authenticated user view desktop | Navbar displays: logo, home, how it works, give feedback, dashboard, log out | | |
+| MNAV-03 | Click logo link | Home page loads | | | |
+| MNAV-04 | Click home link | Home page loads | | | |
+| MNAV-05 | Click How it works link | How it works page loads | | | |
+| MNAV-06 | Click Give feedback link / test target="_blank" behaviour | Google form loads in a separate tab | | | |
+| MNAV-07 | Click sign in link | Sign in page loads | | | |
+| MNAV-08 | Click sign up link | Sign up page loads | | | |
+| MNAV-09 | Click Dashboard link | Dashboard page loads | | | |
+| MNAV-10 | Click Log out link | Redirects to Home page anonymous state | | | |
+| MNAV-11 | Anonymous state mobile | Navbar displays: logo, icons for home, how it works, give feedback, and again linkds for sign in and sign up | | | |
+| MNAV-12 | Authenticated user view mobile | Navbar displays: logo and icons for home, how it works, give feedback, dashboard and log out | | | |
+| MNAV-13 | Click all icon links on mobile view | Icons link to correct pages | | | |
 #### NAV-EXT (external links)
 #### NAV-SIDEBAR (source/unit tree)
+#### NAV-OFFCANVAS (offcanvas for mobile)
+#### NAV-BACK (back link for mobile)
 #### NAV-BREAD (breadcrumbs)
 #### NAV-PAGE (pagination)
 #### NAV-LINK (note-to-note linking)
@@ -220,6 +304,8 @@ Each category tested against:
 #### Reference note CRUD
 #### MyWords note CRUD
 #### Question note CRUD
+#### Home Page
+#### How it Works Page
 #### Other per-page features
 
 Each tested against:
