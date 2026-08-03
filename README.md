@@ -173,12 +173,22 @@ Acceptance criteria:
 
 - AC5: The user can manually log out at any time, which ends the session immediately regardless of "Remember me"
 </details>
+<details><summary>
+5. As a learner, I want the app to consistently enforce that only I can access and modify my own data, so that my content stays private and secure.</summary>
+
+Acceptance Criteria:
+- AC1: Anonymous users attempting to access any protected view (Source, Unit, or Note — list, detail, create, edit, delete) are redirected to the login page
+- AC2: A logged-in user attempting to access another user's Source, Unit, or Note (list, detail, create, edit, delete) receives a 404, not an error revealing the resource exists
+- AC3: Non-owner access attempts and attempts to access a genuinely nonexistent resource both return an identical 404 — so a logged-in user can never tell whether a resource belongs to someone else or doesn't exist at all
+- AC4: Nested resources are validated against their parent's ownership, not just their own primary key (e.g. deleting a Unit checks that both the Unit and its parent Source belong to the requesting user)
+- AC5: This pattern is applied consistently across all Source, Unit, and Note views, and is individually tested per-feature in stories 5–16 above
+</details>
 <br>
 
 **Structure**
 - **Sources**
 <details>
-<summary>5. As a learner, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
+<summary>6. As a learner, I want to see all my sources in a list, so that I can navigate to the one I want to work on.</summary>
 
 Acceptance Criteria:
 
@@ -189,7 +199,7 @@ Acceptance Criteria:
 - AC5: Empty state shown when no sources exist, encouraging user to create one
 </details>
 <details>
-<summary>6. As a learner I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
+<summary>7. As a learner I want to be able to create a source, so that I can organise my notes around a single book, course, or subject.
 </summary>
 Acceptance Criteria:
 
@@ -201,7 +211,7 @@ Acceptance Criteria:
 - AC6: A user cannot create two sources with the same name, an error is shown if they try
 </details>
 <details>
-<summary>7. As a learner I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
+<summary>8. As a learner I want to be able to edit a source name, author, or type, so that I can keep it accurate.</summary>
 
 Acceptance Criteria:
 - AC1: User can edit source name, author, and type
@@ -210,7 +220,7 @@ Acceptance Criteria:
 - AC4: One type choice has to be selected - error shown if no choice is selected
 </details>
 <details>
-<summary>8. As a learner I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
+<summary>9. As a learner I want to be able to delete a source with confirmation step when I no longer need it, so that my dashboard stays uncluttered.</summary>
 
 - AC1: Only accessible to logged-in users; unauthenticated user is redirected to login page
 - AC2: Only accessible to the source owner — another logged-in user gets 404
@@ -226,7 +236,7 @@ Acceptance Criteria:
  - **Units**
 
 <details>
-<summary> 9. As a learner, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
+<summary> 10. As a learner, I want to see all the units within a specific source, so that I can navigate to the unit I want to work on</summary>
 
 Acceptance Criteria:
 
@@ -243,7 +253,7 @@ Acceptance Criteria:
 
 </details>
 <details>
-<summary>10. As a learner I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
+<summary>11. As a learner I want to be able to create a unit within a source, so that I can organise my notes by topic.</summary>
 
 Acceptance Criteria:
 
@@ -258,7 +268,7 @@ Acceptance Criteria:
 - AC9: When there are errors on the form, page loads with expanded form so feedback is immediately visible
 </details>
 <details>
-<summary>11. As a learner I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
+<summary>12. As a learner I want to be able to rename a unit, so that I can keep it aligned with my source structure.</summary>
 
 Acceptance Criteria:
 - AC1: Edit button present in dropdown
@@ -271,7 +281,7 @@ Acceptance Criteria:
 - AC8: Submitting the form with duplicate name rerenders the form with error
 </details>
 <details>
-<summary>12. As a learner I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
+<summary>13. As a learner I want to be able to delete a unit with a confirmation step when I no longer need it, so that I can keep my source structure tidy.</summary>
 
 Acceptance Criteria:
 - AC1: Delete button present on inline dropdown
@@ -286,7 +296,7 @@ Acceptance Criteria:
 
 - **Notes**
 
-<details> <summary>13. As a learner, I want to see all my notes within a unit in one view, so that I can review everything I've captured for that topic in one place.</summary>
+<details> <summary>14. As a learner, I want to see all my notes within a unit in one view, so that I can review everything I've captured for that topic in one place.</summary>
 
 Acceptance Criteria:
 
@@ -300,7 +310,7 @@ Acceptance Criteria:
 - AC8: Empty state shown per tab when no notes of that type exist, encouraging user to create one
 </details>
 <details>
-<summary>14. As a learner, I want to view a note's full detail on its own page, so that I can read or work with it without distraction from other notes.</summary>
+<summary>15. As a learner, I want to view a note's full detail on its own page, so that I can read or work with it without distraction from other notes.</summary>
 
 Acceptance Criteria:
 
@@ -311,7 +321,7 @@ Acceptance Criteria:
 - AC5: Breadcrumb navigation shows the note's position within its source and unit
 </details>
 <details>
- <summary>15. As a learner, I want to edit a note, so that I can correct or improve it after creating it.</summary>
+ <summary>16. As a learner, I want to edit a note, so that I can correct or improve it after creating it.</summary>
 
 Acceptance Criteria:
 
@@ -323,7 +333,7 @@ Acceptance Criteria:
 - AC6: Cancelling an edit returns the user to the note detail page without saving changes
 </details>
 <details>
-<summary>16. As a learner, I want to delete a note with a confirmation step, so that I don't lose it by accident but can remove it when no longer needed.</summary>
+<summary>17. As a learner, I want to delete a note with a confirmation step, so that I don't lose it by accident but can remove it when no longer needed.</summary>
 
 Acceptance Criteria:
 
@@ -339,7 +349,7 @@ Acceptance Criteria:
 
 **Workflow Theme**
 <details><summary>
-17. As a learner, I want to create a reference note within a Unit, so that I can capture source material I'm studying before I paraphrase or question it.</summary>
+18. As a learner, I want to create a reference note within a Unit, so that I can capture source material I'm studying before I paraphrase or question it.</summary>
 
 Acceptance Criteria:
 - AC1: User can select "create reference note" from a Unit's detail page or from the sidebar
@@ -350,7 +360,7 @@ Acceptance Criteria:
 - AC6: Selecting "cancel" returns the user to the previous page without creating a note
 </details>
 <details><summary>
-18. As a learner, I want to create a MyWords note either linked to a reference note, so that I can paraphrase source material in my own words as part of engaging with it actively or standalone to capture links with prior learning or reading.</summary>
+19. As a learner, I want to create a MyWords note either linked to a reference note, so that I can paraphrase source material in my own words as part of engaging with it actively or standalone to capture links with prior learning or reading.</summary>
 
 Acceptance Criteria:
 - AC1: User can create a linked My Words note from Reference detail view
@@ -363,7 +373,7 @@ Acceptance Criteria:
 - AC8: Selecting "cancel" returns the learner to the previous page without creating a note
 </details>
 <details><summary>
-19. As a learner, I want to create a Question note either standalone or linked to a reference note, so that I can capture questions that arise as I engage with source material.</summary>
+20. As a learner, I want to create a Question note either standalone or linked to a reference note, so that I can capture questions that arise as I engage with source material.</summary>
 
 Acceptance Criteria:
 - AC1: User can create a linked Question note from Reference detail view
@@ -377,7 +387,7 @@ Acceptance Criteria:
 - AC9: Selecting "cancel" returns the learner to the previous page without creating a note
 </details>
 <details><summary>
-20. As a learner, I want to answer a Question note by creating a linked MyWords note, so that I can resolve my questions by working through them in my own words.</summary>
+21. As a learner, I want to answer a Question note by creating a linked MyWords note, so that I can resolve my questions by working through them in my own words.</summary>
 
 Acceptance Criteria:
 - AC1: User can select Answer in My Words from a Question detail view which leads to creating a new My Words note related to Question
@@ -386,7 +396,7 @@ Acceptance Criteria:
 - AC4: Once created, the MyWords note's origin badge displays 'From Question'
 </details>
 <details><summary>
-21. As a learner, I want to view all notes linked from a reference note on its detail page, so that I can see how I've already engaged with that source material.</summary>
+22. As a learner, I want to view all notes linked from a reference note on its detail page, so that I can see how I've already engaged with that source material.</summary>
 
 Acceptance Criteria:
 - AC1: Reference note detail page displays a list of linked MyWords notes, if any
@@ -395,7 +405,7 @@ Acceptance Criteria:
 - AC4: Selecting a linked note navigates to its detail page
 </details>
 <details><summary>
-22. As a learner, I want to view the notes linked to a Question note on its detail page, so that I can see how I answered my question.</summary>
+23. As a learner, I want to view the notes linked to a Question note on its detail page, so that I can see how I answered my question.</summary>
 
 Acceptance Criteria:
 - AC1: Question note detail page displays the linked MyWords note(s), if any
@@ -406,7 +416,7 @@ Acceptance Criteria:
 
  **UI/UX Theme**
  <details>
- <summary>23. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
+ <summary>24. As a new or returning user I want to see a home page that presents the app's value and gives me clear options to sign up or log in so that I can understand what the app offers and easily get started.</summary>
 
 Acceptance Criteria:
 - AC1: Home page displays the app's value proposition (tagline/headline)
@@ -416,7 +426,7 @@ Acceptance Criteria:
 - AC5: Home page footer displays attribution and relevant links
 </details>
 <details><summary>
-24. As a learner, I want a walkthrough of the app's structure and workflow, so that I understand how it works before I start creating content.
+25. As a learner, I want a walkthrough of the app's structure and workflow, so that I understand how it works before I start creating content.
 </summary>
 
 Acceptance Criteria:
@@ -426,14 +436,14 @@ Acceptance Criteria:
 - AC4: Empy states support user experience by explaining the role of each piece of structure or workflow
 </details>
 <details><summary>
-25. As a developer, I want to collect user feedback via an external Google Form, so that I can gather insight on usability and prioritize future improvements.</summary>
+26. As a developer, I want to collect user feedback via an external Google Form, so that I can gather insight on usability and prioritize future improvements.</summary>
 
 Acceptance Criteria:
 - AC1: Feedback link/button is visible and accessible from key pages (e.g. footer or nav)
 - AC2: Link opens the Google Form in a new tab, preserving the user's place in the app
 </details>
 <details><summary>
-26. As a learner, I want navigation that reflects the app's structure, so that I always know where I am and how to get back to where I came from.</summary>
+27. As a learner, I want navigation that reflects the app's structure, so that I always know where I am and how to get back to where I came from.</summary>
 
 Acceptance Criteria:
 - AC1: Main navigation is present and consistent across all pages
@@ -443,7 +453,7 @@ Acceptance Criteria:
 - AC5: Back-navigation is available wherever a user might need to retrace a step
 </details>
 <details><summary>
-27. As a learner, I want the app to be usable with assistive technology, so that I'm not excluded from using it regardless of ability.
+28. As a learner, I want the app to be usable with assistive technology, so that I'm not excluded from using it regardless of ability.
 </summary>
 
 Acceptance Criteria:
@@ -453,7 +463,7 @@ Acceptance Criteria:
 - AC4: Color contrast meets standard minimum throughout
 </details>
 <details><summary>
-28. As a learner, I want the app to work well on any device, so that I can study on whatever I have to hand.</summary>
+29. As a learner, I want the app to work well on any device, so that I can study on whatever I have to hand.</summary>
 
 Acceptance Criteria:
 - AC1: Layout adapts cleanly across mobile, tablet, and desktop breakpoints
@@ -462,7 +472,7 @@ Acceptance Criteria:
 - AC4: Touch targets are appropriately sized on smaller screens
 </details>
 <details><summary>
-29. As a learner, I want a clean, uncluttered interface, so that I can focus on the content I'm studying without distraction.</summary>
+30. As a learner, I want a clean, uncluttered interface, so that I can focus on the content I'm studying without distraction.</summary>
 
 Acceptance Criteria:
 - AC1: Pages avoid unnecessary visual elements that don't support the task at hand
@@ -473,19 +483,19 @@ Acceptance Criteria:
 
 
 ### Features
-- Authentication: stories 1–4
-- Structure: stories 5–16 (Sources, Units, Notes CRUD + list views)
-- Comprehension Workflow: stories 17–22 (reference/MyWords/Question creation, answering, viewing links)
-- Home Page: story 23
-- Walkthrough: story 24
-- Feedback Form: story 25
-- Navigation: story 26
+- Authentication and autorization: stories 1–5
+- Structure: stories 6–17 (Sources, Units, Notes CRUD + list views)
+- Comprehension Workflow: stories 18–23 (reference/MyWords/Question creation, answering, viewing links)
+- Home Page: story 24
+- Walkthrough: story 25
+- Feedback Form: story 26
+- Navigation: story 27
 
 **Non-functional requirements**
 
-- Minimalist UI:story 29
-- Responsiveness:story 28
-- Accessibility: story 27
+- Minimalist UI:story 30
+- Responsiveness:story 29
+- Accessibility: story 28
 
 
 ## Structure
@@ -494,7 +504,7 @@ Structure, in this project, covers both the user-facing organization of features
 
 ### Features -> Apps
 
-- Authentication (stories 1–4) -> project level (django-allauth)
+- Authentication (stories 1–4) -> project level (django-allauth) and autorization (story 5) enforced within notes app views (login_required and never_cache decorators, ownership/queryset filtering) — applied consistently across Source, Unit, and Note views
 - Structure + Comprehension Workflow (stories 5–22) -> `notes` app ( these two features map to one codebase app, as they share the same models, so splitting them wouldn't reduce coupling, just add import overhead)
 - Home Page / Walkthrough -> `pages` app
 - Feedback (story 25) -> a link in main navigation (base.html), pointing to an external Google Form — no dedicated view or app
@@ -540,16 +550,81 @@ Entity Relationship Diagram showing the core data structure: User, Source, Unit,
 
 
 ### Navigation
-Navigation is split into eight layers, each addressing a different need:
+Navigation is split into nine layers, each addressing a different need:
 - Navigation to external pages via footer links and give feedback link in main navbar - base.html (project level)
 - Main nav - global, project-level actions (home, feedback, dashboard, log out) - base.html (project level)
 - Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen - `notes` app templates level
 - Sidebar / offcanvas - the Source->Unit content structure, and in Notes level pages also displaying links to the three note type tabs and standalone creation - reachable without losing your place - `notes` app partial
 - Breadcrumbs — orientation: shows exactly where you are and the path you took to get there - `notes` app template level
 - Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab - `notes` app Unit detail template
+- Situational navigation via query parameters - after cancelling an action, the URL (?next=) carries the user back to the page they came from rather than to a fixed default - `notes` app, view + template level
 - Pagination - sequential navigation within long lists - `notes` app template level
 - Relational linking — lets a user jump directly between related notes (e.g. from a reference to its linked My Words or Questions) rather than following the strict Source → Unit → note-type path, so related ideas stay reachable regardless of where the user currently is in the hierarchy - `notes` app template level
 
+## Skeleton
+
+### Layout
+
+The backbone of the entire project is access control. The app boundaries are drawn along the same seam as the access boundary. Anonymous-only pages (login, signup) are handled by django-allauth at project level; `pages` holds anything that doesn't require identity to be meaningful; `notes` holds anything that fundamentally requires an owner:
+
+<p align="center">
+  <img src="docs/readme-assets/access-map-venn.png" alt="Access map by authentication state" style="height: 400px">
+</p>
+
+This same boundary is visible directly in the main nav, the one element that spans the entire project. A single `{% if request.user.is_authenticated %}` conditional in `base.html` controls it: Home, How it works, and Give feedback render identically either way, sitting outside the conditional — the shared zone from the diagram above, made concrete. Only the final nav items swap: Dashboard + Log out for authenticated users, Sign In + Sign Up for anonymous ones.
+
+Anonymous state main navbar
+![Anonymous state main navbar](docs/readme-assets/anonymous.png)
+
+Authenticated state main navbar
+![Authenticated state main navbar](docs/readme-assets/authenticated.png)
+
+
+#### django-allauth account templates
+
+The login and signup pages themselves are straightforward forms with no distinctive layout decisions — form fields, validation errors, and submit buttons following standard patterns. Their only notable design choice is visual (see Surface), matching the underline-input style used throughout the rest of the app.
+
+#### pages app
+
+**Home page**
+
+The home page began as a rough split-layout sketch: text and CTA on the left, the workflow diagram on the right, footer with attribution links. An early "loom" footer link reflected a passing idea to include demo videos — dropped before implementation in favor of Give Feedback, which better served the MVP's actual goal.
+
+
+Home page wireframe
+<p align="center">
+<img src="docs/readme-assets/home-page-wireframe.png" alt="Home page wireframe" width="600">
+</p>
+
+
+The final build follows a single-column, top-to-bottom flow: tagline -> hero statement -> primary CTA -> diagram + explanation -> footer. Each section answers one question in sequence - what is this, why should I care, what do I do now, how does it actually work - before handing off to the footer's attribution and external links.
+
+The hero copy's structure — a short, declarative statement paired with a supporting line - was inspired by Obsidian's tagline pattern, encountered during market research, though the content diverges to reflect this app's own premise: testing understanding through gaps, rather than general thought-organization.
+
+<p align="center">
+<img src="docs/readme-assets/obsidian-tagline.png" alt="Obsidian tagline" width="45%">
+<img src="docs/readme-assets/home-hero.png" alt="got it? hero statement" width="45%">
+</p>
+
+The "Get started" CTA sits alone, with generous whitespace above and below, keeping it the singular, unambiguous next action on the page.
+The hand-drawn workflow diagram (the same one from Strategy's hypothesis section) sits alongside a short "How it works" explanation.
+
+<p align="center"> <img src="docs/readme-assets/home-page.png" alt="Home page layout" width="700"> </p>
+
+
+**How it Works**
+
+"How it works" is a single-column page that scrolls, since its job is closer to documentation than a landing pitch. It moves through four parts: a plain definition, the "why" (the main hook), an explanation of the three note types next to the reused workflow diagram, and two sections that show what's flexible versus what's fixed.
+
+<p align="center"> <img src="docs/readme-assets/how-it-works-1.png" alt="How it works — definition, why, explanation, Fig. 1 diagram" width="700"> </p>
+
+Diagrams are numbered and captioned (Fig. 1, Fig. 2) instead of just dropped in as images — this matches the app's own notebook/documentation style, and gives each diagram something the text can point back to.
+
+The two middle sections are placed next to each other on purpose, as a contrast. "Flexible workflow" makes clear the Reference → My Words/Question loop isn't required. "Rigid structure" then makes clear the opposite: the Source → Unit → Note hierarchy is required — a unit can't exist without a source, a note can't exist without a unit, so nothing ends up orphaned.
+
+<p align="center"> <img src="docs/readme-assets/how-it-works-2.png" alt="Flexible workflow section with tips callout" width="700"> </p> <p align="center"> <img src="docs/readme-assets/how-it-works-3.png" alt="Rigid structure section with Fig. 2 diagram" width="700"> </p>
+
+Putting these two sections back to back, each with its own numbered figure, shows a new user what's optional and what's not, before they've created a single note.
 
 ## Development Process (Agile Workflow)
 
