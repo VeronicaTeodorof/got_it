@@ -212,6 +212,10 @@ Tests how code written at model level reflects in UI
 ##### urls.py
 ##### templates
 
+| Test ID | Test | Covers | Result |
+|---------|------|--------|--------|
+| MPT-01 | Verify external link security attributes | Verify external link security attributes | Inspect page source code or elements to confirm all external anchor tags contain `target="_blank"` and `rel="noopener"` to ensure cross-origin browser security | |
+
 #### got_it project
 ##### urls.py
 ##### settings.py
@@ -222,6 +226,64 @@ Tests how code written at model level reflects in UI
 ## Pass 2 — User-Perspective Testing
 
 ### Repeating categories
+
+#### Main Navbar (MNAV)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| MNAV-01 | Anonymous state desktop | Navbar displays: logo, home, how it works, give feedback, sign in, sign up links | | | |
+| MNAV-02 | Authenticated user view desktop | Navbar displays: logo, home, how it works, give feedback, dashboard, log out | | |
+| MNAV-03 | Click logo link | Home page loads | | | |
+| MNAV-04 | Click home link | Home page loads | | | |
+| MNAV-05 | Click How it works link | How it works page loads | | | |
+| MNAV-06 | Click Give feedback link / test target="_blank" behaviour | Google form loads in a separate tab | | | |
+| MNAV-07 | Click sign in link | Sign in page loads | | | |
+| MNAV-08 | Click sign up link | Sign up page loads | | | |
+| MNAV-09 | Click Dashboard link | Dashboard page loads | | | |
+| MNAV-10 | Click Log out link | Redirects to Home page anonymous state | | | |
+| MNAV-11 | Anonymous state mobile | Navbar displays: logo, icons for home, how it works, give feedback, and again linkds for sign in and sign up | | | |
+| MNAV-12 | Authenticated user view mobile | Navbar displays: logo and icons for home, how it works, give feedback, dashboard and log out | | | |
+| MNAV-13 | Click all icon links on mobile view | Icons link to correct pages | | | |
+
+
+#### Content Navigation (source/unit/notes tree)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| TREE-01 | Click Add source link | Navigates to Dashboard with Add Source form expanded | | | |
+| TREE-02 | Click Sources link | Navigates to Dashboard with Add Source form collapsed | | | |
+| TREE-03 | Click Chevron right | Expands the sources list tree | | | |
+| TREE-04 | Sources count | Present in tree and accurate | | | |
+| TREE-05 | Scrollable list | List of sources is scrollable | | | |
+| TREE-06 | Click an individual source in the list | Navigates to that specific source detail page | | | |
+| TREE-07 | Individual chevron icon per source | Chevron icon present to the right of every source | | | |
+| TREE-08 | Long sources name display | Long sources names are truncated with ellipsis, while tooltips display the entire name | | | |
+| TREE-09 | Click individual source chevron | Expands a list of units belonging to that source | | | |
+| TREE-10 | Units count | Present in tree when units list expanded and accurate | | | |
+| TREE-11 | Plus icon | Plus icon present in Tree when units list is expanded and tooltip reads 'Add unit' | | | |
+| TREE-12 | Click + icon | Navigates to unit detail page, unit form expanded | | | |
+| TREE-13 | Click an individual unit | Navigates to that specific unit detail page | | | |
+| TREE-14 | Long units name display | Long units names are truncated with ellipsis, while tooltips display the entire name | | | |
+| TREE-15 | Notes pages tree content | Lower part of tree content shows links to reference notes, mywords notes, and question notes , and + icons associated with each link | | | |
+| TREE-16 | Click Reference link | Navigates to Unit detail page with Reference panel active | | | |
+| TREE-17 | Click My Words link | Navigates to Unit detail page with My Words panel active | | | |
+| TREE-18 | Click Question link | Navigates to Unit detail page with Question panel active | | | |
+| TREE-19 | Plus icons tooltips | All plus icons show descriptive tooltips | | | |
+| TREE-20 | Click plus icon | Navigates to the specific note type create page | | | |
+| TREE-21 | Empty tree | Newly registered account dashboard tree shows 0 sources | | | |
+#### NAV-OFFCANVAS (offcanvas for mobile)
+#### NAV-BACK (back link for mobile)
+#### NAV-BREAD (breadcrumbs)
+#### NAV-PAGE (pagination)
+#### NAV-LINK (note-to-note linking)
+#### A11Y (accessibility)
+#### RESPONSIVE (responsiveness across breakpoints)
+
+Each category tested against:
+- **Local**
+- **Deployed**
+
+### Per-feature tests
 
 #### Authentication: sign up / log in / session (AUTH)
 
@@ -266,38 +328,16 @@ Tests how code written at model level reflects in UI
 | AUTH-30 | Remember me checked, user does not log out at the end of session | Upon closing without logging out and reopening it, user is logged in, unless more than 2 weeks have passed since their last sign in | | | |
 | AUTH-31 | Remember me checked, user logs out at the end of session | Upon reopening browser user is asked to log in to access their account | | | |
 
-
-#### Main Navbar (MNAV)
+#### External navigation: footer links, give feedback (EXT)
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|-------|-------|------------|
-| MNAV-01 | Anonymous state desktop | Navbar displays: logo, home, how it works, give feedback, sign in, sign up links | | | |
-| MNAV-02 | Authenticated user view desktop | Navbar displays: logo, home, how it works, give feedback, dashboard, log out | | |
-| MNAV-03 | Click logo link | Home page loads | | | |
-| MNAV-04 | Click home link | Home page loads | | | |
-| MNAV-05 | Click How it works link | How it works page loads | | | |
-| MNAV-06 | Click Give feedback link / test target="_blank" behaviour | Google form loads in a separate tab | | | |
-| MNAV-07 | Click sign in link | Sign in page loads | | | |
-| MNAV-08 | Click sign up link | Sign up page loads | | | |
-| MNAV-09 | Click Dashboard link | Dashboard page loads | | | |
-| MNAV-10 | Click Log out link | Redirects to Home page anonymous state | | | |
-| MNAV-11 | Anonymous state mobile | Navbar displays: logo, icons for home, how it works, give feedback, and again linkds for sign in and sign up | | | |
-| MNAV-12 | Authenticated user view mobile | Navbar displays: logo and icons for home, how it works, give feedback, dashboard and log out | | | |
-| MNAV-13 | Click all icon links on mobile view | Icons link to correct pages | | | |
-#### NAV-EXT (external links)
-#### NAV-SIDEBAR (source/unit tree)
-#### NAV-OFFCANVAS (offcanvas for mobile)
-#### NAV-BACK (back link for mobile)
-#### NAV-BREAD (breadcrumbs)
-#### NAV-PAGE (pagination)
-#### NAV-LINK (note-to-note linking)
-#### A11Y (accessibility)
-#### RESPONSIVE (responsiveness across breakpoints)
+| EXT-01 | Give feedback link | Opens Google form in a separate tab | | | |
+| EXT-02 | GitHub link | Opens GitHub page in a separate tab | | | |
+| EXT-03 | Linked in link | Opens Linked in page in a separate tab | | | |
 
-Each category tested against:
-- **Local**
-- **Deployed**
-### Per-feature tests
+
+
 
 #### Source CRUD
 #### Unit CRUD
