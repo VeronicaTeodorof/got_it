@@ -273,8 +273,25 @@ Tests how code written at model level reflects in UI
 | TREE-21 | Empty tree | Newly registered account dashboard tree shows 0 sources | | | |
 #### NAV-OFFCANVAS (offcanvas for mobile)
 #### NAV-BACK (back link for mobile)
-#### NAV-BREAD (breadcrumbs)
-#### NAV-PAGE (pagination)
+#### Breadcrumbs (BNAV)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| BNAV-01 | Page presence | Present in Unit detail page and in Notes pages | | | |
+| BNAV-02 | Trail | Starts with parent source name link and ends with last parent | | | |
+| BNAV-03 | Content | Updates dynamically dependent on page and item | | | |
+| BNAV-04 | Click breadcrumb link | Navigates cleanly to the specific parent item's detail view page | | | |
+| BNAV-05 | Long names display | Long names are truncated with ellipsis | | | |
+#### Pagination (PAG)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| PAG-01 | Number of items per page | Each page correctly displays 8 items per page unless it is an incomplete last page | | | |
+| PAG-02 | Click Next | Navigates to next page | | | |
+| PAG-03 | Click Previous | Navigates to previous page | | | |
+| PAG-04 | 8 or less items | Pagination is not displayed | | |
+| PAG-05 | First page | Previous link is not displayed | | | |
+| PAG-06 | Last page | Next link is not displayed | | | |
 #### NAV-LINK (note-to-note linking)
 #### A11Y (accessibility)
 #### RESPONSIVE (responsiveness across breakpoints)
