@@ -22,7 +22,7 @@ class SourceForm(forms.ModelForm):
         new_choices = []
         for choice in self.fields['source_type'].choices:
             if choice[0] == '':
-                new_choices.append(('', 'type'))
+                new_choices.append(('', 'type required'))
             else:
                 new_choices.append(choice)
         self.fields['source_type'].choices = new_choices
@@ -41,9 +41,7 @@ class SourceForm(forms.ModelForm):
                                                   'name required'}),
             'source_author': forms.TextInput(attrs={'class': 'form-input',
                                                     'placeholder': 'author'}),
-            'source_type': forms.Select(attrs={'class': 'form-input',
-                                               'placeholder':
-                                               'type required'}),
+            'source_type': forms.Select(attrs={'class': 'form-input'}),
         }
 
     # Ensures data consistency: all blank author fields saved as None,
