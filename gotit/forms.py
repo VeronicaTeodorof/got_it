@@ -2,6 +2,7 @@ from allauth.account.forms import SignupForm, LoginForm
 
 
 class CustomSignupForm(SignupForm):
+    """Custom Form for Sign Up"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = 'auth-input'
@@ -18,6 +19,7 @@ class CustomSignupForm(SignupForm):
 
 
 class CustomLoginForm(LoginForm):
+    """Custom Form for Login"""
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['login'].widget.attrs['class'] = 'auth-input'

@@ -249,7 +249,7 @@ class MyWordsModelTest(TestCase):
 
     def test_deleting_question_sets_mywords_reference_to_null(self):
         """
-        ANM-10: Tests that deleting a question note sets question field to
+        ANM-12: Tests that deleting a question note sets question field to
         null on linked my words note
         """
         mywords = MyWords.objects.create(

@@ -354,9 +354,50 @@ Each category tested against:
 | EXT-03 | Linked in link | Opens Linked in page in a separate tab | | | |
 
 
+#### Actions partial
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| ACT-01 | Display | Displays as a 3 dot icon whenever edit and delete actions are needed | | | |
+| ACT-02 | Click 3 dots icon | Opens a dropdown with edit and delete actions selectable | | | |
+| ACT-03 | Click edit | Displays source/unit forms in edit mode or navigates to the specific note's edit page | | | |
+| ACT-04 | Click delete | Opens a delete modal | | | |
 
 
 #### Source CRUD
+
+**Create source**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SCRUD-01 | Click Add source button | Expands Add source form | | | |
+| SCRUD-02 | Add source form fields | Add source form correctly displays name, author and source type fields | | | |
+| SCRUD-03 | Save and Cancel buttons | Present on form | | | |
+| SCRUD-04 | Placeholders | All fields display descriptive placeholders instead of raw visible labels to achieve a clean layout | | | |
+| SCRUD-05 | Communicating required fields to users on add source form | Required fields include 'required' in the placeholder. Matching `label` elements are present in the DOM using Bootstrap's `visually-hidden` class to ensure full screen-reader accessibility | | | |
+| SCRUD-06 | Click type select | Opens a dropdown with choices | | | |
+| SCRUD-07 | Selection | Only one choice can be selected at one time | | | |
+| SCRUD-08 | Valid submission | Creates source, reloads dashboard with sources list updated to include the newly created source, shown first in list | | | |
+| SCRUD-09 | Blank fields | Form rejected, errors shown | | | |
+| SCRUD-10 | Blank name field | Form rejected, error shown | | | |
+| SCRUD-11 | Blank author | Form submits | | | |
+| SCRUD-12 | Duplicate name | Form rejected, error shown | | | |
+| SCRUD-13 | Blank type | Form rejected, error shown | | | |
+| SCRUD-14 | Click save button | Saves form if valid | | | |
+| SCRUD-15 | Click cancel button | Collapses and clears the form | | | |
+| SCRUD-16 | Click cancel after invalid submission with errors showing on form | Collapses and clears the form | | | |
+
+**Read Source**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SCRUD-17 | Individual source display | Each source in the list of sources displays name, author if present, and type badge | | | |
+| SCRUD-18 | Click an individual source | Navigates to the the specific source detail page | | | |
+| SCRUD-19 | Empty state message | Displayed when no source has been created | | | |
+| SCRUD-19 | Source header in source detail page | Shows source name, author if present and type badge and a 3 dots icon as header | | | |
+| SCRUD-20 | Source detail page | Shows Add unit button and list of its units | | | |
+| SCRUD-21 | Empty state message for units | Displayed when no units have been created in that source | | | |
+
 #### Unit CRUD
 #### Reference note CRUD
 #### MyWords note CRUD
@@ -414,7 +455,16 @@ The following pages have been validated with [Code Institute CI Python Linter](h
 - [notes/tests/test_models.py](docs/readme-assets/notes_test_models_validation.png) - no errors found
 - [notes/forms.py](docs/readme-assets/notes_forms_validation.png) - no errors found
 - [notes/tests/test_forms.py](docs/readme-assets/notes_test_forms_validation.png) - no errors found
+- [notes/context_processors.py](docs/readme-assets/notes-context-processor-validation.png) - no errors found
+- [notes/urls.py](docs/readme-assets/notes_urls_validation.png) - no errors found
+- [notes/views.py](docs/readme-assets/notes_views.png) - no errors found
+- [notes/tests_views.py](docs/readme-assets/notes_tests_views_validation.png) - not errors fourd.
+- [notes/admin.py](docs/readme-assets/notes_admin_validation.png) - no errors found
+- [pages/urls.py](docs/readme-assets/pages_urls_validation.png) - no errors found
+- [pages/views.py](docs/readme-assets/pages_views_validation.png) - no errors found
+- [forms.py](docs/readme-assets/forms_validation.png) - no errors found
+- [urls.py](docs/readme-assets/urls_validation.png) - no errors found
 
-- **Lighthouse** — performance, accessibility, best practices, SEO
+ **Lighthouse** — performance, accessibility, best practices, SEO
   (cross-references A11Y and RESPONSIVE categories in Pass 2 — a mechanical
   complement to those manual checks, not a replacement)

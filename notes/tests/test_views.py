@@ -268,180 +268,126 @@ class DeleteSourceView(TestCase):
         self.assertFalse(Source.objects.filter(pk=self.source.pk).exists())
 
 
-# class UnitDetailView(TestCase):
-#     """
-#     Tests for unit detail view
-#     """
+class DeleteUnitViewTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='user',
+            email="user@testing.com",
+            password="test")
+        self.source = Source.objects.create(
+            user=self.user, source_name='Source', source_type='book'
+        )
+        self.unit = Unit.objects.create(source=self.source, unit_name='Unit')
 
-#     def setUp(self):
-#         """
-#         Creates user, source and unit
-#         """
-#         self.user = User.objects.create_user(
-#             username='tester',
-#             password='test'
-#         )
-#         self.source = Source.objects.create(
-#             user=self.user,
-#             source_name='source',
-#             source_type='book'
-#         )
-#         self.unit = Unit.objects.create(
-#             source=self.source,
-#             unit_name='unit'
-#         )
+    def test_owner_can_delete_unit(self):
+        """ANV-18: Authenticated user can delete a unit
+        and is redirected to source detail page
+        """
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('notes:delete-unit', args=[self.source.pk, self.unit.pk])
+        )
+        self.assertRedirects(
+            response, reverse('notes:source-detail', args=[self.source.pk])
+        )
+        self.assertFalse(Unit.objects.filter(pk=self.unit.pk).exists())
 
-#     def test_authenticated_owner_accessing_unit_detail_page_gets_200(self):
-#         """
-#         Authenticated owner gets 200 status code when requesting
-#             detail page of a unit
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.get(reverse(
-#             'unit-detail',
-#             args=[self.source.pk, self.unit.pk]
-#             ))
-#         self.assertEqual(response.status_code, 200)
+    def test_unit_belonging_to_different_source_returns_404(self):
+        """
+        ANV-19: Unit exists but isn't linked to the given source_pk —
+        confirms the second get_object_or_404's source= filter works.
+        """
+        other_source = Source.objects.create(
+            user=self.user, source_name='Other Source', source_type='book'
+        )
+        self.client.force_login(self.user)
+        response = self.client.post(
+            reverse('notes:delete-unit', args=[other_source.pk, self.unit.pk])
+        )
+        self.assertEqual(response.status_code, 404)
+        self.assertTrue(Unit.objects.filter(pk=self.unit.pk).exists())
 
-#     def test_unauthenticated_user_redirected(self):
-#         """
-#         Any unauthenticated user is redirected
-#         when trying to access a unit detail page
-#         """
-#         response = self.client.get(reverse(
-#             'unit-detail',
-#             args=[self.source.pk, self.unit.pk]
-#         ))
-#         self.assertEqual(response.status_code, 302)
-
-#     def test_authenticated_user_gets_404_for_another_user_unit(self):
-#         """
-#         Authenticated user trying to access another user's unit detail page
-#         gets 404 response
-#         """
-#         user2 = User.objects.create_user(
-#             username='tester2',
-#             password='test'
-#         )
-#         self.client.force_login(user2)
-#         response = self.client.get(reverse(
-#             'unit-detail',
-#             args=[self.source.pk, self.unit.pk]
-#             ))
-#         self.assertEqual(response.status_code, 404)
-
-#     def test_authenticated_user_gets_404_for_inexistent_unit(self):
-#         """
-#         Authenticated user requesting a unit that doesn't exists gets 404
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.get(reverse(
-#             'unit-detail',
-#             args=[self.source.pk, 800]
-#         ))
-#         self.assertEqual(response.status_code, 404)
-
-#     def test_unit_name_is_correctly_displayed(self):
-#         """
-#         Unit name correctly shows on unit detail page
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.get(reverse(
-#             'unit-detail',
-#             args=[self.source.pk, self.unit.pk]
-#         ))
-#         self.assertContains(response, self.unit.unit_name)
-
-#     def test_successful_unit_creation_redirects_to_unit_page(self):
-#         """
-#         User is redirected to unit detail page
-#         after successfully creating a unit.
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.post(
-#             reverse('source-detail',
-#                     args=[self.source.pk]
-#                     ),
-#             data={'unit_name': 'Unit1'}
-#         )
-#         self.assertEqual(response.status_code, 302)
-#         unit = Unit.objects.get(unit_name='Unit1')
-#         self.assertRedirects(response,
-#                              reverse('unit-detail',
-#                                      kwargs={'source_pk': self.source.pk,
-#                                              'unit_pk': unit.pk}))
+    def test_unauthenticated_user_visits_unit_delete_url_redirects(self):
+        """
+        ANV-20: Unauthenticated user requests delete url of an existing unit
+        and gets redirected
+        """
+        response = self.client.get(reverse(
+            'notes:delete-unit', args=[self.source.pk, self.unit.pk]
+            ))
+        self.assertEqual(response.status_code, 302)
 
 
-# class EditUnitView(TestCase):
-#     """
-#     Tests for the edit unit view
-#     """
-#     def setUp(self):
-#         """
-#         Creates user, source, unit and unit form
-#         """
-#         self.user = User.objects.create_user(
-#             username='tester',
-#             password='test'
-#         )
-#         self.source = Source.objects.create(
-#             user=self.user,
-#             source_name='name',
-#             source_type='book'
+class UnitDetailView(TestCase):
+    """
+    Tests for unit detail view
+    """
 
-#         )
-#         self.unit = Unit.objects.create(
-#             source=self.source,
-#             unit_name='unit'
-#         )
+    def setUp(self):
+        """
+        Creates user, source and unit
+        """
+        self.user = User.objects.create_user(
+            username='tester',
+            password='test'
+        )
+        self.source = Source.objects.create(
+            user=self.user,
+            source_name='source',
+            source_type='book'
+        )
+        self.unit = Unit.objects.create(
+            source=self.source,
+            unit_name='unit'
+        )
 
-#     def test_get_request_for_edit_unit(self):
-#         """Test if get request for edit unit form gives 200 status code,
-#         the right template, and the right context.
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.get(reverse(
-#             'edit-unit', args=[self.source.pk, self.unit.pk]
-#         ))
-#         self.assertEqual(response.status_code, 200)
-#         self.assertTemplateUsed(response, 'notes/source_detail.html')
-#         self.assertIn('form', response.context)
-#         # asserts that the form is prepopulated with correct data
-#         self.assertEqual(response.context['form'].instance, self.unit)
+    def test_authenticated_owner_accessing_unit_detail_page_gets_200(self):
+        """
+        ANV-21: Authenticated owner gets 200 status code when requesting
+        detail page of a unit
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'notes:unit-detail',
+            args=[self.source.pk, self.unit.pk]
+            ))
+        self.assertEqual(response.status_code, 200)
 
+    def test_unauthenticated_user_redirected(self):
+        """
+        ANV-22: Any unauthenticated user is redirected
+        when trying to access a unit detail page
+        """
+        response = self.client.get(reverse(
+            'notes:unit-detail',
+            args=[self.source.pk, self.unit.pk]
+        ))
+        self.assertEqual(response.status_code, 302)
 
-# class ReferenceDetailVeiw(TestCase):
-#     """
-#     Tests for reference detail view
-#     """
-#     def setUp(self):
-#         """
-#         Creates user, source, unit and reference note
-#         """
-#         self.user = User.objects.create_user(
-#             username='tester',
-#             password='test'
-#         )
-#         self.source = Source.objects.create(
-#             user=self.user,
-#             source_name='name',
-#             source_type='book'
-#         )
-#         self.unit = Unit.objects.create(
-#             source=self.source,
-#             unit_name='name',
-#         )
-#         self.reference = Reference.objects.create(
-#             unit=self.unit,
-#             content='content'
-#         )
+    def test_authenticated_user_gets_404_for_another_user_unit(self):
+        """
+        ANV-23:Authenticated user trying to access another user's
+        unit detail page gets 404 response
+        """
+        user2 = User.objects.create_user(
+            username='tester2',
+            password='test'
+        )
+        self.client.force_login(user2)
+        response = self.client.get(reverse(
+            'notes:unit-detail',
+            args=[self.source.pk, self.unit.pk]
+            ))
+        self.assertEqual(response.status_code, 404)
 
-#     def test_authenticated_owner_gets_200(self):
-#         """
-#         Authenticated owner can access reference note
-#         """
-#         self.client.force_login(self.user)
-#         response = self.client.get(
-#             reverse('reference-detail',
-#                     args=[self.source.pk, self.unit.pk, self.reference.pk]))
-#         self.assertEqual = (response.status_code, 200)
+    def test_authenticated_user_gets_404_for_inexistent_unit(self):
+        """
+        ANV-24: Authenticated user requesting a unit that doesn't
+        exists gets 404
+        """
+        self.client.force_login(self.user)
+        response = self.client.get(reverse(
+            'notes:unit-detail',
+            args=[self.source.pk, 800]
+        ))
+        self.assertEqual(response.status_code, 404)

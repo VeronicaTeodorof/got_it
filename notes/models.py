@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 
 # # Create your models here.
 class Source(models.Model):
+    """
+    Source is a top layer container and the bibliographic reference
+    """
     class SourceType(models.TextChoices):
         # Labels use plain strings;
         # wrap with _() from gettext_lazy if i18n is added

@@ -140,8 +140,8 @@ def source_detail(request, source_pk):
 @login_required
 def delete_unit(request, source_pk, unit_pk):
     """View for deleting units"""
-    current_source = get_object_or_404(Source, pk=source_pk, user=request.user)
-    unit = get_object_or_404(Unit, pk=unit_pk, source=current_source)
+    source = get_object_or_404(Source, pk=source_pk, user=request.user)
+    unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     if request.method == 'POST':
         unit.delete()
         messages.success(request, "Unit deleted.")
@@ -295,6 +295,7 @@ def create_reference(request, source_pk, unit_pk):
 @never_cache
 @login_required
 def edit_reference(request, source_pk, unit_pk, reference_pk):
+    """Edit an existing reference note"""
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     reference = get_object_or_404(Reference, pk=reference_pk, unit=unit)
@@ -401,6 +402,7 @@ def create_question(request, source_pk, unit_pk, reference_pk=None):
 @never_cache
 @login_required
 def edit_question(request, source_pk, unit_pk, question_pk):
+    """Edit an existing question note"""
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     question = get_object_or_404(Question, pk=question_pk, unit=unit)
@@ -452,6 +454,7 @@ def delete_question(request, source_pk, unit_pk, question_pk):
 @never_cache
 @login_required
 def edit_mywords(request, source_pk, unit_pk, mywords_pk):
+    """Edit an existing mywords note"""
     source = get_object_or_404(Source, pk=source_pk, user=request.user)
     unit = get_object_or_404(Unit, pk=unit_pk, source=source)
     mywords = get_object_or_404(MyWords, pk=mywords_pk, unit=unit)
