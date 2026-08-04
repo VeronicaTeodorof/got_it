@@ -1,6 +1,8 @@
 {% extends 'notes/app_base.html' %}
 {% load static %}
 
+{% block head_title %}got it? | Create My Words{% endblock %}
+
 {% block back_link %}
   <a href="{% url 'notes:unit-detail' source.pk unit.pk %}" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
@@ -92,9 +94,9 @@
         </div>
         <button type="submit" class="btn btn-form m-2">Save</button>
         {%if next_url %}
-          <a href="{{next_url}}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+          <a href="{{next_url}}" class="btn btn-form btn-form--cancel">Cancel</a>
         {% else %}
-          <a href="{% url 'notes:unit-detail' source.pk unit.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+          <a href="{% url 'notes:unit-detail' source.pk unit.pk %}" class="btn btn-form btn-form--cancel">Cancel</a>
         {% endif %}
       </form>
     </div>

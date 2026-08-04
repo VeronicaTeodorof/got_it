@@ -1,6 +1,8 @@
 {% extends 'notes/app_base.html' %}
 {% load static %}
 
+{% block head_title %}got it? | Edit Question{% endblock %}
+
 {% block back_link %}
   <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
@@ -49,8 +51,8 @@
           </button>
           <div class="collapse" id="reference-context">
               <div class="mt-2 p-3 linked-notes">
-                  <p class="fw-bold mb-1" class="word-break">{{ reference.title|default:"Untitled reference" }}</p>
-                  <p class="mb-0">{{ reference.content|linebreaks }}</p>
+                  <p class="fw-bold mb-1 word-break">{{ reference.title|default:"Untitled reference" }}</p>
+                  <div class="mb-0">{{ reference.content|linebreaks }}</div>
               </div>
           </div>
       </div>
@@ -72,7 +74,7 @@
         </div>
 
         <button type="submit" class="btn btn-form m-2">Save</button>
-        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="btn btn-form btn-form--cancel" type="button">Cancel</a>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="btn btn-form btn-form--cancel">Cancel</a>
       </form>
     </div>
   </section>

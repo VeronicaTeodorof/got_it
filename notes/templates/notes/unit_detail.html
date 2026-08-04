@@ -1,6 +1,8 @@
 {% extends "notes/app_base.html" %}
 {% load static %}
 
+{% block head_title %}got it? | Unit detail{% endblock %}
+
 {% block back_link %}
   <a href="{% url 'notes:source-detail' source.pk %}" class="back-link">
     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left back-icon" viewBox="0 0 16 16">
@@ -49,7 +51,7 @@
       {% csrf_token %}
       <div class="source-heading d-flex align-items-baseline gap-2 mb-4 pt-2">
         <!-- Unit name -->
-        <span class="field-group">
+        <div class="field-group">
         {% if edit_mode %}
           <label for="id_unit_name" class="visually-hidden">Unit name</label>
           <input type="text" id="id_unit_name" name="unit_name"
@@ -63,7 +65,7 @@
         {% else %}
           <h1 id="id_unit_name" class="heading word-break">{{ unit.unit_name }}</h1>
         {% endif %}
-        </span>
+        </div>
 
         <!-- Actions Menu Read and Edit modes -->
         {% url 'notes:unit-detail' source.pk unit.pk as cancel_url %}

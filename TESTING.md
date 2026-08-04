@@ -445,7 +445,25 @@ Commit: `a61023b`
 
 ## Validation
 
-- **HTML** — W3C validator
+### HTML — W3C validator
+
+The following pages have been validated with [W3C](https://validator.w3.org/):
+- [index.html](docs/readme-assets/home-validation.png) - no errors or warnings to show
+- [how_it_works.html](docs/readme-assets/how-it-works-validation.png) - no errors or warnings to show
+- [signup.html](docs/readme-assets/sign-up-validation.png) - no errors or warnings to show
+- [login.html](docs/readme-assets/sign-in-validation.png) - no errors or warnings to show
+- [dashboard.html](docs/readme-assets/dashboard-validation.png) - no errors or warnings to show
+- [source_detail.html](docs/readme-assets/source-detail-validation.png) - no errors or warnings to show
+- [unit_detail.html](docs/readme-assets/unit-detail-validation.png) - no errors or warnings to show
+- [create_reference.html](docs/readme-assets/create-reference-validation.png) - no errors or warnings to show
+- [reference_detail.html](docs/readme-assets/reference-detail.png) - no errors or warnings to show
+- [edit_reference.html](docs/readme-assets/edit-reference-validation.png) - no errors or warnings to show
+- [create_mywords](docs/readme-assets/create-mywords-validation.png) - no errors or warnings to show
+- [edit_mywords](docs/readme-assets/edit-mywords-validation.png) - no errors or warnings to show
+- [create_question.html](docs/readme-assets/create-question-validation.png) - no errors or warnings to show
+- [question_detail.html](docs/readme-assets/question-detail-validation.png) - no errors or warnings to show
+- [edit_question.html](docs/readme-assets/edit-question-validation.png) -no errors or warnings to show
+-
 - **CSS** — Jigsaw validator
 - **JavaScript** — JSLint
 ### Python — PEP8

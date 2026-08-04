@@ -1,7 +1,7 @@
 {% extends "notes/app_base.html" %}
 {% load static %}
 
-{% block title %}got it? | My Words{% endblock %}
+{% block head_title %}got it? | My Words Detail{% endblock %}
 
 {% block back_link %}
   <a href="{% url 'notes:unit-detail' source.pk unit.pk%}#my-words" class="back-link">
@@ -53,7 +53,7 @@
       {% endif %}
       {% if question %}
       <li>
-        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk}" class="truncate"> {{ question.title }}</a>
+        <a href="{% url 'notes:question-detail' source.pk unit.pk question.pk %}" class="truncate"> {{ question.title }}</a>
       </li>
       {% endif %}
     </ol>
@@ -80,8 +80,8 @@
           </button>
           <div class="collapse" id="reference-context">
               <div class="mt-2 p-3 linked-notes">
-                  <p class="fw-bold mb-1" class="word-break">{{ reference.title|default:"Untitled reference" }}</p>
-                  <p class="mb-0">{{ reference.content|linebreaks }}</p>
+                  <p class="fw-bold mb-1 word-break">{{ reference.title|default:"Untitled reference" }}</p>
+                  <div class="mb-0">{{ reference.content|linebreaks }}</div>
               </div>
           </div>
       </div>
@@ -100,13 +100,13 @@
           </button>
           <div class="collapse" id="question-context">
               <div class="mt-2 p-3 linked-notes">
-                  <p class="fw-bold mb-1" class="word-break">{{ question.title|default:"Untitled question" }}</p>
-                  <p class="mb-0 word-break">{{ question.content|linebreaks }}</p>
+                  <p class="fw-bold mb-1 word-break">{{ question.title|default:"Untitled question" }}</p>
+                  <div class="mb-0 word-break">{{ question.content|linebreaks }}</div>
               </div>
           </div>
       </div>
       {% endif %}
-    <p class="mt-4 mt-lg-5">{{ mywords.content|linebreaks }}</p>
+    <div class="mt-4 mt-lg-5">{{ mywords.content|linebreaks }}</div>
   </section>
 {% endblock %}
 

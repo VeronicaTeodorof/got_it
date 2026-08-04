@@ -1,7 +1,7 @@
 {% extends "notes/app_base.html" %}
 {% load static %}
 
-{% block title %}got it? | Reference{% endblock %}
+{% block head_title %}got it? | Reference{% endblock %}
 
 {% block back_link %}
   <a href="{% url 'notes:unit-detail' source.pk unit.pk %}#reference" class="back-link">
@@ -76,11 +76,12 @@
     </a>
   </div>
 
-  <p class="mt-4">{{ reference.content|linebreaks }}</p>
+  <div class="mt-4">{{ reference.content|linebreaks }}</div>
 </section>
 
 <section id="links">
   {% if linked_mywords %}
+  <h2 class="visually-hidden">Links</h2>
   <!-- Linked My Words collapsed -->
   <div class="mb-3 mt-lg-5 mt-5">
     <button class="btn btn-links align-items-center gap-1"
@@ -97,7 +98,7 @@
           <li class="custom-list-item">
             <a href="{% url 'notes:mywords-detail' note.unit.source.pk note.unit.pk note.pk %}">
               <span class="source-name">{{ note.title|default:"Untitled" }}</span>
-              <span class="text-muted">{{ note.content|truncatewords:8 }}</span></p>
+              <span class="text-muted">{{ note.content|truncatewords:8 }}</span>
             </a>
           </li>
         </ul>
@@ -123,7 +124,7 @@
           <li class="custom-list-item">
             <a href="{% url 'notes:question-detail' note.unit.source.pk note.unit.pk note.pk %}">
               <span class="source-name">{{ note.title|default:"Untitled" }}</span>
-              <span class="text-muted word-break">{{ note.content|truncatewords:8 }}</span></p>
+              <span class="text-muted word-break">{{ note.content|truncatewords:8 }}</span>
             </a>
           </li>
         </ul>
