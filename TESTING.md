@@ -464,7 +464,11 @@ The following pages have been validated with [W3C](https://validator.w3.org/):
 - [question_detail.html](docs/readme-assets/question-detail-validation.png) - no errors or warnings to show
 - [edit_question.html](docs/readme-assets/edit-question-validation.png) -no errors or warnings to show
 -
-- **CSS** — Jigsaw validator
+### CSS — Jigsaw validator
+
+The following pages have been validated with [W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/):
+- [notes.css](docs/readme-assets/css-validation.png) - no error found
+- [style.css](docs/readme-assets/) - no error found
 - **JavaScript** — JSLint
 ### Python — PEP8
 

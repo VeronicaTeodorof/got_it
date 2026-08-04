@@ -15,7 +15,7 @@
 ============================ */
 
 .word-break {
-  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .truncate {
@@ -26,8 +26,18 @@
   max-width: 270px;
 }
 
+.text-muted {
+  color: #5a6268 !important;
+}
+
+/* Prevents the wrapper's inline content from wrapping onto multiple lines */
+.span-wrapper {
+  white-space: nowrap;
+  display: inline-block;
+}
+
 /* ============================
-   APP SHELL (sidebar + secondary nav)
+   APP SHELL (navbar / sidebar / secondary nav / content column)
 ============================ */
 
 .app-layout {
@@ -68,6 +78,26 @@
 /* collapses to nothing when neither block is filled (dashboard) */
 .secondary-nav-bar:empty {
   display: none;
+}
+
+.back-nav {
+  padding: 0.75rem 1rem;
+  background-color: var(--chrome);
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: green;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.back-icon {
+  flex-shrink: 0;
+  font-weight: bolder;
 }
 
 /* ---- sidebar / offcanvas ---- */
@@ -129,6 +159,7 @@
   padding-top: 4rem;
   position: relative;
 }
+
 .sources-wrapper {
   display: flex;
   align-items: center;
@@ -145,7 +176,7 @@
   border: none;
   background: none;
   line-height: 0; /* prevents extra height from button's default line-height */
-  padding:0;
+  padding: 0;
   margin: 0;
 }
 
@@ -174,6 +205,17 @@
   position: relative;
 }
 
+.source-count::after,
+.unit-count::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 60px;
+  height: 1px;
+  background-color: var(--muted-green);
+}
+
 .sidebar-add {
   font-size: large;
   color: var(--nav-green);
@@ -186,20 +228,10 @@
   background-color: white;
   border-radius: 20%;
   cursor: pointer;
-   padding:0 0.2rem;
+  padding: 0 0.2rem;
 }
 
-
-.source-count::after,
-.unit-count::after {
-  content: '';
-  position: absolute;
-  bottom: -8px;
-  left: 0;
-  width: 60px;
-  height: 1px;
-  background-color: var(--muted-green);
-}
+/* Sidebar scroll styled with AI, cross-referenced with MDN */
 .sidebar-sources-scroll {
   overflow-y: auto;
   max-height: 60vh;
@@ -216,7 +248,8 @@
   background: var(--divider);
 }
 
-#sources-node .sidebar-link {
+#sources-node .sidebar-link,
+.units-node .sidebar-link {
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -225,16 +258,17 @@
   flex: 1;        /* let it take remaining space next to the chevron, rather than a fixed max-width */
 }
 
-.units-node .sidebar-link {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  min-width: 0;
-  flex: 1;
+/* Sidebar: offset from top and reduced height to sit below the navbar */
+#sideNavbar {
+  --bs-offcanvas-width: 280px;
+  height: calc(100vh - var(--navbar-height));
+  top: var(--navbar-height);
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-top-right-radius: 5px;
 }
 
-/* ---- main content ---- */
+/* ---- main content column ---- */
 
 .app-content {
   flex: 1 1 auto;
@@ -356,6 +390,16 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
   color: white;
 }
 
+.btn-icon {
+  border: none;
+  background: transparent;
+  padding: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
 /* ============================
    EMPTY STATE
 ============================ */
@@ -366,12 +410,9 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
   margin: 2rem auto 0;
   font-size: 1.05rem;
   line-height: 2;
-  text-align:center;
+  text-align: center;
 }
 
-/* ============================
-   LISTS
-============================ */
 .list {
   list-style: none;
   margin: 0;
@@ -402,35 +443,6 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 .custom-list-item a:hover {
   background-color: #f0f0f0;
   border-radius: 5px;
-}
-
-/* ============================
-   HEADINGS (shared decoration)
-============================ */
-.heading {
-  text-align: left;
-  color: var(--nav-green);
-  font-size: 1.7rem;
-  position: relative;
-  display: inline-block;
-}
-
-.heading::after {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  width: 48px;
-  height: 4px;
-  background-color: var(--terracotta);
-}
-
-.heading--editing::after {
-  content: none;
-}
-
-.heading h1 {
-  font-size: 1.7rem;
 }
 
 /* ============================
@@ -483,54 +495,6 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-/* ============================
-   PAGINATION
-============================ */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  font-size: 0.9rem;
-}
-
-.pagination a {
-  color: #1B3B2D;
-  text-decoration: none;
-}
-
-.pagination a:hover {
-  text-decoration: underline;
-}
-
-.pagination .current {
-  color: #555;
-}
-
-/* ============================
-   SECONDARY NAVIGATION
-============================ */
-.back-nav {
-  padding: 0.75rem 1rem;
-  background-color: var(--chrome);
-}
-
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: green;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-}
-
-.back-icon {
-  flex-shrink: 0;
-  font-weight: bolder;
 }
 
 /* ============================
@@ -631,44 +595,33 @@ input.inline-field:focus {
   flex-shrink: 0;
 }
 
-.btn-icon {
-  border: none;
-  background: transparent;
-  padding: 0.25rem;
-  display: inline-flex;
-  align-items: center;
+/* ============================
+   PAGINATION
+============================ */
+.pagination {
+  display: flex;
   justify-content: center;
-  flex-shrink: 0;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.pagination a {
+  color: #1B3B2D;
+  text-decoration: none;
+}
+
+.pagination a:hover {
+  text-decoration: underline;
+}
+
+.pagination .current {
+  color: #555;
 }
 
 /* ============================
-   LAYOUT HELPERS
-============================ */
-/* Prevents the wrapper's inline content from wrapping onto multiple lines */
-.span-wrapper {
-  white-space: nowrap;
-  display: inline-block;
-}
-
-/* Sidebar: offset from top and reduced height to sit below the navbar */
-#sideNavbar {
-  --bs-offcanvas-width: 280px;
-  height: calc(100vh - var(--navbar-height));
-  top: var(--navbar-height);
-  border-right: 2px solid black;
-  border-top: 2px solid black;
-  border-top-right-radius: 5px;
-}
-
-/* ============================
-   ACTIONS DROPDOWN
-============================ */
-.dropdown-menu {
-  --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
-}
-
-/* ============================
-   LINKS
+   BREADCRUMBS
 ============================ */
 .breadcrumb li a {
   text-decoration: none;
@@ -706,22 +659,22 @@ input.inline-field:focus {
 }
 
 /* ============================
-        LINKED NOTES PAGES
+   ACTIONS DROPDOWN
+============================ */
+.dropdown-menu {
+  --bs-dropdown-link-hover-bg: var(--bs-secondary-bg);
+}
+
+/* ============================
+   LINKED NOTES PAGES
 ============================ */
 .linked-notes {
   border: 1px solid var(--muted-green);
 }
-/* ============================
-        UTILITIES
-============================ */
-.text-muted {
-  color:#5a6268 !important;
-}
 
 /* ============================
-        Linked Status
+   STATUS BADGES (Linked / Unlinked)
 ============================ */
-
 .badge-linked {
   background-color: var(--form-green);
   color: white;
@@ -734,14 +687,8 @@ input.inline-field:focus {
 }
 
 /* ============================
-   MEDIA QUERIES (mobile-first)
+   MEDIA QUERIES (mobile-first: 768px -> 992px -> 1024px)
 ============================ */
-/* small and medium screens up to 992px */
-@media (max-width: 992px) {
-  .offcanvas-lg.show .sidebar-close {
-    display: flex;
-  }
-}
 
 /* md and up: 768px */
 @media (min-width: 768px) {
@@ -760,7 +707,14 @@ input.inline-field:focus {
   /* Empty state */
   .empty {
     margin-top: 4rem;
-    max-width:800px;
+    max-width: 800px;
+  }
+}
+
+/* small and medium screens, up to 992px (offcanvas close button) */
+@media (max-width: 992px) {
+  .offcanvas-lg.show .sidebar-close {
+    display: flex;
   }
 }
 
@@ -775,9 +729,6 @@ input.inline-field:focus {
     top: var(--navbar-height) !important;
     height: calc(100vh - var(--navbar-height)) !important;
     transition: width 0.2s ease, flex-basis 0.2s ease;
-    /* workaround for sticky nav/sidebar gap */
-    /* height: 120vh;
-    z-index: 98; */
   }
 
   .sidebar.offcanvas-lg.expanded-sidebar {
@@ -791,8 +742,8 @@ input.inline-field:focus {
 
   .sidebar.expanded-sidebar .sidebar-close {
     display: flex;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
   }
 
   .sidebar-close:hover {
@@ -800,9 +751,8 @@ input.inline-field:focus {
   }
 
   .sidebar-tree {
-  padding-top: 0;
+    padding-top: 0;
   }
-
 
   /* only needed for the mobile and tablet drawer's close button */
   .sidebar .offcanvas-header {
@@ -843,9 +793,9 @@ input.inline-field:focus {
     flex-grow: 0.73;
   }
 
-   /* Reference-detail page */
+  /* Reference-detail page */
   .location {
-    align-self:baseline;
+    align-self: baseline;
     position: relative;
     top: -0.2rem;
   }
