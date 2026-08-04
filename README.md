@@ -960,6 +960,7 @@ a visible focus indicator.
 - Per-user data isolation on Dashboard: The Dashboard queryset explicitly filters Sources by the logged-in user (Source.objects.filter(user=request.user)), ensuring one user's sources are never visible to another. Covered by automated tests confirming both inclusion of a user's own sources and exclusion of other users' sources.
 - Consistent authentication redirect on protected views: All @login_required views redirect anonymous users to login regardless of whether the requested object exists, preventing anonymous users from distinguishing "object doesn't exist" from "object exists but you're not authenticated" — closing a potential enumeration problem. Verified across all protected views.
 - Nested resource ownership validation: Views handling actions on nested models (e.g. deleting a Unit, which belongs to a Source) explicitly filter by the parent relationship (source=current_source) rather than relying on the child object's primary key alone. This prevents a user from manipulating a URL's parent-resource segment to act on a child object that doesn't actually belong to it — even when both the parent and child objects are owned by the same requesting user.
+- All links pointing to outside resources (such as the Google feedback form, GitHub, and LinkedIn) explicitly use target="_blank" combined with rel="noopener". This prevents the opened page from using the browser's window.opener connection to access my application. By isolating the tabs this way, users are protected against "reverse tabnabbing"—an exploit where an external site secretly redirects an inactive background tab to a fake phishing screen to steal user credentials (https://owasp.org/www-community/attacks/Reverse_Tabnabbing).
 
 ### Feedback to user actions:
 - CRUD actions
@@ -975,24 +976,54 @@ a visible focus indicator.
 
 
 
-## Deployment
-### Prerequisites
+## Deployment and local development
+### Deployment
+
+This project was deployed on Heroku following the next steps:
+
+#### Prerequisites
 - Heroku account
-- GitHub accout
+- GitHub account
 - Git installed locally
-- gunicorn latest version installed locally and added to requirements.txt
+- gunicorn installed locally and added to requirements.txt
 
-### Files Required
-- Procfile in the root directory of your project containing the command that Heroku will use to start the server:
- web: gunicorn your-project.wsgi
+#### Files Required
+- A `Procfile` in the the root directory of the project, containing the command that Heroku will use to start the server:
+`web: gunicorn gotit.wsgi`
 
-### Steps
-1. Create the Heroku app: sign into your Heroku account, navigate to your dashboard and create a  new app with a unique name;
-2. In your app click on the Deploy tab;
-3. In the Deployment method section enable GitHub integration by clicking on Connect to GitHub. You may be asked to authenticate with GitHub if this is the first project you deploy with GitHub;
-4. In the Search box start typing the name of your project and choose it from the list displayed;
-5. Scroll to the bottom of the page and click Deploy Branch to start a manual deployment of the main branch.
-6. Click on Open App to view your deployed project;
+#### Config Vars
+- Before deploying, the following Config Vars were set in the Heroku app's Settings tab: `SECRET_KEY`, `DEBUG` False, `DATABASE_URL`
+
+#### Steps
+1. Sign into Heroku, navigate to the dashboard, and create a new app with a unique name.
+2. In the app click on the `Deploy` tab.
+3. In the Deployment method section click on `Connect to GitHub` and authenticate.
+4. Search for repository name and click `Connect`.
+5. Scroll to the bottom of the page and click `Deploy Branch` to start a manual deployment of the main branch.
+6. Click on `Open App` to view deployed project.
+
+Access the live app:  https://got-it-296cde7d011a.herokuapp.com/
+
+### Local development
+
+The project was managed in GitHub: https://github.com/VeronicaTeodorof/got_it
+
+**To fork the project:**
+1. Navigate to the project's page in GitHub.
+2. Click on the fork icon.
+3. Select a new branch, name it and click `Create Fork`.
+
+**To clone the project:**
+1. Navigate to the project's page in GitHub.
+2. Click the `Code` button and copy the URL shown.
+3. Open your code editor and select a directory for the project.
+4. In the terminal of that directory type 'git clone' followed by the copied URL and press enter.
+5. Create and activate a virtual environment, then install project's dependencies.
+6. Create an `env.py` file in the root directory containing the same variables listed in the Config Vars above using your own values.
+7. Migrate: `python manage.py migrate`.
+8. Run the project locally: `python manage.py runserver`.
+
+
 
 ## Resources:
 - automated tests: https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
