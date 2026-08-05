@@ -557,8 +557,87 @@ Each category tested against:
 | NCRUD-23 | Confirm deletion | Note removed, user redirected to the unit's note list (correct tab active) | | | |
 | NCRUD-24 | Success message after deletion | Confirmation message displayed | | | |
 
+#### Workflow Theme
 
-#### Home Page
+**Story 18 — Create Reference note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-01 | "Create reference note" option from Unit detail page | Opens create form | | | |
+| WORKFLOW-02 | "Create reference note" option from sidebar | Opens create form, correctly attached to the right unit via context | | | |
+| WORKFLOW-03 | Create form displays required content field | Field present and clearly required | | | |
+| WORKFLOW-04 | Submit valid content | Note saved, user taken to new note's detail page | | | |
+| WORKFLOW-05 | Newly created note appears in Reference panel on Unit detail page | Note visible, correctly under its parent unit | | | |
+| WORKFLOW-06 | Newly created note shows "Unlinked" status badge | Badge displayed correctly at creation | | | |
+| WORKFLOW-07 | Submit empty/invalid content | Clear error message shown, note not created | | | |
+| WORKFLOW-08 | Click Cancel on create form | Returns to previous page via `?next=`, no note created | | | |
+
+
+**Story 19 — Create MyWords note (linked or standalone)**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-09 | Create linked MyWords note from Reference detail view | Create My Words page loads | | | |
+| WORKFLOW-10 | Reference note shown collapsed on linked-creation page | Reference content collapsed/expandable | | | |
+| WORKFLOW-11 | Create standalone MyWords note from Unit detail page | Create My Words page loads, no Reference association | | | |
+| WORKFLOW-12 | Create standalone MyWords note from sidebar | Create My Words page loads correctly attached to the right unit via context, no Reference association | | | |
+| WORKFLOW-13 | Submit valid form | Note created, user taken to new note's detail page | | | |
+| WORKFLOW-14 | Newly created MyWords note appears in Unit detail page, MyWords panel | Note visible, correctly under its parent unit | | | |
+| WORKFLOW-15 | Origin badge on newly created MyWords note | Badge correctly indicates origin - "From Reference" vs "Standalone" - matching how it was created | | | |
+| WORKFLOW-16 | Reference note's status updates after a linked MyWords note is created from it | Reference badge changes from "Unlinked" to "Linked" on Unit detail page and Reference detail page | | | |
+| WORKFLOW-17 | Submit invalid/empty content (both linked and standalone) | Clear error message shown, note not created | | | |
+| WORKFLOW-18 | Click Cancel on create form (both linked and standalone) | Returns to previous page via `?next=`, no note created | | | |
+
+
+**Story 20 — Create Question note (linked or standalone)**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-19 | Create linked Question note from Reference detail view | Create Question page loads | | | |
+| WORKFLOW-20 | Reference note shown collapsed on linked-creation page | Reference content collapsed/expandable | | | |
+| WORKFLOW-21 | Create standalone Question note from Unit detail page | Create Question page loads, no Reference association | | | |
+| WORKFLOW-22 | Create standalone Question note from sidebar | Create Question page loads correctly attached to the right unit via context, no Reference association | | | |
+| WORKFLOW-23 | Submit valid form | Note created, user taken to new note's detail page | | | |
+| WORKFLOW-24 | Newly created Question note appears in Unit detail page, Question panel, with "Unanswered" status badge | Note visible under correct unit, badge shows Unanswered by default | | | |
+| WORKFLOW-25 | Reference note's status updates after a linked Question note is created from it | Reference badge changes from "Unlinked" to "Linked" on Unit detail page and Reference detail page | | | |
+| WORKFLOW-26 | Submit invalid/empty content (both linked and standalone) | Clear error message shown, note not created | | | |
+| WORKFLOW-27 | Click Cancel on create form (both linked and standalone) | Returns to previous page via `?next=`, no note created | | | |
+
+
+**Story 21 — Answer a Question via linked MyWords note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-28 | "Answer in My Words" option present on Question detail view | Option visible, leads to MyWords create form linked to that Question | | | |
+| WORKFLOW-29 | Both parent Reference and the Question shown collapsed on MyWords create page (when Question is itself linked to a Reference) | Both notes shown collapsed/expandable for context while answering | | | |
+| WORKFLOW-30 | MyWords create page when Question is standalone (no parent Reference) | Only the Question shown collapsed | | | |
+| WORKFLOW-31 | Submit valid answer | MyWords note created and linked to the Question, user taken to new note's detail page | | | |
+| WORKFLOW-32 | Question's status badge updates after linked MyWords note created | Badge changes from "Unanswered" to "Answered" on Unit detail page and Question detail page | | | |
+| WORKFLOW-33 | New MyWords note's origin badge | Displays "From Question" | | | |
+
+
+**Story 22 — View notes linked from a Reference note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-34 | Reference detail page displays linked MyWords notes | List shown when one or more MyWords notes are linked to this Reference | | | |
+| WORKFLOW-35 | Reference detail page displays linked Question notes | List shown when one or more Question notes are linked to this Reference | | | |
+| WORKFLOW-36 | Reference with no linked notes of a given type | Section for that type not shown| | | |
+| WORKFLOW-37 | Each linked note shows identifying info (title and content preview) in correct category | User can tell what the note is without opening it | | | |
+| WORKFLOW-38 | Click a linked MyWords note in the list | Navigates to that note's detail page | | | |
+| WORKFLOW-39 | Click a linked Question note in the list | Navigates to that note's detail page | | | |
+
+
+**Story 23 — View notes linked to a Question note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| WORKFLOW-40 | Question detail page displays linked MyWords notes | List shown when one or more MyWords notes are linked as answers | | | |
+| WORKFLOW-41 | Question with no linked MyWords note (Unanswered) | Section not shown | | | |
+| WORKFLOW-42 | Each linked MyWords note shows identifying info (title and content preview) | User can tell what the note is without opening it | | | |
+| WORKFLOW-43 | Click a linked MyWords note in the list | Navigates to that note's detail page | | | |
+
+
 #### How it Works Page
 #### Other per-page features
 
