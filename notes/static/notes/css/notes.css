@@ -401,6 +401,35 @@ https://www.w3.org/WAI/WCAG21/Understanding/focus-visible.html */
 }
 
 /* ============================
+   HEADINGS (shared decoration)
+============================ */
+.heading {
+  text-align: left;
+  color: var(--nav-green);
+  font-size: 1.7rem;
+  position: relative;
+  display: inline-block;
+}
+
+.heading::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 48px;
+  height: 4px;
+  background-color: var(--terracotta);
+}
+
+.heading--editing::after {
+  content: none;
+}
+
+.heading h1 {
+  font-size: 1.7rem;
+}
+
+/* ============================
    EMPTY STATE
 ============================ */
 .empty {
