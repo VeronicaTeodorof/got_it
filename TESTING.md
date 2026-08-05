@@ -459,8 +459,6 @@ Each category tested against:
 
 #### Unit CRUD
 
-#### Unit CRUD
-
 **Read Unit (list within source)**
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
@@ -511,9 +509,55 @@ Each category tested against:
 | UCRUD-28 | Cascade: note pk/URL of a note belonging to this unit before deletion, delete the unit, then navigate directly to that note's URL | 404 — note no longer exists (cascade deletion confirmed, same technique used for Source cascade in SCRUD-47/48) | | | |
 
 
-#### Reference note CRUD
-#### MyWords note CRUD
-#### Question note CRUD
+#### Note CRUD
+
+**Read Notes (unit detail — three-tab view)**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| NCRUD-01 | Three tabs present on unit detail page | Reference, My Words, Question tabs all visible | | | |
+| NCRUD-02 | Each tab shows only notes of its own type | Reference tab shows only Reference notes, My Words only MyWords notes, Question only Question notes | | | |
+| NCRUD-03 | Notes shown belong only to the current unit | No notes from other units (even within the same source) appear in any tab | | | |
+| NCRUD-04 | Active tab persists via URL hash on refresh | Refreshing the page keeps the same tab active (e.g. `#question` stays on Question tab) | | | |
+| NCRUD-05 | Active tab persists via URL hash on shared link | Opening a URL with a tab hash (e.g. pasted into a new browser session while logged in) opens directly to that tab | | | |
+| NCRUD-06 | Pagination is independent per tab | Paginating Reference notes doesn't affect page position in My Words or Question tabs | | | |
+| NCRUD-07 | Empty state per tab | Each tab shows its own empty-state message when no notes of that type exist, encouraging creation | | | |
+| NCRUD-08 | Empty state doesn't leak across tabs | A tab with notes doesn't show empty state, and a genuinely empty tab doesn't inherit content from another tab type | | | |
+
+
+**Read Note (individual detail page)**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| NCRUD-09 | Reference note detail page displays all relevant fields | Title, content and location | | | |
+| NCRUD-10 | MyWords note detail page displays all relevant fields | My Words title and content | | | |
+| NCRUD-11 | Question note detail page displays all relevant fields | Question title and content| | | |
+| NCRUD-12 | Breadcrumb navigation on note detail page | Shows correct chain: Source → Unit → Note type, matching the note's actual parent hierarchy | | | |
+| NCRUD-13 | Breadcrumb links are functional | Clicking Source or Unit in the breadcrumb navigates to the correct respective page (the *actual* parent, not just any source/unit) | | | |
+
+**Edit Note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| NCRUD-14 | Edit option accessible from note detail page (Reference/MyWords/Question) | Edit link/button present for all three note types | | | |
+| NCRUD-15 | Any type of note edit form pre-populated with current content | Existing title, content (and location for Reference) shown, editable | | | |
+| NCRUD-16 | Submit any type of note with empty required content field | Form rejected, error shown | | | |
+| NCRUD-17 | Submit valid content change (each note type) | Updated content displayed on detail page, confirmation message shown | | | |
+| NCRUD-18 | Cancel button on edit form | Returns to note detail page, no changes saved, original content still displayed | | | |
+
+
+**Delete Note**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| NCRUD-19 | Click delete option | Confirmation step appears before any deletion occurs | | | |
+| NCRUD-20 | Confirmation step content | Note title and parent unit name present so user can verify they're deleting the right note | | | |
+| NCRUD-21 | Confirm and Cancel options present | Both visible on confirmation step | | | |
+| NCRUD-22 | Click Cancel | Deletion aborted, note remains, no redirect | | | |
+| NCRUD-23 | Confirm deletion | Note removed, user redirected to the unit's note list (correct tab active) | | | |
+| NCRUD-24 | Success message after deletion | Confirmation message displayed | | | |
+
+
 #### Home Page
 #### How it Works Page
 #### Other per-page features
