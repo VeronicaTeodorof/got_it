@@ -637,9 +637,83 @@ Each category tested against:
 | WORKFLOW-42 | Each linked MyWords note shows identifying info (title and content preview) | User can tell what the note is without opening it | | | |
 | WORKFLOW-43 | Click a linked MyWords note in the list | Navigates to that note's detail page | | | |
 
+##### UI/UX Theme
+**Story 24 - Home page**
 
-#### How it Works Page
-#### Other per-page features
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| HOME-01 | Value proposition displayed | Tagline/headline clearly visible on home page | | | |
+| HOME-02 | "How it works" explanation present | Note-taking flow explained on home page | | | |
+| HOME-03 | Primary "Get started" CTA present | Visible, clearly the primary action on the page | | | |
+| HOME-04 | Click "Get started" | Navigates to Sign up page | | | |
+| HOME-05 | Footer attribution and links | Footer displays attribution and relevant links | | | |
+
+**Story 25 - Walkthrough**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| HIW-01 | Walkthrough explains Source → Unit → Note hierarchy | Clear explanation present | | | |
+| HIW-02 | Walkthrough explains three note types and their purpose | Reference, MyWords, Question each explained | | | |
+| HIW-03 | Walkthrough accessible from main nav at any time | Link present in nav regardless of logged-in state or current page | | | |
+| HIW-04 | Empty states explain role of structure/workflow | Empty states (Sources, Units, per-tab Notes) include explanatory text, not just "nothing here" | | | |
+
+**Story 26 - External feedback form**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| GF-01 | Feedback link visible from key pages | Present in footer/nav consistently | | | |
+| GF-02 | Feedback link opens Google Form in new tab | Opens `target="_blank"` (with `rel="noopener"`), user's place in app preserved | | | |
+
+
+**Story 28 - Accessibility**
+
+*Automated testing with Lighthouse*
+
+A11Y-01
+- Lighthouse accessibility audit run per page, both mobile and desktop viewport, in Chrome DevTools.
+- Covers colour contrast, alt text, accessible-name checks, list structure validity, heading order, basic form-label association, across all 16 pages (Home, How it works, Sign In, Sign Up, Dashboard, Source detail, Unit detail, and Create/Detail/Edit for each of the three note types)
+- 100/100 on both desktop and mobile for every page. Several issues were flagged and corrected during this test cycle: some contrast failures, invalid list markup
+
+*Manual Accessibility Review*
+
+- Semantic HTML and structure
+
+A11Y-02 — Use real `<button>`, `<nav>`, `<main>`, `<header>`, `<footer>` instead of styled `<div>`s.** Checked all .html files. Result: Pass.
+
+A11Y-03 — One `<h1>` per page; headings nest in order (no skipping h2 → h4).** Checked all .html files. Result: Pass.
+
+- Forms
+
+A11Y-04 — Every input has a `<label for="id">`.** Checked all custom forms in the notes app. All inputs in all forms have labels using Bootstrap's `visually-hidden` class, so they conform to accessibility criteria while remaining aligned with the app's aesthetics. Result: Pass.
+
+A11Y-05 — Required fields marked with the `required` attribute and indicated visually. All forms checked. While the `required` attribute is passed down from model to form to template and reliably announced by screen readers, sighted users had no way of knowing which fields were required. Added "required" to placeholders for required inputs, giving parity between sighted and visually impaired users: when a field has content, "required" is not announced since the condition is satisfied; when a field is empty, "required" is announced for both types of users. Final result after changes: Pass.
+
+A11Y-06 — Feedback messages made available to screen readers via `role="status"` for CRUD operations and via `aria-live="polite"` for form errors.** Added everywhere relevant. Result: Pass.
+
+**Story 29 - Responsive design**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| RESP-01 | Layout at mobile breakpoint (e.g. 375px) | No broken/overlapping elements, content readable without zoom | | | |
+| RESP-02 | Layout at tablet breakpoint (e.g. 768px) | No broken/overlapping elements | | | |
+| RESP-03 | Layout at desktop breakpoint | No broken/overlapping elements, no excessive whitespace/stretching | | | |
+| RESP-04 | Long unbroken string (source/unit/note title) on mobile | No horizontal scroll — regression check on earlier fix | | | |
+| RESP-05 | Long unbroken string on tablet/desktop | No horizontal scroll | | | |
+| RESP-06 | Navigation collapses to offcanvas on mobile | Hamburger/offcanvas pattern activates at appropriate breakpoint | | | |
+| RESP-07 | Offcanvas nav opens/closes correctly on mobile | Tap opens, tap outside or close icon dismisses | | | |
+| RESP-08 | Sidebar behaviour on desktop | Sidebar expandable/collapsable | | | |
+| RESP-09 | Touch target sizing on mobile | Buttons/links/icons meet minimum touch target size not cramped together | | | |
+| RESP-10 | Forms usable on mobile | Input fields, dropdowns, and buttons on Create/Edit forms remain usable without horizontal scroll or overlap | | | |
+| RESP-11 | Tables/lists (Sources, Units, Notes) on mobile | Content reflows appropriately rather than forcing horizontal scroll | | | |
+
+**Story 30 - Visual clarity**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UX-01 | Pages avoid unnecessary visual clutter | No decorative elements that don't support the task | | | |
+| UX-02 | Consistent, restrained color and typography | Same palette/type system used throughout, no inconsistent one-off styling | | | |
+| UX-03 | CTAs visually clear without excessive decoration | Primary actions stand out through hierarchy/contrast, not ornamentation | | | |
+
 
 Each tested against:
 - **Local**
@@ -672,6 +746,75 @@ During final Pass 1 testing I discovered that all pages that require authenticat
 
 Fix: add pageshow reload in notes.js
 Commit: `a61023b`
+
+
+**Sticky top bug**
+*Description:* Sticky-top not sticking in Chrome/Edge despite correct computed CSS (`position: sticky`, `top: 0`); confirmed broken on both mobile and desktop viewports, independent of pagination changes. `getBoundingClientRect` confirms nav moves with scroll instead of pinning.
+
+*Ruled out:*
+- Overflow on ancestors (checked via computed style loop)
+- Inline style overrides
+- Body/html overflow-x (removed entirely, no effect)
+- `display: flex` on body (removed temporarily, no effect)
+- CSS specificity/override — `.sticky-top` rule confirmed winning in Styles panel,
+  no strikethroughs on position/top/z-index
+- `<header>` structure/sizing — confirmed normal display:block, reasonable height,
+  DOM matches source exactly, no injected wrappers
+- Browser extensions — still fails in Incognito with extensions disabled
+- Bootstrap CDN loading correctly (200 status, not a stale/cached version)
+- Zoom level (confirmed 100%)
+- Isolated minimal reproduction (bare Bootstrap navbar, zero project CSS) —
+  still fails, ruling out project code entirely
+- Firefox — still fails, ruling out Chrome/Edge-specific rendering
+- Hardware acceleration toggle — still fails
+
+*Further complication with scroll behaviour*
+
+On create_reference.html specifically, triggering a scroll (by increasing the content textarea beyond 5 rows) caused the fixed navbar and sidebar to briefly visually separate — a gap opening between them for the duration of the scroll. Reducing the textarea back to 5 rows keeps the page short enough that no scroll ever occurs, avoiding the issue entirely rather than resolving its underlying cause.
+Later on the same bug was seen in dashboard when source form was expanded. I devised a wordaround solution by givine the sidebar a height of 120vh and a z-index of 98, while for nav a z-index of 99. Now the two at least scroll together as below, avoiding the awkward white gap. Since sidebar only appears on desktop, this device cannot affect mobile or tablet views.
+
+By contrast, create_question.html and create_mywords.html scroll regardless of how many textarea rows are set — even at 5 rows or fewer, the page still triggers a scrollbar. On these two pages, however, the navbar and sidebar scroll away together, moving as a consistent unit rather than separating from each other, so no gap appears. Since the specific issue being guarded against (a visible gap between navbar and sidebar) doesn't occur here, no row-count workaround was applied to these two pages, and their scrolling behavior was left as-is.
+
+*Fix: always remember your tutor's fixes*
+Finally, after going through all that trouble, both on my own and with Claude AI, I remembered I had a similar problem in my first project, and the fix was given by my tutor: put sticky on parent element. I put class 'sticky-top' on header instead of nav, and it works! It seems the olden days remedies still work in the age of AI. Thank you, Kevin!
+
+
+**test_duplicate_source_name_raises_error fails**
+*Description:* Automated test fails and raises Integrity Error at database level, instead of returning a 200 status code wit a form error.
+
+*Verified manually:* Confirmed in browser — submitting a duplicate source name at `/dashboard/` raised an unhandled `IntegrityError` before the fix.
+[Unhandled Integrity Error](testing_screenshots/dp-mt-08.png)
+
+*Cause:* Missing form-level validation — duplicate data passed `form.is_valid()` and reached the database, which rejected it with an `Integrity Error`.
+
+*Fix:* Added `__init__` to `SourceForm` to accept `user` as a keyword argument; updated dashboard view to pass `user=request.user` to the form; added `clean()` to validate duplicate source names per user before saving.
+
+
+**Visiting sources/800/delete/ returns Value Error instead of 404**
+*Description* Authenticated user types sources/800/delete/ in local environment and gets ValueError.
+
+*Evidence*
+
+[DP-MT-25 Value Error](testing_screenshots/dp-mt-25.png)
+
+*Automated test*
+
+Confirmed by `test_authenticated_user_gets_404_for_missing_source` - DP-AT-08 failing with `AssertionError: 301 != 404`
+Initial automated test returned 301 (redirect) due to missing trailing slash in test URL. Once corrected, test confirmed the same ValueError seen in the browser.
+
+*Root cause*
+The view had no return for GET requests which were falling through and getting a None.
+
+*Fix*
+Add return for GET requests. Both manual and automated tests now passing.
+
+*Commit:* `1b4bcdd`
+
+
+**Error not shown after login attempt with incorrect credentials**
+
+After removing crispy forms from sign in template and adding custom form for styling purposes, error message would not show on login attempt with invalid credentials. Fixed with Claude AI by adding `{{form.non_field_errors}}` to form.
+
 
 
 ## Known Bugs / Limitations
@@ -723,5 +866,4 @@ The following pages have been validated with [Code Institute CI Python Linter](h
 - [urls.py](docs/readme-assets/urls_validation.png) - no errors found
 
  **Lighthouse** — performance, accessibility, best practices, SEO
-  (cross-references A11Y and RESPONSIVE categories in Pass 2 — a mechanical
-  complement to those manual checks, not a replacement)
+  
