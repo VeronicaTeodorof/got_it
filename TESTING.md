@@ -165,6 +165,10 @@ Tests how code written at model level reflects in UI
 |---------|------|--------|--------|
 | MNV-01 | Log in, view a page in notes, log out, click browser back button; repeat for all pages in notes | @never_cache, pageshow reload, and @login_required together prevent cached authenticated content from being shown after logout, redirecting to Sign In instead | Pass |
 | MNV-02 | Anonymous user typing correctly formated url gets redirected to sign in | Verified all @login_required views redirect anonymous users to login rather than exposing content or returning a 404, confirming no route bypasses authentication | Pass |
+| AUTHZ-20 | Ownership check implementation | All Source/Unit/Note views use the documented ownership helper consistently — confirmed by code inspection, not just behavioural testing | | | |
+| AUTHZ-20a | Helper function itself | Correctly returns 404 for both non-owned and nonexistent PKs, with no distinguishable difference in response | | | |
+| AUTHZ-20b | Grep/audit: any view manually querying Source/Unit/Note by PK without going through the helper | None found — confirms no view bypasses the pattern | | | | | Ownership check implementation | All Source/Unit/Note views use the documented ownership helper consistently — confirmed by code inspection, not just behavioural testing | | | |
+
 
 **Dashboard view**
 
@@ -209,6 +213,7 @@ Tests how code written at model level reflects in UI
 ##### templates
 #### pages app
 ##### views.py
+
 ##### urls.py
 ##### templates
 
@@ -345,6 +350,22 @@ Each category tested against:
 | AUTH-30 | Remember me checked, user does not log out at the end of session | Upon closing without logging out and reopening it, user is logged in, unless more than 2 weeks have passed since their last sign in | | | |
 | AUTH-31 | Remember me checked, user logs out at the end of session | Upon reopening browser user is asked to log in to access their account | | | |
 
+
+#### Authorization (AUTHZ)
+
+
+| Test ID | View accessed while logged out | Expected | Actual | Local | Deployment |
+|---------|-------------------------------|----------|-------|-------|------------|
+| AUTHZ-01 | Source: list, detail, create, edit, delete URLs | All redirect to login | | | |
+| AUTHZ-02 | Unit: list, detail, create, edit, delete URLs | All redirect to login | | | |
+| AUTHZ-03 | Note (Reference/MyWords/Question): detail, create, edit, delete URLs | All redirect to login | | | |
+| AUTHZ-04 | Dashboard / sidebar context data | Redirects to login | | | |
+| AUTHZ-05 | User A requests detail URL for User B's Source | 404 | | | |
+| AUTHZ-06 | User A requests detail URL for User B's Unit | 404 | | | |
+| AUTHZ-07 | User A requests detail URL for User B's Note (each type) | 404 | | | |
+| AUTHZ-08 | User A requests edit URL for User B's Source/Unit/Note (GET) | 404 | | | |
+
+
 #### External navigation: footer links, give feedback (EXT)
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
@@ -377,7 +398,7 @@ Each category tested against:
 | SCRUD-05 | Communicating required fields to users on add source form | Required fields include 'required' in the placeholder. Matching `label` elements are present in the DOM using Bootstrap's `visually-hidden` class to ensure full screen-reader accessibility | | | |
 | SCRUD-06 | Click type select | Opens a dropdown with choices | | | |
 | SCRUD-07 | Selection | Only one choice can be selected at one time | | | |
-| SCRUD-08 | Valid submission | Creates source, reloads dashboard with sources list updated to include the newly created source, shown first in list | | | |
+| SCRUD-08 | Valid submission | Creates source, reloads dashboard with sources list updated to include the newly created source, shown first in list, and "Source added" message displayed | | | |
 | SCRUD-09 | Blank fields | Form rejected, errors shown | | | |
 | SCRUD-10 | Blank name field | Form rejected, error shown | | | |
 | SCRUD-11 | Blank author | Form submits | | | |
@@ -397,6 +418,44 @@ Each category tested against:
 | SCRUD-19 | Source header in source detail page | Shows source name, author if present and type badge and a 3 dots icon as header | | | |
 | SCRUD-20 | Source detail page | Shows Add unit button and list of its units | | | |
 | SCRUD-21 | Empty state message for units | Displayed when no units have been created in that source | | | |
+| SCRUD-22 | Sources list filtering | Only sources belonging to the logged-in user appear in the list — create sources as two different users, confirm each user's list shows only their own | | | |
+| SCRUD-23 | Sources list ordering | Most recently created source appears first, oldest last (reverse chronological) | | | |
+| SCRUD-24 | Date created displayed per source | Each source in the list shows its creation date | | | |
+| SCRUD-25 | Date created displayed per source (desktop viewport) | Each source in the list shows its creation date | | | |
+
+**Edit Source**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|-------|-------|------------|
+| SCRUD-26 | Edit mode: title field pre-populated with current source title | Field shows existing title, editable | | | |
+| SCRUD-27 | Edit mode: author field pre-populated with current author (or placeholder if blank) | Shows existing author, or "add author" placeholder if none set | | | |
+| SCRUD-28 | Edit mode: type dropdown pre-selected to current source type | Dropdown shows current type (e.g. "Website") selected | | | |
+| SCRUD-29 | Submit valid title change via checkmark icon | Source title updates, redirects/re-renders without `?edit=1`, new title displayed | | | |
+| SCRUD-30 | Submit empty/whitespace-only title | Form rejected with validation error, remains in edit mode | | | |
+| SCRUD-31 | Submit extremely long title (test truncation/scroll bug regression) | No horizontal scroll introduced, long-string fix holds | | | |
+| SCRUD-32 | Leave author field blank and submit | Accepted — author is optional, saves with blank author | | | |
+| SCRUD-33 | Change type dropdown to a different value and submit | Source type updates correctly, reflected on next page load | | | |
+| SCRUD-34 | Click cross (cancel) icon without changing anything | Returns to display mode, no changes saved, `?edit=1` removed from URL | | | |
+| SCRUD-35 | Make changes, then click cross (cancel) icon | Returns to display mode, no changes saved, `?edit=1` removed from URL | | | |
+| SCRUD-37 | Submit valid author change | Author updates and persists on reload | | | |
+| SCRUD-38 | Success message on edit | "Edit saved" message displayed after valid submission | | | |
+| SCRUD-39 | Submit edit with no type selected | Form rejected, error shown, edit not saved | | | |
+
+
+**Delete Source**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| SCRUD-40 | Click delete option | Confirmation step/modal appears before any deletion occurs | | | |
+| SCRUD-41 | Confirmation step content | Source name and author are displayed in the confirmation step, so the user can verify they're deleting the right one | | | |
+| SCRUD-42 | Confirmation step — author blank | If source has no author, confirmation step displays sensibly (no "None" or blank gap) rather than breaking the layout | | | |
+| SCRUD-43 | Cancel from confirmation step | Deletion aborted, source remains in list unchanged | | | |
+| SCRUD-44 | Confirm deletion | Source is removed from the sources list on dashboard | | | |
+| SCRUD-45 | Redirect after deletion | User is redirected to dashboard | | | |
+| SCRUD-46 | Success message after deletion | Confirmation message displayed after successful deletion | | | |
+| SCRUD-47 | Cascade: note pk of a unit belonging to the source before deletion, delete the source, then navigate directly to that unit's URL | 404 — unit no longer exists | | | |
+| SCRUD-48 | Cascade: note pk of a note (Reference/MyWords/Question) belonging to a unit under the source before deletion, delete the source, then navigate directly to that note's URL | 404 — note no longer exists | | | |
+
 
 #### Unit CRUD
 #### Reference note CRUD
