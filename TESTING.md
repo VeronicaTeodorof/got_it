@@ -458,6 +458,59 @@ Each category tested against:
 
 
 #### Unit CRUD
+
+#### Unit CRUD
+
+**Read Unit (list within source)**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UCRUD-01 | Source name displayed on source detail page | Source name shown correctly | | | |
+| UCRUD-02 | Source author displayed on source detail page | Author shown if present | | | |
+| UCRUD-03 | Units listed in most-recently-edited order | Most recently edited unit appears first, oldest edit last | | | |
+| UCRUD-04 | Each unit in the list displays its name | Name shown for every unit | | | |
+| UCRUD-05 | Click a unit in the list | Navigates to that unit's detail page (three-tabs view) | | | |
+| UCRUD-06 | List only shows units belonging to the current source | No units from other sources (even the same user's other sources) appear in this list | | | |
+| UCRUD-07 | Empty state message | Displayed when no units exist yet in this source, encouraging user to create one | | | |
+
+**Create Unit**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UCRUD-08 | Create unit button present on source detail page | Button visible | | | |
+| UCRUD-09 | Click Create unit button | Expands the create unit form | | | |
+| UCRUD-10 | Save and Cancel buttons | Present on form | | | |
+| UCRUD-11 | Click cancel button | Collapses and resets the form | | | |
+| UCRUD-12 | Name field | User can enter a unit name | | | |
+| UCRUD-13 | Blank name field submitted | Form rejected, error shown | | | |
+| UCRUD-14 | Valid submission | Unit appears in units list and success message shown | | | |
+| UCRUD-15 | Duplicate unit name within same source | Form rejected, error shown | | | |
+| UCRUD-16 | Duplicate unit name across different sources (same user) | Accepted — uniqueness is scoped per-source, not global | | | |
+| UCRUD-17 | Submit form with errors | Page reloads with form already expanded, so validation feedback is immediately visible without needing to click Create unit again | | | |
+
+**Edit Unit**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UCRUD-18 | Edit form pre-populated with correct unit name | Existing name shown, editable | | | |
+| UCRUD-19 | User can edit the name field | Field accepts new input | | | |
+| UCRUD-20 | Save and Cancel icons present on edit form | Both visible | | | |
+| UCRUD-21 | Submit empty name field | Form re-rendered with error, not saved | | | |
+| UCRUD-22 | Submit valid name change | Form saves, page reloads in non-editable (display) mode showing updated name | | | |
+| UCRUD-23 | Submit duplicate name (matching another unit in same source) | Form re-rendered with error, not saved | | | |
+
+
+**Delete Unit**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UCRUD-24 | Confirmation modal content | Source name and unit name both included, along with a risk/warning message, so user can verify they're deleting the right unit | | | |
+| UCRUD-25 | Delete and Cancel buttons present on modal | Both visible | | | |
+| UCRUD-26 | Click Cancel on modal | Modal closes, unit not deleted, list unchanged | | | |
+| UCRUD-27 | Click Delete on modal | Unit deleted, modal closes, page re-renders with updated units list (deleted unit no longer present) | | | |
+| UCRUD-28 | Cascade: note pk/URL of a note belonging to this unit before deletion, delete the unit, then navigate directly to that note's URL | 404 — note no longer exists (cascade deletion confirmed, same technique used for Source cascade in SCRUD-47/48) | | | |
+
+
 #### Reference note CRUD
 #### MyWords note CRUD
 #### Question note CRUD
