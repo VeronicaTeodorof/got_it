@@ -742,6 +742,39 @@ A11Y-06 — Feedback messages made available to screen readers via `role="status
 
 ## Story-to-Test Mapping
 
+| Story | Summary | Test IDs |
+|-------|---------|----------|
+| 1 | Sign up | AUTH-01 to AUTH-16 |
+| 2 | Sign in | AUTH-17 to AUTH-28 |
+| 3 | Log out | MNAV-10; MNV-01, MNV-02, MNJS-01 |
+| 4 | Stay logged in between sessions | AUTH-29 to AUTH-31 |
+| 5 | Ownership enforcement | AUTHZ-01 to AUTHZ-08; AUTHZ-20, AUTHZ-20a, AUTHZ-20b; MNV-02 |
+| 6 | View sources list | SCRUD-17 to SCRUD-25 |
+| 7 | Create source | SCRUD-01 to SCRUD-16 |
+| 8 | Edit source | SCRUD-26 to SCRUD-39; ACT-01 to ACT-04 |
+| 9 | Delete source | SCRUD-40 to SCRUD-48; ACT-01 to ACT-04 |
+| 10 | View units list | UCRUD-01 to UCRUD-07 |
+| 11 | Create unit | UCRUD-08 to UCRUD-17 |
+| 12 | Edit/rename unit | UCRUD-18 to UCRUD-23; ACT-01 to ACT-04 |
+| 13 | Delete unit | UCRUD-24 to UCRUD-28; ACT-01 to ACT-04 |
+| 14 | View notes within a unit | NCRUD-01 to NCRUD-08 |
+| 15 | View note detail | NCRUD-09 to NCRUD-13 |
+| 16 | Edit note | NCRUD-14 to NCRUD-18; ACT-01 to ACT-04 |
+| 17 | Delete note | NCRUD-19 to NCRUD-24; ACT-01 to ACT-04 |
+| 18 | Create Reference note | WORKFLOW-01 to WORKFLOW-08 |
+| 19 | Create MyWords note (linked/standalone) | WORKFLOW-09 to WORKFLOW-18 |
+| 20 | Create Question note (linked/standalone) | WORKFLOW-19 to WORKFLOW-27 |
+| 21 | Answer a Question via linked MyWords | WORKFLOW-28 to WORKFLOW-33 |
+| 22 | View notes linked from a Reference | WORKFLOW-34 to WORKFLOW-39 |
+| 23 | View notes linked to a Question | WORKFLOW-40 to WORKFLOW-43 |
+| 24 | Home page | HOME-01 to HOME-05 |
+| 25 | Walkthrough | HIW-01 to HIW-04 |
+| 26 | External feedback form | EXT-01 |
+| 27 | Navigation reflecting app structure | MNAV-01 to MNAV-13; TREE-01 to TREE-21; OFFC-01 to OFFC-08; BACK-01 to BACK-05; BNAV-01 to BNAV-05; PAG-01 to PAG-06 |
+| 28 | Accessibility | A11Y-01 to A11Y-06 |
+| 29 | Responsiveness | RESP-01 to RESP-11 |
+| 30 | Minimalist UI | UX-01 to UX-03 |
+
 ## Solved Bugs
 
 *Flat list — bug, cause, fix.*
