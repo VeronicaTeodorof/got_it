@@ -12,23 +12,51 @@ Together, the two passes cover what neither one does alone: Pass 1 catches thing
 
 Note: The two-pass testing methodology (code-to-UI audit, then user-perspective testing) and its categorisation are my own; AI articulated these ideas into accurate wording (file intro, names of the two passes, and some other category names), drafted the skeleton  and sanity checked the idea and structure. I reread and edited the draft where necessary.
 
-## Contents
+# Table of Contents
 
-1. [Pass 1 — Code Audit](#pass-1--code-audit)
-      - [Automated tests](#automated-tests)
-      - [Manual tests - code reflection in UI](#manual-tests--code-reflection-in-ui)
-2. [Pass 2 — User-Perspective Testing](#pass-2--user-perspective-testing)
-3. [Solved Bugs](#solved-bugs)
-4. [Known Bugs / Limitations](#known-bugs--limitations)
-5. [Validation](#validation)
+1. [Pass 1 - Code Audit](#pass-1--code-audit)
+   - [Automated tests](#automated-tests)
+     - [notes app - models.py](#notes-app-models)
+     - [notes app - forms.py](#notes-app-forms)
+     - [notes app - views.py](#notes-app-views)
+   - [Manual tests - code reflection in UI](#manual-tests--code-reflection-in-ui)
+     - [notes app - models.py](#manual-notes-app-models)
+     - [notes app - forms.py](#manual-notes-app-forms)
+     - [notes app - views.py](#manual-notes-app-views)
+     - [notes app - notes.js](#manual-notes-app-notesjs)
+     - [notes app - templates](#manual-notes-app-templates)
+2. [Pass 2 - User-Perspective Testing](#pass-2--user-perspective-testing)
+   - [Repeating categories](#repeating-categories)
+     - [Main Navbar (MNAV)](#main-navbar-mnav)
+     - [Content Navigation (TREE)](#content-navigation-sourceunitnotes-tree)
+     - [NAV-OFFCANVAS](#nav-offcanvas-offcanvas-for-mobile)
+     - [NAV-BACK](#nav-back-back-link-for-mobile)
+     - [Breadcrumbs (BNAV)](#breadcrumbs-bnav)
+     - [Pagination (PAG)](#pagination-pag)
+     - [A11Y](#a11y-accessibility)
+     - [Responsiveness](#responsiveness)
+     - [Minimalist UI](#minimalist-ui)
+   - [Per-feature tests](#per-feature-tests)
+     - [Authentication (AUTH)](#authentication-auth)
+     - [Authorization (AUTHZ)](#authorization-authz)
+     - [External navigation (EXT)](#external-navigation-ext)
+     - [Actions partial](#actions-partial)
+     - [Source CRUD](#source-crud)
+     - [Unit CRUD](#unit-crud)
+     - [Note CRUD](#note-crud)
+     - [Workflow Theme](#workflow-theme)
+     - [UI/UX Theme](#uiux-theme)
+3. [Story-to-Test Mapping](#story-to-test-mapping)
+4. [Solved Bugs](#solved-bugs)
+5. [Known Bugs / Limitations](#known-bugs--limitations)
+6. [Validation](#validation)
 ---
 
 ## Pass 1 — Code Audit
 
 ### Automated tests
 
-#### notes app
-##### models.py
+#### notes app models
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
@@ -49,7 +77,7 @@ null on linked mywords | Pass |
 null on linked mywords | Pass |
 
 
-##### forms.py
+#### notes app forms
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | ANF-01 | test_empty_source_author_saved_as_none | Empty source_author saved as None, not empty string | Pass |
@@ -62,7 +90,7 @@ null on linked mywords | Pass |
 | ANF-08 | test_same_unit_name_different_source_is_valid | Unit name uniqueness is enforced per source, not globally | Pass |
 | ANF-09 | test_editing_unit_with_unchanged_name_is_valid | Editing a unit with its own unchanged name is valid | Pass |
 
-##### views.py
+#### notes app views
 
 **Dashboard view**
 
@@ -115,21 +143,9 @@ null on linked mywords | Pass |
 | ANV-24 | test_authenticated_user_gets_404_for_inexistent_unit | Authenticated user requesting a unit that doesn't exists gets 404 | Pass |
 
 
-
-##### urls.py
-
-#### pages app
-##### views.py
-##### urls.py
-
-#### got_it project
-##### urls.py (root — confirms each app is correctly included)
-##### settings.py
-
 ### Manual tests — code reflection in UI
 
-#### notes app
-##### models.py
+#### manual notes app models
 Tests how code written at model level reflects in UI
 
 | Test ID | Test | Covers | Result |
@@ -146,7 +162,7 @@ Tests how code written at model level reflects in UI
 | MNM-10 | Reference notes submit correctly without location | location's blank=True enforced - form submits with blank location field without error | Pass |
 * Note: while testing MNM-04 at the max-length boundary, found that unbroken long strings (e.g. URLs) in source_name cause horizontal scroll rather than wrapping. Logged as a bug — see Solved Bugs.
 
-##### forms.py
+#### manual notes app forms
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
@@ -157,7 +173,7 @@ Tests how code written at model level reflects in UI
 | MNF-05 | Test in edit mode rerwiting the same unit name doesn't raise error | Submits with name unchanged or cleared and typed again | Pass |
 
 
-##### views.py
+#### manual notes app views
 
 **All Views**
 
@@ -198,33 +214,18 @@ Tests how code written at model level reflects in UI
 | MNV-09 | Feedback message after successful unit deletion | 'Unit deleted' message appears in source detail page | Pass |
 
 
-
-
-##### urls.py
-
-##### notes.js
+#### manual notes app notes.js
 
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | MNJS-01 | Log in, view a page in notes, log out, click browser back button; repeat for all pages in notes | @never_cache, pageshow reload, and @login_required together prevent cached authenticated content from being shown after logout, redirecting to Sign In instead | Pass |
 
-
-##### templates
-#### pages app
-##### views.py
-
-##### urls.py
-##### templates
+#### manual notes app templates
 
 | Test ID | Test | Covers | Result |
 |---------|------|--------|--------|
 | MPT-01 | Verify external link security attributes | Verify external link security attributes | Inspect page source code or elements to confirm all external anchor tags contain `target="_blank"` and `rel="noopener"` to ensure cross-origin browser security | |
-
-#### got_it project
-##### urls.py
-##### settings.py
-##### context processors / shared templates
 
 ---
 
@@ -297,17 +298,65 @@ Tests how code written at model level reflects in UI
 | PAG-04 | 8 or less items | Pagination is not displayed | | |
 | PAG-05 | First page | Previous link is not displayed | | | |
 | PAG-06 | Last page | Next link is not displayed | | | |
-#### NAV-LINK (note-to-note linking)
-#### A11Y (accessibility)
-#### RESPONSIVE (responsiveness across breakpoints)
 
-Each category tested against:
-- **Local**
-- **Deployed**
+
+#### A11Y (accessibility)
+**Story 28 - Accessibility**
+
+*Automated testing with Lighthouse*
+
+A11Y-01
+- Lighthouse accessibility audit run per page, both mobile and desktop viewport, in Chrome DevTools.
+- Covers colour contrast, alt text, accessible-name checks, list structure validity, heading order, basic form-label association, across all 16 pages (Home, How it works, Sign In, Sign Up, Dashboard, Source detail, Unit detail, and Create/Detail/Edit for each of the three note types)
+- 100/100 on both desktop and mobile for every page. Several issues were flagged and corrected during this test cycle: some contrast failures, invalid list markup
+
+*Manual Accessibility Review*
+
+- Semantic HTML and structure
+
+A11Y-02 — Use real `<button>`, `<nav>`, `<main>`, `<header>`, `<footer>` instead of styled `<div>`s.** Checked all .html files. Result: Pass.
+
+A11Y-03 — One `<h1>` per page; headings nest in order (no skipping h2 → h4).** Checked all .html files. Result: Pass.
+
+- Forms
+
+A11Y-04 — Every input has a `<label for="id">`.** Checked all custom forms in the notes app. All inputs in all forms have labels using Bootstrap's `visually-hidden` class, so they conform to accessibility criteria while remaining aligned with the app's aesthetics. Result: Pass.
+
+A11Y-05 — Required fields marked with the `required` attribute and indicated visually. All forms checked. While the `required` attribute is passed down from model to form to template and reliably announced by screen readers, sighted users had no way of knowing which fields were required. Added "required" to placeholders for required inputs, giving parity between sighted and visually impaired users: when a field has content, "required" is not announced since the condition is satisfied; when a field is empty, "required" is announced for both types of users. Final result after changes: Pass.
+
+A11Y-06 — Feedback messages made available to screen readers via `role="status"` for CRUD operations and via `aria-live="polite"` for form errors.** Added everywhere relevant. Result: Pass.
+
+
+#### Responsiveness
+**Story 29 - Responsive design**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| RESP-01 | Layout at mobile breakpoint (e.g. 375px) | No broken/overlapping elements, content readable without zoom | | | |
+| RESP-02 | Layout at tablet breakpoint (e.g. 768px) | No broken/overlapping elements | | | |
+| RESP-03 | Layout at desktop breakpoint | No broken/overlapping elements, no excessive whitespace/stretching | | | |
+| RESP-04 | Long unbroken string (source/unit/note title) on mobile | No horizontal scroll — regression check on earlier fix | | | |
+| RESP-05 | Long unbroken string on tablet/desktop | No horizontal scroll | | | |
+| RESP-06 | Navigation collapses to offcanvas on mobile | Hamburger/offcanvas pattern activates at appropriate breakpoint | | | |
+| RESP-07 | Offcanvas nav opens/closes correctly on mobile | Tap opens, tap outside or close icon dismisses | | | |
+| RESP-08 | Sidebar behaviour on desktop | Sidebar expandable/collapsable | | | |
+| RESP-09 | Touch target sizing on mobile | Buttons/links/icons meet minimum touch target size not cramped together | | | |
+| RESP-10 | Forms usable on mobile | Input fields, dropdowns, and buttons on Create/Edit forms remain usable without horizontal scroll or overlap | | | |
+| RESP-11 | Tables/lists (Sources, Units, Notes) on mobile | Content reflows appropriately rather than forcing horizontal scroll | | | |
+
+
+#### Minimalist UI
+**Story 30 - Minimalist UI**
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| UX-01 | Pages avoid unnecessary visual clutter | No decorative elements that don't support the task | | | |
+| UX-02 | Consistent, restrained color and typography | Same palette/type system used throughout, no inconsistent one-off styling | | | |
+| UX-03 | CTAs visually clear without excessive decoration | Primary actions stand out through hierarchy/contrast, not ornamentation | | | |
 
 ### Per-feature tests
 
-#### Authentication: sign up / log in / session (AUTH)
+#### Authentication (AUTH)
 
 **Sign up page**
 
@@ -366,7 +415,7 @@ Each category tested against:
 | AUTHZ-08 | User A requests edit URL for User B's Source/Unit/Note (GET) | 404 | | | |
 
 
-#### External navigation: footer links, give feedback (EXT)
+#### External navigation: (EXT)
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|-------|-------|------------|
@@ -665,60 +714,9 @@ Each category tested against:
 | GF-02 | Feedback link opens Google Form in new tab | Opens `target="_blank"` (with `rel="noopener"`), user's place in app preserved | | | |
 
 
-**Story 28 - Accessibility**
-
-*Automated testing with Lighthouse*
-
-A11Y-01
-- Lighthouse accessibility audit run per page, both mobile and desktop viewport, in Chrome DevTools.
-- Covers colour contrast, alt text, accessible-name checks, list structure validity, heading order, basic form-label association, across all 16 pages (Home, How it works, Sign In, Sign Up, Dashboard, Source detail, Unit detail, and Create/Detail/Edit for each of the three note types)
-- 100/100 on both desktop and mobile for every page. Several issues were flagged and corrected during this test cycle: some contrast failures, invalid list markup
-
-*Manual Accessibility Review*
-
-- Semantic HTML and structure
-
-A11Y-02 — Use real `<button>`, `<nav>`, `<main>`, `<header>`, `<footer>` instead of styled `<div>`s.** Checked all .html files. Result: Pass.
-
-A11Y-03 — One `<h1>` per page; headings nest in order (no skipping h2 → h4).** Checked all .html files. Result: Pass.
-
-- Forms
-
-A11Y-04 — Every input has a `<label for="id">`.** Checked all custom forms in the notes app. All inputs in all forms have labels using Bootstrap's `visually-hidden` class, so they conform to accessibility criteria while remaining aligned with the app's aesthetics. Result: Pass.
-
-A11Y-05 — Required fields marked with the `required` attribute and indicated visually. All forms checked. While the `required` attribute is passed down from model to form to template and reliably announced by screen readers, sighted users had no way of knowing which fields were required. Added "required" to placeholders for required inputs, giving parity between sighted and visually impaired users: when a field has content, "required" is not announced since the condition is satisfied; when a field is empty, "required" is announced for both types of users. Final result after changes: Pass.
-
-A11Y-06 — Feedback messages made available to screen readers via `role="status"` for CRUD operations and via `aria-live="polite"` for form errors.** Added everywhere relevant. Result: Pass.
-
-**Story 29 - Responsive design**
-
-| Test ID | Test | Expected | Actual | Local | Deployment |
-|---------|------|----------|--------|-------|------------|
-| RESP-01 | Layout at mobile breakpoint (e.g. 375px) | No broken/overlapping elements, content readable without zoom | | | |
-| RESP-02 | Layout at tablet breakpoint (e.g. 768px) | No broken/overlapping elements | | | |
-| RESP-03 | Layout at desktop breakpoint | No broken/overlapping elements, no excessive whitespace/stretching | | | |
-| RESP-04 | Long unbroken string (source/unit/note title) on mobile | No horizontal scroll — regression check on earlier fix | | | |
-| RESP-05 | Long unbroken string on tablet/desktop | No horizontal scroll | | | |
-| RESP-06 | Navigation collapses to offcanvas on mobile | Hamburger/offcanvas pattern activates at appropriate breakpoint | | | |
-| RESP-07 | Offcanvas nav opens/closes correctly on mobile | Tap opens, tap outside or close icon dismisses | | | |
-| RESP-08 | Sidebar behaviour on desktop | Sidebar expandable/collapsable | | | |
-| RESP-09 | Touch target sizing on mobile | Buttons/links/icons meet minimum touch target size not cramped together | | | |
-| RESP-10 | Forms usable on mobile | Input fields, dropdowns, and buttons on Create/Edit forms remain usable without horizontal scroll or overlap | | | |
-| RESP-11 | Tables/lists (Sources, Units, Notes) on mobile | Content reflows appropriately rather than forcing horizontal scroll | | | |
-
-**Story 30 - Visual clarity**
-
-| Test ID | Test | Expected | Actual | Local | Deployment |
-|---------|------|----------|--------|-------|------------|
-| UX-01 | Pages avoid unnecessary visual clutter | No decorative elements that don't support the task | | | |
-| UX-02 | Consistent, restrained color and typography | Same palette/type system used throughout, no inconsistent one-off styling | | | |
-| UX-03 | CTAs visually clear without excessive decoration | Primary actions stand out through hierarchy/contrast, not ornamentation | | | |
-
-
-Each tested against:
-- **Local**
-- **Deployed**
 ---
+
+## Story-to-Test Mapping
 
 ## Solved Bugs
 
@@ -866,4 +864,3 @@ The following pages have been validated with [Code Institute CI Python Linter](h
 - [urls.py](docs/readme-assets/urls_validation.png) - no errors found
 
  **Lighthouse** — performance, accessibility, best practices, SEO
-  
