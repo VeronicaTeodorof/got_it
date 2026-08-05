@@ -277,8 +277,32 @@ Tests how code written at model level reflects in UI
 | TREE-19 | Plus icons tooltips | All plus icons show descriptive tooltips | | | |
 | TREE-20 | Click plus icon | Navigates to the specific note type create page | | | |
 | TREE-21 | Empty tree | Newly registered account dashboard tree shows 0 sources | | | |
+
+
 #### NAV-OFFCANVAS (offcanvas for mobile)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| OFFC-01 | Sidebar/tree hidden by default on mobile viewport | Not shown inline; accessed via a trigger (e.g. hamburger/menu icon) instead of taking up screen space | | | |
+| OFFC-02 | Click offcanvas trigger | Offcanvas panel slides in, containing the same sources/units tree content as the desktop sidebar | | | |
+| OFFC-03 | Offcanvas content matches desktop sidebar content | Same sources, same expand/collapse behaviour, same links — no reduced functionality on mobile | | | |
+| OFFC-04 | Click outside the offcanvas panel (backdrop) | Panel closes | | | |
+| OFFC-05 | Click close icon/button on offcanvas panel | Panel closes | | | |
+| OFFC-06 | Click a link inside the offcanvas panel | Navigates to correct page and panel closes automatically | | | |
+| OFFC-07 | Keyboard: open offcanvas, press Escape | Panel closes | | | |
+| OFFC-08 | Offcanvas trigger accessible name | Trigger icon has an accessible label (e.g. `aria-label="Open navigation"`), not icon-only with no name | | | |
+
 #### NAV-BACK (back link for mobile)
+
+| Test ID | Test | Expected | Actual | Local | Deployment |
+|---------|------|----------|--------|-------|------------|
+| BACK-01 | Back link/button present on mobile viewport where sidebar is not visible inline | Visible on Source detail, Unit detail and Note d pages | | | |
+| BACK-02 | Click back link from Unit detail page | Returns to the parent Source detail page | | | |
+| BACK-03 | Click back link from Note detail page | Returns to the parent Unit detail page | | | |
+| BACK-04 | Click back link from Note create/edit page | Returns to previous page the user came from | | | |
+| BACK-05 | Back link not shown where not needed (Dashboard) | Not present on pages with no meaningful "back" target (Dashboard) | | | |
+
+
 #### Breadcrumbs (BNAV)
 
 | Test ID | Test | Expected | Actual | Local | Deployment |
