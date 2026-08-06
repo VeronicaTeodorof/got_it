@@ -24,7 +24,7 @@
       </li>
       {% if reference %}
       <li>
-        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %} class="truncate"">{{ reference.title|default:"Untitled" }}</a>
+        <a href="{% url 'notes:reference-detail' source.pk unit.pk reference.pk %}" class="truncate">{{ reference.title|default:"Untitled" }}</a>
       </li>
       {% endif %}
     </ol>

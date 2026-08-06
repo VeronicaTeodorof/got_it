@@ -12,8 +12,23 @@ This workflow is derived from the Feynman Technique, which is a simple way of te
 
 The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX, with some references to how some planes connects to corresponding backend decisions, rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
 
+# Table of Contents
+
+1. [Strategy](#strategy)
+2. [Scope](#scope)
+3. [Structure](#structure)
+4. [Skeleton](#skeleton)
+5. [Surface](#surface)
+6. [Deployment](#deployment)
+7. [Testing](#testing)
+8. [Languages](#languages)
+9. [Frameworks, packages and libraries](#frameworks-packages-and-libraries)
+10. [Credits](#credits)
+11. [Acknowledgements](#acknowledgements)
+---
 ## Strategy
 **Origin**
+
 The idea for this app began with a personal need: organising thoughts and external information - a problem generally addressed by Personal Knowledge Management (PKM) tools. This led to reading <em>How to Take Smart Notes</em> by Sonke Ahrens (2017), which introduced me to the Zettelkasten method: organizing notes into **reference notes** (captured from sources) and **permanent notes** (the reader's own ideas and insights, inspired by a source, but independent of it, with a citation back to the original).
 
 The initial idea was to build something similar to Obsidian, one of the most popular implementations of the Zettelkasten system. When I discovered it already existed, I thought about simplifying it, as it felt too complex, one needed to digest it first. Instead of a system for connecting thoughts and ideas, I would turn it into a tool for assessing the understanding of what is being read, which is simpler to grasp and can be used by younger users as well, particularly secondary school students.
@@ -554,7 +569,7 @@ Navigation is split into nine layers, each addressing a different need:
 - Navigation to external pages via footer links and give feedback link in main navbar - base.html (project level)
 - Main nav - global, project-level actions (home, feedback, dashboard, log out) - base.html (project level)
 - Secondary back-navigation (mobile only) — a step-back affordance for small screens, where the content sidebar isn't always visible on screen - `notes` app templates level
-- Sidebar / offcanvas - the Source->Unit content structure, and in Notes level pages also displaying links to the three note type tabs and standalone creation - reachable without losing your place - `notes` app partial
+- Tree navigation (Sidebar / offcanvas) - the Source->Unit content structure, and in Notes level pages also displaying links to the three note type tabs and standalone creation - reachable without losing your place - `notes` app partial
 - Breadcrumbs — orientation: shows exactly where you are and the path you took to get there - `notes` app template level
 - Note-type tabs — switching between Reference/My Words/Questions within a unit, without page reloads, with state synced to the URL hash so a direct link or refresh lands on the right tab - `notes` app Unit detail template
 - Situational navigation via query parameters - after cancelling an action, the URL (?next=) carries the user back to the page they came from rather than to a fixed default - `notes` app, view + template level
@@ -625,6 +640,72 @@ The two middle sections are placed next to each other on purpose, as a contrast.
 <p align="center"> <img src="docs/readme-assets/how-it-works-2.png" alt="Flexible workflow section with tips callout" width="700"> </p> <p align="center"> <img src="docs/readme-assets/how-it-works-3.png" alt="Rigid structure section with Fig. 2 diagram" width="700"> </p>
 
 Putting these two sections back to back, each with its own numbered figure, shows a new user what's optional and what's not, before they've created a single note.
+
+#### notes app
+
+##### Recurring elements
+
+**Tree Navigation**
+
+The most important recurring element in `notes` app is tree navigation, reflecting the underlying data structure: Source contains Units, and each Unit branches further into Reference, MyWords, and Question notes. This navigation was suggested by my tutor because it fits the data as it actually exists - a genuine parent-child hierarchy - and because a nested tree is a representation most users already recognise from file explorers and similar tools.
+
+*Initial idea*
+
+Before landing the idea of a nested tree, my first approach was a flat, accumulating sidebar: each level of drill-down appended a new list section beneath the previous one, rather than nesting it inside. Selecting a Source added a "Units" section below "Sources"; selecting a Unit added Reference, My Words, and Questions below that, separated by a divider.
+<p align="center">
+  <img src="docs/readme-assets/dashboard-desktop.png" alt="Initial sidebar: Sources list" width="45%">
+  <img src="docs/readme-assets/source-detail-desktop.png" alt="Initial sidebar: Sources + Units" width="45%">
+  <img src="docs/readme-assets//unit-detail-desktop.png" alt="Initial sidebar: Sources + Units + Notes" width="45%">
+</p>
+This was simpler to build - each level is just another flat list, appended independently, with its own add button. But it was less intuitive: nothing in the layout showed that a Unit belongs to a Source, or that a note belongs to a Unit - the relationship was only implied by stacking order, not represented structurally.
+<br>
+<br>
+
+*The build*
+
+My tutor's suggestion — representing the same relationships as a genuine nested tree - solved this.
+The tree has two parts:
+- the Source → Unit branch is permanent, shown on every page, giving the owner constant access to the full scope of their content, plus a convenient, quick navigation to add source and add unit forms,
+- links to the three note-type tabs (Reference, MyWords, Question) only appear when viewing a note page because notes belong to a unit and can only be created inside one.
+
+This structure benefits the owner in several ways: it lets them jump to any level without drilling down level by level; the indentation and grouping communicate scope and relationships at a glance, so they always know how much content they have and where a given piece sits within it; and it scales gracefully as the number of Sources and Units grows, since branches stay collapsible rather than forcing everything into view at once.
+
+To adapt to different screen widths, the nested tree is presented as a permanent (expandable) sidebar on desktop, while on mobile, where space is limited, it's tucked behind an offcanvas panel, opened via a trigger, rather than staying constantly on screen.
+
+<p align="center">
+  <img src="docs/readme-assets/navtree-desktop.png" alt="Navigation tree on desktop" width="67%">
+  <img src="docs/readme-assets/navtree-mobile.png" alt="Navigation tree on mobile" width="23%">
+</p>
+
+**Back-navigation link on mobile**
+
+Because the navigation tree disappears behind the offcanvas trigger on mobile, users lose the constant visual reminder of "where they are" that the sidebar provides on desktop. To compensate, every page carries a secondary back-navigation link directly beneath the main header - a one-tap affordance back to the immediately previous level, without needing to open the offcanvas panel at all.
+
+For example, on the unit detail page shown below, "Change or add source" sits right under the "got it?" header - a single tap returns the user to source selection, the level directly above the unit they're viewing. This mirrors the logic of the permanent tree on desktop (Source → Unit → notes) but expresses it as a single contextual step rather than a full hierarchy, which suits the more linear way people tend to move through content on a smaller screen.
+
+<p align="center">
+  <img src="docs/readme-assets/back-nav-mobile.png" alt="Secondary back navigation on mobile" width="25%">
+  <img src="docs/readme-assets/reference-oak-national-academy.png" alt="Reference: Oak National Academy pupil view showing a 'Change subject' back-navigation affordance (external screenshot, not part of this project)" width="25%">
+</p>
+<p align="center"><em>On the left: mobile view of 'got it?' source detail page. On the right: Oak National Academy's pupil view. Screenshot for reference only, not part of this project.</em></p>
+
+This pattern was inspired by classroom platforms such as [Oak National Academy](https://www.thenational.academy)'s pupil view, which uses a similar always-visible "Change subject" affordance directly under its header.
+
+**Breadcrumbs**
+
+Breadcrumbs give a horizontal, textual trace of position within the Source → Unit → note hierarchy, complementing rather than duplicating the sidebar. Since the sidebar already provides constant, structural access to the full tree on desktop (and via offcanvas on mobile), breadcrumbs don't need to repeat that job - instead they answer a narrower question: "how did I get here, and what's directly above this page?"
+
+Breadcrumbs start at the Source level rather than at a site-wide "Home," because Source is the top of the content hierarchy the app is actually organised around - a site-wide home link is already covered separately by the main nav's home icon. Keeping breadcrumbs scoped to content hierarchy alone (rather than mixing in app-level navigation) avoids the same overlap problem the back-nav section addresses: two different kinds of "movement" competing for the same UI element.
+
+Only the Source's title appears in the trail, not its author - so a Source like "Computing" by Khan Academy shows as "Computing," not "Khan Academy." This keeps each crumb short and consistent regardless of how much author/attribution metadata a given Source carries.
+
+<p align="center">
+  <img src="docs/readme-assets/breadcrumbs-desktop.png" alt="Breadcrumb trail: Computing > Computer programming - Java Script and the web > Variables > Why use let instead of var?" width="72%">
+   <img src="docs/readme-assets/breadcrumbs-mobile.png" alt="Breadcrumb trail on mobile: stacked vertically" width="18%">
+</p>
+
+The example above shows a full four-level trail: Source ("Computing") → Unit ("Computer programming - Java Script and the web") → note type ("Variables," a Reference note) → the specific note itself ("Why use let instead of var?," a Question note). Longer segments, like the Unit title here, truncate with an ellipsis to keep the trail from wrapping or overflowing on smaller screens, rather than forcing a horizontal scroll. On mobile, the same trail switches from a single horizontal line to a stacked, one-crumb-per-line layout - the same underlying data, laid out to avoid the choice between truncating every segment or forcing horizontal scroll on a narrow screen.
+
 
 ## Development Process (Agile Workflow)
 
