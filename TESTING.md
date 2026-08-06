@@ -898,7 +898,12 @@ The following pages have been validated with [W3C](https://validator.w3.org/):
 The following pages have been validated with [W3C Jigsaw validator](https://jigsaw.w3.org/css-validator/):
 - [notes.css](docs/readme-assets/css-validation.png) - no error found
 - [style.css](docs/readme-assets/) - no error found
-- **JavaScript** — JSLint
+
+
+### JavaScript — JSLint
+
+- [notes.js](docs/readme-assets/js-validation.png) file has been validated with JSLint
+
 ### Python — PEP8
 
 The following pages have been validated with [Code Institute CI Python Linter](https://pep8ci.herokuapp.com/#):
