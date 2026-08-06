@@ -124,6 +124,7 @@ Note-taking app users expect:
 
 A fully scoped application would consider implementing all the features above. The MVP, however, is deliberately narrower: it will contain the comprehension workflow itself, the organization by course/subject wrapped-up in a minimalist UI, and authentication. The remaining features -  search, full quick-capture, tagging — are left for future iterations.
 
+---
 
 ## Scope
 
@@ -510,6 +511,7 @@ Acceptance Criteria:
 - Minimalist UI:story 30
 - Responsiveness:story 29
 - Accessibility: story 28
+---
 
 
 ## Structure
@@ -574,8 +576,12 @@ Navigation is split into nine layers, each addressing a different need:
 - Situational navigation via query parameters - after cancelling an action, the URL (?next=) carries the user back to the page they came from rather than to a fixed default - `notes` app, view + template level
 - Pagination - sequential navigation within long lists - `notes` app template level
 - Relational linking — lets a user jump directly between related notes (e.g. from a reference to its linked My Words or Questions) rather than following the strict Source → Unit → note-type path, so related ideas stay reachable regardless of where the user currently is in the hierarchy - `notes` app template level
+---
 
 ## Skeleton
+
+As with each section in this document, the reference to the five planes of UX is not a strict one, but meant, where a logical connection between front-end and back-end exists, to include both. In this section I discuss both layout (what goes where) and mechanics (how it works). For brevity, not all decisions could be included.
+
 
 ### Layout
 
@@ -757,124 +763,28 @@ Delete is irreversible and destructive by nature, so rather than a dedicated pag
 <p align="center"><em>The confirmation modal shown before any delete action, across Source, Unit, and all three note types.</em></p>
 
 
-## Development Process (Agile Workflow)
+### Mechanics
 
-1. Check the user story;
-2. Write acceptance criteria and tasks if not already in issue;
-3. Move to respective iteration if not already there;
-4. Move to In Progress in Project Board;
-5. Write acceptance criteria in README user story;
-6. Plan the code;
-7. Write code;
-8. Write automated tests;
-9. Run automated tests, fix if failing, and document in TESTING.md;
-10. Write manual tests in TESTING.md;
-11. Link tests with acceptance criteria in README;
-12. Update README if any decisions were made;
-13. Move issue to done on project board;
-14. Commit;
+Where Layout addresses *what goes where*, Mechanics covers *how it works underneath* - the behaviour and safeguards that aren't visible in a screenshot but shape what a user can and can't do.
 
-## Design
-### Notebook esthetics
-- Early versions used django-crispy-forms; I later switched to custom form templates to match the app's notebook style.
+### Security and Data Protection Features
 
-## Implementation details
+Authorization and data protection are enforced at multiple levels throughout the app: account security, per-user data isolationm safe external linking.
 
-**Handling two forms in one view**
-source_detail manages both the source-edit form and the add-unit form on a single page. Each POST is distinguished via a hidden form_type field. Whichever form isn't being submitted is reconstructed unbound (using existing instance data where relevant) so both forms render correctly regardless of which one was actually processed (pattern suggested and given by Claude AI),
+- **Secrets management**: Sensitive values (`SECRET_KEY` and database credentials) are never hardcoded or committed to version control. Locally, they're stored in an `env.py` file excluded via `.gitignore`; in production, they're set as Config Vars in Heroku's dashboard. This prevents credentials from being exposed in the codebase or Git history, where they would remain accessible even if the file was later deleted. `DEBUG` is also set to `False` in production, preventing Django from exposing error tracebacks, settings, and file paths if an error occurs.
+- **Rate limiting**: Django allauth applies built-in rate limiting by default, controlling how many login attempts a user/IP can make within a given time period, helping prevent brute-force login attacks.
+- **Account enumeration prevention**: Django allauth gives intentionally vague error messages so attackers can't determine which email addresses/usernames are registered in the app. This feature was silently breaking when overriding the default login form for styling purposes: no error message was shown after attempting to log in with invalid credentials. The fix was to add `{{ form.non_field_errors }}` to the form.
+- **Cache control on authenticated pages**: `@never_cache` is applied to all views except delete views, which only use POST methods, to prevent the browser from caching authenticated content — so using the back button after logout doesn't expose a previous user's data on a shared device. This can still be bypassed by the bfcache mechanism, so a `pageshow` reload was also added in `notes.js`.
+
+Authorization is enforced at three levels: user-owned querysets, consistent redirect behaviour for unauthenticated requests, and parent-child ownership checks on nested resources.
+
+- **Per-user data isolation on Dashboard**: The Dashboard queryset explicitly filters Sources by the logged-in user (`Source.objects.filter(user=request.user)`), ensuring one user's sources are never visible to another. Covered by automated tests confirming both inclusion of a user's own sources and exclusion of other users' sources.
+- **Consistent authentication redirect on protected views**: All `@login_required` views redirect anonymous users to login regardless of whether the requested object exists, preventing anonymous users from distinguishing "object doesn't exist" from "object exists but you're not authenticated" — closing a potential enumeration problem. Verified across all protected views.
+- **Nested resource ownership validation**: Views handling actions on nested models (e.g. deleting a Unit, which belongs to a Source) filter by the parent relationship (`source=source`) rather than relying on the child object's primary key alone. This ensures that a child object can only be acted on through its correct parent, even if a URL's parent-resource segment is changed, and even when both objects happen to belong to the same user.
+- **Safe external linking**: All links pointing to outside resources (such as the Google feedback form, GitHub, and LinkedIn) use `target="_blank"` combined with `rel="noopener"`. This prevents the opened page from using the browser's `window.opener` reference to manipulate the originating tab — an exploit known as reverse tabnabbing, where a background tab is silently redirected to a fake phishing page ([OWASP reference](https://owasp.org/www-community/attacks/Reverse_Tabnabbing)).
 
 
-## Design Decisions
-
-### Onboarding through empty states
-
-Empty states are treated as onboarding moments rather than placeholders — each one teaches the user what to do next and why, instead of just indicating that content is missing, reinforcing the app's structure and pedagogy at the exact moment it's relevant.
-
-- **Sidebar reflects data existence** — the sidebar stays empty on first interaction, since the dashboard's primary call-to-action is the sole entry point for a new user; showing sidebar content with nothing to navigate would compete with that and add confusion rather than help.
-
-
-### Navigation Architecture
-**Problem**
-The original mobile layout used a single unlabeled forward arrow to open the offcanvas navigation. This created a real usability gap: nothing on the page told users how to get back to the sources list. The arrow itself pointed forward, so even users who tried it for that purpose were working against its visual meaning, and there was no separate, correctly-oriented control for returning to a previous page at all. Users had no reliable way to navigate back.
-
-**Goals:**
-
-- Make every navigation control state where it leads.
-- Avoid redundant navigation paths (the same destination reachable two different visible ways on the same screen).
-- Reflect the app's actual hierarchy (Source → Unit → Note) rather than imposing a flat menu that implies destinations aren't really reachable.
-- Scale gracefully from mobile to desktop without maintaining two unrelated navigation systems.
-
-**Approach considered and rejected: persistent icon rail**
-An early option was a slim, always-visible sidebar with single-letter abbreviations (S / U / N) for Sources, Units, Notes. This was rejected because:
-
-Notes aren't reachable without first selecting a Unit, so a flat S/U/N rail would need disabled/dimmed states at shallower depths, which adds complexity without adding real navigation.
-The rail's contents would need to change shape depending on the current page (dashboard vs. source detail vs. unit detail), undermining the consistency it was meant to provide.
-
-**Final approach: two-tier navigation + depth-aware menu**
-Top navbar (unchanged): brand mark, Home, Dashboard, Log out. Persistent across all pages and breakpoints.
-Mobile: second nav bar, directly below the top navbar, contextual per page:
-
-Left: a single labelled back-link combining "go up" and "go to creation" into one destination, since both land on the same list/index page (e.g. "Change source or add one", "Change unit or add one", "Change note or add a new one"). On the new-note page specifically, this becomes "View all notes", since there's nothing yet to "change."
-Right (only on pages with more than one add-action or a multi-level jump need): "Menu" + hamburger icon, opening a Bootstrap offcanvas.
-
-Offcanvas menu appears only from Unit detail downward, since that's the point where a single inline button can no longer represent all available content types. It groups:
-
-Navigation shortcuts to jump more than one level up (Sources, Units).
-Add-actions per content type (Sources, Units, Reference, Own words, Questions).
-
-Source detail and Dashboard don't need the menu. For Source detail its only one-level-up path is inline, as are all available actions (single "Create unit" button, three-dot dropdown for edit/delete).
-Inline actions (three-dot dropdown for edit/delete) are used consistently at every depth next to the relevant title (source title, unit title), rather than living in the menu, since edit/delete apply to "the thing I'm looking at," not "something I want to navigate to."
-Desktop: the second nav bar and offcanvas are replaced by a permanent sidebar, occupying the space already implied by the app's existing vertical accent border. The sidebar shows the same depth-appropriate actions as the offcanvas/back-link combination would on mobile, but always visible, with no back-link duplicate, since showing the same destination two different ways on one screen was judged to be redundant rather than helpful.
-
-**Rule of thumb**
-Show exactly what's reachable from the current page, once. A menu (offcanvas or sidebar) is only introduced where a page needs more than one add-action or a jump of more than one level; everything else stays inline.
-
-**Semantic structure**
-Decision: the back-link, the burger, and the sidebar link list are all the same category of thing — navigation — just different affordances for it at different screen sizes (a single "up one level" link vs. a menu of destinations). They all live inside one <nav> landmark.
-
-**Page-by-page behavior matrix**
-
-| Page | Back-link (mobile/tablet) | Burger + offcanvas (mobile/tablet) | Sidebar frame (desktop, lg+) |
-|------|---------------------------|------------------------------------|------------------------------|
-| dashboard | - | - | Always present |
-| source_detail | present -> dashboard | - | Always present |
-| unit_detail | present -> source_detail | Present | Always present |
-| note pages (reference/words/question) | present -> unit_detail | Present | Always present |
-
-Key principle: the sidebar frame itself is unconditional from dashboard upwards — it always renders on desktop, whether or not the current page has populated it with links. This is what makes the coral divider line read as a deliberate, permanent part of the app's chrome rather than something that flickers in and out per page.
-
-The back-link and burger are the only genuinely conditional pieces, and they're controlled entirely by which Django template blocks a page chooses to override
-
-**Template hierarchy**
-Two separate layout lineages, split by whether a page needs the app frame (sidebar + secondary nav) or not.
-
-- base.html — head, main nav, footer (unchanged)
-
-  - index.html — home, stays on base.html directly, no sidebar
-  - account/login.html
-  - account/signup.html
-  - app_base.html (NEW — adds secondary nav + sidebar shell)
-
-    - dashboard.html
-    - source_detail.html
-    - unit_detail.html
-    - note_base.html (EXISTING — extends app_base.html, not base.html)
-
-      - create_reference.html
-      - edit_reference.html
-      - reference_detail.html
-
-**Open item**
-
-Whether the new-note page needs any menu/sidebar at all, deferred until the create-note form is built and its actual length/complexity is known.
-
-### Nested Tree Content Navigation
-
-**Origin**
-
-The nested tree content navigation was proposed by my tutor as an enhancement to site navigation, allowing users to browse their Source → Unit hierarchy without leaving the current page. My tutor's main justification was that users are already familiar with this pattern from file explorer systems. The interaction design, state management approach, and information architecture below were worked out building on my tutor's initial idea and visual example.
-
-**Architecture**
+### Nav tree implementation and design decisiions
 
 **Implementation across breakpoints**
 
@@ -945,9 +855,6 @@ Units don't expand further into individual notes. Instead of a third nesting lev
 
 The lower panel shows the same category of information (counts, gap-metrics, create actions) but scoped to the *current* Unit rather than across all Units. Keeping it structurally separate from the tree — and always visible rather than behind a toggle — avoids showing the same fact twice in two places: the tree answers "which Unit needs attention," the panel answers "what's the state of the Unit I'm in now."
 
-**Consistency principle**
-
-Every destination is shown exactly once, in exactly one place. Where duplication risk was identified during design (e.g. note-type counts appearing both in an expanded tree and in the lower panel), the information was deliberately scoped differently (cross-Unit vs current-Unit) rather than shown twice at the same specificity.
 
 **Implementation Phases**
 
@@ -955,55 +862,8 @@ Every destination is shown exactly once, in exactly one place. Where duplication
 2. **Sources section** — add-source link (rendered first) + queryset with annotated Unit counts, per-row toggler
 3. **Units section** — add-unit link (rendered first) + queryset with annotated total/unlinked-reference/unanswered-question counts, no further expansion
 4. **Lower panel** — note-type counts + gap-metrics + create links, richer detail on note-detail pages, always visible independent of sidebar width
+---
 
-
-**Sidebar visible on Dashboard**
-Dashboard will render the same Sources sidebar as other authenticated pages, rather than excluding it.
-Rationale: Sidebar and Dashboard's Source list serve different purposes, not duplicate ones.
-
-Dashboard Source list — record/detail view: full name, author, type, date created, pagination, add-form. Answers "what is this source, and what do I need to manage?"
-Sidebar Sources tree — navigation view: condensed, drill-down into Units/Notes. Answers "where do I want to go?"
-
-New users with zero Sources get a distinct empty-state partial (sidebar-empty.html) instead of an empty tree, so first-run dashboard doesn't show two dead panels.
-Guardrail: if Dashboard's list ever grows inline expand-into-Units behavior, it starts encroaching on the sidebar's job — at that point re-evaluate
-
-### Naming: Dashboard vs. Sources
-
-The same page is labelled "Dashboard" in the main nav and "Sources" in the sidebar. This is intentional, not inconsistent — the main nav names the page's role relative to the whole site (entry point/overview), while the sidebar names its content relative to the Source→Unit hierarchy (top-level list of sources). Breadcrumbs start at Source level and don't reference this page, so no further reconciliation is needed there.
-
-### Breadcrumbs
-
- Breadcrumbs omit Dashboard/Sources because the sidebar already provides persistent Source→Unit navigation and orientation across all authenticated views. Including them in the breadcrumb would duplicate that information; the breadcrumb instead acts as a local context label (Source > Unit) rather than a full site trail.
-
-### Edit: inline vs dedicated page
-
-**Architecture: single form, not per-field inline-edit** Source name/author/type are edited together via one Django `<form>` and one POST, not as independent fields with their own save actions (as seen in tools like Jira/GitHub). This is a deliberate simplification: per-field
-editing would require JSON endpoints, manual CSRF handling, and JS-driven partial saves — a much larger scope than this page needs right now.Documented tradeoff: this diverges from Atlassian's inline-edit guidance (don't nest inline-edit inside a `<form>`), accepted knowingly.
-
-**Edit mode: server-rendered, not JS-toggled**
-Readonly state renders plain text (`<span>`); edit state renders real form controls (`<input>`, `<select>`). Because these are different elements chosen via `{% if edit_mode %}`, entering/leaving edit mode requires a real request — done via a `?edit=1` query param on GET, followed by Edit/Cancel as plain `<a>` links rather than JS-toggled attributes. Chosen to preserve a boxless, text-like readonly look (no border/underline at rest) that a pure attribute-toggle approach couldn't achieve.
-
-**Input styling: underline, not bordered box**
-Matches the existing convention from Add Source and auth pages (underline-only inputs, no boxed card). Considered a bordered-box style
-(GitHub-style) after feedback that inputs need a clearer edit affordance, but chose to strengthen the underline instead (thicker on focus) to keep one consistent input language across the app, rather than introducing a second visual style for form fields.
-
-**Save/Cancel: icon-only, not text buttons**
-Kept as compact check/x icons rather than matching Add Source's full green Save/Cancel buttons. Reasoning: Source Detail's edit row is a
-small in-place action within a larger page, not a standalone form — full buttons would compete visually with page content and risk breaking
-the single-row layout. Consistency is preserved through color (icons recolored to the same dark green, `#085041`) rather than shape.
-
-**Empty author displays as blank, not "None"**
-`source_author` can be stored as `None`/empty. Templates must guard with `|default:''` wherever it's rendered directly, since `{{ value }}`
-would otherwise print the literal string "None". Bug caught during manual testing (2026-07-03) on source_detail specifically — dashboard
-already had this guard via a truthiness check.
-
-**Long source names: accepted to clip/scroll, not wrap**
-`.inline-field` capped at `max-width: 100%` so a very long title can't overflow the viewport. Text scrolls within the input rather than the
-box growing or the row wrapping. Considered a tradeoff worth accepting given how rare genuinely long titles are expected to be.
-
-**Notes edit**
-
-Notes (Reference, My Words, Question) use a separate dedicated edit page, mirroring the layout of their corresponding create page. Notes carry more content — a multi-line body plus metadata like location — and forcing that into the same compact layout as read mode led to cramped, hard-to-scan forms. Reusing the create-page layout for editing means one consistent, spacious design for both creating and editing a note, rather than fighting to keep edit mode visually identical to read mode.
 
 ## Surface
 
@@ -1061,57 +921,9 @@ Sign in and sign up initially used Crispy Forms' default rendering. Once the hom
 When starting this project, I assumed a note-taking app - mostly text, no imagery - wouldn't need much design work. That turned out to be wrong. I ended up spending more time on visual design here than on my previous two projects, which leaned on imagery to carry a lot of the meaning. Here, there's no imagery: written text alone has to do that work, so colour, font size, and font-weight became the main tools for creating hierarchy and distinguishing content types - balancing the need for consistency with that of a varied and vivid feel.
 
 
-### Internationalisation (i18n)
-While overriding allauth templates, I came across the i18n library and had to decide whether to implement it across all my templates or remove it from the authentication ones for consistency. Although a note-taking app would benefit from it, this being my first Django project, I considered internationalisation an unnecessary overhead at this stage and added it to the future features list instead.
-
-
-## Accessibility
-- The offcanvas sidebar includes a visually hidden heading so screen readers can identify the region when it opens.
-- The sidebar's top offset and height are calculated at runtime via JavaScript rather than hardcoded, so the layout remains correct if a user increases their font size or zoom level.
-- Foreground/background colour pairings were verified using Lighthouse's accessibility audit, with one issue found and fixed (muted text opacity was silently reducing contrast below threshold on note content preview).
-- All meaningful images (e.g. the app workflow diagram, logo) include descriptive alt text
-- Inline SVG icons in the navigation include role="img" and aria-label attributes so screen readers announce their meaning correctly
-- Form labels are present for all inputs and linked via for/id; where visual design doesn't call for a visible label, Bootstrap's visually-hidden class keeps the label available to screen readers rather than removing it from the accessibility tree.
-- Confirmation messages: save/delete use `aria-live="polite"` so screen reader users are notified of status changes that would otherwise only be visible to sighted users.
-
-
-### Pagination
-
-- Pagination controls are wrapped in a `<nav>` element with a descriptive `aria-label` ("Source list pagination"), distinct from the site's main navigation, so screen reader users can identify and jump to the pagination landmark independently.
-- Previous/Next links use `rel="prev"` and `rel="next"` to provide anadditional semantic hint for assistive technology and browsers.
-- Previous/Next links are only rendered when a previous or next page actually exists — rather than rendering a disabled or non-functional link, avoiding confusing "dead" links being announced to screen readers.
-- Interactive elements inherit the site-wide `:focus-visible` styling (WCAG 2.4.7), ensuring pagination links remain keyboard-navigable with
-a visible focus indicator.
-
-## Features
-### Security and Data Protection Features
-
-Authorization and data protection are enforced at multiple levels throughout the app: account security, per-user data isolationm safe external linking.
-
-- **Secrets management**: Sensitive values (`SECRET_KEY` and database credentials) are never hardcoded or committed to version control. Locally, they're stored in an `env.py` file excluded via `.gitignore`; in production, they're set as Config Vars in Heroku's dashboard. This prevents credentials from being exposed in the codebase or Git history, where they would remain accessible even if the file was later deleted. `DEBUG` is also set to `False` in production, preventing Django from exposing error tracebacks, settings, and file paths if an error occurs.
-- **Rate limiting**: Django allauth applies built-in rate limiting by default, controlling how many login attempts a user/IP can make within a given time period, helping prevent brute-force login attacks.
-- **Account enumeration prevention**: Django allauth gives intentionally vague error messages so attackers can't determine which email addresses/usernames are registered in the app. This feature was silently breaking when overriding the default login form for styling purposes: no error message was shown after attempting to log in with invalid credentials. The fix was to add `{{ form.non_field_errors }}` to the form.
-- **Cache control on authenticated pages**: `@never_cache` is applied to all views except delete views, which only use POST methods, to prevent the browser from caching authenticated content — so using the back button after logout doesn't expose a previous user's data on a shared device. This can still be bypassed by the bfcache mechanism, so a `pageshow` reload was also added in `notes.js`.
-
-Authorization is enforced at three levels: user-owned querysets, consistent redirect behaviour for unauthenticated requests, and parent-child ownership checks on nested resources.
-
-- **Per-user data isolation on Dashboard**: The Dashboard queryset explicitly filters Sources by the logged-in user (`Source.objects.filter(user=request.user)`), ensuring one user's sources are never visible to another. Covered by automated tests confirming both inclusion of a user's own sources and exclusion of other users' sources.
-- **Consistent authentication redirect on protected views**: All `@login_required` views redirect anonymous users to login regardless of whether the requested object exists, preventing anonymous users from distinguishing "object doesn't exist" from "object exists but you're not authenticated" — closing a potential enumeration problem. Verified across all protected views.
-- **Nested resource ownership validation**: Views handling actions on nested models (e.g. deleting a Unit, which belongs to a Source) filter by the parent relationship (`source=source`) rather than relying on the child object's primary key alone. This ensures that a child object can only be acted on through its correct parent, even if a URL's parent-resource segment is changed, and even when both objects happen to belong to the same user.
-- **Safe external linking**: All links pointing to outside resources (such as the Google feedback form, GitHub, and LinkedIn) use `target="_blank"` combined with `rel="noopener"`. This prevents the opened page from using the browser's `window.opener` reference to manipulate the originating tab — an exploit known as reverse tabnabbing, where a background tab is silently redirected to a fake phishing page ([OWASP reference](https://owasp.org/www-community/attacks/Reverse_Tabnabbing)).
-
-### Feedback to user actions:
-- CRUD actions
-- form constraints error messages: 'You already have a source with this name', 'You already have a unit with this name'.
-
 ### Future features
 - Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
 - Internationalisation (i18n) support for multi-language translations using Django's built-in i18n framework
-
-## Future Improvements
-- Extend source uniqueness constraint to include 'source_author' and 'source_type' to handle edge cases where same title exists across different authors or formats
-
-
 
 
 ## Deployment and local development
