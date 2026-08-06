@@ -21,10 +21,9 @@ The rest of this document walks through how that workflow was designed and built
 5. [Surface](#surface)
 6. [Deployment](#deployment)
 7. [Testing](#testing)
-8. [Languages](#languages)
-9. [Frameworks, packages and libraries](#frameworks-packages-and-libraries)
-10. [Credits](#credits)
-11. [Acknowledgements](#acknowledgements)
+8. [Languages, frameworks, packages, programs](#languages-frameworks-packages-programs)
+9. [Credits](#credits)
+10. [Acknowledgements](#acknowledgements)
 ---
 ## Strategy
 **Origin**
@@ -1167,11 +1166,43 @@ The project was managed in GitHub: https://github.com/VeronicaTeodorof/got_it
 ## Resources:
 - automated tests: https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
 
-## Technologies Used
-- dbdiagram.io: https://dbdiagram.io/home - for creating the ERD,
-- Lighthouse for accessibility testing
-- Code Institute CI Python Linter: https://pep8ci.herokuapp.com/# for validating python files
-- SVG icons from Bootstrap icons were used inline rather than an icon font library, for reliability and to avoid an additional dependen
+## Languages, frameworks, packages, programs
+
+**Languages**
+- Python
+- HTML
+- CSS
+- JavaScript
+
+**Python packages**
+Django 6.0.5 - the web framework
+django-allauth 65.16.1 - authentication (signup, login, account management)
+psycopg2 2.9.12 - PostgreSQL database adapter
+whitenoise 6.12.0 - serves static files in production
+gunicorn 26.0.0 - WSGI server used for deployment
+
+
+**Front-end libraries**
+- Bootstrap 5.3
+- Bootstrap Icons 1.11 - iconography
+
+**Development tools / programs**
+- Git & GitHub (version control)
+- VS Code / Gitpod (IDE)
+- Mermaid (diagram embeded in README)
+- Excalidraw (wireframing, logo, diagrams)
+- dbdiagram.io: https://dbdiagram.io/home  (ERD)
+- Coolors (colour palette)
+- Validators:
+  - W3C https://www.w3.org/ (html files)
+  - Jigsaw  https://jigsaw.w3.org/css-validator/ (css files)
+  - JSLint,
+  - Code Institute CI Python Linter: https://pep8ci.herokuapp.com/# (Python files)
+  - Lighthouse (performance, accessibility, SEO, best practices)
+
+**Deployment**
+- Heroku: https://www.heroku.com/
+
 
 ## AI use
 **Example 1**: annotate/Exists/OuterRef pattern (Reference and Question linked-status badges)
