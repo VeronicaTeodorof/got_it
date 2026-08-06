@@ -917,3 +917,27 @@ The following pages have been validated with [Code Institute CI Python Linter](h
 - [urls.py](docs/readme-assets/urls_validation.png) - no errors found
 
  **Lighthouse** — performance, accessibility, best practices, SEO
+
+Audited on both desktop and mobile viewports for every page. Full-size screenshots are linked from each thumbnail.
+
+| Test ID | Page | Accessibility | SEO | Best Practices | Performance (Desktop) | Performance (Mobile) | Screenshot |
+|---|---|---|---|---|---|---|---|
+| LH-01 | Home Page | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-home-desktop.png) / [mobile](docs/readme-assets/lh-home-mobile.png) |
+| LH-02 | How it works | 100 | 100 | 100 | 96 | 91 | [desktop](docs/readme-assets/lh-hiw-desktop.png) / [mobile](docs/readme-assets/lh-hiw-mobile.png) |
+| LH-03 | Sign up | 100 | 100 | 100 | 100 | 93 | [desktop](docs/readme-assets/lh-signup-mobile.png) / [mobile](docs/readme-assets/lh-signup-desktop.png) |
+| LH-04 | Sign in | 100 | 100 | 100 | 100 | 93 | [desktop](docs/readme-assets/lh-signin-mobile.png) / [mobile](docs/readme-assets/lh-signin-desktop.png) |
+| LH-05 | Dashboard | 100 | 100 | 100 | 99 | 92 | [desktop](docs/readme-assets/lh-dashboard-desktop.png) / [mobile](docs/readme-assets/lh-dashboard-mobile.png) |
+| LH-06 | Source detail | 100 | 100 | 100 | 93 | 92 | [desktop](docs/readme-assets/lh-source-detail--desktop.png) / [mobile](docs/readme-assets/lh-source-detail-mobile.png) |
+| LH-07 | Unit detail | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-unit-detail-desktop.png) / [mobile](docs/readme-assets/lh-unit-detail-mobile.png) |
+| LH-08 | Create reference | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-create-ref-desktop.png) / [mobile](docs/readme-assets/lh-create-ref-mobile.png) |
+| LH-10 | Create my words | 100 | 100 | 100 | 99 | 99 | [desktop](docs/readme-assets/lh-create-mw-desktop.png) / [mobile](docs/readme-assets/lh-create-mw-mobile.png) |
+| LH-11 | Create question | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-create-question-mobile.png) / [mobile](docs/readme-assets/lh-create-question-desktop.png) |
+| LH-12 | Reference detail | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-reference-desktop.png) / [mobile](docs/readme-assets/lh-reference-mobile.png) |
+| LH-13 | My Words detail | 100 | 100 | 100 | 99 | 98 | [desktop](docs/readme-assets/lh-mw-detail-desktop.png) / [mobile](docs/readme-assets/lh-create-mw-mobile.png) |
+| LH-14 | Question detail | 100 | 100 | 100 | 99 | 91 | [desktop](docs/readme-assets/lh-question-detail.mobile.png) / [mobile](docs/readme-assets/lh-question-detail-desktoop.png) |
+| LH-15 | Edit reference | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-edit-reference-desktop.png) / [mobile](docs/readme-assets/lh-edit-reference-mobile.png) |
+| LH-16 | Edit My Words | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-edit-mw-mobile.png) / [mobile](docs/readme-assets/lh-edit-mw-desktop.png) |
+| LH-17 | Edit Question | 100 | 100 | 100 | 99 | 93 | [desktop](docs/readme-assets/lh-edit-question-mobile.png) / [mobile](docs/readme-assets/lh-edit-question-desktop.png) |
+
+
+**Summary:** All pages score 100 for accessibility, SEO, and best practices across both viewports. Performance varies between 91-98 on mobile and 93-100 on desktop.
