@@ -1005,60 +1005,60 @@ box growing or the row wrapping. Considered a tradeoff worth accepting given how
 
 Notes (Reference, My Words, Question) use a separate dedicated edit page, mirroring the layout of their corresponding create page. Notes carry more content — a multi-line body plus metadata like location — and forcing that into the same compact layout as read mode led to cramped, hard-to-scan forms. Reusing the create-page layout for editing means one consistent, spacious design for both creating and editing a note, rather than fighting to keep edit mode visually identical to read mode.
 
+## Surface
 
-### Visual Hierarchy: Headings, Accents, and Action Color
+**Home page origin story: Excalidraw wireframing became the visual identity**
+
+The notebook aesthetic wasn't planned upfront — it was inspired by the tools I've used. Wireframes were built in Excalidraw, and the hand-drawn, sketchbook look of the tool itself became something I wanted to keep. It first carried over into the logo, then into a set of notebook-style horizontal lines added around the logo. Those lines were reused for a diagram on the home page — and at that point, what started as a wireframing by-product had become the defining visual motif for the whole app.
+
+**Notebook lines: home and "how it works" only**
+
+The horizontal notebook lines are deliberately scoped to the home the "how it works" pages — where the sketchbook feel invites the user to start jotting things down. Logged-in pages don't carry these lines forward; once a user is inside the app working with their own content, the notebook motif would compete with the content rather than frame it. What does carry through from the home/how-it-works pages is the colour palette and the divider style, which takes the function of a sidebar as well, keeping the two halves of the app visually related.
+
+**Sign in/sign up: the bridge between the two aesthetics**
+
+Sign in and sign up sit between these two worlds, so they combine both line treatments: the notebook lines from the home page, and a form-line style that isn't used anywhere else yet at this point in the app — but goes on to define how lists and forms look throughout the logged-in content pages. In that sense, these two auth pages quietly establish the visual grammar for everything that comes after them, even though the notebook lines themselves stop there.
+
+**Colour palette**
+
+<p align="center">
+  <img src="docs/readme-assets/gotit-colour-palette.png" alt="Colour Palette for got it" width="60%">
+</p>
+
+Palette built in Coolors around the terracotta/dark green pairing used throughout the hierarchy below.
+
+
+**Typography: Inter and Architects Daughter**
+
+Two fonts carry the whole app: Inter for body text, and Architects Daughter for the logo and hero tagline, and headings in How it Works and auth pages. Architects Daughter was chosen specifically to get as close as possible to Excalidraw's handwritten font.
 
 **Three-tier hierarchy, app-wide**
+
 Every page follows the same visual order:
 - muted grey for context (breadcrumbs), matching the introductory part of the tagline in home page,
-- dark green + terracota accent for the page heading (most important content),
+- dark green + terracotta accent for the page heading (most important content),
 - solid terracotta for the single primary action on the entire site,
-- dark green for all other primaty action buttons.
+- dark green for all other primary action buttons.
 
 **Heading accent: fixed-width underline, not full-width**
-A short (48px), thick, terracotta bar sits below each page heading, offset by a few pixels rather than hugging the text baseline. Considered a   `full-width `text-decoration: underline` first, but rejected: an underline scaling with text length reads as a link affordance, and grows awkwardly under long titles (e.g. unit or source names). A fixed-width accent, decoupled from text length, keeps the decorative intent unambiguous regardless of heading length, and never suggests the heading itself is clickable.
+
+A short (48px), thick, terracotta bar sits below each page heading, offset by a few pixels rather than the entire text baseline. Considered a full-width `text-decoration: underline` first, but rejected: an underline scaling with text length reads as a link affordance, and grows awkwardly under long titles (e.g. unit or source names). A fixed-width accent, decoupled from text length, keeps the decorative intent unambiguous regardless of heading length, and never suggests the heading itself is clickable.
 
 **Heading font: sans, not italic serif, for in-app pages**
+
 Page headings use the same sans-serif as body text, distinguished by size and weight rather than a decorative typeface. Italic serif was trialled first (echoing the logo's handwritten style) but rejected for in-app headings that wrap user-generated content — italics degrade in legibility as line length grows, and several in-app headings (unit titles, source titles) can't be guaranteed to stay short. The italic serif treatment is reserved for the home page hero section (tagline), where the heading is fixed copy the developer wrote, not user data.
 
-**Terracotta reserved for exactly one action per site**
-Actionwise, terracotta (`#bb6f6f`) is used only for the home page's "Get started" CTA — the single most important action across the entire app. Sign in/sign up submit buttons and every create/save action inside the app (Add source, Add unit, Save note, etc.) use dark green instead. Considered scoping terracota to "primary CTA per page" first, but rejected for accessibility reasons.
+**Forms: from Crispy Forms abandoned in favour of custom styled ones**
 
-**Breadcrumbs: muted, not heading-adjacent styling**
-Breadcrumb trail (e.g. "Source name > Unit name") uses the same muted grey as the home page's supporting copy, sitting above the heading with tighter spacing to the heading than the heading has to the content below — grouping breadcrumb-and-heading visually as "where am I, then what am I looking at."
+Sign in and sign up initially used Crispy Forms' default rendering. Once the home page was styled, the default two forms were rebuilt to match the notebook feel.
 
-### Notes Display
+<p align="center">
+  <img src="docs/readme-assets/sign-up.png" alt="sign up screenshot" width="60%">
+</p>
 
-- Unit detail uses Bootstrap tabs (Reference, My Words, Questions) with full-width content area per tab
-- Reference notes displayed as Bootstrap card grid (3 columns, h-100 for equal height)
-- Cards show title and truncated content preview only
-- Evaluated/Pending distinction: green border = evaluated, blue border = pending
-- Filter on Reference and Questions tabs: All / Evaluated / Pending (References), All / Answered / Unanswered (Questions)
+**Reflection: styling took more work than expected**
 
-### Note Relationships
-
-- Reference notes have one-to-many relationship with My Words and Question notes
-- Foreign key to parent reference note is nullable — My Words and Question notes can exist independently within a unit (linked to source and unit but not to a specific reference note)
-- Answered questions link to one or more My Words notes
-
-### Modals vs Full Pages
-
-- Modals: create/edit source, create/edit unit, delete confirmations
-- Full pages: create, read, edit individual notes
-- Rationale: notes deserve space and focus; modals suit quick transactional actions
-
-### Terminology
-
-- Consistent naming throughout: Reference, My Words, Questions
-- Evaluated/Pending for reference note status
-- Answered/Unanswered for question status
-
-### Visual Identity
-
-- Single green accent colour throughout
-- "got it?" logo as branding in navbar
-- "got it?" logo reused as pending/unanswered indicator on note detail pages
-- Bootstrap defaults otherwise — minimal additional styling
+When starting this project, I assumed a note-taking app - mostly text, no imagery - wouldn't need much design work. That turned out to be wrong. I ended up spending more time on visual design here than on my previous two projects, which leaned on imagery to carry a lot of the meaning. Here, there's no imagery: written text alone has to do that work, so colour, font size, and font-weight became the main tools for creating hierarchy and distinguishing content types - balancing the need for consistency with that of a varied and vivid feel.
 
 
 ### Internationalisation (i18n)
@@ -1192,7 +1192,8 @@ gunicorn 26.0.0 - WSGI server used for deployment
 - Mermaid (diagram embeded in README)
 - Excalidraw (wireframing, logo, diagrams)
 - dbdiagram.io: https://dbdiagram.io/home  (ERD)
-- Coolors (colour palette)
+- Coolors: https://coolors.co/ (colour palette)
+- Google Fonts: https://fonts.google.com/
 - Validators:
   - W3C https://www.w3.org/ (html files)
   - Jigsaw  https://jigsaw.w3.org/css-validator/ (css files)
