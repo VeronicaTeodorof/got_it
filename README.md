@@ -684,8 +684,8 @@ Because the navigation tree disappears behind the offcanvas trigger on mobile, u
 For example, on the unit detail page shown below, "Change or add source" sits right under the "got it?" header - a single tap returns the user to source selection, the level directly above the unit they're viewing. This mirrors the logic of the permanent tree on desktop (Source → Unit → notes) but expresses it as a single contextual step rather than a full hierarchy, which suits the more linear way people tend to move through content on a smaller screen.
 
 <p align="center">
-  <img src="docs/readme-assets/back-nav-mobile.png" alt="Secondary back navigation on mobile" width="25%">
-  <img src="docs/readme-assets/reference-oak-national-academy.png" alt="Reference: Oak National Academy pupil view showing a 'Change subject' back-navigation affordance (external screenshot, not part of this project)" width="25%">
+  <img src="docs/readme-assets/back-nav-mobile.png" alt="Secondary back navigation on mobile" width="30%">
+  <img src="docs/readme-assets/reference-oak-national-academy.png" alt="Reference: Oak National Academy pupil view showing a 'Change subject' back-navigation affordance (external screenshot, not part of this project)" width="30%">
 </p>
 <p align="center"><em>On the left: mobile view of 'got it?' source detail page. On the right: Oak National Academy's pupil view. Screenshot for reference only, not part of this project.</em></p>
 
@@ -697,14 +697,65 @@ Breadcrumbs give a horizontal, textual trace of position within the Source → U
 
 Breadcrumbs start at the Source level rather than at a site-wide "Home," because Source is the top of the content hierarchy the app is actually organised around - a site-wide home link is already covered separately by the main nav's home icon. Keeping breadcrumbs scoped to content hierarchy alone (rather than mixing in app-level navigation) avoids the same overlap problem the back-nav section addresses: two different kinds of "movement" competing for the same UI element.
 
-Only the Source's title appears in the trail, not its author - so a Source like "Computing" by Khan Academy shows as "Computing," not "Khan Academy." This keeps each crumb short and consistent regardless of how much author/attribution metadata a given Source carries.
+
 
 <p align="center">
   <img src="docs/readme-assets/breadcrumbs-desktop.png" alt="Breadcrumb trail: Computing > Computer programming - Java Script and the web > Variables > Why use let instead of var?" width="72%">
    <img src="docs/readme-assets/breadcrumbs-mobile.png" alt="Breadcrumb trail on mobile: stacked vertically" width="18%">
 </p>
 
-The example above shows a full four-level trail: Source ("Computing") → Unit ("Computer programming - Java Script and the web") → note type ("Variables," a Reference note) → the specific note itself ("Why use let instead of var?," a Question note). Longer segments, like the Unit title here, truncate with an ellipsis to keep the trail from wrapping or overflowing on smaller screens, rather than forcing a horizontal scroll. On mobile, the same trail switches from a single horizontal line to a stacked, one-crumb-per-line layout - the same underlying data, laid out to avoid the choice between truncating every segment or forcing horizontal scroll on a narrow screen.
+
+
+The example above shows a full four-level trail: Source ("Computing") → Unit ("Computer programming - Java Script and the web") → note type ("Variables," a Reference note) → the specific note itself ("Why use let instead of var?," a Question note). Longer segments, like the Unit title here, truncate with an ellipsis. On mobile, the same trail switches from a single horizontal line to a stacked, one-crumb-per-line layout.
+
+
+**Layout patterns: shell, content, the border between them **
+
+The app's page layouts fall into three patterns, mapped to whether a page is organising content or acting on it.
+
+*Pattern 1 — Structure/organisation pages (Source, Unit)*
+
+Pages for Source and Unit - the models that organise content rather than being the content - follow a shell pattern: creation form + read list, with inline edit added where relevant (inline edit - creation form - read list). These pages exist to let the user build and see the scaffolding their content sits inside, not to hold the content itself.
+
+<p align="center">
+  <img src="docs/readme-assets/pattern1-dashboard.png" alt="Dashboard: add source form and source list" width="45%">
+</p>
+<p align="center"><em>Dashboard - the top of Pattern 1's shell: add-source form above the source list.</em></p>
+
+<p align="center">
+  <img src="docs/readme-assets/pattern1-source-detail.png" alt="Source detail: add unit form and unit list" width="45%">
+  <img src="docs/readme-assets/pattern1-edit.png" alt="Source detail: inline edit mode" width="45%">
+</p>
+<p align="center"><em>Source detail, one level down: add-unit form and unit list on the left; inline edit mode on the right, the same shell pattern extended to editing existing items in place.</em></p>
+
+*Pattern 2 — Workflow pages (notes)*
+
+Reference, MyWords, and Question notes - the models that carry the actual content and the user's engagement with it - each get dedicated pages for Create, Read, and Update. This is where the content lives, so each action gets its own page and its own space, rather than being folded into a shared shell.
+
+<p align="center">
+  <img src="docs/readme-assets/pattern2-note-create.png" alt="Reference note: create page" width="45%">
+  <img src="docs/readme-assets/pattern2-note-edit.png" alt="Reference note: edit page" width="45%">
+  <img src="docs/readme-assets/pattern2-note-detail.png" alt="Reference note: detail page" width="45%">
+</p>
+<p align="center"><em>Left to right: Reference note create, edit, and detail pages - each a dedicated page for its own action.</em></p>
+
+*Border pattern — note tabs on unit detail*
+
+The three note-type tabs sit between these two: they act as an index of everything within a Unit, while also surfacing each note's workflow status at a glance (e.g. Answered/Unanswered for Question, Linked/Unlinked for Reference). It's simultaneously an organisational view (what exists here) and a workflow view (where each item stands) - which is why it doesn't cleanly belong to either Pattern 1 or Pattern 2 on its own.
+
+<p align="center">
+  <img src="docs/readme-assets/border-pattern.png" alt="Unit detail page showing note-type tabs with status badges" width="45%">
+</p>
+<p align="center"><em>Unit detail page: note-type tabs, sitting at the border between organisation (index of notes) and workflow (status at a glance).</em></p>
+
+*Delete — app-wide confirmation modal*
+
+Delete is irreversible and destructive by nature, so rather than a dedicated page, it's handled by a single, app-wide confirmation modal - a deliberate point of friction before an action that can't be undone.
+
+<p align="center">
+  <img src="docs/readme-assets/delete.png" alt="App-wide delete confirmation modal" width="45%">
+</p>
+<p align="center"><em>The confirmation modal shown before any delete action, across Source, Unit, and all three note types.</em></p>
 
 
 ## Development Process (Agile Workflow)
