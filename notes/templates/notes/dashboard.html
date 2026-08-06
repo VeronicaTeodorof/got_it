@@ -76,7 +76,7 @@
       </ul>
 
       <!-- Paginator -->
-      {% include 'notes/partials/pagination.html' with aria_label="Source list pagination" %}
+      {% include 'notes/partials/pagination.html' with page_obj=page_obj param_name='page' tab_anchor='' aria_label='Source list pagination' %}
     </section>
 {% endblock %}
 

@@ -317,8 +317,8 @@ Tests how code written at model level reflects in UI
 | Test ID | Test | Expected | Actual | Local | Deployment |
 |---------|------|----------|-------|-------|------------|
 | PAG-01 | Number of items per page | Each page correctly displays 8 items per page unless it is an incomplete last page | As expected | Pass | Pass |
-| PAG-02 | Click Next | Navigates to next page | Reloads same page on dasboard and unit detail | Fail | Fail|
-| PAG-03 | Click Previous | Navigates to previous page | As expected on unit view / to check after bug fix on other pages| | |
+| PAG-02 | Click Next | Navigates to next page | As expected | Pass | Pass |
+| PAG-03 | Click Previous | Navigates to previous page | As expected | Pass | Pass |
 | PAG-04 | 8 or less items | Pagination is not displayed | As expected | Pass | Pass |
 | PAG-05 | First page | Previous link is not displayed | As expected | Pass | Pass |
 | PAG-06 | Last page | Next link is not displayed | As expected | Pass | Pass |

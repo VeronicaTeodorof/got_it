@@ -31,7 +31,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
         <div class="modal-body">
-          <p>Deleting <strong>{{source.source_name}}</strong> will also delete all units and notes associated with it.</p>
+          <p class="truncate">Deleting <strong>{{source.source_name}}</strong> will also delete all units and notes associated with it.</p>
           <p>Are you sure you want to continue?</p>
         </div>
         <div class="modal-footer">
@@ -83,7 +83,7 @@
                   size="{{ form.source_author.value|default:''|length|add:2 }}"
                   class="inline-field inline-field--author">
             {% if form.source_author.errors %}
-              <div aria-live="polite">{{ form.source_author.errors.0 }}</div>
+              <div aria-live="polite" class="field-error">{{ form.source_author.errors.0 }}</div>
             {% endif %}
           {% else %}
             <span id="id_source_author" class="word-break">{{ source.source_author|default:"" }}</span>
@@ -100,7 +100,7 @@
               {% endfor %}
             </select>
             {% if form.source_type.errors %}
-              <div aria-live="polite">{{ form.source_type.errors.0 }}</div>
+              <div aria-live="polite" class="field-error">{{ form.source_type.errors.0 }}</div>
             {% endif %}
           {% else %}
             <span id="id_source_type" class="inline-badge">{{ source.get_source_type_display }}</span>
@@ -171,7 +171,7 @@
     </ul>
 
     <!-- Paginator -->
-    {% include 'notes/partials/pagination.html' with aria_label="Unit list pagination" %}
+    {% include 'notes/partials/pagination.html' with page_obj=page_obj param_name='page' tab_anchor='' aria_label='Units list pagination' %}
   </section>
 </div>
 {% endblock %}
