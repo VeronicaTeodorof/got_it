@@ -974,6 +974,13 @@ The project was managed in GitHub: https://github.com/VeronicaTeodorof/got_it
 8. Run the project locally: `python manage.py runserver`.
 
 
+## Testing
+
+Full testing documentation, including automated and manual test results, story-to-test mapping, solved bugs, known limitations, and validation (HTML/CSS/JS/Python/Lighthouse), is in [TESTING.md](TESTING.md).
+
+**Automated test coverage**: Source and Unit models, forms, and views are covered by automated tests (see TESTING.md, Pass 1). Reference, MyWords, and Question note types are covered by automated model tests, but not yet by automated form or view tests — this functionality is instead covered comprehensively by the manual testing in Pass 2 (Note CRUD, Workflow Theme).
+
+
 ## Languages, frameworks, packages, programs
 
 **Languages**
