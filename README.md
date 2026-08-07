@@ -1000,12 +1000,16 @@ gunicorn 26.0.0 - WSGI server used for deployment
 
 **Development tools / programs**
 - Git & GitHub (version control)
-- VS Code / Gitpod (IDE)
-- Mermaid (diagram embeded in README)
-- Excalidraw (wireframing, logo, diagrams)
+- Conventional Commits cheatsheet: https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13
+- VS Code (IDE)
+- Mermaid: https://mermaid.js.org/ (diagram embeded in README)
+- Excalidraw: https://excalidraw.com/ (wireframing, logo, diagrams)
 - dbdiagram.io: https://dbdiagram.io/home  (ERD)
 - Coolors: https://coolors.co/ (colour palette)
+- Diffchecker: https://www.diffchecker.com/ (debugging)
 - Google Fonts: https://fonts.google.com/
+- Chrome DevTools (inspecting/debugging layout, computed styles, console)
+- Obsidian: https://obsidian.md/ (personal learning notes throughout development)
 - Validators:
   - W3C https://www.w3.org/ (html files)
   - Jigsaw  https://jigsaw.w3.org/css-validator/ (css files)
@@ -1015,6 +1019,62 @@ gunicorn 26.0.0 - WSGI server used for deployment
 
 **Deployment**
 - Heroku: https://www.heroku.com/
+
+
+## Credits
+
+**Resources that shaped the idea and look of the project**
+- Ahrens, Sönke (2017) *How to Take Smart Notes*
+- Vorderman, Carol (2016) *Help Your Kids with Study Skills*
+- Richard Feynman — the Feynman Technique
+- Note-taking apps studied during market research: OneNote (https://onenote.cloud.microsoft/), Notion (https://www.notion.com/notes), Obsidian (https://obsidian.md/) — studied as a competitor app, Google Keep (https://keep.google.com/)
+- Digital note-taking UX research: https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d
+and https://justtalkingtech.medium.com/i-tried-every-second-brain-app-the-concept-is-the-problem-not-the-tools-5015de4c8812
+- UX: https://www.falmouth.ac.uk/news/6-key-ux-design-principles-follow
+
+Specific visual and UX influences on individual pages (Obsidian's tagline pattern, Oak National Academy's back-navigation pattern) are credited inline in the Skeleton and Surface sections above.
+
+**Development resources**
+- Django official documentation: https://docs.djangoproject.com/en/6.0/
+- django-allauth official documentation: https://docs.allauth.org/
+- Bootstrap documentation: https://getbootstrap.com/docs/5.3/ (consulted throughout for components and utilities generally; `Collapse.getOrCreateInstance(el)` is one specific example, used for the nav tree)
+- MDN Web Docs: https://developer.mozilla.org/ (consulted repeatedly throughout, for CSS and JavaScript reference generally, not limited to the specific pages below)
+- MDN — Pagination: https://developer.mozilla.org/en-US/docs/Web/CSS/How_to/Layout_cookbook/Pagination
+- MDN — Working with the History API (tab-hash syncing): https://developer.mozilla.org/en-US/docs/Web/API/History_API/Working_with_the_History_API
+- MDN — clamp(): https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/clamp
+- MDN - Flexbox: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Flexible_box_layout/Basic_concepts
+- CSS Tricks - A Complete CSS Flexbox Layout Guide: https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+- WCAG - Accessibility: https://www.w3.org/TR/WCAG22/
+- Context processors — introductory article on Medium: https://medium.com/dajngo/context-processor-in-django-62818f14d88f
+- Atlassian Design — inline edit pattern: https://atlassian.design/components/inline-edit/usage
+- Python unittest docs: https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
+- Real Python — Python testing: https://realpython.com/python-testing/
+- Medium articles - for overriding allauth templates: https://gavinwiener.medium.com/modifying-django-allauth-forms-6eb19e77ef56
+
+**AI use**
+
+Claude was used throughout this project in a range of ways:
+
+- **Sanity-checking ideas** - "this is my idea, what do you think?"
+- **Prompting further ideas** — some answers surfaced angles or implications I hadn't considered, which then became their own line of thought.
+- **Phrasing help for documentation** — giving Claude the rough substance of what a section (README, TESTING.md) needed to cover, reading the draft back, then editing, correcting, or redirecting it until it matched what I actually meant (almost).
+- **Learning concepts** — working through how something actually functions (e.g. the HTTP request/response cycle as implemented in Django) rather than just how to use it.
+- **Testing my understanding** — asking Claude to quiz me or set exercises on a concept once I thought I'd understood it.
+- **Exploring implementation options** — asking what approaches existed for a given feature and reasoning through the trade-offs together before choosing one.
+- **Finding resources to cross-reference** — asking for further reading or documentation on a new pattern, to verify it against a source beyond Claude's own explanation.
+- **Double-checking** — verifying my own reasoning or output before relying on it.
+- **Code implementation and debugging** — used more heavily early in the project, always checked and understood; over time this shifted toward writing and debugging independently, with Claude used to check.
+
+Three full conversations with Claude AI are shared here as evidence of process rather than described secondhand:
+- Naming the app: https://claude.ai/share/275c93ee-878d-457b-aa82-dfbbb6c5250a
+- Reviewing and gap-checking my draft user stories: https://claude.ai/share/7bb57a15-6da5-43ae-9f56-2aa1c2f5357a — Claude flagged missing stories (e.g. no dashboard/home-view story, no explicit Course CRUD stories, no story for navigating between linked notes), which I then wrote myself before continuing development.
+- An everyday session: https://claude.ai/chat/c64f653d-919b-48ca-9241-aedf6b246543
+
+To the assessor: any of my work sessions with Claude AI relating to this project can be shared upon request.
+
+## Acknowledgements
+
+Thanks to my tutor, Kevin, for guidance throughout the project — including suggesting the nested tree navigation pattern (see Skeleton) and the sticky-positioning fix documented in TESTING.md's Solved Bugs.
 
 
 ## AI use
