@@ -974,10 +974,6 @@ The project was managed in GitHub: https://github.com/VeronicaTeodorof/got_it
 8. Run the project locally: `python manage.py runserver`.
 
 
-
-## Resources:
-- automated tests: https://docs.python.org/3/library/unittest.html#unittest.TestCase.assertRaises
-
 ## Languages, frameworks, packages, programs
 
 **Languages**
@@ -1074,10 +1070,15 @@ To the assessor: any of my work sessions with Claude AI relating to this project
 
 ## Acknowledgements
 
-Thanks to my tutor, Kevin, for guidance throughout the project — including suggesting the nested tree navigation pattern (see Skeleton) and the sticky-positioning fix documented in TESTING.md's Solved Bugs.
+This project was about learning. And learning there was... So it's only natural to thank everyone I've ever learnt from and still learn, also to thank the millions who've put their time, effort, intelligence and creativity to create the code that, with or without their consent has been used to feed Claude, which was my learning companion for this project.
 
+And most of all I'd like to thank those I learn from or with today:
+- Kevin Loughrey, my tutor and kind friend, for his guidance, support, putting up with my missed deadlines, and for the knowledge he's passing on (if only there were a `git merge` for that!)
+- Luisa Evans, my friend and colleague, for her feedback, for sharing the ups and downs of this path (and for convincing me to eventually submit and move forward)
+- Smosu from North Pole, my dear tester, by the name he wanted to be mentioned
+- my family for the time granted for this insanity
 
-## AI use
-**Example 1**: annotate/Exists/OuterRef pattern (Reference and Question linked-status badges)
+Not least to those who gave their time to check my app and give feedback: Dylan Austin, SuperJakeJoseCat, Daria Dumitrascu, Elena Dumitrascu and Tom Mckechnie.
 
-Claude first suggested the annotate() + Exists() + OuterRef() pattern for checking whether a Reference has linked MyWords/Question notes. I asked for a full explanation of each part of the syntax individually, then of the pattern as a whole. Claude then quizzed me on my understanding (e.g. what would happen without OuterRef, why Exists() is preferable to Count() here, how - affects sorting on a boolean field). Once I could answer these correctly, I wrote the Reference-notes and then the Question-notes version (has_answer) independently, from memory and understanding, including my own explanatory comment — this was checked, not dictated.
+Thank you all and hope to have you along on my next learning adventure: a race against time!
+
