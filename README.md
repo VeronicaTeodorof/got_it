@@ -41,7 +41,6 @@ This too pointed to the need for a structured way to capture thoughts while lear
 This would be the core of my app:
 
 ```mermaid
-%%{init: {'themeVariables': {'fontSize': '11px'}, 'flowchart': {'nodeSpacing': 15, 'rankSpacing': 15}}}%%
 graph TD
     A[Capture reference note] --> B{got it?}
     B -->|Yes| C[My Words note]
@@ -75,30 +74,35 @@ Before scoping the application I did a quick market research to understand what 
 
 Home Page and Dashboard:
 
+
 <p align="center">
-    <img src="docs/research-assets/market-research/one_note_home.png" style="width:45%">
-    <img src="docs/research-assets/market-research/one_note_dashboard.png" style="width:45%">
+    <img src="docs/research-assets/market-research/one_note_home.png" style="width:55%">
+    <img src="docs/research-assets/market-research/one_note_dashboard.png" style="width:55%">
 </p>
+
 
 2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes
 
+
 <p align="center">
-   <img src="docs/research-assets/market-research/notion_home.png" style="width:45%">
-   <img src="docs/research-assets/market-research/notion_dashboard.png" style="width:45%">
+   <img src="docs/research-assets/market-research/notion_home.png" style="width:55%">
+   <img src="docs/research-assets/market-research/notion_dashboard.png" style="width:55%">
 </p>
 
 
 3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/
 
+
 <p align="center">
-   <img src="docs/research-assets/market-research/obsidian-home.png" style="width:45%">
-   <img src="docs/research-assets/market-research/obsidian-dashboard.png" style="width:45%">
+   <img src="docs/research-assets/market-research/obsidian-home.png" style="width:55%">
+   <img src="docs/research-assets/market-research/obsidian-dashboard.png" style="width:55%">
 </p>
 
 
 4. Google Keep - minimal: https://keep.google.com/
 
 Dashboard:
+
 
 <p align="center">
    <img src="docs/research-assets/market-research/google-keep-dashboard.png" style="width:55%">
