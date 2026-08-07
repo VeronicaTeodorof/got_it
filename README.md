@@ -10,7 +10,7 @@ This workflow is derived from the Feynman Technique, which is a simple way of te
 - My Words notes - your attempt at the explanation itself: the same idea, rebuilt in your own plain language.
 - Question notes - a third note type meant to capture and make you aware of your gaps in understanding, which is arguably more important than being aware of what you already know and understand. By writing it down, you make sure it doesn't quietly disappear.
 
-The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX, with some references to how some planes connects to corresponding backend decisions, rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
+The rest of this document walks through how that workflow was designed and built, loosely structured around the five planes of UX, with some references to how some planes connect to corresponding backend decisions, rather than the chronological order of development. This was a learn-as-you-build project and learning can be quite messy; the document tries to bring some order into chaos, and why not, be a blueprint for the development lifecycle of future projects.
 
 # Table of Contents
 
@@ -41,6 +41,7 @@ This too pointed to the need for a structured way to capture thoughts while lear
 This would be the core of my app:
 
 ```mermaid
+%%{init: {'themeVariables': {'fontSize': '11px'}, 'flowchart': {'nodeSpacing': 15, 'rankSpacing': 15}}}%%
 graph TD
     A[Capture reference note] --> B{got it?}
     B -->|Yes| C[My Words note]
@@ -72,42 +73,36 @@ The core hypothesis of this app remains untested. Rather than treat this as a li
 Before scoping the application I did a quick market research to understand what existing products have to offer and what note-taing app users expect from such tools.I selected four apps representing different approaches to note-taking: a mainstream all-rounder, an AI-first workspace, a linked-thinking tool, and a minimal capture app.
 1. OneNote - mainstream app: https://onenote.cloud.microsoft/
 
-Home Page:
+Home Page and Dashboard:
 
-<img src="docs/research-assets/market-research/one_note_home.png" style="height: 400px">
-
-Dashboard:
-
-<img src="docs/research-assets/market-research/one_note_dashboard.png" style="height: 400px">
-
+<p align="center">
+    <img src="docs/research-assets/market-research/one_note_home.png" style="width:45%">
+    <img src="docs/research-assets/market-research/one_note_dashboard.png" style="width:45%">
+</p>
 
 2. Notion - AI-first, workspace/productivity oriented: https://www.notion.com/notes
 
-Home Page:
-
-<img src="docs/research-assets/market-research/notion_home.png" style="height: 400px">
-
-Dashboard:
-
-<img src="docs/research-assets/market-research/notion_dashboard.png" style="height: 400px">
+<p align="center">
+   <img src="docs/research-assets/market-research/notion_home.png" style="width:45%">
+   <img src="docs/research-assets/market-research/notion_dashboard.png" style="width:45%">
+</p>
 
 
 3. Obsidian -  Zettelkasten, linked thinking,: https://obsidian.md/
 
-Home Page:
-
-<img src="docs/research-assets/market-research/obsidian-home.png" style="height: 400px">
-
-Dashboard:
-
-<img src="docs/research-assets/market-research/obsidian-dashboard.png" style="height: 400px">
+<p align="center">
+   <img src="docs/research-assets/market-research/obsidian-home.png" style="width:45%">
+   <img src="docs/research-assets/market-research/obsidian-dashboard.png" style="width:45%">
+</p>
 
 
 4. Google Keep - minimal: https://keep.google.com/
 
 Dashboard:
 
-<img src="docs/research-assets/market-research/google-keep-dashboard.png" style="height: 400px">
+<p align="center">
+   <img src="docs/research-assets/market-research/google-keep-dashboard.png" style="width:55%">
+</p>
 
 
 To complement the visual research, I also drew on an the article: "Digital Note-Taking: A UX Research Case Study" https://medium.com/@garimamour10/digital-note-taking-a-ux-research-case-study-c5cee728dc8d, and an AI overview, to further inform my design decisions.
@@ -562,8 +557,9 @@ The above schema was built using the Hernandez methodology, as described in `Dat
 ### ERD
 Entity Relationship Diagram showing the core data structure: User, Source, Unit, Note, Reference, MyWords and Question.
 
-![ERD](docs/readme-assets/got_it_erd.png)
-
+<p align="center">
+   <img src="docs/readme-assets/got_it_erd.png" style="width:60%">
+</p>
 
 ### Navigation
 Navigation is split into nine layers, each addressing a different need:
@@ -921,9 +917,9 @@ Sign in and sign up initially used Crispy Forms' default rendering. Once the hom
 When starting this project, I assumed a note-taking app - mostly text, no imagery - wouldn't need much design work. That turned out to be wrong. I ended up spending more time on visual design here than on my previous two projects, which leaned on imagery to carry a lot of the meaning. Here, there's no imagery: written text alone has to do that work, so colour, font size, and font-weight became the main tools for creating hierarchy and distinguishing content types - balancing the need for consistency with that of a varied and vivid feel.
 
 
-### Future features
-- Social authentication (Google, GitHub) planned as a future enhancement using django-allauth's built-in social providers
-- Internationalisation (i18n) support for multi-language translations using Django's built-in i18n framework
+### Next steps
+
+Since the core hypothesis is unvalidated, the priority isn't more features — it's testing this workflow with real users (the target secondary-school-and-above audience) to find out whether it actually helps comprehension. Feature decisions would follow from what that testing shows, rather than being planned in advance of it.
 
 
 ## Deployment and local development
@@ -1071,7 +1067,7 @@ Claude was used throughout this project in a range of ways:
 Three full conversations with Claude AI are shared here as evidence of process rather than described secondhand:
 - Naming the app: https://claude.ai/share/275c93ee-878d-457b-aa82-dfbbb6c5250a
 - Reviewing and gap-checking my draft user stories: https://claude.ai/share/7bb57a15-6da5-43ae-9f56-2aa1c2f5357a — Claude flagged missing stories (e.g. no dashboard/home-view story, no explicit Course CRUD stories, no story for navigating between linked notes), which I then wrote myself before continuing development.
-- An everyday session: https://claude.ai/chat/c64f653d-919b-48ca-9241-aedf6b246543
+- An everyday session: https://claude.ai/share/96763d7d-4eef-4677-8d42-0bfaa2f03e9a
 
 To the assessor: any of my work sessions with Claude AI relating to this project can be shared upon request.
 
