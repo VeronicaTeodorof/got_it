@@ -784,7 +784,13 @@ Authorization is enforced at three levels: user-owned querysets, consistent redi
 - **Safe external linking**: All links pointing to outside resources (such as the Google feedback form, GitHub, and LinkedIn) use `target="_blank"` combined with `rel="noopener"`. This prevents the opened page from using the browser's `window.opener` reference to manipulate the originating tab — an exploit known as reverse tabnabbing, where a background tab is silently redirected to a fake phishing page ([OWASP reference](https://owasp.org/www-community/attacks/Reverse_Tabnabbing)).
 
 
-### Nav tree implementation and design decisiions
+### Functional design decisions — example
+
+<details>
+<summary>The section below walks through one specific UI decision — the nav tree's expand/collapse buttons — in full, including the back-and-forth reasoning behind it. It's kept in this detail deliberately, as a representative example of how decisions were made throughout the project; collapsed by default so it doesn't interrupt the flow above for anyone who doesn't need that level of detail.
+</summary>
+
+#### Nav tree implementation and design decisions
 
 **Implementation across breakpoints**
 
@@ -862,6 +868,8 @@ The lower panel shows the same category of information (counts, gap-metrics, cre
 2. **Sources section** — add-source link (rendered first) + queryset with annotated Unit counts, per-row toggler
 3. **Units section** — add-unit link (rendered first) + queryset with annotated total/unlinked-reference/unanswered-question counts, no further expansion
 4. **Lower panel** — note-type counts + gap-metrics + create links, richer detail on note-detail pages, always visible independent of sidebar width
+
+</details>
 ---
 
 
